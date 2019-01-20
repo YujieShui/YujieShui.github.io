@@ -102,7 +102,7 @@ githubEmojis:
 deploy:
   type: git
   repo: git@github.com:YujieShui/YujieShui.github.io.git
-  branch: hexo 
+  branch: master
 
 # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
 # 文章字数统计插件 | 需要在全局文件和 next 主题文件中分别配置
