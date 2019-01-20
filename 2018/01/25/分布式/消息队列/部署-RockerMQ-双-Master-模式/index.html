@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文介绍搭建双 master 的 RocektMQ 的集群。">
+<meta name="keywords" content="RocketMQ,消息队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署 RockerMQ 双 Master 模式">
+<meta property="og:url" content="http://shuiyujie.com/2018/01/25/分布式/消息队列/部署-RockerMQ-双-Master-模式/index.html">
+<meta property="og:site_name" content="深页の博客">
+<meta property="og:description" content="本文介绍搭建双 master 的 RocektMQ 的集群。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-93906a9fdf4db672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-05-29T03:00:57.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="部署 RockerMQ 双 Master 模式">
+<meta name="twitter:description" content="本文介绍搭建双 master 的 RocektMQ 的集群。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2791079-93906a9fdf4db672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="深页の博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://shuiyujie.com/2018/01/25/分布式/消息队列/部署-RockerMQ-双-Master-模式/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>部署 RockerMQ 双 Master 模式 | 深页の博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">深页の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">克制而极致</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://shuiyujie.com/2018/01/25/分布式/消息队列/部署-RockerMQ-双-Master-模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="深页">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="深页の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">部署 RockerMQ 双 Master 模式
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-25 21:57:27" itemprop="dateCreated datePublished" datetime="2018-01-25T21:57:27+08:00">2018-01-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-29 11:00:57" itemprop="dateModified" datetime="2018-05-29T11:00:57+08:00">2018-05-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文介绍搭建双 master 的 RocektMQ 的集群。</p>
+<a id="more"></a>
+<h1 id="RocketMQ集群方式"><a href="#RocketMQ集群方式" class="headerlink" title="RocketMQ集群方式"></a>RocketMQ集群方式</h1><p>首先要部署一个 RocketMQ 的集群，以下集群方式摘自网络。</p>
+<p>推荐的几种 Broker 集群部署方式，这里的 Slave 不可写但可读，类似于 Mysql 主备方式。</p>
+<h2 id="单个-Master"><a href="#单个-Master" class="headerlink" title="单个 Master"></a>单个 Master</h2><p>这种方式风险较大，一旦Broker 重启或者宕机时，会导致整个服务不可用，不建议线上环境使用。</p>
+<h2 id="多-Master-模式"><a href="#多-Master-模式" class="headerlink" title="多 Master 模式"></a>多 Master 模式</h2><p>一个集群无 Slave，全是 Master，例如 2 个 Master 或者 3 个 Master。</p>
+<p><strong>优点</strong></p>
+<p>配置简单，单个 Master 宕机或重启维护对应用无影响，在磁盘配置为 RAID10 时，即使机器宕机不可恢复情况下，由与 RAID10 磁盘非常可靠，消息也不会丢（异步刷盘丢失少量消息，同步刷盘一条不丢） 。性能最高。</p>
+<p><strong>缺点</strong></p>
+<p>单台机器宕机期间，这台机器上未被消费的消息在机器恢复之前不可订阅，消息实时性会受到受到影响。</p>
+<p><strong>启动顺序</strong></p>
+<ol>
+<li>先启动 NameServer</li>
+<li>再机器 A，启动第一个 Master</li>
+<li>再机器 B，启动第二个 Master</li>
+</ol>
+<h2 id="多-Master-多-Slave-模式，异步复制"><a href="#多-Master-多-Slave-模式，异步复制" class="headerlink" title="多 Master 多 Slave 模式，异步复制"></a>多 Master 多 Slave 模式，异步复制</h2><p>每个 Master 配置一个 Slave，有多对Master-Slave，HA 采用异步复制方式，主备有短暂消息延迟，毫秒级。</p>
+<p><strong>优点</strong></p>
+<p>即使磁盘损坏，消息丢失的非常少，且消息实时性不会受影响，因为 Master 宕机后，消费者仍然可以从 Slave 消费，此过程对应用透明。不需要人工干预。性能同多 Master 模式几乎一样。 </p>
+<p><strong>缺点</strong></p>
+<p>Master 宕机，磁盘损坏情况，会丢失少量消息。</p>
+<p><strong>启动顺序</strong></p>
+<ol>
+<li>启动 NameServer</li>
+<li>机器 A，启动第一个 Master</li>
+<li>机器 B，启动第二个 Master</li>
+<li>机器 C，启动第一个 Slave </li>
+<li>机器 D，启动第二个 Slave</li>
+</ol>
+<h2 id="多-Master-多-Slave-模式，同步双写"><a href="#多-Master-多-Slave-模式，同步双写" class="headerlink" title="多 Master 多 Slave 模式，同步双写"></a>多 Master 多 Slave 模式，同步双写</h2><p>每个 Master 配置一个 Slave，有多对Master-Slave，HA 采用同步双写方式，主备都写成功，向应用返回成功。</p>
+<p><strong>优点</strong></p>
+<p>数据与服务都无单点，Master宕机情况下，消息无延迟，服务可用性与 数据可用性都非常高 </p>
+<p><strong>缺点</strong></p>
+<p>性能比异步复制模式略低，大约低 10%左右，发送单个消息的 RT 会略高。目前主宕机后，备机不能自动切换为主机，后续会支持自动切换功能 。</p>
+<p><strong>启动顺序</strong></p>
+<ol>
+<li>启动 NameServer</li>
+<li>机器 A，启动第一个 Master</li>
+<li>机器 B，启动第二个 Master</li>
+<li>机器 C，启动第一个 Slave</li>
+<li>机器 D，启动第二个 Slave</li>
+</ol>
+<div class="note info icon"><p>以上 Broker 与 Slave 配对是通过指定相同的brokerName 参数来配对，Master 的 BrokerId 必须是 0，Slave 的BrokerId 必须是大与 0 的数。另外一个 Master 下面可以挂载多个 Slave，同一 Master 下的多个 Slave通过指定不同的 BrokerId 来区分。</p></div>
+
+<hr>
+<h1 id="部署双-master-模式的集群"><a href="#部署双-master-模式的集群" class="headerlink" title="部署双 master 模式的集群"></a>部署双 master 模式的集群</h1><p>出于简单和可用的考虑，本文使用双 master 的方式部署 RocketMQ 集群。更多细节看上一篇文章<a href="http://shuiyujie.com/2018/01/21/RocketMQ-Start/#more">RocketMQ Start</a>，我们用上篇文章中相同的方式再部署一台主机。</p>
+<h2 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h2><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>IP</th>
+<th>用户名</th>
+<th>角色</th>
+<th>模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>192.168.0.222</td>
+<td>root</td>
+<td>nameService1,brokerServer1</td>
+<td>Master</td>
+</tr>
+<tr>
+<td>2</td>
+<td>192.168.0.255</td>
+<td>Root</td>
+<td>nameService2,brokerServer2</td>
+<td>Master2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="修改-hosts"><a href="#修改-hosts" class="headerlink" title="修改 hosts"></a>修改 hosts</h2><blockquote>
+<p>vi /etc/hosts</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.0.222</td>
+<td>rocketmq-nameserver1</td>
+</tr>
+<tr>
+<td>192.168.0.222</td>
+<td>rocketmq-master1</td>
+</tr>
+<tr>
+<td>192.168.0.225</td>
+<td>rocketmq-nameserver2</td>
+</tr>
+<tr>
+<td>192.168.0.225</td>
+<td>rocketmq-master2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>修改目标文件：</p>
+<blockquote>
+<p>/usr/local/rocketmq/conf/2m-noslave</p>
+</blockquote>
+<p>该目录下有两个文件,分别修改一个，与下面的配置文件的 <code>brokerName</code> 对应</p>
+<blockquote>
+<p>broker-a.properties  broker-b.properties</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#所属集群名字 </span><br><span class="line">brokerClusterName=rocketmq-cluster </span><br><span class="line">#broker名字，注意此处不同的配置文件填写的不一样</span><br><span class="line">brokerName=broker-a|broker-b</span><br><span class="line">#0 表示 Master，&gt;0 表示 Slave </span><br><span class="line">brokerId=0 </span><br><span class="line">#nameServer地址，分号分割</span><br><span class="line">namesrvAddr=rocketmq-nameserver1:9876;rocketmq-nameserver2:9876 </span><br><span class="line">#在发送消息时，自动创建服务器不存在的topic，默认创建的队列数</span><br><span class="line">defaultTopicQueueNums=4 </span><br><span class="line">#是否允许 Broker 自动创建Topic，建议线下开启，线上关闭</span><br><span class="line">autoCreateTopicEnable=true </span><br><span class="line">#是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭</span><br><span class="line">autoCreateSubscriptionGroup=true </span><br><span class="line">#Broker 对外服务的监听端口 </span><br><span class="line">listenPort=10911 </span><br><span class="line">#删除文件时间点，默认凌晨 4点 </span><br><span class="line">deleteWhen=04 </span><br><span class="line">#文件保留时间，默认 48 小时</span><br><span class="line">fileReservedTime=120</span><br><span class="line">#commitLog每个文件的大小默认1G</span><br><span class="line">mapedFileSizeCommitLog=1073741824</span><br><span class="line">#ConsumeQueue每个文件默认存30W条，根据业务情况调整</span><br><span class="line">mapedFileSizeConsumeQueue=300000</span><br><span class="line">#destroyMapedFileIntervalForcibly=120000</span><br><span class="line">#redeleteHangedFileInterval=120000</span><br><span class="line">#检测物理文件磁盘空间</span><br><span class="line">diskMaxUsedSpaceRatio=88</span><br><span class="line"></span><br><span class="line">#存储路径 </span><br><span class="line">storePathRootDir=/usr/local/rocketmq/store </span><br><span class="line">#commitLog 存储路径 </span><br><span class="line">storePathCommitLog=/usr/local/rocketmq/store/commitlog </span><br><span class="line">#消费队列存储路径存储路径</span><br><span class="line">storePathConsumeQueue=/usr/local/rocketmq/store/consumequeue</span><br><span class="line">#消息索引存储路径</span><br><span class="line">storePathIndex=/usr/local/rocketmq/store/index</span><br><span class="line">#checkpoint 文件存储路径</span><br><span class="line">storeCheckpoint=/usr/local/rocketmq/store/checkpoint</span><br><span class="line">#abort 文件存储路径</span><br><span class="line">abortFile=/usr/local/rocketmq/store/abort</span><br><span class="line">#限制的消息大小i</span><br><span class="line">maxMessageSize=65536</span><br><span class="line"></span><br><span class="line">#flushCommitLogLeastPages=4 </span><br><span class="line">#flushConsumeQueueLeastPages=2 </span><br><span class="line">#flushCommitLogThoroughInterval=10000 </span><br><span class="line">#flushConsumeQueueThoroughInterval=60000</span><br><span class="line"></span><br><span class="line">#Broker 的角色 </span><br><span class="line">#- ASYNC_MASTER 异步复制Master </span><br><span class="line">#- SYNC_MASTER 同步双写Master </span><br><span class="line">#- SLAVE </span><br><span class="line">brokerRole=ASYNC_MASTER</span><br><span class="line"></span><br><span class="line">#刷盘方式 </span><br><span class="line">#- ASYNC_FLUSH 异步刷盘 </span><br><span class="line">#- SYNC_FLUSH 同步刷盘 </span><br><span class="line">flushDiskType=ASYNC_FLUSH</span><br><span class="line"></span><br><span class="line">#checkTransactionMessageEnable=false</span><br><span class="line"></span><br><span class="line">#发消息线程池数量 </span><br><span class="line">#sendMessageThreadPoolNums=128 </span><br><span class="line">#拉消息线程池数量 </span><br><span class="line">#pullMessageThreadPoolNums=128</span><br></pre></td></tr></table></figure>
+<h2 id="配置存储路径"><a href="#配置存储路径" class="headerlink" title="配置存储路径"></a>配置存储路径</h2><p>从配置文件中可以看到需要配置一些文件的存储位置，只要文件中配置的目录存在即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#存储路径 </span><br><span class="line">storePathRootDir=/usr/local/rocketmq/store </span><br><span class="line">#commitLog 存储路径 </span><br><span class="line">storePathCommitLog=/usr/local/rocketmq/store/commitlog </span><br><span class="line">#消费队列存储路径存储路径</span><br><span class="line">storePathConsumeQueue=/usr/local/rocketmq/store/consumequeue</span><br><span class="line">#消息索引存储路径</span><br><span class="line">storePathIndex=/usr/local/rocketmq/store/index</span><br><span class="line">#checkpoint 文件存储路径</span><br><span class="line">storeCheckpoint=/usr/local/rocketmq/store/checkpoint</span><br><span class="line">#abort 文件存储路径</span><br><span class="line">abortFile=/usr/local/rocketmq/store/abort</span><br></pre></td></tr></table></figure>
+<h2 id="分别修改日志配置文件"><a href="#分别修改日志配置文件" class="headerlink" title="分别修改日志配置文件"></a>分别修改日志配置文件</h2><blockquote>
+<p>mkdir -p /usr/local/rocketmq/logs<br>cd /usr/local/rocketmq/conf &amp;&amp; sed -i ‘s#${user.home}#/usr/local/rocketmq#g’ *.xml</p>
+</blockquote>
+<h2 id="修改-JVM-参数"><a href="#修改-JVM-参数" class="headerlink" title="修改 JVM 参数"></a>修改 JVM 参数</h2><p>runserver.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms4g -Xmx4g -Xmn2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span><br><span class="line"></span><br><span class="line">改成</span><br><span class="line"></span><br><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms256m -Xmx256m -Xmn128m -XX:PermSize=128m -XX:MaxPermSize=320m&quot;</span><br></pre></td></tr></table></figure>
+<p>runbroker.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms8g -Xmx8g -Xmn4g&quot;</span><br><span class="line"></span><br><span class="line">改成：</span><br><span class="line"></span><br><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms256m -Xmx256m -Xmn128m&quot;</span><br></pre></td></tr></table></figure>
+<p>tools.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn256m -XX:PermSize=128m -XX:MaxPermSize=128m&quot;</span><br><span class="line"></span><br><span class="line">改成</span><br><span class="line"></span><br><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms256m -Xmx256m -Xmn128m -XX:PermSize=128m -XX:MaxPermSize=128m&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="启动两台主机的-NameServer"><a href="#启动两台主机的-NameServer" class="headerlink" title="启动两台主机的 NameServer"></a>启动两台主机的 NameServer</h2><blockquote>
+<p>cd /usr/local/rocketmq/bin<br>nohup sh mqnamesrv &amp;</p>
+</blockquote>
+<h2 id="启动BrokerServer-A"><a href="#启动BrokerServer-A" class="headerlink" title="启动BrokerServer A"></a>启动BrokerServer A</h2><blockquote>
+<p>nohup sh mqbroker -c /usr/local/rocketmq/conf/2m-noslave/broker-a.properties &gt;/dev/null 2&gt;&amp;1 &amp;<br>netstat -ntlp<br>tail -f -n 500 /usr/local/rocketmq/logs/rocketmqlogs/broker.log<br>tail -f -n 500 /usr/local/rocketmq/logs/rocketmqlogs/namesrv.log</p>
+</blockquote>
+<h2 id="启动BrokerServer-A-1"><a href="#启动BrokerServer-A-1" class="headerlink" title="启动BrokerServer A"></a>启动BrokerServer A</h2><blockquote>
+<p>nohup sh mqbroker -c /usr/local/rocketmq/conf/2m-noslave/broker-b.properties &gt;/dev/null 2&gt;&amp;1 &amp;<br>netstat -ntlp<br>tail -f -n 500 /usr/local/rocketmq/logs/rocketmqlogs/broker.log<br>tail -f -n 500 /usr/local/rocketmq/logs/rocketmqlogs/namesrv.log</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/2791079-93906a9fdf4db672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="启动成功"></p>
+<h2 id="数据清理"><a href="#数据清理" class="headerlink" title="数据清理"></a>数据清理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/rocketmq/bin </span><br><span class="line">sh mqshutdown broker</span><br><span class="line">sh mqshutdown namesrv</span><br><span class="line"></span><br><span class="line">*等待停止 *</span><br><span class="line"></span><br><span class="line">rm -rf /usr/local/rocketmq/store</span><br><span class="line">mkdir /usr/local/rocketmq/store</span><br><span class="line">mkdir /usr/local/rocketmq/store/commitlog</span><br><span class="line">mkdir /usr/local/rocketmq/store/consumequeue </span><br><span class="line">mkdir /usr/local/rocketmq/store/index</span><br><span class="line"></span><br><span class="line">*重复以上步骤重启NameServer与BrokerServer*</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+  <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="深页 wechat" style="width: 200px; max-width: 100%;">
+  <div>坚持原创技术分享，您的支持将支持我更好的创作！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RocketMQ/" rel="tag"># RocketMQ</a>
+          
+            <a href="/tags/消息队列/" rel="tag"># 消息队列</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/21/Devops/Linux中几种常用的文件传输方式/" rel="next" title="Linux中几种常用的文件传输方式">
+                <i class="fa fa-chevron-left"></i> Linux中几种常用的文件传输方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/28/Java/Protobuf-编译-Java/" rel="prev" title="Protobuf 编译 Java">
+                Protobuf 编译 Java <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">深页</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/YujieShui" title="GitHub &rarr; https://github.com/YujieShui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:shuiyujie.cn@gmail.com" title="E-Mail &rarr; mailto:shuiyujie.cn@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RocketMQ集群方式"><span class="nav-number">1.</span> <span class="nav-text">RocketMQ集群方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单个-Master"><span class="nav-number">1.1.</span> <span class="nav-text">单个 Master</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多-Master-模式"><span class="nav-number">1.2.</span> <span class="nav-text">多 Master 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多-Master-多-Slave-模式，异步复制"><span class="nav-number">1.3.</span> <span class="nav-text">多 Master 多 Slave 模式，异步复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多-Master-多-Slave-模式，同步双写"><span class="nav-number">1.4.</span> <span class="nav-text">多 Master 多 Slave 模式，同步双写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署双-master-模式的集群"><span class="nav-number">2.</span> <span class="nav-text">部署双 master 模式的集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器环境"><span class="nav-number">2.1.</span> <span class="nav-text">服务器环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-hosts"><span class="nav-number">2.2.</span> <span class="nav-text">修改 hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置存储路径"><span class="nav-number">2.4.</span> <span class="nav-text">配置存储路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分别修改日志配置文件"><span class="nav-number">2.5.</span> <span class="nav-text">分别修改日志配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-JVM-参数"><span class="nav-number">2.6.</span> <span class="nav-text">修改 JVM 参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动两台主机的-NameServer"><span class="nav-number">2.7.</span> <span class="nav-text">启动两台主机的 NameServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动BrokerServer-A"><span class="nav-number">2.8.</span> <span class="nav-text">启动BrokerServer A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动BrokerServer-A-1"><span class="nav-number">2.9.</span> <span class="nav-text">启动BrokerServer A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据清理"><span class="nav-number">2.10.</span> <span class="nav-text">数据清理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">深页</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数"></span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
