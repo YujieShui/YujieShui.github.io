@@ -1,11 +1,13 @@
 ---
 title: 部署 RockerMQ 双 Master 模式
-date: 2018-01-25 21:57:27
 categories:
-- 分布式
-tags: 
-- RocketMQ
-- 消息队列
+  - 分布式
+tags:
+  - RocketMQ
+  - 消息队列
+  - MQ
+abbrlink: 6fc5439d
+date: 2018-01-25 21:57:27
 ---
 
 本文介绍搭建双 master 的 RocektMQ 的集群。

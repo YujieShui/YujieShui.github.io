@@ -1,11 +1,12 @@
 ---
 title: mybatis 配置和使用
-date: 2017-11-25 19:09:09
 categories:
-- java
+  - Java
 tags:
-- java
-- mybatis
+  - java
+  - mybatis
+abbrlink: 5ed7ab06
+date: 2017-11-25 19:09:09
 ---
 
 MyBatis 是一款一流的支持自定义 SQL、存储过程和高级映射的持久化框架。MyBatis 几乎消除了所有的 JDBC 代码，也基本不需要手工去设置参数和获取检索结果。MyBatis 能够使用简单的 XML 格式或者注解进行来配置，能够映射基本数据元素、Map 接口和 POJOs（普通 java 对象）到数据库中的记录。

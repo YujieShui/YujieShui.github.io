@@ -1,11 +1,12 @@
 ---
 title: maven 实战
-date: 2017-12-06 21:11:20
-categories: 
-- java
+categories:
+  - Java
 tags:
-- java
-- maven
+  - java
+  - maven
+abbrlink: cfedc026
+date: 2017-12-06 21:11:20
 ---
 
 Maven 是跨平台的项目管理工具，主要服务于基于Java平台的项目构建、依赖管理和项目信息管理。Maven 的主要思想是**约定优于配置。**通过将约定项目的目录结构，抽象项目的生命周期的方式，将程序员从繁琐的项目构建中解放出来。

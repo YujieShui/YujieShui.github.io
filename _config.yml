@@ -14,8 +14,15 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://shuiyujie.com
 root: /
-permalink: :year/:month/:day/:title/
-permalink_defaults:
+# permalink: :year/:month/:day/:title/
+# permalink_defaults:
+
+# 优化博客链接
+# https://blog.csdn.net/yanzi1225627/article/details/77761488
+permalink: post/:abbrlink.html
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
 
 # Directory
 source_dir: source
@@ -72,7 +79,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: icarus
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
@@ -103,19 +110,3 @@ deploy:
   type: git
   repo: git@github.com:YujieShui/YujieShui.github.io.git
   branch: master
-
-# Dependencies: https://github.com/theme-next/hexo-symbols-count-time
-# 文章字数统计插件 | 需要在全局文件和 next 主题文件中分别配置
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: false
-
-# Local search
-# Dependencies: https://github.com/theme-next/hexo-generator-searchdb
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000

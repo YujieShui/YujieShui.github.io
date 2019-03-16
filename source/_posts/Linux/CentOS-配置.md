@@ -1,15 +1,11 @@
 ---
 title: CentOS 7 配置
+categories:
+  - Linux
+tags:
+  - linux
+abbrlink: 99732d8a
 date: 2017-11-14 09:57:16
-categories: 
-- 运维
-- Linux
-tags: 
-- linux
-- centos
-- jdk
-- tomcat
-- mysql
 ---
 
 本文说明如何在 Parallels 虚拟机上安装 CentOS 7 以及对其的一些基本配置，几个常用配置文件的说明和 JDK, Tomcat 和 Mysql 的安装。

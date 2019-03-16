@@ -1,10 +1,10 @@
 ---
 title: Linux 权限
-date: 2017-11-13 19:50:41
-categories: 
-- 运维
-- Linux
+categories:
+  - Linux
 tags: linux
+abbrlink: 40efde90
+date: 2017-11-13 19:50:41
 ---
 
 Linux 是多用户的操作系统，同一时间可以有多个用户同时操作同一台计算机。为了让用户和用户之间不相互影响，必须要有一种机制来保障每一个用户的行为不会越界对其他用户造成不必要的影响。

@@ -1,12 +1,12 @@
 ---
 title: RabbitMQ 安装和使用
-date: 2018-02-04 17:35:33
-categories: 
-- 分布式
-- 消息队列
+categories:
+  - 分布式
 tags:
-- 消息队列
-- RabbitMQ
+  - 消息队列
+  - RabbitMQ
+abbrlink: 29003c34
+date: 2018-02-04 17:35:33
 ---
 
 RabbitMQ 是一个消息队列，主要是用来实现应用程序的异步和解耦，同时也能起到消息缓冲，消息分发的作用。本文介绍RabbitMQ 安装和使用。

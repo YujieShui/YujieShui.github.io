@@ -1,12 +1,12 @@
 ---
 title: Linux中几种常用的文件传输方式
-date: 2018-01-21 20:14:35
 categories:
-- 运维
-- Linux
+  - Linux
 tags:
-- linux
-- 文件传输
+  - linux
+  - 文件传输
+abbrlink: a6fc1711
+date: 2018-01-21 20:14:35
 ---
 
 整理`scp`,`wget`,`ftp`以及其他Linux中常用的文件传输方式的介绍。

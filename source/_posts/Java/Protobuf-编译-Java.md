@@ -1,11 +1,12 @@
 ---
 title: Protobuf 编译 Java
-date: 2018-01-28 11:06:34
 categories:
-- java
+  - Java
 tags:
-- java
-- protobuf
+  - java
+  - protobuf
+abbrlink: 7e6ba807
+date: 2018-01-28 11:06:34
 ---
 
 Google Protocol Buffers 简称 Protobuf，它提供了一种灵活、高效、自动序列化结构数据的机制，可以联想 XML，但是比 XML 更小、更快、更简单。仅需要自定义一次你所需的数据格式，然后用户就可以使用 Protobuf 编译器自动生成各种语言的源码，方便的读写用户自定义的格式化的数据。与语言无关，与平台无关，还可以在不破坏原数据格式的基础上，依据老的数据格式，更新现有的数据格式。

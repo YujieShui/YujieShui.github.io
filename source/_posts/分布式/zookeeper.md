@@ -1,8 +1,11 @@
 ---
 title: zookeeper 的安装和配置
+categories:
+  - 分布式
+tags:
+  - zookeeper
+abbrlink: 530b5399
 date: 2017-11-14 17:18:25
-categories: 分布式
-tags: zookeeper
 ---
 
 ZooKeeper 是一个分布式协调服务。其本身就是一个高可用的分布式程序，只需半数以上节点存活即可继续使用，所以使用中往往配置奇数台主机。他主要能提供主从协调、服务器节点动态上下线、统一配置管理、分布式共享锁、统一名称服务等。

@@ -1,10 +1,11 @@
 ---
 title: Java 反射和动态代理
-date: 2017-11-26 23:08:39
-categories: 
-- java
+categories:
+  - Java
 tags:
-- java
+  - java
+abbrlink: e0acc964
+date: 2017-11-26 23:08:39
 ---
 
 反射提供了一种机制——用来检测可用的方法，并返回方法名。通过类名我们就能获取 Class 对象，并通过 Class 对象获取对象相关的一些属性和方法等。

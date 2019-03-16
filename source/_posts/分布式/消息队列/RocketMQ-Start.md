@@ -1,12 +1,12 @@
 ---
 title: RocketMQ Start
-date: 2018-01-21 17:39:45
 categories:
-- 分布式
-- 消息队列
-tags: 
-- RocketMQ
-- 消息队列
+  - 分布式
+tags:
+  - RocketMQ
+  - 消息队列
+abbrlink: 20e9366a
+date: 2018-01-21 17:39:45
 ---
 
 RocketMQ 是一款分布式、队列模型的消息中间件，具有以下特点：

@@ -1,13 +1,13 @@
 ---
 title: 实现 SSH 免密登录
-date: 2017-12-19 11:57:18
 categories:
-- 运维
-- Linux
+  - Linux
 tags:
-- linux
-- ssh
-- 分布式
+  - linux
+  - ssh
+  - 分布式
+abbrlink: ea055f0d
+date: 2017-12-19 11:57:18
 ---
 
 SSH (Secure Shell的) 是一种网络协议，用于计算机之间的加密登录。
