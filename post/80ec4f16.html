@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>如何使用Jupyter notebook - 深页の博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Notebook 已迅速成为处理数据的必备工具。其已知用途包括数据清理和探索、可视化、机器学习和大数据分析。GitHub 上面也会自动提供 notebook。借助此出色的功能，你可以轻松共享工作。http://nbviewer.jupyter.org/ 也会提供 GitHub 代码库中的 notebook 或存储在其他地方的 notebook。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用Jupyter notebook">
+<meta property="og:url" content="http://shuiyujie.com/post/80ec4f16.html">
+<meta property="og:site_name" content="深页の博客">
+<meta property="og:description" content="Notebook 已迅速成为处理数据的必备工具。其已知用途包括数据清理和探索、可视化、机器学习和大数据分析。GitHub 上面也会自动提供 notebook。借助此出色的功能，你可以轻松共享工作。http://nbviewer.jupyter.org/ 也会提供 GitHub 代码库中的 notebook 或存储在其他地方的 notebook。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-03-22-07-53-40.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-03-21-07-37-58.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-03-21-07-49-10.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-03-21-07-50-18.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-03-21-08-07-42.png">
+<meta property="og:updated_time" content="2019-03-21T23:54:27.033Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何使用Jupyter notebook">
+<meta name="twitter:description" content="Notebook 已迅速成为处理数据的必备工具。其已知用途包括数据清理和探索、可视化、机器学习和大数据分析。GitHub 上面也会自动提供 notebook。借助此出色的功能，你可以轻松共享工作。http://nbviewer.jupyter.org/ 也会提供 GitHub 代码库中的 notebook 或存储在其他地方的 notebook。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-03-22-07-53-40.png">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="如何使用Jupyter notebook" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-21T23:51:30.000Z">2019-03-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2164 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                如何使用Jupyter notebook
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://image.shuiyujie.com/2019-03-22-07-53-40.png" alt="Jupyter Notebook"></p>
+<p>Notebook 已迅速成为处理数据的必备工具。其已知用途包括<a href="http://nbviewer.jupyter.org/github/jmsteinw/Notebooks/blob/master/IndeedJobs.ipynb" target="_blank" rel="noopener">数据清理和探索</a>、可视化、<a href="http://nbviewer.jupyter.org/github/masinoa/machine_learning/blob/master/04_Neural_Networks.ipynb" target="_blank" rel="noopener">机器学习</a>和<a href="http://nbviewer.jupyter.org/github/tdhopper/rta-pyspark-presentation/blob/master/slides.ipynb" target="_blank" rel="noopener">大数据分析</a>。GitHub 上面也会自动提供 notebook。借助此出色的功能，你可以轻松共享工作。<a href="http://nbviewer.jupyter.org/" target="_blank" rel="noopener">http://nbviewer.jupyter.org/</a> 也会提供 GitHub 代码库中的 notebook 或存储在其他地方的 notebook。</p>
+<a id="more"></a>
+<p>Notebook 运行的核心是 notebook 服务器。你通过浏览器连接到该服务器，而 notebook 呈现为 Web 应用。你在 Web 应用中编写的代码通过该服务器发送给内核。内核运行代码并将代码发送回该服务器，之后，任何输出都会返回到浏览器中。保存 notebook 时，它作为 JSON 文件（文件扩展名为 <code>.ipynb</code>）写入到该服务器中。</p>
+<h1 id="使用-Jupyter-notebook"><a href="#使用-Jupyter-notebook" class="headerlink" title="使用 Jupyter notebook"></a>使用 Jupyter notebook</h1><h2 id="安装-notebook"><a href="#安装-notebook" class="headerlink" title="安装 notebook"></a>安装 notebook</h2><p>安装 Jupyter 的最简单方法是使用 Anaconda。该发行版自动附带了 Jupyter notebook。你能够在默认环境下使用 notebook。</p>
+<p>要在 conda 环境中安装 Jupyter notebook，请使用 <code>conda install jupyter notebook</code>。</p>
+<p>也可以通过 pip 使用 <code>pip install jupyter notebook</code> 来获得 Jupyter notebook。</p>
+<p>查看<a href="https://shuiyujie.com/post/9d29b615.html">如何使用Anaconda</a>了解如何使用Anaconda。</p>
+<h2 id="启动-notebook-服务器"><a href="#启动-notebook-服务器" class="headerlink" title="启动 notebook 服务器"></a>启动 notebook 服务器</h2><p>要启动 notebook 服务器，请在终端或控制台中输入 <code>jupyter notebook</code>。服务器会在你运行此命令的目录中启动。这意味着任何 notebook 文件都会保存在该目录中。你通常希望在 notebook 所在的目录中启动服务器。不过，你可以在文件系统中导航到 notebook 所在的位置。</p>
+<p>运行此命令时（请自己试一下！），服务器主页会在浏览器中打开。默认情况下，notebook 服务器的运行地址是 <code>http://localhost:8888</code>。如果启动其他服务器，新服务器会尝试使用端口 <code>8888</code>，但由于此端口已被占用，因此新服务器会在端口 <code>8889</code> 上运行。之后，可以通过 <code>http://localhost:8889</code> 连接到新服务器。每台额外的 notebook 服务器都会像这样增大端口号。</p>
+<p><img src="http://image.shuiyujie.com/2019-03-21-07-37-58.png" alt="Jupyter启动后的界面"></p>
+<p>在右侧，你可以点击“New”（新建），创建新的 notebook、文本文件、文件夹或终端。“Notebooks”下的列表显示了你已安装的内核。由于我在 Python 3 环境中运行服务器，因此列出了 Python 3 内核。</p>
+<p>顶部的选项卡是 <em>Files</em>（文件）、<em>Running</em>（运行）和 <em>Cluster</em>（聚类）。<em>Files</em>（文件）显示当前目录中的所有文件和文件夹。点击 <em>Running</em>（运行）选项卡会列出所有正在运行的 notebook。可以在该选项卡中管理这些 notebook。</p>
+<h2 id="关闭-notebook"><a href="#关闭-notebook" class="headerlink" title="关闭 notebook"></a>关闭 notebook</h2><p>通过在服务器主页上选中 notebook 旁边的复选框，然后点击“Shutdown”（关闭），你可以关闭各个 notebook。但是，在这样做之前，请确保你保存了工作！否则，在你上次保存后所做的任何更改都会丢失。下次运行 notebook 时，你还需要重新运行代码。</p>
+<p>通过在终端中按两次 Ctrl + C，可以关闭整个服务器。再次提醒，这会立即关闭所有运行中的 notebook，因此，请确保你保存了工作！</p>
+<h1 id="Notebook-界面"><a href="#Notebook-界面" class="headerlink" title="Notebook 界面"></a>Notebook 界面</h1><h2 id="Cell"><a href="#Cell" class="headerlink" title="Cell"></a>Cell</h2><p>新建的一个 notebook 之后，默认就会有一个 cell，也就是下图中蓝色的小框。</p>
+<p><img src="http://image.shuiyujie.com/2019-03-21-07-49-10.png" alt="Notebook 界面"></p>
+<p>Cell 可以称为<em>单元格</em>。单元格是你编写和运行代码的地方。</p>
+<h2 id="工具栏"><a href="#工具栏" class="headerlink" title="工具栏"></a>工具栏</h2><p>从左侧开始，工具栏上的其他控件是：</p>
+<ul>
+<li>落伍的软盘符号，表示“保存”。请记得保存 notebook！</li>
+<li><code>+</code> 按钮用于创建新的单元格</li>
+<li>然后是用于剪切、复制和粘贴单元格的按钮。</li>
+<li>运行、停止、重新启动内核</li>
+<li>单元格类型：代码、Markdown、原始文本和标题</li>
+<li>命令面板（见下文）</li>
+<li>单元格工具栏，提供不同的单元格选项（例如将单元格用作幻灯片）</li>
+</ul>
+<h2 id="命令面板"><a href="#命令面板" class="headerlink" title="命令面板"></a>命令面板</h2><p>小键盘符号代表命令面板。点击它会弹出一个带有搜索栏的面板，供你搜索不同的命令。这能切实帮助你加快工作速度，因为你无需使用鼠标翻查各个菜单。你只需打开命令面板，然后键入要执行的操作。</p>
+<p><img src="http://image.shuiyujie.com/2019-03-21-07-50-18.png" alt="命令面板"></p>
+<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><p>Notebook 提供了许多快捷键，我们可以使用<code>shift + command + P</code>呼出命令行面板，在输入<code>keyboard</code>就可以查看快捷键列表。</p>
+<p><img src="http://image.shuiyujie.com/2019-03-21-08-07-42.png" alt="快捷键列表"></p>
+<p>键入<code>Esc</code>进入命令模式，即可使用这些快捷键。</p>
+<h1 id="Magic-关键字"><a href="#Magic-关键字" class="headerlink" title="Magic 关键字"></a>Magic 关键字</h1><p>Magic 关键字是可以在单元格中运行的特殊命令，能让你控制 notebook 本身或执行系统调用（例如更改目录）。例如，可以使用 <code>%matplotlib</code> 将 matplotlib 设置为以交互方式在 notebook 中工作。</p>
+<p>Magic 命令的前面带有一个或两个百分号（<code>%</code> 或 <code>%%</code>），分别对应行 Magic 命令和单元格 Magic 命令。行 Magic 命令仅应用于编写 Magic 命令时所在的行，而单元格 Magic 命令应用于整个单元格。</p>
+<p><strong>注意：</strong>这些 Magic 关键字是特定于普通 Python 内核的关键字。如果使用其他内核，这些关键字很有可能无效。</p>
+<h2 id="代码计时"><a href="#代码计时" class="headerlink" title="代码计时"></a>代码计时</h2><p>有时候，你可能要花些精力优化代码，让代码运行得更快。在此优化过程中，必须对代码的运行速度进行计时。可以使用 Magic 命令 <code>timeit</code> 测算单元格中代买运行时间和函数的运行时间。</p>
+<p>测试整个单元格代码运行时间的时候可以添加<code>%%timeit</code></p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%timeit</span><br><span class="line">sum = <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):</span><br><span class="line">    sum += i就会输出</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.97 µs ± 150 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)</span><br></pre></td></tr></table></figure>
+<p>测试整个某个函数代码运行时间的时候可以添加<code>%timeit</code></p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sum</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    sum = <span class="hljs-number">0</span></span><br><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):</span><br><span class="line">        sum += i</span><br></pre></td></tr></table></figure>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%timeit sum()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.06 µs ± 180 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)</span><br></pre></td></tr></table></figure>
+<h2 id="在-notebook-中进行调试"><a href="#在-notebook-中进行调试" class="headerlink" title="在 notebook 中进行调试"></a>在 notebook 中进行调试</h2><p>对于 Python 内核，可以使用 Magic 命令 <code>%pdb</code> 开启交互式调试器。出错时，你能检查当前命名空间中的变量。</p>
+<p>要详细了解 <code>pdb</code>，请阅读<a href="https://docs.python.org/3/library/pdb.html" target="_blank" rel="noopener">此文档</a>。要退出调试器，在提示符中输入 <code>q</code> 即可。</p>
+<h2 id="补充读物"><a href="#补充读物" class="headerlink" title="补充读物"></a>补充读物</h2><p>Magic 命令还有很多，我只是介绍了你将会用得最多的一些命令。要了解更多信息，请查看<a href="http://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank" rel="noopener">此列表</a>，它列出了所有可用的 Magic 命令。</p>
+<h1 id="转换-notebook"><a href="#转换-notebook" class="headerlink" title="转换 notebook"></a>转换 notebook</h1><p>Notebook 只是扩展名为 <code>.ipynb</code> 的大型 <a href="http://www.json.org/" target="_blank" rel="noopener">JSON</a> 文件。</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="hljs-attr">"cells"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="hljs-attr">"cell_type"</span>: <span class="hljs-string">"code"</span>,</span><br><span class="line">   <span class="hljs-attr">"execution_count"</span>: <span class="hljs-number">8</span>,</span><br><span class="line">   <span class="hljs-attr">"metadata"</span>: &#123;&#125;,</span><br><span class="line">   <span class="hljs-attr">"outputs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="hljs-attr">"name"</span>: <span class="hljs-string">"stdout"</span>,</span><br><span class="line">     <span class="hljs-attr">"output_type"</span>: <span class="hljs-string">"stream"</span>,</span><br><span class="line">     <span class="hljs-attr">"text"</span>: [</span><br><span class="line">      <span class="hljs-string">"3.97 µs ± 150 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)\n"</span></span><br><span class="line">     ]</span><br><span class="line">    &#125;</span><br><span class="line">   ],</span><br><span class="line">   <span class="hljs-attr">"source"</span>: [</span><br><span class="line">    <span class="hljs-string">"%%timeit\n"</span>,</span><br><span class="line">    <span class="hljs-string">"sum = 0\n"</span>,</span><br><span class="line">    <span class="hljs-string">"for i in range(100):\n"</span>,</span><br><span class="line">    <span class="hljs-string">"    sum += i"</span></span><br><span class="line">   ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="hljs-attr">"cell_type"</span>: <span class="hljs-string">"code"</span>,</span><br><span class="line">   <span class="hljs-attr">"execution_count"</span>: <span class="hljs-number">9</span>,</span><br><span class="line">   <span class="hljs-attr">"metadata"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"collapsed"</span>: <span class="hljs-literal">true</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="hljs-attr">"outputs"</span>: [],</span><br><span class="line">   <span class="hljs-attr">"source"</span>: [</span><br><span class="line">    <span class="hljs-string">"def sum():\n"</span>,</span><br><span class="line">    <span class="hljs-string">"    sum = 0\n"</span>,</span><br><span class="line">    <span class="hljs-string">"    for i in range(100):\n"</span>,</span><br><span class="line">    <span class="hljs-string">"        sum += i"</span></span><br><span class="line">   ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="hljs-attr">"cell_type"</span>: <span class="hljs-string">"code"</span>,</span><br><span class="line">   <span class="hljs-attr">"execution_count"</span>: <span class="hljs-number">10</span>,</span><br><span class="line">   <span class="hljs-attr">"metadata"</span>: &#123;&#125;,</span><br><span class="line">   <span class="hljs-attr">"outputs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="hljs-attr">"name"</span>: <span class="hljs-string">"stdout"</span>,</span><br><span class="line">     <span class="hljs-attr">"output_type"</span>: <span class="hljs-string">"stream"</span>,</span><br><span class="line">     <span class="hljs-attr">"text"</span>: [</span><br><span class="line">      <span class="hljs-string">"4.06 µs ± 180 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)\n"</span></span><br><span class="line">     ]</span><br><span class="line">    &#125;</span><br><span class="line">   ],</span><br><span class="line">   <span class="hljs-attr">"source"</span>: [</span><br><span class="line">    <span class="hljs-string">"%timeit sum()"</span></span><br><span class="line">   ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="hljs-attr">"cell_type"</span>: <span class="hljs-string">"code"</span>,</span><br><span class="line">   <span class="hljs-attr">"execution_count"</span>: <span class="hljs-literal">null</span>,</span><br><span class="line">   <span class="hljs-attr">"metadata"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"collapsed"</span>: <span class="hljs-literal">true</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="hljs-attr">"outputs"</span>: [],</span><br><span class="line">   <span class="hljs-attr">"source"</span>: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="hljs-attr">"metadata"</span>: &#123;</span><br><span class="line">  <span class="hljs-attr">"kernelspec"</span>: &#123;</span><br><span class="line">   <span class="hljs-attr">"display_name"</span>: <span class="hljs-string">"Python 3"</span>,</span><br><span class="line">   <span class="hljs-attr">"language"</span>: <span class="hljs-string">"python"</span>,</span><br><span class="line">   <span class="hljs-attr">"name"</span>: <span class="hljs-string">"python3"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-attr">"language_info"</span>: &#123;</span><br><span class="line">   <span class="hljs-attr">"codemirror_mode"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"ipython"</span>,</span><br><span class="line">    <span class="hljs-attr">"version"</span>: <span class="hljs-number">3</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="hljs-attr">"file_extension"</span>: <span class="hljs-string">".py"</span>,</span><br><span class="line">   <span class="hljs-attr">"mimetype"</span>: <span class="hljs-string">"text/x-python"</span>,</span><br><span class="line">   <span class="hljs-attr">"name"</span>: <span class="hljs-string">"python"</span>,</span><br><span class="line">   <span class="hljs-attr">"nbconvert_exporter"</span>: <span class="hljs-string">"python"</span>,</span><br><span class="line">   <span class="hljs-attr">"pygments_lexer"</span>: <span class="hljs-string">"ipython3"</span>,</span><br><span class="line">   <span class="hljs-attr">"version"</span>: <span class="hljs-string">"3.6.5"</span></span><br><span class="line">  &#125;</span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="hljs-attr">"nbformat"</span>: <span class="hljs-number">4</span>,</span><br><span class="line"> <span class="hljs-attr">"nbformat_minor"</span>: <span class="hljs-number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于 notebook 是 JSON 文件，因此，可以轻松将其转换为其他格式。Jupyter 附带了一个名为 <code>nbconvert</code> 的实用程序，可将 notebook 转换为 HTML、Markdown、幻灯片等格式。</p>
+<p>例如，要将 notebook 转换为 HTML 文件，请在终端中使用</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter nbconvert --to html notebook.ipynb</span><br></pre></td></tr></table></figure>
+<p>要将 notebook 与不使用 notebook 的其他人共享，转换为 HTML 很有用。而要在博客和其他接受 Markdown 格式化的文本编辑器中加入 notebook，Markdown 很合适。</p>
+<p>像平常一样，要详细了解 <code>nbconvert</code>，请阅读相关<a href="https://nbconvert.readthedocs.io/en/latest/usage.html" target="_blank" rel="noopener">文档</a>。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/python/">python</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/b63a0941.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">消息队列的连环炮</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/9d29b615.html">
+                <span class="level-item">如何使用Anaconda</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="水宇杰">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        水宇杰
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Debug the world
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        30
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        26
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/YujieShui" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/OpenCV/">
+            <span class="level-start">
+                <span class="level-item">OpenCV</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/分布式/">
+            <span class="level-start">
+                <span class="level-item">分布式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/工具癖/">
+            <span class="level-start">
+                <span class="level-item">工具癖</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/每周一书/">
+            <span class="level-start">
+                <span class="level-item">每周一书</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法与数据结构/">
+            <span class="level-start">
+                <span class="level-item">算法与数据结构</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 12.5px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 12.5px;">分布式</a> <a href="/tags/剑指-offer/" style="font-size: 12.5px;">剑指 offer</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 12.5px;">并发编程</a> <a href="/tags/文件传输/" style="font-size: 10px;">文件传输</a> <a href="/tags/消息队列/" style="font-size: 15px;">消息队列</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/算法和数据结构/" style="font-size: 12.5px;">算法和数据结构</a> <a href="/tags/网站/" style="font-size: 10px;">网站</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/post/b63a0941.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="消息队列的连环炮">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-23T15:26:49.000Z">2019-03-23</time></div>
+                    <a href="/post/b63a0941.html" class="has-link-black-ter is-size-6">消息队列的连环炮</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/80ec4f16.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="如何使用Jupyter notebook">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-21T23:51:30.000Z">2019-03-22</time></div>
+                    <a href="/post/80ec4f16.html" class="has-link-black-ter is-size-6">如何使用Jupyter notebook</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/9d29b615.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="如何使用Anaconda">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-20T12:11:03.000Z">2019-03-20</time></div>
+                    <a href="/post/9d29b615.html" class="has-link-black-ter is-size-6">如何使用Anaconda</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/5359e313.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu16.04配置OpenCV环境">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-19T11:42:00.000Z">2019-03-19</time></div>
+                    <a href="/post/5359e313.html" class="has-link-black-ter is-size-6">Ubuntu16.04配置OpenCV环境</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/cbbc9ca0.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu OpenSSH Server">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-16T10:41:24.000Z">2019-03-16</time></div>
+                    <a href="/post/cbbc9ca0.html" class="has-link-black-ter is-size-6">Ubuntu OpenSSH Server</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RabbitMQ/">
+                        <span class="tag">RabbitMQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RocketMQ/">
+                        <span class="tag">RocketMQ</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/protobuf/">
+                        <span class="tag">protobuf</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ssh/">
+                        <span class="tag">ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ubuntu/">
+                        <span class="tag">ubuntu</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/剑指-offer/">
+                        <span class="tag">剑指 offer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发编程/">
+                        <span class="tag">并发编程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文件传输/">
+                        <span class="tag">文件传输</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电影/">
+                        <span class="tag">电影</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法和数据结构/">
+                        <span class="tag">算法和数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/网站/">
+                        <span class="tag">网站</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/post/b63a0941.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="消息队列的连环炮">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-23T15:26:49.000Z">2019-03-23</time></div>
+                    <a href="/post/b63a0941.html" class="has-link-black-ter is-size-6">消息队列的连环炮</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/80ec4f16.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="如何使用Jupyter notebook">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-21T23:51:30.000Z">2019-03-22</time></div>
+                    <a href="/post/80ec4f16.html" class="has-link-black-ter is-size-6">如何使用Jupyter notebook</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/9d29b615.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="如何使用Anaconda">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-20T12:11:03.000Z">2019-03-20</time></div>
+                    <a href="/post/9d29b615.html" class="has-link-black-ter is-size-6">如何使用Anaconda</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/5359e313.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu16.04配置OpenCV环境">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-19T11:42:00.000Z">2019-03-19</time></div>
+                    <a href="/post/5359e313.html" class="has-link-black-ter is-size-6">Ubuntu16.04配置OpenCV环境</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/post/cbbc9ca0.html" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu OpenSSH Server">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-16T10:41:24.000Z">2019-03-16</time></div>
+                    <a href="/post/cbbc9ca0.html" class="has-link-black-ter is-size-6">Ubuntu OpenSSH Server</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RabbitMQ/">
+                        <span class="tag">RabbitMQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RocketMQ/">
+                        <span class="tag">RocketMQ</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
+                        <span class="tag is-grey">12</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/protobuf/">
+                        <span class="tag">protobuf</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ssh/">
+                        <span class="tag">ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ubuntu/">
+                        <span class="tag">ubuntu</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/剑指-offer/">
+                        <span class="tag">剑指 offer</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发编程/">
+                        <span class="tag">并发编程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文件传输/">
+                        <span class="tag">文件传输</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/电影/">
+                        <span class="tag">电影</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/算法和数据结构/">
+                        <span class="tag">算法和数据结构</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/网站/">
+                        <span class="tag">网站</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="如何使用Jupyter notebook" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 深页&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
