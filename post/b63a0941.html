@@ -15,16 +15,16 @@
 <meta property="og:site_name" content="深页の博客">
 <meta property="og:description" content="1. 引子消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。 常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。 简历中涉及到了消息队列，面试官先问了这样几个问题：  你们系统里为什么要使用消息队列？ 既然使用了消息队列，说说他还有什么使用场景？ 消息队列的优缺点是什么？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2791079-8ad0948a1ec81797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2791079-9266d4ecfc2ce1ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2791079-6435f7642c400095.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2791079-054a739e5a9b1025.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2791079-8ad0948a1ec81797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-30T13:00:32.336Z">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-02-26.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-03-06.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-03-45.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-04-20.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-02-26.png">
+<meta property="og:updated_time" content="2019-05-09T15:05:23.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消息队列的连环炮">
 <meta name="twitter:description" content="1. 引子消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。 常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。 简历中涉及到了消息队列，面试官先问了这样几个问题：  你们系统里为什么要使用消息队列？ 既然使用了消息队列，说说他还有什么使用场景？ 消息队列的优缺点是什么？">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2791079-8ad0948a1ec81797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-05-09-23-02-26.png">
 
 
 
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1371 个字)
+                    9 分钟 读完 (大约 1285 个字)
                 </span>
                 
                 
@@ -170,7 +170,7 @@
             
         </h1>
         <div class="content">
-            <p><img src="https://upload-images.jianshu.io/upload_images/2791079-8ad0948a1ec81797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="消息队列思维导图"></p>
+            <p><img src="http://image.shuiyujie.com/2019-05-09-23-02-26.png" alt="消息队列思维导图"></p>
 <h1 id="1-引子"><a href="#1-引子" class="headerlink" title="1. 引子"></a>1. 引子</h1><p>消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。</p>
 <p>常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。</p>
 <p>简历中涉及到了消息队列，面试官先问了这样几个问题：</p>
@@ -186,7 +186,7 @@
 <p>通过一个问题就能看出是为了用而用，还是经过思考之后使用。</p>
 <h1 id="3-消息队列的使用场景？"><a href="#3-消息队列的使用场景？" class="headerlink" title="3. 消息队列的使用场景？"></a>3. 消息队列的使用场景？</h1><p>问消息队列的使用场景，和问消息队列有什么优点，消息队列有什么作用是等价的。</p>
 <p>消息队列的作用主要有三个<strong>解耦、异步、削峰</strong>。</p>
-<h2 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h2><p><img src="https://upload-images.jianshu.io/upload_images/2791079-9266d4ecfc2ce1ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解耦"></p>
+<h2 id="解耦"><a href="#解耦" class="headerlink" title="解耦"></a>解耦</h2><p><img src="http://image.shuiyujie.com/2019-05-09-23-03-06.png" alt="解耦"></p>
 <p>B,C,D 系统需要使用 A 系统产生的关键数据。</p>
 <ul>
 <li>无消息队列时<ul>
@@ -201,7 +201,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h2><p><img src="https://upload-images.jianshu.io/upload_images/2791079-6435f7642c400095.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="异步.png"></p>
+<h2 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h2><p><img src="http://image.shuiyujie.com/2019-05-09-23-03-45.png" alt="异步.png"></p>
 <p>用户请求数据时，系统的响应时间是保证用户体验很重要的一部分。</p>
 <ul>
 <li>无消息队列时<ul>
@@ -215,7 +215,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="削峰"><a href="#削峰" class="headerlink" title="削峰"></a>削峰</h2><p><img src="https://upload-images.jianshu.io/upload_images/2791079-054a739e5a9b1025.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="削峰.png"></p>
+<h2 id="削峰"><a href="#削峰" class="headerlink" title="削峰"></a>削峰</h2><p><img src="http://image.shuiyujie.com/2019-05-09-23-04-20.png" alt="削峰.png"></p>
 <p>秒杀场景下，每秒有 5000 个请求，Mysql 每秒最大处理 2000 条 sql。</p>
 <ul>
 <li>无消息队列时<ul>
@@ -250,7 +250,7 @@
 <li>这样的情况就是数据不一致</li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>面试官问到 MQ 的时候，希望考察我们在使用 MQ 的时候是否有过自己的思考。没有完美的技术，任何技术都具有两面性，要考虑它的使用场景，并且对可能遇到的风险做到心中有数，提前预防。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2791079-8ad0948a1ec81797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="消息队列思维导图"></p>
+<p><img src="http://image.shuiyujie.com/2019-05-09-23-02-26.png" alt="消息队列思维导图"></p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>引入消息队列之后：</p>
 <ul>
 <li>如何保证高可用？</li>
