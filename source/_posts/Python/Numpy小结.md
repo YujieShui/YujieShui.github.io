@@ -8,10 +8,10 @@ tags:
 abbrlink: a404f4e2
 date: 2017-12-10 18:41:29
 ---
- 
+
 NumPy 是 Python 语言的一个扩充程序库。支持高级大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库，也是学习 python 必学的一个库。
 
-![numpy](http://upload-images.jianshu.io/upload_images/2791079-c87361c2a52ca8a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![numpy](<http://image.shuiyujie.com/2019-05-09-23-07-28.png>)
 
 <!-- more -->
 

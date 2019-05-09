@@ -14,7 +14,7 @@ SSH (Secure Shell的) 是一种网络协议，用于计算机之间的加密登�
 
 通过使用SSH，你可以把所有传输的数据进行加密更加安全可靠。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH 有很多功能，它既可以代替 Telnet，又可以为FTP、Pop、甚至为 PPP 提供一个安全的"通道"。
 
-![SSH](http://upload-images.jianshu.io/upload_images/2791079-879bf1f790d974bc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![SSH](http://image.shuiyujie.com/2019-05-09-23-08-57.png)
 
 <!-- more -->
 

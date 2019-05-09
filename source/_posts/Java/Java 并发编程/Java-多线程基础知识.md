@@ -1,6 +1,7 @@
 ---
 title: Java 多线程基础知识
-category: Java
+categories:
+  - Java
 tags:
   - java
   - 并发编程
