@@ -2,26 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>C语言学习笔记-静态库、动态库的制作和使用 - 深页</title>
+<title>C语言学习笔记-const关键字 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
+    <meta name="description" content="c语言中 const 关键字使用示例  const 修饰的变量定义时要初始化，不初始化后面就没有办法赋值了 const 运用在指针上 c 语言中的 const 是个冒牌货，使用指针任然能够修改">
 <meta name="keywords" content="c,c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言学习笔记-静态库、动态库的制作和使用">
-<meta property="og:url" content="http://shuiyujie.com/post/62b06016.html">
+<meta property="og:title" content="C语言学习笔记-const关键字">
+<meta property="og:url" content="http://shuiyujie.com/post/5c7372a9.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
+<meta property="og:description" content="c语言中 const 关键字使用示例  const 修饰的变量定义时要初始化，不初始化后面就没有办法赋值了 const 运用在指针上 c 语言中的 const 是个冒牌货，使用指针任然能够修改">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/static_library.png">
-<meta property="og:image" content="http://image.shuiyujie.com/dll.png">
-<meta property="og:updated_time" content="2019-05-11T00:42:50.430Z">
+<meta property="og:updated_time" content="2019-05-11T07:37:40.434Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言学习笔记-静态库、动态库的制作和使用">
-<meta name="twitter:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
-<meta name="twitter:image" content="http://image.shuiyujie.com/static_library.png">
+<meta name="twitter:title" content="C语言学习笔记-const关键字">
+<meta name="twitter:description" content="c语言中 const 关键字使用示例  const 修饰的变量定义时要初始化，不初始化后面就没有办法赋值了 const 运用在指针上 c 语言中的 const 是个冒牌货，使用指针任然能够修改">
 
 
 
@@ -93,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="C语言学习笔记-静态库、动态库的制作和使用" height="28">
+                <img src="/images/logo.svg" alt="C语言学习笔记-const关键字" height="28">
             
             </a>
         </div>
@@ -144,7 +141,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-02T08:22:20.000Z">2019-05-02</time>
+                <time class="level-item has-text-grey" datetime="2019-05-11T07:32:21.000Z">2019-05-11</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
@@ -154,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 780 个字)
+                    2 分钟 读完 (大约 271 个字)
                 </span>
                 
                 
@@ -163,32 +160,18 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                C语言学习笔记-静态库、动态库的制作和使用
+                C语言学习笔记-const关键字
             
         </h1>
         <div class="content">
-            <p>本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。</p>
-<p><a href="https://github.com/YujieShui/up-up-c/tree/master/how_to_make_lib" target="_blank" rel="noopener">示例代码</a></p>
+            <p>c语言中 const 关键字使用示例</p>
+<ol>
+<li>const 修饰的变量定义时要初始化，不初始化后面就没有办法赋值了</li>
+<li>const 运用在指针上</li>
+<li>c 语言中的 const 是个冒牌货，使用指针任然能够修改</li>
+</ol>
 <a id="more"></a>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">    ├── add.c</span><br><span class="line">    ├── mul.c</span><br><span class="line">    ├── sub.c</span><br></pre></td></tr></table></figure>
-<ul>
-<li>include - 头文件目录</li>
-<li>lib - 库文件目录</li>
-<li>src - 源代码目录</li>
-</ul>
-<h2 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h2><p>本节介绍如何将代码编译成静态库。当我们希望程序响应更快，或者不想提供源代码，我们可以使用静态库。</p>
-<p><img src="http://image.shuiyujie.com/static_library.png" alt="静态库"></p>
-<h3 id="编译静态库"><a href="#编译静态库" class="headerlink" title="编译静态库"></a>编译静态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 将 .c 文件编译成 .o 文件</span><br><span class="line">➜  ls</span><br><span class="line">add.c mul.c sub.c</span><br><span class="line">➜  gcc *.c -c -I ../include</span><br><span class="line">➜  ls</span><br><span class="line">add.c add.o mul.c mul.o sub.c sub.o</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将 .o 文件打包，生成 .a 文件</span><br><span class="line">➜  ar rcs libMyCalc.a *.o</span><br><span class="line">➜  ls</span><br><span class="line">add.c       libMyCalc.a mul.o       sub.o</span><br><span class="line">add.o       mul.c       sub.c</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将 .a 文件移动到 lib 目录下</span><br><span class="line">➜  mv libMyCalc.a ../lib</span><br></pre></td></tr></table></figure>
-<h3 id="使用静态库"><a href="#使用静态库" class="headerlink" title="使用静态库"></a>使用静态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 方式 1</span><br><span class="line">gcc main.c lib/libMyCalc.a -I include -o sum</span><br><span class="line">./sum</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 方式 2</span><br><span class="line">gcc main.c -Iinclude -L lib -l MyCalc -o myapp</span><br><span class="line">./myapp</span><br></pre></td></tr></table></figure>
-<h2 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h2><p><img src="http://image.shuiyujie.com/dll.png" alt="动态库"></p>
-<h3 id="编译动态库"><a href="#编译动态库" class="headerlink" title="编译动态库"></a>编译动态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> .c 编译为 .o</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c mul.c sub.c</span><br><span class="line">➜  src git:(master) ✗ gcc -fPIC -c *.c -I ../include</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c add.o mul.c mul.o sub.c sub.o</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> .o 打包为 .so</span><br><span class="line">➜  src git:(master) ✗ gcc -shared -o libMyCalc.so *.o -Iinclude</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c        libMyCalc.so mul.o        sub.o</span><br><span class="line">add.o        mul.c        sub.c</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> .so 移动到 lib</span><br><span class="line">➜  src git:(master) ✗ mv libMyCalc.so ../lib</span><br></pre></td></tr></table></figure>
-<h3 id="使用动态库"><a href="#使用动态库" class="headerlink" title="使用动态库"></a>使用动态库</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 方式 1</span><br><span class="line">gcc main.c lib/libMyCalc.so -o app -Iinclude</span><br><span class="line">./app</span><br><span class="line"></span><br><span class="line"># 方式 2</span><br><span class="line">gcc main.c -Iinclude -L lib -l MyCalc -o myapp</span><br><span class="line">./myapp</span><br></pre></td></tr></table></figure>
-<p>如果在使用动态库的过程中遇到了问题，请看下一小结。</p>
-<h3 id="动态库链接失败问题"><a href="#动态库链接失败问题" class="headerlink" title="动态库链接失败问题"></a>动态库链接失败问题</h3><p>动态库是由动态连机器加载的，通过<code>ldd app</code>我们可以查看可执行文件执行的时候依赖的所有动态库。交由动态连接器管理的动态库都能被正确加载，比如说<code>/lib</code>目录下的库文件。我们自定义的动态库没有被加载就是因为没有告知动态连接器我们的动态库在哪里。</p>
-<h3 id="方法一-临时配置"><a href="#方法一-临时配置" class="headerlink" title="方法一 临时配置"></a>方法一 临时配置</h3><p>要想汤动态连机器知道我们的动态库在哪，一种方式是直接把自定义的动态库丢到<code>/lib</code>目录下，这样自然就能加载到了，当然我想没有人会想这么做的。另一种方式就是在配置文件中配置动态库的位置，比如像下面的这样：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=我们的动态库位置</span><br></pre></td></tr></table></figure>
-<p><code>LD_LIBRARY_PATH</code>我们可以将动态库的位置保存在这里，此时就能顺利运行程序，但是重启终端将会失效，临时测试的时候使用很方便。</p>
-<h3 id="方法二-永久配置"><a href="#方法二-永久配置" class="headerlink" title="方法二 永久配置"></a>方法二 永久配置</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. vim /etc/ld.so.conf</span><br><span class="line">2. 将动态库的路径配置在里面</span><br><span class="line">3. sudo ldconfig -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> buf[] = <span class="hljs-string">"dfasfadsgafdg"</span>;</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *p = buf;</span><br><span class="line">    <span class="hljs-comment">// p[1] = "2"; err</span></span><br><span class="line">    p = <span class="hljs-string">"0x11"</span>;</span><br><span class="line">    <span class="hljs-comment">// const 此时修饰的是 *p，表示 p 指向的那块内存的内容 *p 是不可变的</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-comment">// char const *p1 = buf;</span></span><br><span class="line">    <span class="hljs-comment">// p1[1] = '2;</span></span><br><span class="line">    <span class="hljs-comment">// 交换顺序这里 const char 与 char const 相同</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">char</span> * <span class="hljs-keyword">const</span> p1 = buf;</span><br><span class="line">    p1[<span class="hljs-number">1</span>] = <span class="hljs-string">'2'</span>;</span><br><span class="line">    <span class="hljs-comment">// p1 = "0x11"; err</span></span><br><span class="line">    <span class="hljs-comment">// const 此时修饰的是 p，表示指针变量 p 本身是不可修改的，而指针变量指向的内容 *p 是可以修改的</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * <span class="hljs-keyword">const</span> p3 = buf;</span><br><span class="line">    <span class="hljs-comment">// p3[1] = '2; err</span></span><br><span class="line">    <span class="hljs-comment">// p3 = "abc"; err</span></span><br><span class="line">    <span class="hljs-comment">// 两个 const 分别修饰了 p 和 *p，此时无论是指针还是指针指向的内存都不可变，完成处于只读状态</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">123</span>;</span><br><span class="line">    <span class="hljs-comment">// a = 321; err</span></span><br><span class="line">    <span class="hljs-keyword">int</span> *q = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    q = &amp;a;</span><br><span class="line">    *q = <span class="hljs-number">321</span>;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"a: %d\n"</span>, a);</span><br><span class="line">    <span class="hljs-comment">// c 语言中的 const 是个冒牌货，使用指针任然能够修改</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -214,16 +197,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/871f090d.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/a99472bd.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">斯坦福高效睡眠法</span>
+                <span class="level-item">C语言学习笔记-字符串</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/b63a0941.html">
-                <span class="level-item">消息队列的连环炮</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/e261fd69.html">
+                <span class="level-item">C语言学习笔记-结构体</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1322,7 +1305,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="C语言学习笔记-静态库、动态库的制作和使用" height="28">
+                    <img src="/images/logo.svg" alt="C语言学习笔记-const关键字" height="28">
                 
                 </a>
                 <p class="is-size-7">

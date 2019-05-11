@@ -2,26 +2,27 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>C语言学习笔记-静态库、动态库的制作和使用 - 深页</title>
+<title>C语言学习笔记-指针01 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
+    <meta name="description" content="指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。">
 <meta name="keywords" content="c,c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言学习笔记-静态库、动态库的制作和使用">
-<meta property="og:url" content="http://shuiyujie.com/post/62b06016.html">
+<meta property="og:title" content="C语言学习笔记-指针01">
+<meta property="og:url" content="http://shuiyujie.com/post/2f02c8ae.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
+<meta property="og:description" content="指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/static_library.png">
-<meta property="og:image" content="http://image.shuiyujie.com/dll.png">
-<meta property="og:updated_time" content="2019-05-11T00:42:50.430Z">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-11-16-35-12.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-11-16-41-34.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-11-16-54-13.png">
+<meta property="og:updated_time" content="2019-05-11T12:58:21.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言学习笔记-静态库、动态库的制作和使用">
-<meta name="twitter:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
-<meta name="twitter:image" content="http://image.shuiyujie.com/static_library.png">
+<meta name="twitter:title" content="C语言学习笔记-指针01">
+<meta name="twitter:description" content="指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-05-11-16-35-12.png">
 
 
 
@@ -93,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="C语言学习笔记-静态库、动态库的制作和使用" height="28">
+                <img src="/images/logo.svg" alt="C语言学习笔记-指针01" height="28">
             
             </a>
         </div>
@@ -144,7 +145,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-02T08:22:20.000Z">2019-05-02</time>
+                <time class="level-item has-text-grey" datetime="2019-05-11T07:45:09.000Z">2019-05-11</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
@@ -154,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 780 个字)
+                    13 分钟 读完 (大约 1944 个字)
                 </span>
                 
                 
@@ -163,32 +164,97 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                C语言学习笔记-静态库、动态库的制作和使用
+                C语言学习笔记-指针01
             
         </h1>
         <div class="content">
-            <p>本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。</p>
-<p><a href="https://github.com/YujieShui/up-up-c/tree/master/how_to_make_lib" target="_blank" rel="noopener">示例代码</a></p>
+            <p>指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。</p>
 <a id="more"></a>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">    ├── add.c</span><br><span class="line">    ├── mul.c</span><br><span class="line">    ├── sub.c</span><br></pre></td></tr></table></figure>
-<ul>
-<li>include - 头文件目录</li>
-<li>lib - 库文件目录</li>
-<li>src - 源代码目录</li>
-</ul>
-<h2 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h2><p>本节介绍如何将代码编译成静态库。当我们希望程序响应更快，或者不想提供源代码，我们可以使用静态库。</p>
-<p><img src="http://image.shuiyujie.com/static_library.png" alt="静态库"></p>
-<h3 id="编译静态库"><a href="#编译静态库" class="headerlink" title="编译静态库"></a>编译静态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 将 .c 文件编译成 .o 文件</span><br><span class="line">➜  ls</span><br><span class="line">add.c mul.c sub.c</span><br><span class="line">➜  gcc *.c -c -I ../include</span><br><span class="line">➜  ls</span><br><span class="line">add.c add.o mul.c mul.o sub.c sub.o</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将 .o 文件打包，生成 .a 文件</span><br><span class="line">➜  ar rcs libMyCalc.a *.o</span><br><span class="line">➜  ls</span><br><span class="line">add.c       libMyCalc.a mul.o       sub.o</span><br><span class="line">add.o       mul.c       sub.c</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将 .a 文件移动到 lib 目录下</span><br><span class="line">➜  mv libMyCalc.a ../lib</span><br></pre></td></tr></table></figure>
-<h3 id="使用静态库"><a href="#使用静态库" class="headerlink" title="使用静态库"></a>使用静态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 方式 1</span><br><span class="line">gcc main.c lib/libMyCalc.a -I include -o sum</span><br><span class="line">./sum</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 方式 2</span><br><span class="line">gcc main.c -Iinclude -L lib -l MyCalc -o myapp</span><br><span class="line">./myapp</span><br></pre></td></tr></table></figure>
-<h2 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h2><p><img src="http://image.shuiyujie.com/dll.png" alt="动态库"></p>
-<h3 id="编译动态库"><a href="#编译动态库" class="headerlink" title="编译动态库"></a>编译动态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> .c 编译为 .o</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c mul.c sub.c</span><br><span class="line">➜  src git:(master) ✗ gcc -fPIC -c *.c -I ../include</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c add.o mul.c mul.o sub.c sub.o</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> .o 打包为 .so</span><br><span class="line">➜  src git:(master) ✗ gcc -shared -o libMyCalc.so *.o -Iinclude</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c        libMyCalc.so mul.o        sub.o</span><br><span class="line">add.o        mul.c        sub.c</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> .so 移动到 lib</span><br><span class="line">➜  src git:(master) ✗ mv libMyCalc.so ../lib</span><br></pre></td></tr></table></figure>
-<h3 id="使用动态库"><a href="#使用动态库" class="headerlink" title="使用动态库"></a>使用动态库</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 方式 1</span><br><span class="line">gcc main.c lib/libMyCalc.so -o app -Iinclude</span><br><span class="line">./app</span><br><span class="line"></span><br><span class="line"># 方式 2</span><br><span class="line">gcc main.c -Iinclude -L lib -l MyCalc -o myapp</span><br><span class="line">./myapp</span><br></pre></td></tr></table></figure>
-<p>如果在使用动态库的过程中遇到了问题，请看下一小结。</p>
-<h3 id="动态库链接失败问题"><a href="#动态库链接失败问题" class="headerlink" title="动态库链接失败问题"></a>动态库链接失败问题</h3><p>动态库是由动态连机器加载的，通过<code>ldd app</code>我们可以查看可执行文件执行的时候依赖的所有动态库。交由动态连接器管理的动态库都能被正确加载，比如说<code>/lib</code>目录下的库文件。我们自定义的动态库没有被加载就是因为没有告知动态连接器我们的动态库在哪里。</p>
-<h3 id="方法一-临时配置"><a href="#方法一-临时配置" class="headerlink" title="方法一 临时配置"></a>方法一 临时配置</h3><p>要想汤动态连机器知道我们的动态库在哪，一种方式是直接把自定义的动态库丢到<code>/lib</code>目录下，这样自然就能加载到了，当然我想没有人会想这么做的。另一种方式就是在配置文件中配置动态库的位置，比如像下面的这样：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=我们的动态库位置</span><br></pre></td></tr></table></figure>
-<p><code>LD_LIBRARY_PATH</code>我们可以将动态库的位置保存在这里，此时就能顺利运行程序，但是重启终端将会失效，临时测试的时候使用很方便。</p>
-<h3 id="方法二-永久配置"><a href="#方法二-永久配置" class="headerlink" title="方法二 永久配置"></a>方法二 永久配置</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. vim /etc/ld.so.conf</span><br><span class="line">2. 将动态库的路径配置在里面</span><br><span class="line">3. sudo ldconfig -v</span><br></pre></td></tr></table></figure>
+<h1 id="指针的概念"><a href="#指针的概念" class="headerlink" title="指针的概念"></a>指针的概念</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 10;</span><br><span class="line">    int *p = NULL;</span><br><span class="line">    </span><br><span class="line">    p = (int *)malloc(sizeof(int));</span><br><span class="line">    p = &amp;a;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%d\n&quot;, p);</span><br><span class="line">    printf(&quot;%d\n&quot;, *p);</span><br><span class="line"></span><br><span class="line">    if(p != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free(p);</span><br><span class="line">        p = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先来看这样一段代码</p>
+<ol>
+<li>p 是一个指针变量，*p 是指针指向的内存空间的保存的值。</li>
+<li>&amp;a 表示取变量 a 所在内存的地址，p = &amp;a 表示将内存 a 所在的地址值赋值给 p，相当于指针 p 指向 a 所在的内存。</li>
+<li>接下来分别打印 p 和 *p 来验证上面的说法</li>
+<li>最后我们释放内存空间</li>
+</ol>
+<p>明确几个概念：</p>
+<ol>
+<li>指针是一个变量</li>
+<li>注意区分指针变量和它指向的内存块<ol>
+<li>改变指针变量的值不会影响指针指向的内存区域 </li>
+<li>改变指针指向的内存区域也不会改变指针变量的值</li>
+</ol>
+</li>
+</ol>
+<h1 id="内存四区"><a href="#内存四区" class="headerlink" title="内存四区"></a>内存四区</h1><p>先来看这样一段代码</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">get_str</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> str[] = <span class="hljs-string">"abcdefg"</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> buf[<span class="hljs-number">128</span>] = &#123;<span class="hljs-number">0</span>&#125;;</span><br><span class="line">    <span class="hljs-built_in">strcpy</span>(buf, get_str());</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"buf = %s\n"</span>, buf);</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">// char *p = NULL;</span></span><br><span class="line">    <span class="hljs-comment">// p = get_str();</span></span><br><span class="line">    <span class="hljs-comment">// printf("p = %s\n", p);</span></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>char *p 是一个 char 类型的指针变量，看代码的意思是希望通过 get_str() 方法给指针 p 赋值。如果你运行一下这段代码会发现它是会报错的，至于为什么会报错就要分析一下内存四区了。</p>
+<p><img src="http://image.shuiyujie.com/2019-05-11-16-35-12.png" alt="内存四区图"></p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>栈区(stack)</td>
+<td>由编译器自动分配释放，存放函数的参数值，局部变量值等。</td>
+</tr>
+<tr>
+<td>堆区（heap）</td>
+<td>一般由程序员分配释放（动态内存申请与释放），若程序员不释放，程序结束时可能由操作系统回收。</td>
+</tr>
+<tr>
+<td>全局区（静态区）</td>
+<td>全局变量和静态变量的存储是放在一起的，初始化的全局变量和静态变量在一块区域，未被初始化的全局变量和未初始化的静态变量在相邻的另一块区域，该区域在程序结束后由操作系统释放。</td>
+</tr>
+<tr>
+<td>程序代码区</td>
+<td>存放函数体的二进制代码。</td>
+</tr>
+</tbody>
+</table>
+<p>现在通过内存四区的理论来分析上面这一段代码。</p>
+<p><img src="http://image.shuiyujie.com/2019-05-11-16-41-34.png" alt="内存四区分析"></p>
+<ol>
+<li>声明了一个名为 buf 的变量</li>
+<li>调用 get_str()<ol>
+<li>声明一个数组 str ，它是一个局部变量所以再栈区</li>
+<li>字符串 “abcdef…” 是字符串常量，所以再全局区（静态区）</li>
+<li>str = “abcdef” 会将全局区的字符串常量拷贝到 str 数组内存中</li>
+</ol>
+</li>
+<li>紧接着 get_str() 调用结束，<strong>与之相关的内存就会被销毁</strong></li>
+<li>strcpy() 希望将  get_str() 返回的字符串拷贝给 buf，但是因为这一块内存已经被销毁了，就会报错</li>
+</ol>
+<p><em>注：有时候以上的操作可能会成功，这可能是因为没有及时销毁，可以用我上面注释掉的指针操作的代码做练习，用内存四区的方式分析，赋值是一定不会成功的，原理相同。</em></p>
+<h1 id="正确的赋值方式"><a href="#正确的赋值方式" class="headerlink" title="正确的赋值方式"></a>正确的赋值方式</h1><p>我们可以使用 malloc() 将变量保存在堆区，堆区的内存在函数执行完之后不会立即销毁，而是由我们自己销毁，或者再程序运行完之后由操作系统来销毁。</p>
+<p><img src="http://image.shuiyujie.com/2019-05-11-16-54-13.png" alt="内存四区分析2"></p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">get_str2</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> *tmp = (<span class="hljs-keyword">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">100</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span>(tmp == <span class="hljs-literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">strcpy</span>(tmp, <span class="hljs-string">"adsaffa"</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> buf[<span class="hljs-number">128</span>] = &#123;<span class="hljs-number">0</span>&#125;;</span><br><span class="line">    <span class="hljs-comment">// strcpy(buf, get_str());</span></span><br><span class="line">    <span class="hljs-comment">// printf("buf = %s\n", buf);</span></span><br><span class="line">    <span class="hljs-keyword">char</span> *p = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    p = get_str2();</span><br><span class="line">    <span class="hljs-keyword">if</span>(p != <span class="hljs-literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"p = %s\n"</span>, p);</span><br><span class="line">        <span class="hljs-built_in">free</span>(p);</span><br><span class="line">        p = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用指针的几个注意事项"><a href="#使用指针的几个注意事项" class="headerlink" title="使用指针的几个注意事项"></a>使用指针的几个注意事项</h1><p>这一小节属于使用指针过程中遇到的一些问题，以及如何避免，有个故事说：人如果知道自己会死在哪里，就死也不要去那里就行了。使用指针也一样，指针使用会遇到很多的坑，知道哪里有坑就要尽可能避免。</p>
+<h2 id="修改内存时要保证内存可写"><a href="#修改内存时要保证内存可写" class="headerlink" title="修改内存时要保证内存可写"></a>修改内存时要保证内存可写</h2><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> *p = <span class="hljs-string">"abcdef"</span>;</span><br><span class="line">    <span class="hljs-keyword">char</span> q[] = <span class="hljs-string">"fdasfafdfas"</span>;</span><br><span class="line">    p[<span class="hljs-number">2</span>] = <span class="hljs-string">"1”; // 会报错 err</span></span><br><span class="line"><span class="hljs-string">    q[2] = "</span><span class="hljs-number">1</span><span class="hljs-string">";</span></span><br><span class="line"><span class="hljs-string">    printf("</span>p: %s\n<span class="hljs-string">", p);</span></span><br><span class="line"><span class="hljs-string">    printf("</span>q: %s\n<span class="hljs-string">", q);</span></span><br><span class="line"><span class="hljs-string">    return 0;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>修改 p[2] 会报错，因为 abcdef 是字符串常量，保存在全局区（静态区），所以它是不能被修改的。使用指针的第一个事项就是修改内存的时候保证内存可写。</p>
+<h2 id="指针的步长"><a href="#指针的步长" class="headerlink" title="指针的步长"></a>指针的步长</h2><p>指针的步长由指针指向的内存类型决定，比如说 int <em>p 步长就是 4，chat </em>p 步长就是 1。步长的意思就是每次 p++ 操作之后，地址移动的距离。可以分别打印 p 和 p++ 的值看一看就知道了。</p>
+<p>由此还想讲一个问题就是如何计算一个动态数组的大小。比如 int a[] = {1, 2, 3, 4}，可以使用 <code>sizeof(a)/sizeof(a[0])</code>的方式计算数组大小。</p>
+<h2 id="不允许-NULL-或者未知非法地址拷贝内存"><a href="#不允许-NULL-或者未知非法地址拷贝内存" class="headerlink" title="不允许 NULL 或者未知非法地址拷贝内存"></a>不允许 NULL 或者未知非法地址拷贝内存</h2><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">char</span> *p =<span class="hljs-literal">NULL</span>;</span><br><span class="line"><span class="hljs-built_in">strcpy</span>(p, “<span class="hljs-number">1232143</span>”); <span class="hljs-comment">// 报错</span></span><br></pre></td></tr></table></figure>
+<p>strcpy() 执行的操作时将字符串拷贝给指针 p 所指向的内存,此时指针 p 指向的内存是 NULL，就是说没有执行任何内存，字符串也就没地方拷贝，自然会发生错误。 </p>
+<p>如果我们让<code>char* p = 0x11;</code> 任意赋一个值，也会报错，向未知非法地址拷贝也是不被允许的。 正确的做法就是将 p 指向一个已经分配好内存的指针，比如 char *q = “fdsafas” 。</p>
+<p>所以当我们给一个使用 malloc() 分配内存之后应该习惯性地加一个判断，比如<code>int *p = (int *)malloc(sizeof(int));</code>之后应该进行判断<code>if(p == NULL)</code>如果为空则说明内存分配失败，就应该对异常进行处理。一直对应的，释放内存是有个也应该讲指针赋值为空<code>free(p); p = NULL;</code>。</p>
+<h1 id="通过指针间接赋值"><a href="#通过指针间接赋值" class="headerlink" title="通过指针间接赋值"></a>通过指针间接赋值</h1><p>我们定义一个函数会有返回值，返回值可能是一个结果、可能表示一种状态。比如说<code>int findMax(int *a, int n);</code>在这个函数中我们出入一个数组，然后返回这个数组中最大的值。</p>
+<p>那现在如果我想返回这个数组的最大值、最小值该怎么办？</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> *max, <span class="hljs-keyword">int</span> *min)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(a == <span class="hljs-literal">NULL</span> || n &lt;= <span class="hljs-number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">int</span> tmp_max, tmp_min, sum = *a;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(a[i] &lt; tmp_min)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp_min = a[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span>(a[i] &gt; tmp_max)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp_max = a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    max = &amp;tmp_max;</span><br><span class="line">    min = &amp;tmp_min;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> a[<span class="hljs-number">5</span>] = &#123;<span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">1</span>&#125;;</span><br><span class="line">    <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> min = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">int</span> res = fun(a, <span class="hljs-number">5</span>, &amp;max, &amp;min);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span>(res == <span class="hljs-number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="hljs-string">"fun() err."</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"max = %d, min = %d\n"</span>, max, min);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义一个函数<code>int fun(int *a, int n, int *max, int *min);</code></p>
+<ol>
+<li>返回值表示成功或者失败</li>
+<li>a 是数组指针</li>
+<li>n 是数组大小</li>
+<li>max 和 int 是 int 类型的指针</li>
+</ol>
+<p>关键就在于 max 和 int 这两个指针，它们指向的两个内存分别保存数组的最大和最小值，而这两个指针是由主函数传入的，此时就完成你了最大值和最小值传递。</p>
+<p><strong>通过指针间接赋值是指针很强大的一个功能，我们可以看到很多函数都是这样定义的。</strong></p>
 
         </div>
         
@@ -213,17 +279,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/871f090d.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">斯坦福高效睡眠法</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/b63a0941.html">
-                <span class="level-item">消息队列的连环炮</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/a99472bd.html">
+                <span class="level-item">C语言学习笔记-字符串</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -1322,7 +1381,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="C语言学习笔记-静态库、动态库的制作和使用" height="28">
+                    <img src="/images/logo.svg" alt="C语言学习笔记-指针01" height="28">
                 
                 </a>
                 <p class="is-size-7">

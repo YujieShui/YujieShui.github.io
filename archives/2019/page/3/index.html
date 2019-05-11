@@ -2,26 +2,18 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>C语言学习笔记-静态库、动态库的制作和使用 - 深页</title>
+<title>归档: 2019 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
-<meta name="keywords" content="c,c++">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C语言学习笔记-静态库、动态库的制作和使用">
-<meta property="og:url" content="http://shuiyujie.com/post/62b06016.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="深页">
+<meta property="og:url" content="http://shuiyujie.com/archives/2019/page/3/index.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/static_library.png">
-<meta property="og:image" content="http://image.shuiyujie.com/dll.png">
-<meta property="og:updated_time" content="2019-05-11T00:42:50.430Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言学习笔记-静态库、动态库的制作和使用">
-<meta name="twitter:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
-<meta name="twitter:image" content="http://image.shuiyujie.com/static_library.png">
+<meta name="twitter:title" content="深页">
 
 
 
@@ -93,7 +85,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="C语言学习笔记-静态库、动态库的制作和使用" height="28">
+                <img src="/images/logo.svg" alt="深页" height="28">
             
             </a>
         </div>
@@ -138,100 +130,79 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="tag is-link">
+        2019
+        </h3>
+        <div class="timeline">
+        
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-14T13:00:00.000Z">2019-01-14</time>
+                        <a href="/post/21dc510a.html" class="has-link-black-ter is-size-6">J002 - 替换空格</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/categories/算法与数据结构/">算法与数据结构</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+            <article class="media">
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-13T13:00:00.000Z">2019-01-13</time>
+                        <a href="/post/5b71691f.html" class="has-link-black-ter is-size-6">J001 - 二维数组中的查找</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/categories/算法与数据结构/">算法与数据结构</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
+        </div>
+    </div>
+</div>
+
+
+
     
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-02T08:22:20.000Z">2019-05-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 780 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                C语言学习笔记-静态库、动态库的制作和使用
-            
-        </h1>
-        <div class="content">
-            <p>本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。</p>
-<p><a href="https://github.com/YujieShui/up-up-c/tree/master/how_to_make_lib" target="_blank" rel="noopener">示例代码</a></p>
-<a id="more"></a>
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">    ├── add.c</span><br><span class="line">    ├── mul.c</span><br><span class="line">    ├── sub.c</span><br></pre></td></tr></table></figure>
-<ul>
-<li>include - 头文件目录</li>
-<li>lib - 库文件目录</li>
-<li>src - 源代码目录</li>
-</ul>
-<h2 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h2><p>本节介绍如何将代码编译成静态库。当我们希望程序响应更快，或者不想提供源代码，我们可以使用静态库。</p>
-<p><img src="http://image.shuiyujie.com/static_library.png" alt="静态库"></p>
-<h3 id="编译静态库"><a href="#编译静态库" class="headerlink" title="编译静态库"></a>编译静态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 将 .c 文件编译成 .o 文件</span><br><span class="line">➜  ls</span><br><span class="line">add.c mul.c sub.c</span><br><span class="line">➜  gcc *.c -c -I ../include</span><br><span class="line">➜  ls</span><br><span class="line">add.c add.o mul.c mul.o sub.c sub.o</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将 .o 文件打包，生成 .a 文件</span><br><span class="line">➜  ar rcs libMyCalc.a *.o</span><br><span class="line">➜  ls</span><br><span class="line">add.c       libMyCalc.a mul.o       sub.o</span><br><span class="line">add.o       mul.c       sub.c</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将 .a 文件移动到 lib 目录下</span><br><span class="line">➜  mv libMyCalc.a ../lib</span><br></pre></td></tr></table></figure>
-<h3 id="使用静态库"><a href="#使用静态库" class="headerlink" title="使用静态库"></a>使用静态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 方式 1</span><br><span class="line">gcc main.c lib/libMyCalc.a -I include -o sum</span><br><span class="line">./sum</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 方式 2</span><br><span class="line">gcc main.c -Iinclude -L lib -l MyCalc -o myapp</span><br><span class="line">./myapp</span><br></pre></td></tr></table></figure>
-<h2 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h2><p><img src="http://image.shuiyujie.com/dll.png" alt="动态库"></p>
-<h3 id="编译动态库"><a href="#编译动态库" class="headerlink" title="编译动态库"></a>编译动态库</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> .c 编译为 .o</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c mul.c sub.c</span><br><span class="line">➜  src git:(master) ✗ gcc -fPIC -c *.c -I ../include</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c add.o mul.c mul.o sub.c sub.o</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> .o 打包为 .so</span><br><span class="line">➜  src git:(master) ✗ gcc -shared -o libMyCalc.so *.o -Iinclude</span><br><span class="line">➜  src git:(master) ✗ ls</span><br><span class="line">add.c        libMyCalc.so mul.o        sub.o</span><br><span class="line">add.o        mul.c        sub.c</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> .so 移动到 lib</span><br><span class="line">➜  src git:(master) ✗ mv libMyCalc.so ../lib</span><br></pre></td></tr></table></figure>
-<h3 id="使用动态库"><a href="#使用动态库" class="headerlink" title="使用动态库"></a>使用动态库</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 方式 1</span><br><span class="line">gcc main.c lib/libMyCalc.so -o app -Iinclude</span><br><span class="line">./app</span><br><span class="line"></span><br><span class="line"># 方式 2</span><br><span class="line">gcc main.c -Iinclude -L lib -l MyCalc -o myapp</span><br><span class="line">./myapp</span><br></pre></td></tr></table></figure>
-<p>如果在使用动态库的过程中遇到了问题，请看下一小结。</p>
-<h3 id="动态库链接失败问题"><a href="#动态库链接失败问题" class="headerlink" title="动态库链接失败问题"></a>动态库链接失败问题</h3><p>动态库是由动态连机器加载的，通过<code>ldd app</code>我们可以查看可执行文件执行的时候依赖的所有动态库。交由动态连接器管理的动态库都能被正确加载，比如说<code>/lib</code>目录下的库文件。我们自定义的动态库没有被加载就是因为没有告知动态连接器我们的动态库在哪里。</p>
-<h3 id="方法一-临时配置"><a href="#方法一-临时配置" class="headerlink" title="方法一 临时配置"></a>方法一 临时配置</h3><p>要想汤动态连机器知道我们的动态库在哪，一种方式是直接把自定义的动态库丢到<code>/lib</code>目录下，这样自然就能加载到了，当然我想没有人会想这么做的。另一种方式就是在配置文件中配置动态库的位置，比如像下面的这样：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=我们的动态库位置</span><br></pre></td></tr></table></figure>
-<p><code>LD_LIBRARY_PATH</code>我们可以将动态库的位置保存在这里，此时就能顺利运行程序，但是重启终端将会失效，临时测试的时候使用很方便。</p>
-<h3 id="方法二-永久配置"><a href="#方法二-永久配置" class="headerlink" title="方法二 永久配置"></a>方法二 永久配置</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. vim /etc/ld.so.conf</span><br><span class="line">2. 将动态库的路径配置在里面</span><br><span class="line">3. sudo ldconfig -v</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/c/">c</a>, <a class="has-link-grey -link" href="/tags/c/">c++</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
 <div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/871f090d.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">斯坦福高效睡眠法</span>
-            </a>
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous">
+            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/page/2/">上一页</a>
         </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/b63a0941.html">
-                <span class="level-item">消息队列的连环炮</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
+        <div class="pagination-next is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/page/4/">下一页</a>
         </div>
-        
-    </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link has-text-black-ter" href="/archives/2019/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/archives/2019/page/2/">2</a></li>
+            
+            <li><a class="pagination-link is-current" href="/archives/2019/page/3/">3</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
 </div>
                 
 
@@ -1322,7 +1293,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="C语言学习笔记-静态库、动态库的制作和使用" height="28">
+                    <img src="/images/logo.svg" alt="深页" height="28">
                 
                 </a>
                 <p class="is-size-7">
