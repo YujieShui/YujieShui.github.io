@@ -7,18 +7,18 @@
 
 
 
-    <meta name="description" content="结构体的类型和定义结构体是一种数据类型，用 struct 关键字来修饰，定义一个结构体可以这样： 12345struct Teacher&amp;#123;    char name[50];    int age;&amp;#125; 如果用 typedef 修饰，就可以直接使用 Teacher  1234567typedef struct Teacher&amp;#123;    char name[50];">
+    <meta name="description" content="结构体的类型和定义  结构体的赋值  结构体的数组  结构体嵌套一级指针  结构体嵌套二级指针 结构体作为函数参数 结构体深拷贝、浅拷贝">
 <meta name="keywords" content="c,c++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言学习笔记-结构体">
 <meta property="og:url" content="http://shuiyujie.com/post/e261fd69.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="结构体的类型和定义结构体是一种数据类型，用 struct 关键字来修饰，定义一个结构体可以这样： 12345struct Teacher&amp;#123;    char name[50];    int age;&amp;#125; 如果用 typedef 修饰，就可以直接使用 Teacher  1234567typedef struct Teacher&amp;#123;    char name[50];">
+<meta property="og:description" content="结构体的类型和定义  结构体的赋值  结构体的数组  结构体嵌套一级指针  结构体嵌套二级指针 结构体作为函数参数 结构体深拷贝、浅拷贝">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-11T02:14:15.020Z">
+<meta property="og:updated_time" content="2019-05-11T02:18:28.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习笔记-结构体">
-<meta name="twitter:description" content="结构体的类型和定义结构体是一种数据类型，用 struct 关键字来修饰，定义一个结构体可以这样： 12345struct Teacher&amp;#123;    char name[50];    int age;&amp;#125; 如果用 typedef 修饰，就可以直接使用 Teacher  1234567typedef struct Teacher&amp;#123;    char name[50];">
+<meta name="twitter:description" content="结构体的类型和定义  结构体的赋值  结构体的数组  结构体嵌套一级指针  结构体嵌套二级指针 结构体作为函数参数 结构体深拷贝、浅拷贝">
 
 
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 829 个字)
+                    6 分钟 读完 (大约 888 个字)
                 </span>
                 
                 
@@ -164,7 +164,21 @@
             
         </h1>
         <div class="content">
-            <h1 id="结构体的类型和定义"><a href="#结构体的类型和定义" class="headerlink" title="结构体的类型和定义"></a>结构体的类型和定义</h1><p>结构体是一种数据类型，用 struct 关键字来修饰，定义一个结构体可以这样：</p>
+            <ul>
+<li><p>结构体的类型和定义</p>
+</li>
+<li><p>结构体的赋值</p>
+</li>
+<li><p>结构体的数组</p>
+</li>
+<li><p>结构体嵌套一级指针</p>
+</li>
+<li>结构体嵌套二级指针</li>
+<li>结构体作为函数参数</li>
+<li>结构体深拷贝、浅拷贝</li>
+</ul>
+<a id="more"></a>
+<h1 id="结构体的类型和定义"><a href="#结构体的类型和定义" class="headerlink" title="结构体的类型和定义"></a>结构体的类型和定义</h1><p>结构体是一种数据类型，用 struct 关键字来修饰，定义一个结构体可以这样：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Teacher</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">    <span class="hljs-keyword">char</span> name[<span class="hljs-number">50</span>];</span><br><span class="line">    <span class="hljs-keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果用 typedef 修饰，就可以直接使用 Teacher </p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Teacher</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">    <span class="hljs-keyword">char</span> name[<span class="hljs-number">50</span>];</span><br><span class="line">    <span class="hljs-keyword">int</span> age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Teacher teacher = <span class="hljs-literal">NULL</span>;</span><br></pre></td></tr></table></figure>
