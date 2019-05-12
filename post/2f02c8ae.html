@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-11-16-35-12.png">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-11-16-41-34.png">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-11-16-54-13.png">
-<meta property="og:updated_time" content="2019-05-11T12:58:21.020Z">
+<meta property="og:updated_time" content="2019-05-11T13:02:59.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习笔记-指针01">
 <meta name="twitter:description" content="指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。">
@@ -170,7 +170,7 @@
         <div class="content">
             <p>指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。</p>
 <a id="more"></a>
-<h1 id="指针的概念"><a href="#指针的概念" class="headerlink" title="指针的概念"></a>指针的概念</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 10;</span><br><span class="line">    int *p = NULL;</span><br><span class="line">    </span><br><span class="line">    p = (int *)malloc(sizeof(int));</span><br><span class="line">    p = &amp;a;</span><br><span class="line"></span><br><span class="line">    printf(&quot;%d\n&quot;, p);</span><br><span class="line">    printf(&quot;%d\n&quot;, *p);</span><br><span class="line"></span><br><span class="line">    if(p != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free(p);</span><br><span class="line">        p = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="指针的概念"><a href="#指针的概念" class="headerlink" title="指针的概念"></a>指针的概念</h1><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> *p = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    p = (<span class="hljs-keyword">int</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">    p = &amp;a;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, p);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, *p);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span>(p != <span class="hljs-literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-built_in">free</span>(p);</span><br><span class="line">        p = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>先来看这样一段代码</p>
 <ol>
 <li>p 是一个指针变量，*p 是指针指向的内存空间的保存的值。</li>
@@ -507,12 +507,6 @@
         
         <article class="media">
             
-            <a href="/post/2f02c8ae.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-指针01">
-                </p>
-            </a>
-            
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T07:45:09.000Z">2019-05-11</time></div>
@@ -525,12 +519,6 @@
         </article>
         
         <article class="media">
-            
-            <a href="/post/a99472bd.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-字符串">
-                </p>
-            </a>
             
             <div class="media-content">
                 <div class="content">
@@ -545,12 +533,6 @@
         
         <article class="media">
             
-            <a href="/post/5c7372a9.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-const关键字">
-                </p>
-            </a>
-            
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T07:32:21.000Z">2019-05-11</time></div>
@@ -564,12 +546,6 @@
         
         <article class="media">
             
-            <a href="/post/e261fd69.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-结构体">
-                </p>
-            </a>
-            
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T01:40:29.000Z">2019-05-11</time></div>
@@ -582,12 +558,6 @@
         </article>
         
         <article class="media">
-            
-            <a href="/post/fe52dfa7.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-文件操作">
-                </p>
-            </a>
             
             <div class="media-content">
                 <div class="content">
@@ -948,12 +918,6 @@
         
         <article class="media">
             
-            <a href="/post/2f02c8ae.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-指针01">
-                </p>
-            </a>
-            
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T07:45:09.000Z">2019-05-11</time></div>
@@ -966,12 +930,6 @@
         </article>
         
         <article class="media">
-            
-            <a href="/post/a99472bd.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-字符串">
-                </p>
-            </a>
             
             <div class="media-content">
                 <div class="content">
@@ -986,12 +944,6 @@
         
         <article class="media">
             
-            <a href="/post/5c7372a9.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-const关键字">
-                </p>
-            </a>
-            
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T07:32:21.000Z">2019-05-11</time></div>
@@ -1005,12 +957,6 @@
         
         <article class="media">
             
-            <a href="/post/e261fd69.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-结构体">
-                </p>
-            </a>
-            
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-11T01:40:29.000Z">2019-05-11</time></div>
@@ -1023,12 +969,6 @@
         </article>
         
         <article class="media">
-            
-            <a href="/post/fe52dfa7.html" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C语言学习笔记-文件操作">
-                </p>
-            </a>
             
             <div class="media-content">
                 <div class="content">
