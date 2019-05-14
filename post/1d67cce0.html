@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="深页">
 <meta property="og:description" content="计算机发明之初，单个 CPU 在同一时间点只能执行单个任务，也就是单任务阶段。紧接着发展为多任务阶段，在单个 CPU 上能执行多个进程，但是此处的并行执行并不是指在同一时间执行多个任务，而是指由系统对进程进行调度轮流使用 CPU。 接着发展到现在的多线程阶段，一个程序内部能够运行多个线程，每个线程都可以被看做运行在一个 CPU 上，此时计算机真正做到了在同一时间点能够执行多个任务。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-04T15:58:13.339Z">
+<meta property="og:updated_time" content="2019-05-14T13:55:26.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 多线程基础知识">
 <meta name="twitter:description" content="计算机发明之初，单个 CPU 在同一时间点只能执行单个任务，也就是单任务阶段。紧接着发展为多任务阶段，在单个 CPU 上能执行多个进程，但是此处的并行执行并不是指在同一时间执行多个任务，而是指由系统对进程进行调度轮流使用 CPU。 接着发展到现在的多线程阶段，一个程序内部能够运行多个线程，每个线程都可以被看做运行在一个 CPU 上，此时计算机真正做到了在同一时间点能够执行多个任务。">
@@ -112,15 +112,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -337,6 +332,73 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#进程和线程">
+        <span class="has-mr-6">1</span>
+        <span>进程和线程</span>
+        </a></li><li>
+        <a class="is-flex" href="#多线程运行原理">
+        <span class="has-mr-6">2</span>
+        <span>多线程运行原理</span>
+        </a></li><li>
+        <a class="is-flex" href="#Java-实现多线程的两种方式">
+        <span class="has-mr-6">3</span>
+        <span>Java 实现多线程的两种方式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#继承-Thread-类">
+        <span class="has-mr-6">3.1</span>
+        <span>继承 Thread 类</span>
+        </a></li><li>
+        <a class="is-flex" href="#实现-Runnable-接口">
+        <span class="has-mr-6">3.2</span>
+        <span>实现 Runnable 接口</span>
+        </a></li><li>
+        <a class="is-flex" href="#两者优缺点比较">
+        <span class="has-mr-6">3.3</span>
+        <span>两者优缺点比较</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#实现-Runable-避免由于-Java-的单继承特性而带来的局限">
+        <span class="has-mr-6">3.3.1</span>
+        <span>实现 Runable() 避免由于 Java 的单继承特性而带来的局限</span>
+        </a></li><li>
+        <a class="is-flex" href="#继承-Thread-类编写简单，方便理解">
+        <span class="has-mr-6">3.3.2</span>
+        <span>继承 Thread 类编写简单，方便理解</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#多线程-run-和-start-的区别">
+        <span class="has-mr-6">4</span>
+        <span>多线程 run() 和 start() 的区别</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#run-方法">
+        <span class="has-mr-6">4.1</span>
+        <span>run() 方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#start-方法">
+        <span class="has-mr-6">4.2</span>
+        <span>start() 方法</span>
+        </a></li><li>
+        <a class="is-flex" href="#结果对比">
+        <span class="has-mr-6">4.3</span>
+        <span>结果对比</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#线程-start-和-run-的区别">
+        <span class="has-mr-6">5</span>
+        <span>线程 start() 和 run() 的区别</span>
+        </a></li><li>
+        <a class="is-flex" href="#参考">
+        <span class="has-mr-6">6</span>
+        <span>参考</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1299,35 +1361,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

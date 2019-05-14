@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-03-45.png">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-04-20.png">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-02-26.png">
-<meta property="og:updated_time" content="2019-05-09T15:05:23.243Z">
+<meta property="og:updated_time" content="2019-05-14T13:53:51.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消息队列的连环炮">
 <meta name="twitter:description" content="1. 引子消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。 常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。 简历中涉及到了消息队列，面试官先问了这样几个问题：  你们系统里为什么要使用消息队列？ 既然使用了消息队列，说说他还有什么使用场景？ 消息队列的优缺点是什么？">
@@ -118,15 +118,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -379,6 +374,69 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-引子">
+        <span class="has-mr-6">1</span>
+        <span>1. 引子</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-为什么使用消息队列？">
+        <span class="has-mr-6">2</span>
+        <span>2. 为什么使用消息队列？</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-消息队列的使用场景？">
+        <span class="has-mr-6">3</span>
+        <span>3. 消息队列的使用场景？</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#解耦">
+        <span class="has-mr-6">3.1</span>
+        <span>解耦</span>
+        </a></li><li>
+        <a class="is-flex" href="#异步">
+        <span class="has-mr-6">3.2</span>
+        <span>异步</span>
+        </a></li><li>
+        <a class="is-flex" href="#削峰">
+        <span class="has-mr-6">3.3</span>
+        <span>削峰</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-消息队列有什么缺点？">
+        <span class="has-mr-6">4</span>
+        <span>4. 消息队列有什么缺点？</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#为什么要问缺点是什么？">
+        <span class="has-mr-6">4.1</span>
+        <span>为什么要问缺点是什么？</span>
+        </a></li><li>
+        <a class="is-flex" href="#系统可用性降低">
+        <span class="has-mr-6">4.2</span>
+        <span>系统可用性降低</span>
+        </a></li><li>
+        <a class="is-flex" href="#系统复杂度提高">
+        <span class="has-mr-6">4.3</span>
+        <span>系统复杂度提高</span>
+        </a></li><li>
+        <a class="is-flex" href="#一致性问题">
+        <span class="has-mr-6">4.4</span>
+        <span>一致性问题</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#总结">
+        <span class="has-mr-6">5</span>
+        <span>总结</span>
+        </a></li><li>
+        <a class="is-flex" href="#思考">
+        <span class="has-mr-6">6</span>
+        <span>思考</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1341,35 +1399,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5430305-bb9bfa40b0c66271.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5430305-19fde3fa988edc5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5430305-70c6843b6887d7ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-09T14:36:56.922Z">
+<meta property="og:updated_time" content="2019-05-14T13:52:10.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS 7 配置">
 <meta name="twitter:description" content="本文说明如何在 Parallels 虚拟机上安装 CentOS 7 以及对其的一些基本配置，几个常用配置文件的说明和 JDK, Tomcat 和 Mysql 的安装。">
@@ -116,15 +116,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -446,6 +441,101 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#CentOS-7-基本配置">
+        <span class="has-mr-6">1</span>
+        <span>CentOS 7 基本配置</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#安装-centos-7">
+        <span class="has-mr-6">1.1</span>
+        <span>安装 centos 7</span>
+        </a></li><li>
+        <a class="is-flex" href="#更换-yum-源">
+        <span class="has-mr-6">1.2</span>
+        <span>更换 yum 源</span>
+        </a></li><li>
+        <a class="is-flex" href="#通过-yum-安装一些基本软件">
+        <span class="has-mr-6">1.3</span>
+        <span>通过 yum 安装一些基本软件</span>
+        </a></li><li>
+        <a class="is-flex" href="#创建一个普通用户并赋予-root-权限">
+        <span class="has-mr-6">1.4</span>
+        <span>创建一个普通用户并赋予 root 权限</span>
+        </a></li><li>
+        <a class="is-flex" href="#禁止-root-使用-ssh-登入">
+        <span class="has-mr-6">1.5</span>
+        <span>禁止 root 使用 ssh 登入</span>
+        </a></li><li>
+        <a class="is-flex" href="#将防火墙换成-iptables">
+        <span class="has-mr-6">1.6</span>
+        <span>将防火墙换成 iptables</span>
+        </a></li><li>
+        <a class="is-flex" href="#关闭-SELinux">
+        <span class="has-mr-6">1.7</span>
+        <span>关闭 SELinux</span>
+        </a></li><li>
+        <a class="is-flex" href="#更改系统语言">
+        <span class="has-mr-6">1.8</span>
+        <span>更改系统语言</span>
+        </a></li><li>
+        <a class="is-flex" href="#参考：">
+        <span class="has-mr-6">1.9</span>
+        <span>参考：</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#一些配置文件的修改">
+        <span class="has-mr-6">2</span>
+        <span>一些配置文件的修改</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#修改主机名">
+        <span class="has-mr-6">2.1</span>
+        <span>修改主机名</span>
+        </a></li><li>
+        <a class="is-flex" href="#修改-ip-地址">
+        <span class="has-mr-6">2.2</span>
+        <span>修改 ip 地址</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#设置-ip-和-hostname-的映射">
+        <span class="has-mr-6">3</span>
+        <span>设置 ip 和 hostname 的映射</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装-JDK">
+        <span class="has-mr-6">4</span>
+        <span>安装 JDK</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装-Tomcat">
+        <span class="has-mr-6">5</span>
+        <span>安装 Tomcat</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装-Mysql">
+        <span class="has-mr-6">6</span>
+        <span>安装 Mysql</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#配置YUM源">
+        <span class="has-mr-6">6.1</span>
+        <span>配置YUM源</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装MySQL">
+        <span class="has-mr-6">6.2</span>
+        <span>安装MySQL</span>
+        </a></li><li>
+        <a class="is-flex" href="#启动-mysql">
+        <span class="has-mr-6">6.3</span>
+        <span>启动 mysql</span>
+        </a></li><li>
+        <a class="is-flex" href="#修改-root-默认密码">
+        <span class="has-mr-6">6.4</span>
+        <span>修改 root 默认密码</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1408,35 +1498,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

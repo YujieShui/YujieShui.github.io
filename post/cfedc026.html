@@ -28,7 +28,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-1bb963176649ce15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-ebe51ef3d448eb65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-fc655f8309d1609a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-09T14:36:56.931Z">
+<meta property="og:updated_time" content="2019-05-14T13:51:32.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maven 实战">
 <meta name="twitter:description" content="Maven 是跨平台的项目管理工具，主要服务于基于Java平台的项目构建、依赖管理和项目信息管理。Maven 的主要思想是约定优于配置。通过将约定项目的目录结构，抽象项目的生命周期的方式，将程序员从繁琐的项目构建中解放出来。">
@@ -126,15 +126,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -495,6 +490,129 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Maven-优点和作用">
+        <span class="has-mr-6">1</span>
+        <span>Maven 优点和作用</span>
+        </a></li><li>
+        <a class="is-flex" href="#Maven-的仓库">
+        <span class="has-mr-6">2</span>
+        <span>Maven 的仓库</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#仓库的作用">
+        <span class="has-mr-6">2.1</span>
+        <span>仓库的作用</span>
+        </a></li><li>
+        <a class="is-flex" href="#更多种类的仓库">
+        <span class="has-mr-6">2.2</span>
+        <span>更多种类的仓库</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#私服">
+        <span class="has-mr-6">2.2.1</span>
+        <span>私服</span>
+        </a></li><li>
+        <a class="is-flex" href="#其他公共仓库">
+        <span class="has-mr-6">2.2.2</span>
+        <span>其他公共仓库</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#setting-文件">
+        <span class="has-mr-6">3</span>
+        <span>setting 文件</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#自定义本地仓库位置">
+        <span class="has-mr-6">3.1</span>
+        <span>自定义本地仓库位置</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置多个远程仓库">
+        <span class="has-mr-6">3.2</span>
+        <span>配置多个远程仓库</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置中央仓库镜像">
+        <span class="has-mr-6">3.3</span>
+        <span>配置中央仓库镜像</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置私服作为镜像">
+        <span class="has-mr-6">3.4</span>
+        <span>配置私服作为镜像</span>
+        </a></li><li>
+        <a class="is-flex" href="#仓库搜索服务">
+        <span class="has-mr-6">3.5</span>
+        <span>仓库搜索服务</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Maven-坐标">
+        <span class="has-mr-6">4</span>
+        <span>Maven 坐标</span>
+        </a></li><li>
+        <a class="is-flex" href="#Maven-依赖">
+        <span class="has-mr-6">5</span>
+        <span>Maven 依赖</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#依赖范围">
+        <span class="has-mr-6">5.1</span>
+        <span>依赖范围</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖传递">
+        <span class="has-mr-6">5.2</span>
+        <span>依赖传递</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖冲突">
+        <span class="has-mr-6">5.3</span>
+        <span>依赖冲突</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Maven-生命周期">
+        <span class="has-mr-6">6</span>
+        <span>Maven 生命周期</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#clean-生命周期。">
+        <span class="has-mr-6">6.1</span>
+        <span>clean 生命周期。</span>
+        </a></li><li>
+        <a class="is-flex" href="#default生命周期">
+        <span class="has-mr-6">6.2</span>
+        <span>default生命周期</span>
+        </a></li><li>
+        <a class="is-flex" href="#site生命周期">
+        <span class="has-mr-6">6.3</span>
+        <span>site生命周期</span>
+        </a></li><li>
+        <a class="is-flex" href="#命令与生命周期">
+        <span class="has-mr-6">6.4</span>
+        <span>命令与生命周期</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#聚合与继承">
+        <span class="has-mr-6">7</span>
+        <span>聚合与继承</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#聚合">
+        <span class="has-mr-6">7.1</span>
+        <span>聚合</span>
+        </a></li><li>
+        <a class="is-flex" href="#继承">
+        <span class="has-mr-6">7.2</span>
+        <span>继承</span>
+        </a></li><li>
+        <a class="is-flex" href="#排除父类的依赖">
+        <span class="has-mr-6">7.3</span>
+        <span>排除父类的依赖</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#总结：Maven-的思想">
+        <span class="has-mr-6">8</span>
+        <span>总结：Maven 的思想</span>
+        </a></li><li>
+        <a class="is-flex" href="#参考">
+        <span class="has-mr-6">9</span>
+        <span>参考</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1457,35 +1575,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

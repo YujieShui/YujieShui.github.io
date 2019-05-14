@@ -16,7 +16,7 @@
 <meta property="og:description" content="NumPy 是 Python 语言的一个扩充程序库。支持高级大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库，也是学习 python 必学的一个库。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-05-09-23-07-28.png">
-<meta property="og:updated_time" content="2019-05-09T15:07:44.252Z">
+<meta property="og:updated_time" content="2019-05-14T13:52:59.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Numpy 小结">
 <meta name="twitter:description" content="NumPy 是 Python 语言的一个扩充程序库。支持高级大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库，也是学习 python 必学的一个库。">
@@ -114,15 +114,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -369,6 +364,113 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-读取文件">
+        <span class="has-mr-6">1</span>
+        <span>1. 读取文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-构造-ndarray">
+        <span class="has-mr-6">2</span>
+        <span>2. 构造 ndarray</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#numpy-array-构造-ndarray">
+        <span class="has-mr-6">2.1</span>
+        <span>numpy.array()构造 ndarray</span>
+        </a></li><li>
+        <a class="is-flex" href="#利用-shape-查看结构">
+        <span class="has-mr-6">2.2</span>
+        <span>利用 .shape 查看结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#利用-dtype-查看类型">
+        <span class="has-mr-6">2.3</span>
+        <span>利用 dtype 查看类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#ndim-查看维度">
+        <span class="has-mr-6">2.4</span>
+        <span>ndim 查看维度</span>
+        </a></li><li>
+        <a class="is-flex" href="#size-查看元素数量">
+        <span class="has-mr-6">2.5</span>
+        <span>size 查看元素数量</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-获取与计算">
+        <span class="has-mr-6">3</span>
+        <span>3. 获取与计算</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#numpy-能使用切片获取数据">
+        <span class="has-mr-6">3.1</span>
+        <span>numpy 能使用切片获取数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#根据条件获取">
+        <span class="has-mr-6">3.2</span>
+        <span>根据条件获取</span>
+        </a></li><li>
+        <a class="is-flex" href="#类型转换">
+        <span class="has-mr-6">3.3</span>
+        <span>类型转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#求和">
+        <span class="has-mr-6">3.4</span>
+        <span>求和</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-常用函数">
+        <span class="has-mr-6">4</span>
+        <span>4. 常用函数</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#reshape">
+        <span class="has-mr-6">4.1</span>
+        <span>reshape</span>
+        </a></li><li>
+        <a class="is-flex" href="#zeros">
+        <span class="has-mr-6">4.2</span>
+        <span>zeros</span>
+        </a></li><li>
+        <a class="is-flex" href="#ones">
+        <span class="has-mr-6">4.3</span>
+        <span>ones</span>
+        </a></li><li>
+        <a class="is-flex" href="#range">
+        <span class="has-mr-6">4.4</span>
+        <span>range</span>
+        </a></li><li>
+        <a class="is-flex" href="#random-随机数">
+        <span class="has-mr-6">4.5</span>
+        <span>random 随机数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-ndarray-运算">
+        <span class="has-mr-6">5</span>
+        <span>5. ndarray 运算</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#6-矩阵运算">
+        <span class="has-mr-6">5.1</span>
+        <span>6. 矩阵运算</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#7-复制的区别">
+        <span class="has-mr-6">6</span>
+        <span>7. 复制的区别</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#地址复制">
+        <span class="has-mr-6">6.1</span>
+        <span>地址复制</span>
+        </a></li><li>
+        <a class="is-flex" href="#复制值">
+        <span class="has-mr-6">6.2</span>
+        <span>复制值</span>
+        </a></li><li>
+        <a class="is-flex" href="#完整拷贝">
+        <span class="has-mr-6">6.3</span>
+        <span>完整拷贝</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1331,35 +1433,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

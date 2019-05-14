@@ -16,7 +16,7 @@
 <meta property="og:description" content="示例代码">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.shuiyujie.com/makefile.png">
-<meta property="og:updated_time" content="2019-05-11T01:07:51.930Z">
+<meta property="og:updated_time" content="2019-05-14T13:45:56.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习笔记-写一个最简单的makefile">
 <meta name="twitter:description" content="示例代码">
@@ -114,15 +114,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -182,7 +177,7 @@
 <li>依赖：预编译完成的 .o 文件</li>
 <li>命令：系列 gcc 命令</li>
 </ul>
-<h1 id="makefile的工作原理"><a href="#makefile的工作原理" class="headerlink" title="makefile的工作原理"></a><strong>makefile的工作原理</strong></h1><h1 id="makefile中的变量"><a href="#makefile中的变量" class="headerlink" title="makefile中的变量"></a><strong>makefile中的变量</strong></h1><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">obj=main.o add.o mul.o sub.o</span><br><span class="line">target=app</span><br><span class="line">CC=gcc</span><br><span class="line"><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(obj)</span></span><br><span class="line">    gcc <span class="hljs-variable">$(obj)</span> -o <span class="hljs-variable">$(target)</span></span><br><span class="line">    </span><br><span class="line"><span class="hljs-section">%.o:%.c</span></span><br><span class="line">	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br></pre></td></tr></table></figure>
+<h1 id="makefile的工作原理"><a href="#makefile的工作原理" class="headerlink" title="makefile的工作原理"></a><strong>makefile的工作原理</strong></h1><h2 id="makefile中的变量"><a href="#makefile中的变量" class="headerlink" title="makefile中的变量"></a><strong>makefile中的变量</strong></h2><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">obj=main.o add.o mul.o sub.o</span><br><span class="line">target=app</span><br><span class="line">CC=gcc</span><br><span class="line"><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(obj)</span></span><br><span class="line">    gcc <span class="hljs-variable">$(obj)</span> -o <span class="hljs-variable">$(target)</span></span><br><span class="line">    </span><br><span class="line"><span class="hljs-section">%.o:%.c</span></span><br><span class="line">	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br></pre></td></tr></table></figure>
 <p><code>%.o:%.c</code>模式匹配</p>
 <p>自动变量，只能在规则中的命令中使用</p>
 <ul>
@@ -190,7 +185,7 @@
 <li><code>$@</code>规则中的目标</li>
 <li><code>$^</code>规则中所有依赖</li>
 </ul>
-<h1 id="makefile中的函数"><a href="#makefile中的函数" class="headerlink" title="makefile中的函数"></a><strong>makefile中的函数</strong></h1><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">target=app</span><br><span class="line">src=<span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> ./*.c)</span></span><br><span class="line">obj=<span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> ./%.c, ./%.o, <span class="hljs-variable">$(src)</span>)</span></span><br><span class="line">CC=gcc</span><br><span class="line">CPPFLAGS=-I</span><br><span class="line"><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(obj)</span></span><br><span class="line">	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(obj)</span> -o <span class="hljs-variable">$(target)</span></span><br><span class="line">    </span><br><span class="line"><span class="hljs-section">%.o:%.c</span></span><br><span class="line">	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br><span class="line">	</span><br><span class="line"><span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>:clean</span></span><br><span class="line"><span class="hljs-section">clean:</span></span><br><span class="line">	rm -f <span class="hljs-variable">$(obj)</span> <span class="hljs-variable">$(target)</span></span><br></pre></td></tr></table></figure>
+<h2 id="makefile中的函数"><a href="#makefile中的函数" class="headerlink" title="makefile中的函数"></a><strong>makefile中的函数</strong></h2><figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">target=app</span><br><span class="line">src=<span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> ./*.c)</span></span><br><span class="line">obj=<span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> ./%.c, ./%.o, <span class="hljs-variable">$(src)</span>)</span></span><br><span class="line">CC=gcc</span><br><span class="line">CPPFLAGS=-I</span><br><span class="line"><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(obj)</span></span><br><span class="line">	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(obj)</span> -o <span class="hljs-variable">$(target)</span></span><br><span class="line">    </span><br><span class="line"><span class="hljs-section">%.o:%.c</span></span><br><span class="line">	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br><span class="line">	</span><br><span class="line"><span class="hljs-meta"><span class="hljs-meta-keyword">.PHONY</span>:clean</span></span><br><span class="line"><span class="hljs-section">clean:</span></span><br><span class="line">	rm -f <span class="hljs-variable">$(obj)</span> <span class="hljs-variable">$(target)</span></span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -312,6 +307,33 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#最简单的-makefile">
+        <span class="has-mr-6">1</span>
+        <span>最简单的 makefile</span>
+        </a></li><li>
+        <a class="is-flex" href="#makefile的工作原理">
+        <span class="has-mr-6">2</span>
+        <span>makefile的工作原理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#makefile中的变量">
+        <span class="has-mr-6">2.1</span>
+        <span>makefile中的变量</span>
+        </a></li><li>
+        <a class="is-flex" href="#makefile中的函数">
+        <span class="has-mr-6">2.2</span>
+        <span>makefile中的函数</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1274,35 +1296,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

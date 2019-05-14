@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.shuiyujie.com/static_library.png">
 <meta property="og:image" content="http://image.shuiyujie.com/dll.png">
-<meta property="og:updated_time" content="2019-05-11T00:42:50.430Z">
+<meta property="og:updated_time" content="2019-05-14T13:47:38.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习笔记-静态库、动态库的制作和使用">
 <meta name="twitter:description" content="本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。 示例代码">
@@ -115,15 +115,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -310,6 +305,57 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#目录结构">
+        <span class="has-mr-6">1</span>
+        <span>目录结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#静态库">
+        <span class="has-mr-6">2</span>
+        <span>静态库</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#编译静态库">
+        <span class="has-mr-6">2.1</span>
+        <span>编译静态库</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用静态库">
+        <span class="has-mr-6">2.2</span>
+        <span>使用静态库</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#动态库">
+        <span class="has-mr-6">3</span>
+        <span>动态库</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#编译动态库">
+        <span class="has-mr-6">3.1</span>
+        <span>编译动态库</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用动态库">
+        <span class="has-mr-6">3.2</span>
+        <span>使用动态库</span>
+        </a></li><li>
+        <a class="is-flex" href="#动态库链接失败问题">
+        <span class="has-mr-6">3.3</span>
+        <span>动态库链接失败问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#方法一-临时配置">
+        <span class="has-mr-6">3.4</span>
+        <span>方法一 临时配置</span>
+        </a></li><li>
+        <a class="is-flex" href="#方法二-永久配置">
+        <span class="has-mr-6">3.5</span>
+        <span>方法二 永久配置</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1272,35 +1318,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

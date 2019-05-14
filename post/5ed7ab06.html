@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="深页">
 <meta property="og:description" content="MyBatis 是一款一流的支持自定义 SQL、存储过程和高级映射的持久化框架。MyBatis 几乎消除了所有的 JDBC 代码，也基本不需要手工去设置参数和获取检索结果。MyBatis 能够使用简单的 XML 格式或者注解进行来配置，能够映射基本数据元素、Map 接口和 POJOs（普通 java 对象）到数据库中的记录。 简而言之：Mybatis 是一个半自动化的持久化框架，帮助我们简化对数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-09T14:36:56.925Z">
+<meta property="og:updated_time" content="2019-05-14T13:51:36.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis 配置和使用">
 <meta name="twitter:description" content="MyBatis 是一款一流的支持自定义 SQL、存储过程和高级映射的持久化框架。MyBatis 几乎消除了所有的 JDBC 代码，也基本不需要手工去设置参数和获取检索结果。MyBatis 能够使用简单的 XML 格式或者注解进行来配置，能够映射基本数据元素、Map 接口和 POJOs（普通 java 对象）到数据库中的记录。 简而言之：Mybatis 是一个半自动化的持久化框架，帮助我们简化对数据">
@@ -112,15 +112,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -361,6 +356,65 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#封装-SqlSession">
+        <span class="has-mr-6">1</span>
+        <span>封装 SqlSession</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#注入-SqlSession">
+        <span class="has-mr-6">1.1</span>
+        <span>注入 SqlSession</span>
+        </a></li><li>
+        <a class="is-flex" href="#封装-SqlSession-1">
+        <span class="has-mr-6">1.2</span>
+        <span>封装 SqlSession</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#查询">
+        <span class="has-mr-6">2</span>
+        <span>查询</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#一对一查询">
+        <span class="has-mr-6">2.1</span>
+        <span>一对一查询</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#association-关联一个对象查询">
+        <span class="has-mr-6">2.1.1</span>
+        <span>association 关联一个对象查询</span>
+        </a></li><li>
+        <a class="is-flex" href="#扩展-ResultMap-来扩展字段">
+        <span class="has-mr-6">2.1.2</span>
+        <span>扩展 ResultMap 来扩展字段</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#集合嵌套查询">
+        <span class="has-mr-6">2.2</span>
+        <span>集合嵌套查询</span>
+        </a></li><li>
+        <a class="is-flex" href="#集合迭代器查询">
+        <span class="has-mr-6">2.3</span>
+        <span>集合迭代器查询</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#插入">
+        <span class="has-mr-6">3</span>
+        <span>插入</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#插入设置主键自增">
+        <span class="has-mr-6">3.1</span>
+        <span>插入设置主键自增</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#注解方式调用-sql">
+        <span class="has-mr-6">4</span>
+        <span>注解方式调用 sql</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1323,35 +1377,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

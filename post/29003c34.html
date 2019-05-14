@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-4026a587dd2a63ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-a7a629c3ddd452a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-e6aa0a7f74c58d9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-09T14:36:56.935Z">
+<meta property="og:updated_time" content="2019-05-14T13:53:42.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RabbitMQ 安装和使用">
 <meta name="twitter:description" content="RabbitMQ 是一个消息队列，主要是用来实现应用程序的异步和解耦，同时也能起到消息缓冲，消息分发的作用。本文介绍RabbitMQ 安装和使用。">
@@ -120,15 +120,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -448,6 +443,101 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#AMQP">
+        <span class="has-mr-6">1.1</span>
+        <span>AMQP</span>
+        </a></li><li>
+        <a class="is-flex" href="#Rabbit-概念">
+        <span class="has-mr-6">1.2</span>
+        <span>Rabbit 概念</span>
+        </a></li></ul><li>
+        <a class="is-flex" href="#CentOS-安装-RabbitMQ">
+        <span class="has-mr-6">2</span>
+        <span>CentOS 安装 RabbitMQ</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#安装-Erlang、Elixir">
+        <span class="has-mr-6">2.1</span>
+        <span>安装 Erlang、Elixir</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#准备">
+        <span class="has-mr-6">2.1.1</span>
+        <span>准备</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装-Erlang">
+        <span class="has-mr-6">2.1.2</span>
+        <span>安装 Erlang</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装-Elixir">
+        <span class="has-mr-6">2.1.3</span>
+        <span>安装 Elixir</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#安装-RabbitMQ">
+        <span class="has-mr-6">2.2</span>
+        <span>安装 RabbitMQ</span>
+        </a></li><li>
+        <a class="is-flex" href="#Rabitmq-管理">
+        <span class="has-mr-6">2.3</span>
+        <span>Rabitmq 管理</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Springboot-集成-RabbitMQ">
+        <span class="has-mr-6">3</span>
+        <span>Springboot 集成 RabbitMQ</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#基本配置">
+        <span class="has-mr-6">3.1</span>
+        <span>基本配置</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#pom-文件">
+        <span class="has-mr-6">3.1.1</span>
+        <span>pom 文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#application-properties">
+        <span class="has-mr-6">3.1.2</span>
+        <span>application.properties</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#“Hello-World”">
+        <span class="has-mr-6">3.2</span>
+        <span>“Hello World”</span>
+        </a></li><li>
+        <a class="is-flex" href="#Work-Queues">
+        <span class="has-mr-6">3.3</span>
+        <span>Work Queues</span>
+        </a></li><li>
+        <a class="is-flex" href="#public-subscribe">
+        <span class="has-mr-6">3.4</span>
+        <span>public/subscribe</span>
+        </a></li><li>
+        <a class="is-flex" href="#Routing">
+        <span class="has-mr-6">3.5</span>
+        <span>Routing</span>
+        </a></li><li>
+        <a class="is-flex" href="#Topic">
+        <span class="has-mr-6">3.6</span>
+        <span>Topic</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#总结">
+        <span class="has-mr-6">4</span>
+        <span>总结</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#安装参考：">
+        <span class="has-mr-6">4.1</span>
+        <span>安装参考：</span>
+        </a></li><li>
+        <a class="is-flex" href="#Springboot-集成-RabbitMQ-参考">
+        <span class="has-mr-6">4.2</span>
+        <span>Springboot 集成 RabbitMQ 参考</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1410,35 +1500,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

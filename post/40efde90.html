@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5430305-a18c76f78238c675.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5430305-7f8a457aae28df46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5430305-51db58cc1b768d91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-09T14:36:56.924Z">
+<meta property="og:updated_time" content="2019-05-14T13:52:13.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 权限">
 <meta name="twitter:description" content="Linux 是多用户的操作系统，同一时间可以有多个用户同时操作同一台计算机。为了让用户和用户之间不相互影响，必须要有一种机制来保障每一个用户的行为不会越界对其他用户造成不必要的影响。">
@@ -116,15 +116,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -397,6 +392,57 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#用户和用户组">
+        <span class="has-mr-6">1</span>
+        <span>用户和用户组</span>
+        </a></li><li>
+        <a class="is-flex" href="#基本的用户管理">
+        <span class="has-mr-6">2</span>
+        <span>基本的用户管理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#创建一个普通用户">
+        <span class="has-mr-6">2.1</span>
+        <span>创建一个普通用户</span>
+        </a></li><li>
+        <a class="is-flex" href="#为用户配置sudo权限">
+        <span class="has-mr-6">2.2</span>
+        <span>为用户配置sudo权限</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#文件权限的操作">
+        <span class="has-mr-6">3</span>
+        <span>文件权限的操作</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#linux-文件权限的描述格式解读">
+        <span class="has-mr-6">3.1</span>
+        <span>linux 文件权限的描述格式解读</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#chmod-更改权限">
+        <span class="has-mr-6">4</span>
+        <span>chmod 更改权限</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#符号方式修改文件权限">
+        <span class="has-mr-6">4.1</span>
+        <span>符号方式修改文件权限</span>
+        </a></li><li>
+        <a class="is-flex" href="#八进制的方式来修改权限">
+        <span class="has-mr-6">4.2</span>
+        <span>八进制的方式来修改权限</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#更多">
+        <span class="has-mr-6">5</span>
+        <span>更多</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1359,35 +1405,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

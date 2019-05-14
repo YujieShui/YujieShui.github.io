@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="深页">
 <meta property="og:description" content="C语言中我们使用一个指针变量指向一个文件，这个文件就是文件指针。这个文件指针就是 FILE 结构体，它被包含在头文件 “stdio.h” 中。拿到文件指针再结合文件操作的 API，我们就可以对文件进行读写操作。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-11T01:42:11.148Z">
+<meta property="og:updated_time" content="2019-05-14T13:47:28.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习笔记-文件操作">
 <meta name="twitter:description" content="C语言中我们使用一个指针变量指向一个文件，这个文件就是文件指针。这个文件指针就是 FILE 结构体，它被包含在头文件 “stdio.h” 中。拿到文件指针再结合文件操作的 API，我们就可以对文件进行读写操作。">
@@ -112,15 +112,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -301,6 +296,41 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#文件操作">
+        <span class="has-mr-6">1</span>
+        <span>文件操作</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#打开文件-fopen">
+        <span class="has-mr-6">1.1</span>
+        <span>打开文件 fopen()</span>
+        </a></li><li>
+        <a class="is-flex" href="#关闭文件-fclose">
+        <span class="has-mr-6">1.2</span>
+        <span>关闭文件 fclose()</span>
+        </a></li><li>
+        <a class="is-flex" href="#fgetc-和-fputc-按字符读写文件">
+        <span class="has-mr-6">1.3</span>
+        <span>fgetc() 和 fputc() 按字符读写文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#fgets-和-fputs-按行读写文件">
+        <span class="has-mr-6">1.4</span>
+        <span>fgets() 和 fputs() 按行读写文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#fwrite-和-fread-按块读写文件">
+        <span class="has-mr-6">1.5</span>
+        <span>fwrite() 和 fread() 按块读写文件</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1263,35 +1293,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>

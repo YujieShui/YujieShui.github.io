@@ -16,7 +16,7 @@
 <meta property="og:description" content="本文介绍搭建双 master 的 RocektMQ 的集群。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2791079-93906a9fdf4db672.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-03-09T14:36:56.933Z">
+<meta property="og:updated_time" content="2019-05-14T13:53:56.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="部署 RockerMQ 双 Master 模式">
 <meta name="twitter:description" content="本文介绍搭建双 master 的 RocektMQ 的集群。">
@@ -114,15 +114,10 @@
             
             <div class="navbar-end">
                 
-                    
-                    
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
@@ -420,6 +415,81 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#RocketMQ集群方式">
+        <span class="has-mr-6">1</span>
+        <span>RocketMQ集群方式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#单个-Master">
+        <span class="has-mr-6">1.1</span>
+        <span>单个 Master</span>
+        </a></li><li>
+        <a class="is-flex" href="#多-Master-模式">
+        <span class="has-mr-6">1.2</span>
+        <span>多 Master 模式</span>
+        </a></li><li>
+        <a class="is-flex" href="#多-Master-多-Slave-模式，异步复制">
+        <span class="has-mr-6">1.3</span>
+        <span>多 Master 多 Slave 模式，异步复制</span>
+        </a></li><li>
+        <a class="is-flex" href="#多-Master-多-Slave-模式，同步双写">
+        <span class="has-mr-6">1.4</span>
+        <span>多 Master 多 Slave 模式，同步双写</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#部署双-master-模式的集群">
+        <span class="has-mr-6">2</span>
+        <span>部署双 master 模式的集群</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#服务器环境">
+        <span class="has-mr-6">2.1</span>
+        <span>服务器环境</span>
+        </a></li><li>
+        <a class="is-flex" href="#修改-hosts">
+        <span class="has-mr-6">2.2</span>
+        <span>修改 hosts</span>
+        </a></li><li>
+        <a class="is-flex" href="#修改配置文件">
+        <span class="has-mr-6">2.3</span>
+        <span>修改配置文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置存储路径">
+        <span class="has-mr-6">2.4</span>
+        <span>配置存储路径</span>
+        </a></li><li>
+        <a class="is-flex" href="#分别修改日志配置文件">
+        <span class="has-mr-6">2.5</span>
+        <span>分别修改日志配置文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#修改-JVM-参数">
+        <span class="has-mr-6">2.6</span>
+        <span>修改 JVM 参数</span>
+        </a></li><li>
+        <a class="is-flex" href="#启动两台主机的-NameServer">
+        <span class="has-mr-6">2.7</span>
+        <span>启动两台主机的 NameServer</span>
+        </a></li><li>
+        <a class="is-flex" href="#启动BrokerServer-A">
+        <span class="has-mr-6">2.8</span>
+        <span>启动BrokerServer A</span>
+        </a></li><li>
+        <a class="is-flex" href="#启动BrokerServer-A-1">
+        <span class="has-mr-6">2.9</span>
+        <span>启动BrokerServer A</span>
+        </a></li><li>
+        <a class="is-flex" href="#数据清理">
+        <span class="has-mr-6">2.10</span>
+        <span>数据清理</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1382,35 +1452,6 @@
                 </p>
             </div>
             <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="http://github.com/ppoffice/hexo-theme-icarus">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
             
             </div>
         </div>
