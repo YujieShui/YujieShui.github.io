@@ -1,5 +1,6 @@
 ---
 title: SpringBoot 配置文件及其读取
+toc: true
 categories:
   - Java
 tags:
@@ -8,23 +9,23 @@ tags:
 abbrlink: f0ba9e07
 date: 2019-02-19 11:00:47
 ---
-  
+
  在配置文件中统一管理配置信息，使用配置文件 SpringBoot 有规范的方式。
-  
+
  `src/main/resources` 的 classpath 路径之中，创建`application.properties`配置文件。
- 
+
  配置文件也可以用 YAML 语言来写，创建`application.yml`配置文件
- 
+
  两个文件同时存在都会起作用，但当配置项冲突时，优先使用`application.properties`文件
- 
+
  [点击获取项目源码](https://github.com/YujieShui/springboot-learning/tree/master/spring-messagesource)
- 
+
  <!-- more -->
- 
+
 # 资源文件的设置 
- 
+
  资源文件统一放在`src/main/resources/i18n`目录中
- 
+
  - 建立 Messages.properties
 
 ```

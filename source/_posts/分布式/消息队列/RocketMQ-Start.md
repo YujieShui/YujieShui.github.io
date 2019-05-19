@@ -1,5 +1,6 @@
 ---
 title: RocketMQ Start
+toc: true
 categories:
   - 分布式
 tags:
@@ -104,7 +105,7 @@ JAVA_OPT="${JAVA_OPT} -server -Xms8g -Xmx8g -Xmn4g"
 
 JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m"
 ```
- 
+
 tools.sh
 
 ```

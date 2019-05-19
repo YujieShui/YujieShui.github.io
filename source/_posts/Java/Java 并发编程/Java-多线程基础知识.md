@@ -1,5 +1,6 @@
 ---
 title: Java 多线程基础知识
+toc: true
 categories:
   - Java
 tags:

@@ -1,5 +1,6 @@
 ---
-title: C/C++学习笔记-静态库、动态库的制作和使用
+title: C语言学习笔记-静态库、动态库的制作和使用
+toc: true
 categories:
   - C/C++
 tags:

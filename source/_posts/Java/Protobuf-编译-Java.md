@@ -1,5 +1,6 @@
 ---
 title: Protobuf 编译 Java
+toc: true
 categories:
   - Java
 tags:

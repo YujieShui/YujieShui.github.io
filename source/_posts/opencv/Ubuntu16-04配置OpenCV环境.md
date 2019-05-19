@@ -1,5 +1,6 @@
 ---
 title: Ubuntu16.04配置OpenCV环境
+toc: true
 categories:
   - OpenCV
 tags:

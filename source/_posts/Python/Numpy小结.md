@@ -1,5 +1,6 @@
 ---
 title: Numpy 小结
+toc: true
 categories:
   - Python
 tags:

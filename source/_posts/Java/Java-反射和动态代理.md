@@ -1,5 +1,6 @@
 ---
 title: Java 反射和动态代理
+toc: true
 categories:
   - Java
 tags:

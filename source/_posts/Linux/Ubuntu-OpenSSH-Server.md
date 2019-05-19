@@ -1,5 +1,6 @@
 ---
 title: Ubuntu OpenSSH Server
+toc: true
 categories:
   - Linux
 tags:

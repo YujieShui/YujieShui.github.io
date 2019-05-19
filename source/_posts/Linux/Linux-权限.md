@@ -1,5 +1,6 @@
 ---
 title: Linux 权限
+toc: true
 categories:
   - Linux
 tags: linux

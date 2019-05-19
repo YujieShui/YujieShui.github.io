@@ -1,5 +1,6 @@
 ---
 title: SpringBoot 模板 Thymeleaf 的使用
+toc: true
 categories:
   - Java
 tags:
@@ -31,7 +32,7 @@ pom.xml 中添加依赖
     <artifactId>spring-boot-starter-thymeleaf</artifactId>
 </dependency>
 ```
- 
+
 控制层进行信息显示
 
 ```java

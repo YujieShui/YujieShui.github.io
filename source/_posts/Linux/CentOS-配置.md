@@ -1,5 +1,6 @@
 ---
 title: CentOS 7 配置
+toc: true
 categories:
   - Linux
 tags:

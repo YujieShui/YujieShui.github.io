@@ -1,5 +1,6 @@
 ---
 title: 如何使用Anaconda
+toc: true
 categories:
   - Python
 tags:

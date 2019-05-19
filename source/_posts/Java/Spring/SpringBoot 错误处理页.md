@@ -1,5 +1,6 @@
 ---
 title: SpringBoot 错误处理页
+toc: true
 categories:
   - Java
 tags:

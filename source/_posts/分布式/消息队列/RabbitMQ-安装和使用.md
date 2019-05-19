@@ -1,5 +1,6 @@
 ---
 title: RabbitMQ 安装和使用
+toc: true
 categories:
   - 分布式
 tags:

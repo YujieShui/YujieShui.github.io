@@ -1,5 +1,6 @@
 ---
 title: 实现 SSH 免密登录
+toc: true
 categories:
   - Linux
 tags:
@@ -59,7 +60,7 @@ id_rsa id_rsa.pub
 3.最后我们就可以免密登录,也就是不输入密码 A 就可以登录 B
 
 > ssh root@192.168.0.10
- 
+
 *192.168.0.10 为 B 的 ip 地址*
 
 如果要退出登录，输入`exit`即可。

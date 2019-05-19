@@ -1,5 +1,6 @@
 ---
 title: maven 实战
+toc: true
 categories:
   - Java
 tags:
@@ -180,7 +181,12 @@ Default: ${user.home}/.m2/repository
 
 Maven 项目规定的项目结构是这样的：
 
-- src/main/java —— 存放项目的.java文件- src/main/resources —— 存放项目资源文件，如spring, hibernate配置文件- src/test/java —— 存放所有测试.java文件，如JUnit测试类- src/test/resources —— 测试资源文件- target —— 项目输出位置- pom.xml——maven项目核心配置文件
+- src/main/java —— 存放项目的.java文件
+- src/main/resources —— 存放项目资源文件，如spring, hibernate配置文件
+- src/test/java —— 存放所有测试.java文件，如JUnit测试类
+- src/test/resources —— 测试资源文件
+- target —— 项目输出位置
+- pom.xml——maven项目核心配置文件
 
 每个 maven 项目都有 `pom.xml` 文件。Maven坐标为各种构件引入了秩序，任何一个构件都必须明确定义自己的坐标。
 
@@ -272,19 +278,51 @@ Maven的生命周期就是为了对所有的构建过程进行抽象和统一。
 
 clean生命周期的目的是清理项目，它包含三个阶段：
 
-- pre-clean 执行一些需要在clean之前完成的工作 - clean 移除所有上一次构建生成的文件 - post-clean 执行一些需要在clean之后立刻完成的工作 
+- pre-clean 执行一些需要在clean之前完成的工作 
+- clean 移除所有上一次构建生成的文件 
+- post-clean 执行一些需要在clean之后立刻完成的工作 
 
-mvn clean 中的clean就是上面的clean，在一个生命周期中，运行某个阶段的时候，它之前的所有阶段都会被运行，也就是说，mvn clean 等同于 mvn pre-clean clean ，如果我们运行 mvn post-clean ，那么 pre-clean，clean 都会被运行。这是Maven很重要的一个规则，可以大大简化命令行的输入。## default生命周期
+mvn clean 中的clean就是上面的clean，在一个生命周期中，运行某个阶段的时候，它之前的所有阶段都会被运行，也就是说，mvn clean 等同于 mvn pre-clean clean ，如果我们运行 mvn post-clean ，那么 pre-clean，clean 都会被运行。这是Maven很重要的一个规则，可以大大简化命令行的输入。
+
+## default生命周期
 
 default生命周期定义了真正构建时所需要执 行的所有步骤，它是所有生命周期中最核心的部分，其包含的阶段如下：
 
-- validate - generate-sources - process-sources - generate-resources - process-resources 复制并处理资源文件，至目标目录，准备打包。 - compile 编译项目的源代码。 - process-classes - generate-test-sources - process-test-sources - generate-test-resources - process-test-resources 复制并处理资源文件，至目标测试目录。 - test-compile 编译测试源代码。 - process-test-classes - test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。 - prepare-package - package 接受编译好的代码，打包成可发布的格式，如 JAR 。 - pre-integration-test - integration-test - post-integration-test - verify - install 将包安装至本地仓库，以让其它项目依赖。 - deploy 将最终的包复制到远程的仓库，以让其它开发人员与项目共享。 运行任何一个阶段的时候，它前面的所有阶段都会被运行，这也就是为什么我们运行mvn install 的时候，代码会被编译，测试，打包。此外，Maven的插件机制是完全依赖Maven的生命周期的，因此理解生命周期至关重要。 
+- validate 
+- generate-sources 
+- process-sources 
+- generate-resources 
+- process-resources 复制并处理资源文件，至目标目录，准备打包。 
+- compile 编译项目的源代码。 
+- process-classes 
+- generate-test-sources 
+- process-test-sources 
+- generate-test-resources 
+- process-test-resources 复制并处理资源文件，至目标测试目录。 
+- test-compile 编译测试源代码。 
+- process-test-classes 
+- test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。 
+- prepare-package 
+- package 接受编译好的代码，打包成可发布的格式，如 JAR 。 
+- pre-integration-test 
+- integration-test 
+- post-integration-test 
+- verify 
+- install 将包安装至本地仓库，以让其它项目依赖。 
+- deploy 将最终的包复制到远程的仓库，以让其它开发人员与项目共享。 
+
+运行任何一个阶段的时候，它前面的所有阶段都会被运行，这也就是为什么我们运行mvn install 的时候，代码会被编译，测试，打包。此外，Maven的插件机制是完全依赖Maven的生命周期的，因此理解生命周期至关重要。 
 
 ## site生命周期
 
 site生命周期的目的是建立和发布项目站点，Maven能够基于POM所包含的信息，自动生成一个友好的站点，方便团队交流和发布项目信息。
 
-- pre-site 执行一些需要在生成站点文档之前完成的工作 site 生成项目的站点文档 - post-site 执行一些需要在生成站点文档之后完成的工作，并且为部署做准备 - site-deploy 将生成的站点文档部署到特定的服务器上 这里经常用到的是site阶段和site-deploy阶段，用以生成和发布Maven站点，这可是Maven相当强大的功能，Manager比较喜欢，文档及统计数据自动生成，很好看。 
+- pre-site 执行一些需要在生成站点文档之前完成的工作 
+site 生成项目的站点文档 
+- post-site 执行一些需要在生成站点文档之后完成的工作，并且为部署做准备 
+- site-deploy 将生成的站点文档部署到特定的服务器上 
+
+这里经常用到的是site阶段和site-deploy阶段，用以生成和发布Maven站点，这可是Maven相当强大的功能，Manager比较喜欢，文档及统计数据自动生成，很好看。 
 
 
 ## 命令与生命周期

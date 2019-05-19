@@ -1,5 +1,6 @@
 ---
 title: mybatis 配置和使用
+toc: true
 categories:
   - Java
 tags:

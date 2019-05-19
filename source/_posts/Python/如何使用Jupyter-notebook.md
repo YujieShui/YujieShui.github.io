@@ -1,5 +1,6 @@
 ---
 title: 如何使用Jupyter notebook
+toc: true
 categories:
   - Python
 tags:
