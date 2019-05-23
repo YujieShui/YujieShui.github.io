@@ -2,18 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>归档 - 深页</title>
+<title>C/C++ 中的命令行参数 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/archives/page/3/index.html">
+    <meta name="description" content="C/C++ 中的 main 函数经常带有 argc, argv ,比如 int main(int argc, char** argv) 或者 int main(int argc, char* argv[])，其中 argc 表示我们从命令行键入的参数，argv[] 即为参数列表。 Java 中的 public static void main(String argc[]) 和 Python 中的">
+<meta name="keywords" content="c++,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++ 中的命令行参数">
+<meta property="og:url" content="http://shuiyujie.com/post/b482364a.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="C/C++ 中的 main 函数经常带有 argc, argv ,比如 int main(int argc, char** argv) 或者 int main(int argc, char* argv[])，其中 argc 表示我们从命令行键入的参数，argv[] 即为参数列表。 Java 中的 public static void main(String argc[]) 和 Python 中的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-23T13:36:54.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="C&#x2F;C++ 中的命令行参数">
+<meta name="twitter:description" content="C/C++ 中的 main 函数经常带有 argc, argv ,比如 int main(int argc, char** argv) 或者 int main(int argc, char* argv[])，其中 argc 表示我们从命令行键入的参数，argv[] 即为参数列表。 Java 中的 public static void main(String argc[]) 和 Python 中的">
 
 
 
@@ -85,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="C/C++ 中的命令行参数" height="28">
             
             </a>
         </div>
@@ -119,235 +124,90 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-23T13:27:25.000Z">2019-05-23</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-03-19T11:42:00.000Z">2019-03-19</time>
-                        <a href="/post/5359e313.html" class="has-link-black-ter is-size-6">Ubuntu16.04配置OpenCV环境</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-03-16T10:41:24.000Z">2019-03-16</time>
-                        <a href="/post/cbbc9ca0.html" class="has-link-black-ter is-size-6">Ubuntu OpenSSH Server</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-03-16T06:59:31.000Z">2019-03-16</time>
-                        <a href="/post/9a276542.html" class="has-link-black-ter is-size-6">更多搜索引擎</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/工具癖/">工具癖</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 194 个字)
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-03-09T13:50:37.000Z">2019-03-09</time>
-                        <a href="/post/d84813e6.html" class="has-link-black-ter is-size-6">Python 编程，从入门到实践</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/每周一书/">每周一书</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-21T03:03:47.000Z">2019-02-21</time>
-                        <a href="/post/ee9b8bc4.html" class="has-link-black-ter is-size-6">SpringBoot 系列文章</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-19T03:10:47.000Z">2019-02-19</time>
-                        <a href="/post/41479a53.html" class="has-link-black-ter is-size-6">SpringBoot 模板 Thymeleaf 的使用</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-19T03:03:47.000Z">2019-02-19</time>
-                        <a href="/post/3c98ab20.html" class="has-link-black-ter is-size-6">SpringBoot 错误处理页</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-19T03:00:47.000Z">2019-02-19</time>
-                        <a href="/post/f0ba9e07.html" class="has-link-black-ter is-size-6">SpringBoot 配置文件及其读取</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-26T03:03:47.000Z">2019-01-26</time>
-                        <a href="/post/579f9aa4.html" class="has-link-black-ter is-size-6">并发编程的优缺点</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-14T13:00:00.000Z">2019-01-14</time>
-                        <a href="/post/21dc510a.html" class="has-link-black-ter is-size-6">J002 - 替换空格</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/算法与数据结构/">算法与数据结构</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                C/C++ 中的命令行参数
+            
+        </h1>
+        <div class="content">
+            <p>C/C++ 中的 main 函数经常带有 argc, argv ,比如 <code>int main(int argc, char** argv)</code> 或者 <code>int main(int argc, char* argv[])</code>，其中 argc 表示我们从命令行键入的参数，argv[] 即为参数列表。</p>
+<p>Java 中的 <code>public static void main(String argc[])</code> 和 Python 中的 <code>sys.argv</code> 中也都带有命令行参数。</p>
+<p>通过命令行参数我们可以就能由 main 函数入口传递参数到程序内部。</p>
+<a id="more"></a>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> ** argv)</span> </span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>; i &lt; argc; i++)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Argument %d is %s.\n"</span>, i, argv[i]);</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加入我们编译之后运行 <code>./hello a b c d</code> 将会输出</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Argument 0 is ./hello.</span><br><span class="line">Argument 1 is a.</span><br><span class="line">Argument 2 is b.</span><br><span class="line">Argument 3 is c.</span><br><span class="line">Argument 4 is d.</span><br></pre></td></tr></table></figure>
+<p>由此得出两个结论</p>
+<ol>
+<li>参数列表中包含 <code>./hello</code></li>
+<li>参数个数要算上 <code>./hello</code></li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/c/">c</a>, <a class="has-link-grey -link" href="/tags/c/">c++</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
 
-    
 
-    
+
+
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/2/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/d37b0970.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">C 语言-格式化输出函数 printf()</span>
+            </a>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/4/">下一页</a>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/789284ab.html">
+                <span class="level-item">目录-C/C++学习笔记</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/2/">2</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/page/3/">3</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/4/">4</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/5/">5</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -1378,7 +1238,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="C/C++ 中的命令行参数" height="28">
                 
                 </a>
                 <p class="is-size-7">
