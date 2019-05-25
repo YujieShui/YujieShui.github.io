@@ -2,18 +2,29 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 消息队列 - 深页</title>
+<title>OpenCV-图像的遍历 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/消息队列/index.html">
+    <meta name="description" content="计算机使用 0/1 编码存储图像，数字图像在计算机中同样也使用 0/1 编码来存储。在计算机看来图像是一堆亮度不同的点组成的矩阵。一般灰度图用 2 维矩阵来表示，彩色图片是多通道的，则用 3 维矩阵来表示。  我们一般接触的图像都是 8 位整数（CV_8U），所以灰度图像包含 0～255 灰度，其中 0 代表最⿊，1表⽰最⽩。  彩色图像比如 RGB 图像，每个像素用三个字节来表示，而 OpenC">
+<meta name="keywords" content="opencv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV-图像的遍历">
+<meta property="og:url" content="http://shuiyujie.com/post/dfe68fea.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="计算机使用 0/1 编码存储图像，数字图像在计算机中同样也使用 0/1 编码来存储。在计算机看来图像是一堆亮度不同的点组成的矩阵。一般灰度图用 2 维矩阵来表示，彩色图片是多通道的，则用 3 维矩阵来表示。  我们一般接触的图像都是 8 位整数（CV_8U），所以灰度图像包含 0～255 灰度，其中 0 代表最⿊，1表⽰最⽩。  彩色图像比如 RGB 图像，每个像素用三个字节来表示，而 OpenC">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-25-09-31-19.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-25-09-32-13.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-25-10-47-43.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-25-10-47-43.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-25-11-13-05.png">
+<meta property="og:updated_time" content="2019-05-25T04:57:48.868Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="OpenCV-图像的遍历">
+<meta name="twitter:description" content="计算机使用 0/1 编码存储图像，数字图像在计算机中同样也使用 0/1 编码来存储。在计算机看来图像是一堆亮度不同的点组成的矩阵。一般灰度图用 2 维矩阵来表示，彩色图片是多通道的，则用 3 维矩阵来表示。  我们一般接触的图像都是 8 位整数（CV_8U），所以灰度图像包含 0～255 灰度，其中 0 代表最⿊，1表⽰最⽩。  彩色图像比如 RGB 图像，每个像素用三个字节来表示，而 OpenC">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-05-25-09-31-19.png">
 
 
 
@@ -85,7 +96,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="OpenCV-图像的遍历" height="28">
             
             </a>
         </div>
@@ -106,6 +117,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,33 +135,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">消息队列</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-23T15:26:49.000Z">2019-03-23</time>
+                <time class="level-item has-text-grey" datetime="2019-05-25T01:19:43.000Z">2019-05-25</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
+                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1285 个字)
+                    5 分钟 读完 (大约 797 个字)
                 </span>
                 
                 
@@ -155,29 +159,41 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/b63a0941.html">消息队列的连环炮</a>
+                OpenCV-图像的遍历
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-05-09-23-02-26.png" alt="消息队列思维导图"></p>
-<h1 id="1-引子"><a href="#1-引子" class="headerlink" title="1. 引子"></a>1. 引子</h1><p>消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。</p>
-<p>常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。</p>
-<p>简历中涉及到了消息队列，面试官先问了这样几个问题：</p>
-<ol>
-<li>你们系统里为什么要使用消息队列？</li>
-<li>既然使用了消息队列，说说他还有什么使用场景？</li>
-<li>消息队列的优缺点是什么？</li>
-</ol>
+            <p>计算机使用 0/1 编码存储图像，数字图像在计算机中同样也使用 0/1 编码来存储。在计算机看来图像是一堆亮度不同的点组成的矩阵。一般灰度图用 2 维矩阵来表示，彩色图片是多通道的，则用 3 维矩阵来表示。</p>
+<p><img src="http://image.shuiyujie.com/2019-05-25-09-31-19.png" alt="灰度图像"></p>
+<p>我们一般接触的图像都是 8 位整数（CV_8U），所以灰度图像包含 0～255 灰度，其中 0 代表最⿊，1表⽰最⽩。</p>
+<p><img src="http://image.shuiyujie.com/2019-05-25-09-32-13.png" alt="彩色图像"></p>
+<p>彩色图像比如 RGB 图像，每个像素用三个字节来表示，而 OpenCV 中存储 RGB 图像以 BGR 的顺序存储图像，所以存储方式如上所示。</p>
+<p>本文将介绍遍历灰度图像和彩色图像的方法，其本质即为遍历图像矩阵，可以对比二维数组的遍历来学习。</p>
+<a id="more"></a>
+<h1 id="使用-at-遍历图像"><a href="#使用-at-遍历图像" class="headerlink" title="使用 at() 遍历图像"></a>使用 at() 遍历图像</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 使用构造器创建 Mat，注意类型</span></span><br><span class="line">    cv::<span class="hljs-function">Mat <span class="hljs-title">grayImage</span><span class="hljs-params">(<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, CV_8UC1)</span></span>;</span><br><span class="line">    cv::<span class="hljs-function">Mat <span class="hljs-title">colorImage</span><span class="hljs-params">(<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, CV_8UC3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; grayImage.rows; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; grayImage.cols; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-comment">// 灰度图像是单通道的</span></span><br><span class="line">            grayImage.at&lt;uchar&gt;(i, j) = (i + j) % <span class="hljs-number">255</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; colorImage.rows; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; colorImage.cols; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-comment">// 三通道用向量来表示</span></span><br><span class="line">            cv::Vec3b pixel;</span><br><span class="line">            pixel[<span class="hljs-number">0</span>] = i % <span class="hljs-number">255</span>;</span><br><span class="line">            pixel[<span class="hljs-number">1</span>] = j % <span class="hljs-number">255</span>;</span><br><span class="line">            pixel[<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">            colorImage.at&lt;cv::Vec3b&gt;(i, j) = pixel;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cv::imshow(<span class="hljs-string">"1. GrayImage"</span>, grayImage);</span><br><span class="line">    cv::imshow(<span class="hljs-string">"2. ColorImage"</span>, colorImage);</span><br><span class="line"></span><br><span class="line">    cv::waitKey(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.shuiyujie.com/2019-05-25-10-47-43.png" alt="效果图"></p>
+<p>at() 的优点在于可读性强，缺点在于效率不高。图像遍历操作时常用且开销很大的操作，所以不推荐使用 at() 做图像的遍历操作。</p>
+<h1 id="使用指针遍历"><a href="#使用指针遍历" class="headerlink" title="使用指针遍历"></a>使用指针遍历</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    cv::<span class="hljs-function">Mat <span class="hljs-title">grayImage</span><span class="hljs-params">(<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, CV_8UC1)</span></span>;</span><br><span class="line">    cv::<span class="hljs-function">Mat <span class="hljs-title">colorImage</span><span class="hljs-params">(<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, CV_8UC3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; grayImage.rows; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        uchar *p = grayImage.ptr&lt;uchar&gt;(i);</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j =<span class="hljs-number">0</span>; j &lt; grayImage.cols; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            p[j] = (i + j) % <span class="hljs-number">255</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; colorImage.rows; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        cv::Vec3b *p = colorImage.ptr&lt;cv::Vec3b&gt;(i);</span><br><span class="line">    </span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j =<span class="hljs-number">0</span>; j &lt; colorImage.cols; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            p[j][<span class="hljs-number">0</span>] = i % <span class="hljs-number">255</span>;</span><br><span class="line">            p[j][<span class="hljs-number">1</span>] = j % <span class="hljs-number">255</span>;</span><br><span class="line">            p[j][<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cv::imshow(<span class="hljs-string">"1. GrayImage"</span>, grayImage);</span><br><span class="line">    cv::imshow(<span class="hljs-string">"2. ColorImage"</span>, colorImage);</span><br><span class="line"></span><br><span class="line">    cv::waitKey(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.shuiyujie.com/2019-05-25-10-47-43.png" alt="效果图"></p>
+<p>程序是用 <code>image.ptr()</code> 返回矩阵每一行的头指针，紧接着遍历这一行的元素。</p>
+<p>指针的优点在于访问速度快，缺点在于指针较为复杂，不熟悉指针的朋友容易犯错且不易查找错误。</p>
+<h1 id="迭代器遍历"><a href="#迭代器遍历" class="headerlink" title="迭代器遍历"></a>迭代器遍历</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    cv::<span class="hljs-function">Mat <span class="hljs-title">grayImage</span><span class="hljs-params">(<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, CV_8UC1)</span></span>;</span><br><span class="line">    cv::<span class="hljs-function">Mat <span class="hljs-title">colorImage</span><span class="hljs-params">(<span class="hljs-number">400</span>, <span class="hljs-number">500</span>, CV_8UC3)</span></span>;</span><br><span class="line"></span><br><span class="line">    cv::MatIterator_&lt;uchar&gt; grayit, grayend;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> (grayit = grayImage.begin&lt;uchar&gt;(), grayend = grayImage.end&lt;uchar&gt;();</span><br><span class="line">         grayit != grayend; grayit++)</span><br><span class="line">    &#123;</span><br><span class="line">        *grayit = rand() % <span class="hljs-number">255</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cv::MatIterator_&lt;cv::Vec3b&gt; colorit, colorend;</span><br><span class="line">    <span class="hljs-keyword">for</span> (colorit = colorImage.begin&lt;cv::Vec3b&gt;(), colorend = colorImage.end&lt;cv::Vec3b&gt;();</span><br><span class="line">         colorit != colorend; colorit++)</span><br><span class="line">    &#123;</span><br><span class="line">        (*colorit)[<span class="hljs-number">0</span>] = rand() % <span class="hljs-number">255</span>;</span><br><span class="line">        (*colorit)[<span class="hljs-number">1</span>] = rand() % <span class="hljs-number">255</span>;</span><br><span class="line">        (*colorit)[<span class="hljs-number">2</span>] = rand() % <span class="hljs-number">255</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cv::imshow(<span class="hljs-string">"1. GrayImage"</span>, grayImage);</span><br><span class="line">    cv::imshow(<span class="hljs-string">"2. ColorImage"</span>, colorImage);</span><br><span class="line"></span><br><span class="line">    cv::waitKey(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.shuiyujie.com/2019-05-25-11-13-05.png" alt="迭代器遍历"></p>
+<p>在 C++ 的 STL 库，或者 Java, Python  等语言中都提供了对迭代器的支持，OpenCV 也支持使用迭代器的方式进行遍历，代码如上所示。</p>
+<hr>
+<p>本文介绍了遍历 Mat 的三种方式: 使用 at() 遍历，使用指针遍历，以及使用迭代器遍历。推荐使用指针的方式遍历图像，其效率最高，在编写图像处理的算法时，效率是我们不可忽视的要素。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/b63a0941.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/opencv/">opencv</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -187,171 +203,26 @@
 
 
 
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-02-04T09:35:33.000Z">2018-02-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    21 分钟 读完 (大约 3190 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/29003c34.html">RabbitMQ 安装和使用</a>
-            
-        </h1>
-        <div class="content">
-            <p>RabbitMQ 是一个消息队列，主要是用来实现应用程序的异步和解耦，同时也能起到消息缓冲，消息分发的作用。本文介绍RabbitMQ 安装和使用。</p>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/463fc5c6.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">OpenCV-基本数据结构</span>
+            </a>
         </div>
         
         
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/29003c34.html#more">阅读更多</a>
-                </div>
-            </div>
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/789284ab.html">
+                <span class="level-item">目录-C/C++学习笔记</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-25T13:57:27.000Z">2018-01-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1759 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/6fc5439d.html">部署 RockerMQ 双 Master 模式</a>
-            
-        </h1>
-        <div class="content">
-            <p>本文介绍搭建双 master 的 RocektMQ 的集群。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/6fc5439d.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-21T09:39:45.000Z">2018-01-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1098 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/20e9366a.html">RocketMQ Start</a>
-            
-        </h1>
-        <div class="content">
-            <p>RocketMQ 是一款分布式、队列模型的消息中间件，具有以下特点：</p>
-<ol>
-<li>能够保证严格的消息顺序 </li>
-<li>提供丰富的消息拉取模式 </li>
-<li>高效的订阅者水平扩展能力 </li>
-<li>实时的消息订阅机制 </li>
-<li>亿级消息堆积能力</li>
-</ol>
-<p>今天开始试着理解她。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/20e9366a.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -432,6 +303,29 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#使用-at-遍历图像">
+        <span class="has-mr-6">1</span>
+        <span>使用 at() 遍历图像</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用指针遍历">
+        <span class="has-mr-6">2</span>
+        <span>使用指针遍历</span>
+        </a></li><li>
+        <a class="is-flex" href="#迭代器遍历">
+        <span class="has-mr-6">3</span>
+        <span>迭代器遍历</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1384,7 +1278,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="OpenCV-图像的遍历" height="28">
                 
                 </a>
                 <p class="is-size-7">

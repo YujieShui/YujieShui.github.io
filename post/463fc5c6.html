@@ -2,18 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 消息队列 - 深页</title>
+<title>OpenCV-基本数据结构 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/消息队列/index.html">
+    <meta name="description" content="本文介绍 OpenCV 的基本数据结构，做到心中有数就不会在阅读示例代码的时候发憷。">
+<meta name="keywords" content="opencv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV-基本数据结构">
+<meta property="og:url" content="http://shuiyujie.com/post/463fc5c6.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="本文介绍 OpenCV 的基本数据结构，做到心中有数就不会在阅读示例代码的时候发憷。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-05-25-13-01-13.png">
+<meta property="og:updated_time" content="2019-05-25T05:03:27.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="OpenCV-基本数据结构">
+<meta name="twitter:description" content="本文介绍 OpenCV 的基本数据结构，做到心中有数就不会在阅读示例代码的时候发憷。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-05-25-13-01-13.png">
 
 
 
@@ -85,7 +92,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="OpenCV-基本数据结构" height="28">
             
             </a>
         </div>
@@ -106,6 +113,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,33 +131,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">消息队列</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-23T15:26:49.000Z">2019-03-23</time>
+                <time class="level-item has-text-grey" datetime="2019-05-25T04:22:04.000Z">2019-05-25</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
+                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1285 个字)
+                    5 分钟 读完 (大约 675 个字)
                 </span>
                 
                 
@@ -155,29 +155,91 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/b63a0941.html">消息队列的连环炮</a>
+                OpenCV-基本数据结构
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-05-09-23-02-26.png" alt="消息队列思维导图"></p>
-<h1 id="1-引子"><a href="#1-引子" class="headerlink" title="1. 引子"></a>1. 引子</h1><p>消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。</p>
-<p>常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。</p>
-<p>简历中涉及到了消息队列，面试官先问了这样几个问题：</p>
-<ol>
-<li>你们系统里为什么要使用消息队列？</li>
-<li>既然使用了消息队列，说说他还有什么使用场景？</li>
-<li>消息队列的优缺点是什么？</li>
-</ol>
+            <p><img src="http://image.shuiyujie.com/2019-05-25-13-01-13.png" alt="OpenCV 基本数据结构"></p>
+<p>本文介绍 OpenCV 的基本数据结构，做到心中有数就不会在阅读示例代码的时候发憷。</p>
+<a id="more"></a>
+<h1 id="Mat-类"><a href="#Mat-类" class="headerlink" title="Mat 类"></a>Mat 类</h1><p>Mat 是 OpenCV 中最重要的一种数据结构，OpenCV 将其定义为一个类，用于存储图像矩阵。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dims</td>
+<td>矩阵的维度，如 3x4x5 的矩阵为 3 维</td>
+</tr>
+<tr>
+<td>data</td>
+<td>uchar 类型指针, 指向矩阵数据内存</td>
+</tr>
+<tr>
+<td>rows, cols</td>
+<td>矩阵的行数、列数</td>
+</tr>
+<tr>
+<td>type</td>
+<td>矩阵元素类型 + 通道数</td>
+</tr>
+<tr>
+<td>depth</td>
+<td>像素位数(bist)</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>通道数量</td>
+</tr>
+<tr>
+<td>elemSize</td>
+<td>矩阵中每一个元素的数据大小</td>
+</tr>
+<tr>
+<td>elemSize1</td>
+<td>单通道的矩阵元素占用的数据大小</td>
+</tr>
+</tbody>
+</table>
+<p>type 表示矩阵元素类型和通道数。矩阵元素类型一般都是 8 位无符号整数，即 CV_8U，彩色图像一般为 3 通道，灰度图像则为单通道。所以灰度图像的 type 可以表示为 CV_8UC1，3 通道的 RGB 图像的 type 可以表示为 CV_8UC3。</p>
+<p>以 CV_8UC3 为例，depth = CV_8U，channels = 3。</p>
+<p>elemSize = channels <em> depth / 8 ，type是CV_8UC3，elemSize = 3 </em> 8 / 8 = 3bytes。</p>
+<p>elemSize1 = depth / 8，type是CV_8UC3，elemSize1 = 8 / 8 = 1bytes。</p>
+<p>通过遍历图像可以体会 Mat 类的使用，可以参考 <a href="https://shuiyujie.com/post/dfe68fea.html">OpenCV-图像的遍历</a>。</p>
+<h1 id="Ponit-类-点的表示"><a href="#Ponit-类-点的表示" class="headerlink" title="Ponit 类 - 点的表示"></a>Ponit 类 - 点的表示</h1><p>Point 类表示二维坐标系下的点，即 (x, y) 形式的 2D 点。</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 方法一</span></span><br><span class="line">Point point1 = Point(<span class="hljs-number">10</span>, <span class="hljs-number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 方法二</span></span><br><span class="line">Point point2;</span><br><span class="line">point2.x = <span class="hljs-number">8</span>;</span><br><span class="line">point2.y = <span class="hljs-number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>Point_&lt;int&gt;</code>, Point2i, Point 等价，<code>Point_&lt;float&gt;</code>, Point2f 等价。</p>
+<h1 id="Scalar-类-颜色的表示"><a href="#Scalar-类-颜色的表示" class="headerlink" title="Scalar 类 - 颜色的表示"></a>Scalar 类 - 颜色的表示</h1><p>Scalar() 表示具有 4 个元素的数组，用于传递像素值，如 RGB 颜色值。RGB 颜色值只有三个参数，Scalar() 用不到第四个参数可以缺省。</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Mat <span class="hljs-title">M</span><span class="hljs-params">(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, CV_8UC3, Scalar(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">255</span>))</span></span>;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>Scalar(0,0,255)</code> 表示 BGR 的值分别为 (0, 0, 255) 是红色。</p>
+<h1 id="Size-类-尺寸的表示"><a href="#Size-类-尺寸的表示" class="headerlink" title="Size 类 - 尺寸的表示"></a>Size 类 - 尺寸的表示</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> Size_&lt;<span class="hljs-keyword">int</span>&gt; Size2i;</span><br><span class="line"><span class="hljs-keyword">typedef</span> Size_&lt;int64&gt; Size2l;</span><br><span class="line"><span class="hljs-keyword">typedef</span> Size_&lt;<span class="hljs-keyword">float</span>&gt; Size2f;</span><br><span class="line"><span class="hljs-keyword">typedef</span> Size_&lt;<span class="hljs-keyword">double</span>&gt; Size2d;</span><br><span class="line"><span class="hljs-keyword">typedef</span> Size2i Size;</span><br></pre></td></tr></table></figure>
+<p>源代码中的定义上述代码所示。Size_ 是模板类，<code>Size_&lt;int&gt;</code> 表示其模板类型为 int。之后给 <code>Size_&lt;int&gt;</code> 别名为 Size2i，再给 Size2i 别名为 Size。由此可见，<strong><code>Size_&lt;int&gt;</code>, Size2i, Size 等价。</strong></p>
+<p><code>Size size = Size(8, 10);</code> 表示宽和长分别为 8 和 10。</p>
+<h1 id="Rect-类-矩形的表示"><a href="#Rect-类-矩形的表示" class="headerlink" title="Rect 类 - 矩形的表示"></a>Rect 类 - 矩形的表示</h1><ul>
+<li>Rect 类的成员变量有 x, y, width, heigh</li>
+<li>Size() 返回值为 Size</li>
+<li>area() 返回矩形面积</li>
+<li>contains(Point) 判断点是否在矩形内</li>
+<li>inside(Rect) 判断矩形是否在该矩形内</li>
+<li>tl() 返回左上角点坐标</li>
+<li>br() 返回右下角点坐标</li>
+</ul>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 矩形交集</span></span><br><span class="line">Rect rect = rect1 &amp; rect2;</span><br><span class="line"><span class="hljs-comment">// 矩形并集</span></span><br><span class="line">Rect rect = rect1 | rect2;</span><br><span class="line"><span class="hljs-comment">// 平移操作</span></span><br><span class="line">Rect rectShift = rect + point;</span><br><span class="line"><span class="hljs-comment">// 缩放操作</span></span><br><span class="line">Rect rectScale = rect + size;</span><br></pre></td></tr></table></figure>
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/b63a0941.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/opencv/">opencv</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -187,171 +249,19 @@
 
 
 
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-02-04T09:35:33.000Z">2018-02-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    21 分钟 读完 (大约 3190 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/dfe68fea.html">
+                <span class="level-item">OpenCV-图像的遍历</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/29003c34.html">RabbitMQ 安装和使用</a>
-            
-        </h1>
-        <div class="content">
-            <p>RabbitMQ 是一个消息队列，主要是用来实现应用程序的异步和解耦，同时也能起到消息缓冲，消息分发的作用。本文介绍RabbitMQ 安装和使用。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/29003c34.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-25T13:57:27.000Z">2018-01-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1759 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/6fc5439d.html">部署 RockerMQ 双 Master 模式</a>
-            
-        </h1>
-        <div class="content">
-            <p>本文介绍搭建双 master 的 RocektMQ 的集群。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/6fc5439d.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-21T09:39:45.000Z">2018-01-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1098 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/20e9366a.html">RocketMQ Start</a>
-            
-        </h1>
-        <div class="content">
-            <p>RocketMQ 是一款分布式、队列模型的消息中间件，具有以下特点：</p>
-<ol>
-<li>能够保证严格的消息顺序 </li>
-<li>提供丰富的消息拉取模式 </li>
-<li>高效的订阅者水平扩展能力 </li>
-<li>实时的消息订阅机制 </li>
-<li>亿级消息堆积能力</li>
-</ol>
-<p>今天开始试着理解她。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/20e9366a.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -432,6 +342,37 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Mat-类">
+        <span class="has-mr-6">1</span>
+        <span>Mat 类</span>
+        </a></li><li>
+        <a class="is-flex" href="#Ponit-类-点的表示">
+        <span class="has-mr-6">2</span>
+        <span>Ponit 类 - 点的表示</span>
+        </a></li><li>
+        <a class="is-flex" href="#Scalar-类-颜色的表示">
+        <span class="has-mr-6">3</span>
+        <span>Scalar 类 - 颜色的表示</span>
+        </a></li><li>
+        <a class="is-flex" href="#Size-类-尺寸的表示">
+        <span class="has-mr-6">4</span>
+        <span>Size 类 - 尺寸的表示</span>
+        </a></li><li>
+        <a class="is-flex" href="#Rect-类-矩形的表示">
+        <span class="has-mr-6">5</span>
+        <span>Rect 类 - 矩形的表示</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1384,7 +1325,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="OpenCV-基本数据结构" height="28">
                 
                 </a>
                 <p class="is-size-7">
