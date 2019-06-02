@@ -2,25 +2,28 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Ubuntu16.04配置OpenCV环境 - 深页</title>
+<title>图像处理——边缘检测 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="本文介绍在 Ubuntu16.04 中配置 OpenCV 的环境  Linux 环境: Ubuntu16.04 LST  软件版本:　opencv-3.4.0 、opencv_contrib-3.4.0 (安装包在文末下载)  参考文档：Installation in Linux">
-<meta name="keywords" content="linux,ubuntu,opencv">
+    <meta name="description" content="边缘检测是为了识别物体的边缘，而边缘是由数字图像中亮度变化明显的点连接而成的，主要可以通过基于图像强度的一阶和二阶导数来寻找到这些点。 边缘检测可以分成三个步骤：  滤波。由于导数对噪声敏感，所以在边缘检测之前可以先试着降低图片的噪声，常用的是高斯滤波。 增强。增强算法可以将图像灰度点邻域强度值有显著变化的点凸显出来，可以通过计算梯度幅值来确定。 检测。根据梯度幅值就可以检测出物体的边缘，由于经">
+<meta name="keywords" content="opencv,图像处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu16.04配置OpenCV环境">
-<meta property="og:url" content="http://shuiyujie.com/post/5359e313.html">
+<meta property="og:title" content="图像处理——边缘检测">
+<meta property="og:url" content="http://shuiyujie.com/post/1d0f563b.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="本文介绍在 Ubuntu16.04 中配置 OpenCV 的环境  Linux 环境: Ubuntu16.04 LST  软件版本:　opencv-3.4.0 、opencv_contrib-3.4.0 (安装包在文末下载)  参考文档：Installation in Linux">
+<meta property="og:description" content="边缘检测是为了识别物体的边缘，而边缘是由数字图像中亮度变化明显的点连接而成的，主要可以通过基于图像强度的一阶和二阶导数来寻找到这些点。 边缘检测可以分成三个步骤：  滤波。由于导数对噪声敏感，所以在边缘检测之前可以先试着降低图片的噪声，常用的是高斯滤波。 增强。增强算法可以将图像灰度点邻域强度值有显著变化的点凸显出来，可以通过计算梯度幅值来确定。 检测。根据梯度幅值就可以检测出物体的边缘，由于经">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/Snipaste_2019-03-19_19-26-50.png">
-<meta property="og:updated_time" content="2019-05-14T13:52:47.099Z">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-03-00-12-54.png">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/32769037c408874e1890f77554c65f39c523ebe2">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/f4be87ad083e5ead48d92b0c82f2d4e719cb34a6">
+<meta property="og:image" content="https://wikimedia.org/api/rest_v1/media/math/render/svg/9464c9bf2670581ed86a15bc9c2e8ac4b6ab1484">
+<meta property="og:updated_time" content="2019-06-02T16:49:29.990Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu16.04配置OpenCV环境">
-<meta name="twitter:description" content="本文介绍在 Ubuntu16.04 中配置 OpenCV 的环境  Linux 环境: Ubuntu16.04 LST  软件版本:　opencv-3.4.0 、opencv_contrib-3.4.0 (安装包在文末下载)  参考文档：Installation in Linux">
-<meta name="twitter:image" content="http://image.shuiyujie.com/Snipaste_2019-03-19_19-26-50.png">
+<meta name="twitter:title" content="图像处理——边缘检测">
+<meta name="twitter:description" content="边缘检测是为了识别物体的边缘，而边缘是由数字图像中亮度变化明显的点连接而成的，主要可以通过基于图像强度的一阶和二阶导数来寻找到这些点。 边缘检测可以分成三个步骤：  滤波。由于导数对噪声敏感，所以在边缘检测之前可以先试着降低图片的噪声，常用的是高斯滤波。 增强。增强算法可以将图像灰度点邻域强度值有显著变化的点凸显出来，可以通过计算梯度幅值来确定。 检测。根据梯度幅值就可以检测出物体的边缘，由于经">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-06-03-00-12-54.png">
 
 
 
@@ -92,7 +95,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="Ubuntu16.04配置OpenCV环境" height="28">
+                <img src="/images/logo.svg" alt="图像处理——边缘检测" height="28">
             
             </a>
         </div>
@@ -136,17 +139,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-19T11:42:00.000Z">2019-03-19</time>
+                <time class="level-item has-text-grey" datetime="2019-06-02T11:08:59.000Z">2019-06-02</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
+                <a class="has-link-grey -link" href="/categories/图像处理/">图像处理</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 769 个字)
+                    23 分钟 读完 (大约 3379 个字)
                 </span>
                 
                 
@@ -155,79 +158,93 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Ubuntu16.04配置OpenCV环境
+                图像处理——边缘检测
             
         </h1>
         <div class="content">
-            <p>本文介绍在 Ubuntu16.04 中配置 OpenCV 的环境 </p>
-<p>Linux 环境: Ubuntu16.04 LST </p>
-<p>软件版本:　opencv-3.4.0 、opencv_contrib-3.4.0 (安装包在文末下载) </p>
-<p>参考文档：<a href="https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html" target="_blank" rel="noopener">Installation in Linux</a> </p>
+            <p><img src="http://image.shuiyujie.com/2019-06-03-00-12-54.png" alt="边缘检测"></p>
+<p>边缘检测是为了识别物体的边缘，而边缘是由数字图像中亮度变化明显的点连接而成的，主要可以通过基于图像强度的一阶和二阶导数来寻找到这些点。</p>
+<p>边缘检测可以分成三个步骤：</p>
+<ol>
+<li>滤波。由于导数对噪声敏感，所以在边缘检测之前可以先试着<a href="https://shuiyujie.com/post/d966aba8.html">降低图片的噪声</a>，常用的是高斯滤波。</li>
+<li>增强。增强算法可以将图像灰度点邻域强度值有显著变化的点凸显出来，可以通过计算梯度幅值来确定。</li>
+<li>检测。根据梯度幅值就可以检测出物体的边缘，由于经过图像增强，有些店并不是要找的边缘值，我们还可以通过阈值化的方式来筛选。</li>
+</ol>
 <a id="more"></a>
-<h1 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h1><p>执行以下命令</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[compiler] sudo apt-get install build-essential</span><br><span class="line"></span><br><span class="line">[required] sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev cmake-gui</span><br><span class="line"></span><br><span class="line">[optional] sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev</span><br></pre></td></tr></table></figure>
-<p>下载以下两个文件，注意版本</p>
-<p><a href="https://github.com/opencv/opencv/releases" target="_blank" rel="noopener">opencv-3.4.0</a> 、<a href="https://github.com/opencv/opencv_contrib/releases" target="_blank" rel="noopener">opencv_contrib-3.4.0</a></p>
-<p>解压文件，并新建一个build文件夹作为编译目录，如下 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">opencv/</span><br><span class="line">├── build</span><br><span class="line">├── opencv-3.4.0</span><br><span class="line">└── opencv_contrib-3.4.0</span><br></pre></td></tr></table></figure>
-<h1 id="使用CMake-gui进行编译"><a href="#使用CMake-gui进行编译" class="headerlink" title="使用CMake-gui进行编译"></a>使用CMake-gui进行编译</h1><p>使用cmake-gui生成Makefile,并进行编译</p>
-<h2 id="生成-Makefile"><a href="#生成-Makefile" class="headerlink" title="生成 Makefile"></a>生成 Makefile</h2><p><img src="http://image.shuiyujie.com/Snipaste_2019-03-19_19-26-50.png" alt="生成 Makefile"></p>
+<h1 id="canny"><a href="#canny" class="headerlink" title="canny"></a>canny</h1><blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/Canny%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">Canny边缘检测算子</a>是澳洲计算机科学家<a href="https://zh.wikipedia.org/w/index.php?title=%E7%B4%84%E7%BF%B0%C2%B7%E5%9D%8E%E5%B0%BC&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">约翰·坎尼</a>（John F. Canny）于1986年开发出来的一个多级<a href="https://zh.wikipedia.org/wiki/%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B" target="_blank" rel="noopener">边缘检测</a><a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">算法</a>。更为重要的是Canny创立了“边缘检测计算理论”（computational theory of edge detection）解释这项技术如何工作。</p>
+<p>Canny的目标是找到一个最优的边缘检测算法，最优边缘检测的含义是：</p>
+<ul>
+<li><em>好的检测</em> - 算法能够尽可能多地标识出图像中的实际边缘。</li>
+<li><em>好的定位</em> - 标识出的边缘要与实际图像中的实际边缘尽可能接近。</li>
+<li><em>最小响应</em> - 图像中的边缘只能标识一次，并且可能存在的图像噪声不应标识为边缘。</li>
+</ul>
+<p>为了满足这些要求Canny使用了<a href="https://zh.wikipedia.org/wiki/%E5%8F%98%E5%88%86%E6%B3%95" target="_blank" rel="noopener">变分法</a>，这是一种寻找满足特定<a href="https://zh.wikipedia.org/wiki/%E5%8A%9F%E8%83%BD" target="_blank" rel="noopener">功能</a>的<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">函数</a>的方法。最优检测使用四个<a href="https://zh.wikipedia.org/wiki/%E6%8C%87%E6%95%B0%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">指数函数</a>项的和表示，但是它非常近似于<a href="https://zh.wikipedia.org/wiki/%E9%AB%98%E6%96%AF%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">高斯函数</a>的一阶<a href="https://zh.wikipedia.org/wiki/%E5%AF%BC%E6%95%B0" target="_blank" rel="noopener">导数</a>。</p>
+<p>—— 维基百科</p>
+</blockquote>
+<p>我们可以使用 OpenCV 中的 <a href="https://docs.opencv.org/3.1.0/da/d22/tutorial_py_canny.html" target="_blank" rel="noopener">Canny()</a> 来做边缘检测。</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">void</span> cv::Canny	(	InputArray 	image,</span><br><span class="line">					OutputArray 	edges,</span><br><span class="line">					<span class="hljs-keyword">double</span> 	threshold1,</span><br><span class="line">					<span class="hljs-keyword">double</span> 	threshold2,</span><br><span class="line">					<span class="hljs-keyword">int</span> 	apertureSize = <span class="hljs-number">3</span>,</span><br><span class="line">					<span class="hljs-keyword">bool</span> 	L2gradient = <span class="hljs-literal">false</span> </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>src: 源图像，8位即可</li>
+<li>edges: 输出的边缘图，要求与源图像保持一样的尺寸和类型</li>
+<li>threshold1: 第一个滞后性阈值</li>
+<li>threshold2: 第二个滞后性阈值</li>
+<li>apertureSize: 表示应该用 Sobel 算子的空间大小，默认为 3</li>
+<li>L2gradient: 计算图像梯度幅值的标识，默认为 false</li>
+</ul>
+<p><em>注：threshold1 和 threshold2 中较小的用于边缘连接，交大的用来控制强边缘的初始段，推荐的高低阈值比在 2:1 到 3:1 之间。</em></p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/highgui.hpp"</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/imgcodecs.hpp"</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/imgproc.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    cv::Mat src = cv::imread(<span class="hljs-string">"../images/persimmon.jpg"</span>, cv::IMREAD_COLOR);</span><br><span class="line"></span><br><span class="line">    cv::Mat dst, edge, gray;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 【1】创建与src同类型和大小的矩阵(dst)</span></span><br><span class="line">    dst.create(src.size(), src.type());</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 【2】将原图像转换为灰度图像</span></span><br><span class="line">    cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 【3】运行Canny算子</span></span><br><span class="line">    cv::Canny(gray, edge, <span class="hljs-number">150</span>, <span class="hljs-number">50</span>, <span class="hljs-number">3</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 【4】显示效果图</span></span><br><span class="line">    cv::namedWindow(<span class="hljs-string">"【原图】边缘检测"</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::namedWindow(<span class="hljs-string">"【效果图】Canny边缘检测"</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    imshow(<span class="hljs-string">"【原图】边缘检测"</span>, gray);</span><br><span class="line">    imshow(<span class="hljs-string">"【效果图】Canny边缘检测"</span>, edge);</span><br><span class="line"></span><br><span class="line">    cv::waitKey(<span class="hljs-number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="sobel"><a href="#sobel" class="headerlink" title="sobel"></a>sobel</h1><blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/%E7%B4%A2%E8%B2%9D%E7%88%BE%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">索伯算子(Sobel operator)</a> 是<a href="https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86" target="_blank" rel="noopener">图像处理</a>中的<a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">算子</a>之一，有时又称为<strong>索伯-费德曼算子</strong>或<strong>索贝滤波器</strong>，在<a href="https://zh.wikipedia.org/wiki/%E5%BD%B1%E5%83%8F%E8%99%95%E7%90%86" target="_blank" rel="noopener">影像处理</a>及<a href="https://zh.wikipedia.org/w/index.php?title=%E9%9B%BB%E8%85%A6%E8%A6%96%E8%A6%BA%E9%A0%98%E5%9F%9F&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">电脑视觉领域</a>中常被用来做<a href="https://zh.wikipedia.org/wiki/%E9%82%8A%E7%B7%A3%E6%AA%A2%E6%B8%AC" target="_blank" rel="noopener">边缘检测</a>。索伯算子最早是由美国计算机科学家<a href="https://zh.wikipedia.org/w/index.php?title=%E8%89%BE%E7%88%BE%E6%96%87%C2%B7%E7%B4%A2%E4%BC%AF&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">艾尔文·索伯</a>（Irwin Sobel）及<a href="https://zh.wikipedia.org/w/index.php?title=%E8%93%8B%E7%91%9E%C2%B7%E8%B2%BB%E5%BE%B7%E6%9B%BC&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">盖瑞·费德曼</a>（Gary Feldman）于1968年在<a href="https://zh.wikipedia.org/wiki/%E5%8F%B2%E4%B8%B9%E4%BD%9B%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">史丹佛大学</a>的人工智能实验室(SAIL)所提出，因此为了表扬他们的贡献，才用他们的名字命名。在技术上，它是一离散性<a href="https://zh.wikipedia.org/wiki/%E5%B7%AE%E5%88%86" target="_blank" rel="noopener">差分</a>算子，用来运算图像亮度函数的梯度之近似值。在图像的任何一点使用此算子，索伯算子的运算将会产生对应的梯度向量或是其范数。概念上，索伯算子就是一个小且是整数的滤波器对整张影像在水平及垂直方向上做卷积，因此它所需的运算资源相对较少，另一方面，对于影像中的频率变化较高的地方，它所得的梯度之近似值也比较粗糙。</p>
+<p>—— 维基百科</p>
+</blockquote>
+<p><a href="https://docs.opencv.org/3.4.0/d2/d2c/tutorial_sobel_derivatives.html" target="_blank" rel="noopener">Sobel 函数</a>使用扩展的 Sobel 算子来计算一阶、二阶、三阶或者混合图像的差分，来看一下 OpenCV 中的 Sobel()。</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">void</span> cv::Sobel	(	InputArray 	src,</span><br><span class="line">					OutputArray 	dst,</span><br><span class="line">					<span class="hljs-keyword">int</span> 	ddepth,</span><br><span class="line">					<span class="hljs-keyword">int</span> 	dx,</span><br><span class="line">					<span class="hljs-keyword">int</span> 	dy,</span><br><span class="line">					<span class="hljs-keyword">int</span> 	ksize = <span class="hljs-number">3</span>,</span><br><span class="line">					<span class="hljs-keyword">double</span> 	scale = <span class="hljs-number">1</span>,</span><br><span class="line">					<span class="hljs-keyword">double</span> 	delta = <span class="hljs-number">0</span>,</span><br><span class="line">					<span class="hljs-keyword">int</span> 	borderType = BORDER_DEFAULT </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>src: 源图像，Mat 类型</li>
+<li>dst: 输出图像，尺寸和类型需要与 src 相同</li>
+<li>ddepth: 输出图像深度，支持如下 src.depth() 和 ddepth 的组合</li>
+<li>dx:  x 方向上的差分阶数</li>
+<li>dy: y 方向上的差分阶数</li>
+<li>ksize: Sobel 卷积核的代销，默认值为 3，必须取 1、3、5 或 7</li>
+<li>scale: 计算导数值时可选的缩放因子，默认值是 1，表示默认情况下是没有应用缩放的，更多可以查看文档</li>
+<li>delta: 表示结果存入输出图像之前可选的 delta 值，默认为 0</li>
+<li>borderType: 推断图像外包部像素的某种边界模式，一般用默认的即可</li>
+</ul>
+<p>注：</p>
 <ol>
-<li>点击 Browse_Source… 引入 opencv-3.4.0 文件夹 </li>
-<li>点击 Browse_Build… 引入 build 文件夹 </li>
-<li>点击 Configure </li>
-<li>点击 Generate </li>
-<li>弹出如下对话框，选择使用Makefile生成的系统平台 </li>
+<li>当内核大小为 3 时，Sobel 内核可能产生比较明显的误差。为此 OpenCV 提供了结果更加精确的 <a href="https://docs.opencv.org/3.4.0/d4/d86/group__imgproc__filter.html#gaa13106761eedf14798f37aa2d60404c9" target="_blank" rel="noopener">Scharr()</a> ，它仅作用于大小为 3 的卷积核，运行速度与 Sobel() 一样快，当结果更精确。</li>
+<li>计算图像 X 方向导数是可以取 <code>xorder = 1, uorder = 0, ksize = 3</code></li>
+<li>计算图像 Y 方向导数是可以取 <code>xorder = 0, uorder = 1, ksize = 3</code></li>
 </ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">注：</span><br><span class="line">1. 第一次会弹出`CMakeSetup`选择`default`那个就可以了</span><br><span class="line">2. 开始的时候没有上图红色部分</span><br></pre></td></tr></table></figure>
-<p>之后我们勾选下面这几个选项</p>
-<ol>
-<li>编译成静态库，取消选择 BUILD_SHARED_LIBS </li>
-<li>勾选　OPENCV_ENABLE_NOFREE </li>
-<li>选择　OPENCV_EXTRA_MODULES_PATH 引入 opencv_contrib-3.4.0 下的 modules 文件夹 </li>
-<li>点击 Configure </li>
-<li>点击 Generate </li>
-</ol>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>进入 build 文件夹路径</p>
-<blockquote>
-<p>make -j7 # 7 表示7个并发</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//---------------【边缘检测】----------------</span></span><br><span class="line"><span class="hljs-comment">// 描述：sobel 函数用法示例</span></span><br><span class="line"><span class="hljs-comment">//------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">//【0】创建 grad_x 和 grad_y 矩阵</span></span><br><span class="line">	Mat grad_x, grad_y;</span><br><span class="line">	Mat abs_grad_x, abs_grad_y,dst;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//【1】载入原始图  </span></span><br><span class="line">	Mat src = imread(<span class="hljs-string">"images/2.jpg"</span>);  <span class="hljs-comment">//工程目录下应该有一张名为1.jpg的素材图</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//【2】显示原始图 </span></span><br><span class="line">	imshow(<span class="hljs-string">"【原始图】sobel边缘检测"</span>, src); </span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//【3】求 X方向梯度</span></span><br><span class="line">	Sobel( src, grad_x, CV_16S, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, BORDER_DEFAULT );</span><br><span class="line">	convertScaleAbs( grad_x, abs_grad_x );</span><br><span class="line">	imshow(<span class="hljs-string">"【效果图】 X方向Sobel"</span>, abs_grad_x); </span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//【4】求Y方向梯度</span></span><br><span class="line">	Sobel( src, grad_y, CV_16S, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, BORDER_DEFAULT );</span><br><span class="line">	convertScaleAbs( grad_y, abs_grad_y );</span><br><span class="line">	imshow(<span class="hljs-string">"【效果图】Y方向Sobel"</span>, abs_grad_y); </span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//【5】合并梯度(近似)</span></span><br><span class="line">	addWeighted( abs_grad_x, <span class="hljs-number">0.5</span>, abs_grad_y, <span class="hljs-number">0.5</span>, <span class="hljs-number">0</span>, dst );</span><br><span class="line">	imshow(<span class="hljs-string">"【效果图】整体方向Sobel"</span>, dst); </span><br><span class="line"></span><br><span class="line">	waitKey(<span class="hljs-number">0</span>); </span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Laplacian"><a href="#Laplacian" class="headerlink" title="Laplacian"></a>Laplacian</h1><blockquote>
+<p>在<a href="https://zh.wikipedia.org/wiki/%E6%95%B8%E5%AD%B8" target="_blank" rel="noopener">数学</a>以及<a href="https://zh.wikipedia.org/wiki/%E7%89%A9%E7%90%86" target="_blank" rel="noopener">物理</a>中，<strong>拉普拉斯算子</strong>或是<strong>拉普拉斯算符</strong>（英语：<strong>Laplace operator, Laplacian</strong>）是由<a href="https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%A9%BA%E9%97%B4" target="_blank" rel="noopener">欧几里得空间</a>中的一个函数的<a href="https://zh.wikipedia.org/wiki/%E6%A2%AF%E5%BA%A6" target="_blank" rel="noopener">梯度</a>的<a href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%BA%A6" target="_blank" rel="noopener">散度</a>给出的<a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%88%86%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">微分算子</a>，通常写成 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/32769037c408874e1890f77554c65f39c523ebe2" alt="\Delta ">、<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f4be87ad083e5ead48d92b0c82f2d4e719cb34a6" alt="{\displaystyle \nabla ^{2}}"> 或<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9464c9bf2670581ed86a15bc9c2e8ac4b6ab1484" alt="{\displaystyle \nabla \cdot \nabla }">。</p>
+<p>这名字是为了纪念<a href="https://zh.wikipedia.org/wiki/%E6%B3%95%E5%9B%BD" target="_blank" rel="noopener">法国</a>数学家<a href="https://zh.wikipedia.org/wiki/%E7%9A%AE%E8%80%B6-%E8%A5%BF%E8%92%99%C2%B7%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF" target="_blank" rel="noopener">皮埃尔-西蒙·拉普拉斯</a>（1749–1827）而命名的。他在研究<a href="https://zh.wikipedia.org/wiki/%E5%A4%A9%E4%BD%93%E5%8A%9B%E5%AD%A6" target="_blank" rel="noopener">天体力学</a>在数学中首次应用<a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">算子</a>，当它被施加到一个给定的<a href="https://zh.wikipedia.org/wiki/%E9%87%8D%E5%8A%9B%E4%BD%8D" target="_blank" rel="noopener">重力位</a>（Gravitational potential）的时候，其中所述算子给出的质量密度的常数倍。经拉普拉斯算子运算为零∆f=0的<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B8" target="_blank" rel="noopener">函数</a>称为<a href="https://zh.wikipedia.org/wiki/%E8%B0%83%E5%92%8C%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">调和函数</a>，现在称为<a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">拉普拉斯方程</a>，和代表了在自由空间中的可能的重力场。</p>
+<p>拉普拉斯算子有许多用途，此外也是<a href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">椭圆算子</a>中的一个重要例子。</p>
+<p>拉普拉斯算子出现描述许多物理现象的微分方程里。例如，常用于<a href="https://zh.wikipedia.org/wiki/%E6%B3%A2%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">波方程</a>的<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B" target="_blank" rel="noopener">数学模型</a>、<a href="https://zh.wikipedia.org/wiki/%E7%86%B1%E5%82%B3%E5%B0%8E%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">热传导方程</a>、<a href="https://zh.wikipedia.org/wiki/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6" target="_blank" rel="noopener">流体力学</a>以及<a href="https://zh.wikipedia.org/wiki/%E4%BA%A5%E5%A7%86%E9%9C%8D%E5%85%B9%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">亥姆霍兹方程</a>。在<a href="https://zh.wikipedia.org/wiki/%E9%9D%9C%E9%9B%BB%E5%AD%B8" target="_blank" rel="noopener">静电学</a>中，<a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">拉普拉斯方程</a>和<a href="https://zh.wikipedia.org/wiki/%E6%B3%8A%E6%9D%BE%E6%96%B9%E7%A8%8B" target="_blank" rel="noopener">泊松方程</a>的应用随处可见。在<a href="https://zh.wikipedia.org/wiki/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8" target="_blank" rel="noopener">量子力学</a>中，其代表<a href="https://zh.wikipedia.org/wiki/%E8%96%9B%E4%B8%81%E6%A0%BC%E6%96%B9%E7%A8%8B%E5%BC%8F" target="_blank" rel="noopener">薛定谔方程</a>中的<a href="https://zh.wikipedia.org/wiki/%E5%8B%95%E8%83%BD" target="_blank" rel="noopener">动能</a>项。</p>
+<p>拉普拉斯算子是最简单的<a href="https://zh.wikipedia.org/wiki/%E6%A4%AD%E5%9C%86%E7%AE%97%E5%AD%90" target="_blank" rel="noopener">椭圆算子</a>，并且拉普拉斯算子是<a href="https://zh.wikipedia.org/wiki/%E9%9C%8D%E5%A5%87%E7%90%86%E8%AB%96" target="_blank" rel="noopener">霍奇理论</a>的核心，并且是<a href="https://zh.wikipedia.org/wiki/%E5%BE%B7%E6%8B%89%E5%A7%86%E4%B8%8A%E5%90%8C%E8%B0%83" target="_blank" rel="noopener">德拉姆上同调</a>的结果。在<a href="https://zh.wikipedia.org/wiki/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86" target="_blank" rel="noopener">图像处理</a>和<a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89" target="_blank" rel="noopener">计算机视觉</a>中，拉普拉斯算子已经被用于诸如<a href="https://zh.wikipedia.org/w/index.php?title=%E6%96%91%E7%82%B9%E6%A3%80%E6%B5%8B&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">斑点检测</a>和<a href="https://zh.wikipedia.org/wiki/%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B" target="_blank" rel="noopener">边缘检测</a>等的各种任务。</p>
 </blockquote>
-<p>修改　opencv.pv 文件</p>
-<blockquote>
-<p>cd /build/unix_install</p>
-<p>vim opencv.pc</p>
-</blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Package Information for pkg-config</span><br><span class="line">prefix=/usr/local</span><br><span class="line">exec_prefix=$&#123;prefix&#125;</span><br><span class="line">libdir=$&#123;exec_prefix&#125;/lib</span><br><span class="line">includedir_old=$&#123;prefix&#125;/include/opencv</span><br><span class="line">includedir_new=$&#123;prefix&#125;/include</span><br><span class="line"></span><br><span class="line">Name: OpenCV</span><br><span class="line">Description: Open Source Computer Vision Library</span><br><span class="line">Version: 3.4.0</span><br><span class="line">Libs: -L$&#123;exec_prefix&#125;/lib -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dpm -lopencv_face -lopencv_photo -lopencv_freetype -lopencv_fuzzy -lopencv_img_hash -lopencv_line_descriptor -lopencv_optflow -lopencv_reg -lopencv_rgbd -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_dnn -lopencv_plot -lopencv_xfeatures2d -lopencv_shape -lopencv_video -lopencv_ml -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_highgui -lopencv_videoio -lopencv_flann -lopencv_xobjdetect -lopencv_imgcodecs -lopencv_objdetect -lopencv_xphoto -lopencv_imgproc -lopencv_core</span><br><span class="line">Libs.private: -ldl -lm -lpthread -lrt</span><br><span class="line">Cflags: -I$&#123;includedir_old&#125; -I$&#123;includedir_new&#125;</span><br></pre></td></tr></table></figure>
-<p>将文件中的<code>Libs.private:</code>删除</p>
-<blockquote>
-<p>sudo make install</p>
-<p>sudo updatedb</p>
-<p>sudo ldconfig</p>
-</blockquote>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>写一段测试程序，可以使用命令行的方式或者 CMake 进行编译</p>
-<h2 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h2><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/highgui/highgui.hpp"</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/imgproc/imgproc.hpp"</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/core/core.hpp"</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"opencv2/video/video.hpp"</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 从命令行参数读取图片路径</span></span><br><span class="line">    <span class="hljs-keyword">char</span> *imageName = argv[<span class="hljs-number">1</span>];</span><br><span class="line"></span><br><span class="line">    Mat image;</span><br><span class="line">    image = imread(imageName, IMREAD_COLOR);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (argc != <span class="hljs-number">2</span> || !image.data)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"No image data"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Mat gray_image;</span><br><span class="line">    cvtColor(image, gray_image, COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 保存转换之后的灰度图片</span></span><br><span class="line">    imwrite(<span class="hljs-string">"Gray_Image.jpg"</span>, gray_image);</span><br><span class="line"></span><br><span class="line">    namedWindow(imageName, WINDOW_AUTOSIZE);</span><br><span class="line">    namedWindow(<span class="hljs-string">"Gray image"</span>, WINDOW_AUTOSIZE);</span><br><span class="line"></span><br><span class="line">    imshow(imageName, image);</span><br><span class="line">    imshow(<span class="hljs-string">"Gray image"</span>, gray_image);</span><br><span class="line">    waitKey(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="命令行方式编译"><a href="#命令行方式编译" class="headerlink" title="命令行方式编译"></a>命令行方式编译</h2><blockquote>
-<p>g++ ModifyImage.cpp <code>pkg-config --cflags --libs opencv</code> -o ModifyImage</p>
-</blockquote>
-<h2 id="CMake-方式编译"><a href="#CMake-方式编译" class="headerlink" title="CMake 方式编译"></a>CMake 方式编译</h2><p>新建一个<code>CMakeLists.txt</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 2.8)</span><br><span class="line">project( ModifyImage )</span><br><span class="line">find_package( OpenCV REQUIRED )</span><br><span class="line">include_directories( $&#123;OpenCV_INCLUDE_DIRS&#125; )</span><br><span class="line">add_executable( ModifyImage ModifyImage.cpp )</span><br><span class="line">target_link_libraries( ModifyImage $&#123;OpenCV_LIBS&#125; )</span><br></pre></td></tr></table></figure>
-<p>输入以下命令</p>
-<blockquote>
-<p>cmake .</p>
-<p>make</p>
-</blockquote>
-<p>通过以上两种方式都会生成一个可执行文件，我们可以执行它</p>
-<blockquote>
-<p>./ModifyImage</p>
-</blockquote>
-
+<p>Laplacian 使用了图像梯度，它内部的代码调用了 Sobel 算子。让一幅图像减去它的 Laplacian 算子可以增强对比度。</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">void</span> cv::Laplacian	(	InputArray 	src,</span><br><span class="line">						OutputArray 	dst,</span><br><span class="line">						<span class="hljs-keyword">int</span> 	ddepth,</span><br><span class="line">						<span class="hljs-keyword">int</span> 	ksize = <span class="hljs-number">1</span>,</span><br><span class="line">						<span class="hljs-keyword">double</span> 	scale = <span class="hljs-number">1</span>,</span><br><span class="line">						<span class="hljs-keyword">double</span> 	delta = <span class="hljs-number">0</span>,</span><br><span class="line">						<span class="hljs-keyword">int</span> 	borderType = BORDER_DEFAULT </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>src: 源图像，Mat 类型，需要为<strong>单通道 8 位图像</strong></li>
+<li>dst: 输出图像，尺寸和类型需要与 src 相同</li>
+<li>ddepth: 输出图像深度</li>
+<li>ksize: 用于计算二阶大数的滤波器的孔径尺寸，大小必须正奇数，默认值为 1</li>
+<li>scale: 计算拉普拉斯值的时候可选的比例因子，默认值为 1</li>
+<li>delta: 在结果存入输出图像全可选的 delta 值，默认值为 0</li>
+<li>borderType: 推断图像外包部像素的某种边界模式，一般用默认的即可</li>
+</ul>
+<p>注：Laplacian() 函数使用  sobel 运算，加上 sobel 算子运算出图像 dx 和 dy，来得到载入图像的拉普拉斯变换的结果。</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//---------------【边缘检测】----------------</span></span><br><span class="line"><span class="hljs-comment">// 描述：laplacian 函数用法示例</span></span><br><span class="line"><span class="hljs-comment">//------------------------------------------</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    cv::Mat src, src_gray, dst, abs_dst;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 载入原图像</span></span><br><span class="line">    src = cv::imread(<span class="hljs-string">"images/3.jpg"</span>, cv::IMREAD_COLOR);;</span><br><span class="line">    cv::imshow(<span class="hljs-string">"【原图】"</span>, src);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 使用高斯滤波降噪</span></span><br><span class="line">    cv::GaussianBlur(src, src, cv::Size(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, cv::BORDER_DEFAULT);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 转换为灰度图</span></span><br><span class="line">    cv::cvtColor(src, src_gray, cv::COLOR_BGR2GRAY);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 使用 Laplacian 函数</span></span><br><span class="line">    cv::Laplacian(src_gray, dst, CV_16S, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, cv::BORDER_DEFAULT);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//【6】计算绝对值，并将结果转换成8位</span></span><br><span class="line">	convertScaleAbs( dst, abs_dst );</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//【7】显示效果图</span></span><br><span class="line">	cv::imshow( <span class="hljs-string">"【效果图】图像Laplace变换"</span>, abs_dst );</span><br><span class="line"></span><br><span class="line">	cv::waitKey(<span class="hljs-number">0</span>); </span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/linux/">linux</a>, <a class="has-link-grey -link" href="/tags/opencv/">opencv</a>, <a class="has-link-grey -link" href="/tags/ubuntu/">ubuntu</a>
+                    <a class="has-link-grey -link" href="/tags/opencv/">opencv</a>, <a class="has-link-grey -link" href="/tags/图像处理/">图像处理</a>
                 </div>
             </div>
         </div>
@@ -244,17 +261,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/9d29b615.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">如何使用Anaconda</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/cbbc9ca0.html">
-                <span class="level-item">Ubuntu OpenSSH Server</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/d966aba8.html">
+                <span class="level-item">图像处理——图像降噪</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -348,38 +358,18 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#依赖安装">
+        <a class="is-flex" href="#canny">
         <span class="has-mr-6">1</span>
-        <span>依赖安装</span>
+        <span>canny</span>
         </a></li><li>
-        <a class="is-flex" href="#使用CMake-gui进行编译">
+        <a class="is-flex" href="#sobel">
         <span class="has-mr-6">2</span>
-        <span>使用CMake-gui进行编译</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#生成-Makefile">
-        <span class="has-mr-6">2.1</span>
-        <span>生成 Makefile</span>
+        <span>sobel</span>
         </a></li><li>
-        <a class="is-flex" href="#编译">
-        <span class="has-mr-6">2.2</span>
-        <span>编译</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#运行">
+        <a class="is-flex" href="#Laplacian">
         <span class="has-mr-6">3</span>
-        <span>运行</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#测试程序">
-        <span class="has-mr-6">3.1</span>
-        <span>测试程序</span>
-        </a></li><li>
-        <a class="is-flex" href="#命令行方式编译">
-        <span class="has-mr-6">3.2</span>
-        <span>命令行方式编译</span>
-        </a></li><li>
-        <a class="is-flex" href="#CMake-方式编译">
-        <span class="has-mr-6">3.3</span>
-        <span>CMake 方式编译</span>
-        </a></li></ul></li></ul>
+        <span>Laplacian</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
@@ -1380,7 +1370,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="Ubuntu16.04配置OpenCV环境" height="28">
+                    <img src="/images/logo.svg" alt="图像处理——边缘检测" height="28">
                 
                 </a>
                 <p class="is-size-7">
