@@ -16,8 +16,9 @@
 <meta property="og:description" content="数字图像在数字化和成像过程中会受到成像设备或外界环境的影响，受到干扰产生的图像叫做噪声图像。 按照噪声的引入方式分类，可以将噪声分成加性噪声和乘法性噪声。加性噪声的幅度与信号的幅度无关，是叠加在图像上的，比较容易去除。成性噪声的幅度与信号的幅度成正比，比较难去除。不过乘性噪声可以通过取对数的方式转化为加性噪声，实际上大部分去噪算法都会假设噪声为加性高斯白噪声。 按照噪声的性质分类，可以将噪声分成">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-06-02-14-26-47.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-03-01-26-22.png">
 <meta property="og:image" content="http://image.shuiyujie.com/filter.png">
-<meta property="og:updated_time" content="2019-06-02T15:58:22.766Z">
+<meta property="og:updated_time" content="2019-06-02T17:28:22.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图像处理——图像降噪">
 <meta name="twitter:description" content="数字图像在数字化和成像过程中会受到成像设备或外界环境的影响，受到干扰产生的图像叫做噪声图像。 按照噪声的引入方式分类，可以将噪声分成加性噪声和乘法性噪声。加性噪声的幅度与信号的幅度无关，是叠加在图像上的，比较容易去除。成性噪声的幅度与信号的幅度成正比，比较难去除。不过乘性噪声可以通过取对数的方式转化为加性噪声，实际上大部分去噪算法都会假设噪声为加性高斯白噪声。 按照噪声的性质分类，可以将噪声分成">
@@ -147,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    16 分钟 读完 (大约 2459 个字)
+                    17 分钟 读完 (大约 2506 个字)
                 </span>
                 
                 
@@ -167,7 +168,9 @@
 <p>传统降噪算法根据降噪的原理不同可分为基于邻域像素特征的⽅法，基于频域变换的⽅法，和基于特定模型的⽅法。本文主要讲述基于邻域像素特征的方法，并用 OpenCV 实现相应算法。</p>
 <a id="more"></a>
 <p>基于邻域像素特征的⽅法，是通过分析在⼀定⼤⼩的窗口内，中⼼像素与其他相邻像素之间在灰度空间的直接联系，来获取新的中⼼像素值的⽅法，因此往往都会存在⼀个典型的输⼊参数，即滤波半径 r。此滤波半径可能被⽤于在该局部窗⼜内计算像素的相似性，也可能是⼀些⾼斯或拉普拉斯算⼦的计算窗口。在邻域滤波⽅法⾥⾯，最具有代表性的滤波⽅法有以下⼏种。</p>
-<h1 id="算数均值滤波"><a href="#算数均值滤波" class="headerlink" title="算数均值滤波"></a>算数均值滤波</h1><p>原理：均值滤波用像素邻域的平均灰度来代替像素值，适用于脉冲噪声，因为脉冲噪声一般与周围像素的灰度级不相关，而且亮度高出其他像素很多。</p>
+<h1 id="算数均值滤波"><a href="#算数均值滤波" class="headerlink" title="算数均值滤波"></a>算数均值滤波</h1><p><img src="http://image.shuiyujie.com/2019-06-03-01-26-22.png" alt="均值滤波示意图"></p>
+<p><em>上图演示 6x6 的图片，采用边框补零的方式，与 3x3 的卷积核做步长为 1 的卷积操作。</em></p>
+<p>原理：均值滤波用像素邻域的平均灰度来代替像素值，适用于脉冲噪声，因为脉冲噪声一般与周围像素的灰度级不相关，而且亮度高出其他像素很多。</p>
 <p>缺点：均值滤波随着半径取值增大而变得越来越模糊，因为均值操作之后，噪声被分散到了周围像素点，但是噪声区域也不可避免地增大了。</p>
 <p>解决：采用设定阈值的方式可以一定程度上避免这一问题。比较噪声和领域像素的灰度，只有当灰度差达到设定的阈值才判定为噪声。</p>
 <p>实现：可以使用 OpenCV 中的 <a href="https://docs.opencv.org/master/d4/d86/group__imgproc__filter.html#ga8c45db9afe636703801b0b2e440fce37" target="_blank" rel="noopener">blur()</a> 实现算数均值滤波的效果。</p>
