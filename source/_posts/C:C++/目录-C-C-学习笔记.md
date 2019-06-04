@@ -7,7 +7,7 @@ tags:
   - c
   - c++
 abbrlink: 789284ab
-date: 2019-05-19 10:07:28
+date: 2019-05-24 10:07:28
 ---
 
 ![C/C++](http://image.shuiyujie.com/C_and_C_plus_plus.jpg)
@@ -33,3 +33,9 @@ C++ 学习笔记
 - [C++学习笔记-继承](https://shuiyujie.com/post/5afabdd4.html)
 - [C++学习笔记-多态](https://shuiyujie.com/post/e7609a12.html)
 
+
+
+零散知识点
+
+- [C/C++ 中的命令行参数](https://shuiyujie.com/post/b482364a.html)
+- [C 语言-格式化输出函数 printf()](https://shuiyujie.com/post/d37b0970.html)
