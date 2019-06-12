@@ -1,5 +1,5 @@
 ---
-title: 使用 LabelImg 标注图片
+title: darknet 
 toc: true
 categories:
   - 深度学习

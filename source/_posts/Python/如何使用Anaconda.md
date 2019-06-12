@@ -40,6 +40,29 @@ Anaconda 可用于 Windows、Mac OS X 和 Linux。可以在 <https://docs.anacon
 
 Anaconda 可以使用命令行的方式使用，也可以使用 GUI，下面将介绍用命令行的方式使用。
 
+# conda 切换为国内源
+
+```
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
+conda config --set show_channel_urls yes
+```
+
+```
+channels:
+  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - defaults
+show_channel_urls: true
+```
+
+[关于停止Anaconda镜像服务的通知](https://mirrors.tuna.tsinghua.edu.cn/news/close-anaconda-service/)。
+
 # 管理包
 
 安装了 Anaconda 之后，管理包是相当简单的。要安装包，请在终端中键入 `conda install package_name`。例如，要安装 numpy，请键入 `conda install numpy`。
