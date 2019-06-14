@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="深页">
 <meta property="og:description" content="常用遍历、查找、拷贝和替换、算数生成、集合算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-08T07:11:53.431Z">
+<meta property="og:updated_time" content="2019-06-14T14:21:44.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STL-常用算法">
 <meta name="twitter:description" content="常用遍历、查找、拷贝和替换、算数生成、集合算法。">
@@ -160,8 +160,7 @@
             <p>常用遍历、查找、拷贝和替换、算数生成、集合算法。</p>
 <a id="more"></a>
 <h1 id="遍历算法"><a href="#遍历算法" class="headerlink" title="遍历算法"></a>遍历算法</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">遍历算法,遍历容器元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param _callback 函数回调或者函数对象</span></span><br><span class="line"><span class="hljs-comment">@return 函数对象</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">for_each(iterator beg, iterator end, _callback);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">transform 算法,将指定容器区间元素搬运到另一容器中</span></span><br><span class="line"><span class="hljs-comment">注意: transform 不会给目标容器分配内存，所以需要我们提前分配好内存</span></span><br><span class="line"><span class="hljs-comment">@param beg1 源容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end1 源容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param beg2 目标容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param _cakkback 回调函数或者函数对象</span></span><br><span class="line"><span class="hljs-comment">@return 返回目标容器迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">transform(iterator beg1, iterator end1, iterator beg2, _callbakc)</span><br></pre></td></tr></table></figure>
-<p>#查找算法 </p>
-<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">find 算法, 查找元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 查找的元素</span></span><br><span class="line"><span class="hljs-comment">@return 返回查找元素的位置</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">find(iterator beg, iterator end, value)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">adjacent_find 算法,查找相邻重复元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param _callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return 返回相邻元素的第一个位置的迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">adjacent_find(iterator beg, iterator end, _callback);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">binary_search 算法二分查找法</span></span><br><span class="line"><span class="hljs-comment">注意: 在无序序列中不可用</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 查找的元素</span></span><br><span class="line"><span class="hljs-comment">@return bool 查找返回 true 否则 false</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">binary_search</span><span class="hljs-params">(iterator beg, iterator end, value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">find_if 算法 条件查找</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return bool 查找返回 true 否则 false</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">find_if(iterator beg, iterator end, _callback);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">count 算法 统计元素出现次数</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return int 返回元素个数</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">count(iterator beg, iterator end, value);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">count 算法 统计元素出现次数</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return int 返回元素个数</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">count_if(iterator beg, iterator end, _callback);</span><br></pre></td></tr></table></figure>
+<h1 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">find 算法, 查找元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 查找的元素</span></span><br><span class="line"><span class="hljs-comment">@return 返回查找元素的位置</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">find(iterator beg, iterator end, value)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">adjacent_find 算法,查找相邻重复元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param _callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return 返回相邻元素的第一个位置的迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">adjacent_find(iterator beg, iterator end, _callback);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">binary_search 算法二分查找法</span></span><br><span class="line"><span class="hljs-comment">注意: 在无序序列中不可用</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 查找的元素</span></span><br><span class="line"><span class="hljs-comment">@return bool 查找返回 true 否则 false</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">binary_search</span><span class="hljs-params">(iterator beg, iterator end, value)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">find_if 算法 条件查找</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return bool 查找返回 true 否则 false</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">find_if(iterator beg, iterator end, _callback);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">count 算法 统计元素出现次数</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return int 返回元素个数</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">count(iterator beg, iterator end, value);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">count 算法 统计元素出现次数</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@return int 返回元素个数</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">count_if(iterator beg, iterator end, _callback);</span><br></pre></td></tr></table></figure>
 <h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">merge 算法 容器元素合并，并存储到另一容器中</span></span><br><span class="line"><span class="hljs-comment">@param beg1 容器 1 开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end1 容器 1 结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param beg2 容器 2 开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end2 容器 2 结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param dest 目标容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">merge(iterator beg1, iterator end1, iterator beg2, iterator end2, iterator dest)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">sort 算法 容器元素排序</span></span><br><span class="line"><span class="hljs-comment">注意:两个容器必须是有序的</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器 1 开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器 1 结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param _callback 回调函数或者谓词(返回 bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">sort(iterator beg, iterator end, _callback)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">sort 算法 对指定范围内的元素随机调整次序</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">random_shuffle(iterator beg, iterator end)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">reverse 算法 反转指定范围的元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">reverse(iterator beg, iterator end)</span><br></pre></td></tr></table></figure>
 <h1 id="拷贝和替换算法"><a href="#拷贝和替换算法" class="headerlink" title="拷贝和替换算法"></a>拷贝和替换算法</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">copy 算法 将容器内指定范围的元素拷贝到另一容器中</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param dest 目标容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">copy(iterator beg, iterator end, iterator dest)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">replace 算法 将容器内指定范围的旧元素修改为新元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param oldvalue 旧元素</span></span><br><span class="line"><span class="hljs-comment">@param oldvalue 新元素</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">replace(iterator beg, iterator end, oldvalue, newvalue)</span><br><span class="line">  </span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">replace_if 算法 将容器内指定范围满足条件的元素替换为新元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param callback 函数回调或者谓词(返回 Bool 类型的函数对象)</span></span><br><span class="line"><span class="hljs-comment">@param oldvalue 新元素</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">replace_if(iterator beg, iterator end, _callback, newvalue)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">swap 算法 互换两个容器的元素</span></span><br><span class="line"><span class="hljs-comment">@param c1 容器 1</span></span><br><span class="line"><span class="hljs-comment">@param c2 容器 2</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">swap(container c1, container c2)</span><br></pre></td></tr></table></figure>
 <h1 id="算数生成算法"><a href="#算数生成算法" class="headerlink" title="算数生成算法"></a>算数生成算法</h1><figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">accumulate 算法 计算容器元素累计总和</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value 累加值</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">accumulate(iterator beg, iterator end, value)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">fill 算法 向容器中添加元素</span></span><br><span class="line"><span class="hljs-comment">@param beg 容器开始迭代器</span></span><br><span class="line"><span class="hljs-comment">@param end 容器结束迭代器</span></span><br><span class="line"><span class="hljs-comment">@param value t 填充元素</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">fill(iterator beg, iterator end, value)</span><br></pre></td></tr></table></figure>
@@ -252,7 +251,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        60
+                        61
                     </p>
                 </div>
             </div>
@@ -272,7 +271,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        30
+                        31
                     </p>
                 </div>
             </div>
@@ -298,20 +297,24 @@
         <span class="has-mr-6">1</span>
         <span>遍历算法</span>
         </a></li><li>
-        <a class="is-flex" href="#排序算法">
+        <a class="is-flex" href="#查找算法">
         <span class="has-mr-6">2</span>
+        <span>查找算法</span>
+        </a></li><li>
+        <a class="is-flex" href="#排序算法">
+        <span class="has-mr-6">3</span>
         <span>排序算法</span>
         </a></li><li>
         <a class="is-flex" href="#拷贝和替换算法">
-        <span class="has-mr-6">3</span>
+        <span class="has-mr-6">4</span>
         <span>拷贝和替换算法</span>
         </a></li><li>
         <a class="is-flex" href="#算数生成算法">
-        <span class="has-mr-6">4</span>
+        <span class="has-mr-6">5</span>
         <span>算数生成算法</span>
         </a></li><li>
         <a class="is-flex" href="#集合算法">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">6</span>
         <span>集合算法</span>
         </a></li></ul>
         </div>
@@ -417,7 +420,7 @@
                 <span class="level-item">工具癖</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/开源框架/">
@@ -439,7 +442,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.67px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.33px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.33px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.67px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 10px;">开源框架</a> <a href="/tags/文件传输/" style="font-size: 10px;">文件传输</a> <a href="/tags/消息队列/" style="font-size: 15px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.67px;">网站</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.67px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.33px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.33px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.67px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 10px;">开源框架</a> <a href="/tags/文件传输/" style="font-size: 10px;">文件传输</a> <a href="/tags/消息队列/" style="font-size: 15px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.67px;">网站</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
     </div>
 </div>
 
@@ -453,6 +456,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T13:57:54.000Z">2019-06-14</time></div>
+                    <a href="/post/c002250d.html" class="has-link-black-ter is-size-6">Markdown 记要</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具癖/">工具癖</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -506,19 +522,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-08T04:15:12.000Z">2019-06-08</time></div>
-                    <a href="/post/8d66854b.html" class="has-link-black-ter is-size-6">STL-map and multimap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -537,7 +540,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">17</span>
+                    <span class="level-item tag">18</span>
                 </span>
             </a>
         </li>
@@ -710,6 +713,13 @@
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -880,6 +890,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T13:57:54.000Z">2019-06-14</time></div>
+                    <a href="/post/c002250d.html" class="has-link-black-ter is-size-6">Markdown 记要</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具癖/">工具癖</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-13T13:09:45.000Z">2019-06-13</time></div>
                     <a href="/post/5ba44047.html" class="has-link-black-ter is-size-6">【darknet】darknet实战</a>
                     <p class="is-size-7 is-uppercase">
@@ -928,19 +951,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-08T04:15:12.000Z">2019-06-08</time></div>
-                    <a href="/post/8d66854b.html" class="has-link-black-ter is-size-6">STL-map and multimap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -959,7 +969,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">17</span>
+                    <span class="level-item tag">18</span>
                 </span>
             </a>
         </li>
@@ -1132,6 +1142,13 @@
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

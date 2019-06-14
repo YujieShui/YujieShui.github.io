@@ -293,14 +293,14 @@
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># coding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> argparse</span><br><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">(argv)</span>:</span></span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="hljs-string">"log_file"</span>,  help = <span class="hljs-string">"path to log file"</span>  )</span><br><span class="line">    parser.add_argument( <span class="hljs-string">"option"</span>, help = <span class="hljs-string">"0 -&gt; loss vs iter"</span>  )</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    f = open(args.log_file)</span><br><span class="line">    lines  = [line.rstrip(<span class="hljs-string">"\n"</span>) <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f.readlines()]</span><br><span class="line">    <span class="hljs-comment"># skip the first 3 lines</span></span><br><span class="line">    lines = lines[<span class="hljs-number">3</span>:]</span><br><span class="line">    numbers = &#123;<span class="hljs-string">'1'</span>,<span class="hljs-string">'2'</span>,<span class="hljs-string">'3'</span>,<span class="hljs-string">'4'</span>,<span class="hljs-string">'5'</span>,<span class="hljs-string">'6'</span>,<span class="hljs-string">'7'</span>,<span class="hljs-string">'8'</span>,<span class="hljs-string">'9'</span>, <span class="hljs-string">'0'</span>&#125;</span><br><span class="line">    iters = []</span><br><span class="line">    loss = []</span><br><span class="line">    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:</span><br><span class="line">        print(line)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">#跳过空行</span></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> len(line):</span><br><span class="line">            <span class="hljs-keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> line[<span class="hljs-number">0</span>] <span class="hljs-keyword">in</span> numbers:</span><br><span class="line">            args = line.split(<span class="hljs-string">" "</span>)</span><br><span class="line">            <span class="hljs-comment"># print(args)</span></span><br><span class="line">            <span class="hljs-keyword">if</span> len(args) &gt; <span class="hljs-number">4</span> <span class="hljs-keyword">and</span> is_number(args[<span class="hljs-number">2</span>]):</span><br><span class="line">                iters.append(int(args[<span class="hljs-number">0</span>][:<span class="hljs-number">-1</span>]))</span><br><span class="line">                loss.append(float(args[<span class="hljs-number">2</span>]))</span><br><span class="line">    plt.plot(iters,loss)</span><br><span class="line">    plt.xlabel(<span class="hljs-string">'iters'</span>)</span><br><span class="line">    plt.ylabel(<span class="hljs-string">'loss'</span>)</span><br><span class="line">    plt.grid()</span><br><span class="line">    plt.show()</span><br><span class="line"><span class="hljs-comment"># 0.692735 seconds, 595200 images</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_number</span><span class="hljs-params">(s)</span>:</span></span><br><span class="line">    <span class="hljs-keyword">try</span>:</span><br><span class="line">        float(s)</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">True</span></span><br><span class="line">    <span class="hljs-keyword">except</span> ValueError:</span><br><span class="line">        <span class="hljs-keyword">pass</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">try</span>:</span><br><span class="line">        <span class="hljs-keyword">import</span> unicodedata</span><br><span class="line">        unicodedata.numeric(s)</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">True</span></span><br><span class="line">    <span class="hljs-keyword">except</span> (TypeError, ValueError):</span><br><span class="line">        <span class="hljs-keyword">pass</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:</span><br><span class="line">    main(sys.argv)</span><br></pre></td></tr></table></figure>
 <p><img src="/Users/shui/Desktop/yolov3_darknet/images/loss.png" alt="loss 曲线"></p>
 <h2 id="生成预测结果"><a href="#生成预测结果" class="headerlink" title="生成预测结果"></a>生成预测结果</h2><p>通过<code>./darknet detector valid &lt;data_cfg&gt; &lt;models_cfg&gt; &lt;weights&gt;</code> 可以批量生成模型的测试结果,测试结果保存在<code>results</code>目录下面,按照类别分成一个个文件.</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line">./darknet detector valid switch_18/switch.data switch_18/switch.cfg switch_18/switch.weights -i 1 -out ""</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line">./darknet detector valid switch_18/switch.data switch_18/switch.cfg switch_18/switch.weights -i 1 -out ""</span><br></pre></td></tr></table></figure>
 <ul>
 <li>结果生成在 &lt;data_cfg&gt; 的指定的目录下以 &lt;out_file&gt; 开头的若干文件中，若&lt;data_cfg&gt;没有指定results，那么默认为&lt;darknet_root&gt;/results；</li>
 <li>&lt;models_cfg&gt; 文件中 batch 和 subdivisions 两项必须为1；</li>
 <li>若 -out 未指定字符串，则在 results 文件夹下生成 comp4_det_test_[类名].txt 文件并保存测试结果；</li>
 <li>本次实验在 results 文件夹下生成  [类名].txt 文件；</li>
 </ul>
-<h2 id="统计召回率-recall"><a href="#统计召回率-recall" class="headerlink" title="统计召回率 recall"></a>统计召回率 recall</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line">./darknet detector recall switch_18/switch.data switch_18/switch.cfg switch_18/switch.weights</span><br></pre></td></tr></table></figure>
+<h2 id="统计召回率-recall"><a href="#统计召回率-recall" class="headerlink" title="统计召回率 recall"></a>统计召回率 recall</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line">./darknet detector recall switch_18/switch.data switch_18/switch.cfg switch_18/switch.weights</span><br></pre></td></tr></table></figure>
 <p>输出结果为</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">835    35    45	RPs/Img: 1.81	IOU: 57.69%	Recall:77.78%</span><br><span class="line">836    35    45	RPs/Img: 1.81	IOU: 57.69%	Recall:77.78%</span><br><span class="line">837    35    45	RPs/Img: 1.81	IOU: 57.69%	Recall:77.78%</span><br><span class="line">838    35    45	RPs/Img: 1.81	IOU: 57.69%	Recall:77.78%</span><br><span class="line">839    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">840    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">841    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">842    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">843    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">844    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">845    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">846    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">847    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">848    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">849    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">850    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br><span class="line">851    35    45	RPs/Img: 1.82	IOU: 57.69%	Recall:77.78%</span><br></pre></td></tr></table></figure>
 <p>数据格式为<code>Number Correct Total Rps/Img IOU Recall</code></p>
@@ -354,6 +354,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/c002250d.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Markdown 记要</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -410,7 +417,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        60
+                        61
                     </p>
                 </div>
             </div>
@@ -430,7 +437,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        30
+                        31
                     </p>
                 </div>
             </div>
@@ -683,7 +690,7 @@
                 <span class="level-item">工具癖</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/开源框架/">
@@ -705,7 +712,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.67px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.33px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.33px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.67px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 10px;">开源框架</a> <a href="/tags/文件传输/" style="font-size: 10px;">文件传输</a> <a href="/tags/消息队列/" style="font-size: 15px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.67px;">网站</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.67px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.33px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.33px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.67px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 10px;">开源框架</a> <a href="/tags/文件传输/" style="font-size: 10px;">文件传输</a> <a href="/tags/消息队列/" style="font-size: 15px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.67px;">网站</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
     </div>
 </div>
 
@@ -719,6 +726,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T13:57:54.000Z">2019-06-14</time></div>
+                    <a href="/post/c002250d.html" class="has-link-black-ter is-size-6">Markdown 记要</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具癖/">工具癖</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -772,19 +792,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-08T04:15:12.000Z">2019-06-08</time></div>
-                    <a href="/post/8d66854b.html" class="has-link-black-ter is-size-6">STL-map and multimap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -803,7 +810,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">17</span>
+                    <span class="level-item tag">18</span>
                 </span>
             </a>
         </li>
@@ -976,6 +983,13 @@
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1146,6 +1160,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T13:57:54.000Z">2019-06-14</time></div>
+                    <a href="/post/c002250d.html" class="has-link-black-ter is-size-6">Markdown 记要</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具癖/">工具癖</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-13T13:09:45.000Z">2019-06-13</time></div>
                     <a href="/post/5ba44047.html" class="has-link-black-ter is-size-6">【darknet】darknet实战</a>
                     <p class="is-size-7 is-uppercase">
@@ -1194,19 +1221,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-08T04:15:12.000Z">2019-06-08</time></div>
-                    <a href="/post/8d66854b.html" class="has-link-black-ter is-size-6">STL-map and multimap</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1225,7 +1239,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">17</span>
+                    <span class="level-item tag">18</span>
                 </span>
             </a>
         </li>
@@ -1398,6 +1412,13 @@
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
