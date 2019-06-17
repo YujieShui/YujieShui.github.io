@@ -2,18 +2,28 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 开源框架 - 深页</title>
+<title>【Caffe】Caffe实战手写数字分类 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/开源框架/index.html">
+    <meta name="description" content="Caffe)是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在Model zoo中找到许多模型的实现。本文以 Caffe 提供的 Training LeNet on MNIST with Caffe 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。 本文的目标是能够了解 Caffe 基本的使用流程。">
+<meta name="keywords" content="deeplearning,caffe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Caffe】Caffe实战手写数字分类">
+<meta property="og:url" content="http://shuiyujie.com/post/96cd1245.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="Caffe)是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在Model zoo中找到许多模型的实现。本文以 Caffe 提供的 Training LeNet on MNIST with Caffe 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。 本文的目标是能够了解 Caffe 基本的使用流程。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-18-25-09.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-18-23-18.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-19-13-31.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-19-14-19.png">
+<meta property="og:updated_time" content="2019-06-17T11:22:50.865Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="【Caffe】Caffe实战手写数字分类">
+<meta name="twitter:description" content="Caffe)是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在Model zoo中找到许多模型的实现。本文以 Caffe 提供的 Training LeNet on MNIST with Caffe 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。 本文的目标是能够了解 Caffe 基本的使用流程。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-06-17-18-25-09.png">
 
 
 
@@ -85,7 +95,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="【Caffe】Caffe实战手写数字分类" height="28">
             
             </a>
         </div>
@@ -106,6 +116,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,33 +134,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">开源框架</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-13T13:09:45.000Z">2019-06-13</time>
+                <time class="level-item has-text-grey" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开源框架/">开源框架</a>
+                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 10548 个字)
+                    8 分钟 读完 (大约 1207 个字)
                 </span>
                 
                 
@@ -155,31 +158,55 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/5ba44047.html">【darknet】darknet实战</a>
+                【Caffe】Caffe实战手写数字分类
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-06-13-21-01-25.png" alt="darknet"></p>
-<blockquote>
-<p>Darknet is an open source neural network framework written in C and CUDA. It is fast, easy to install, and supports CPU and GPU computation.</p>
-<p>—— <a href="https://pjreddie.com/darknet/" target="_blank" rel="noopener">https://pjreddie.com/darknet/</a></p>
-</blockquote>
-<p>本文是对使用 darknet 进行目标检测的小结，包括：</p>
-<ol>
-<li>数据集准备：如何使用 labelimage 对数据进行标注，注意事项，文件格式转换</li>
-<li>darknet 使用：如何编译和修改配置文件</li>
-<li>模型评估：如何查看 loss、计算 IoU、recall、mAP</li>
-</ol>
+            <p><img src="http://image.shuiyujie.com/2019-06-17-18-25-09.png" alt="Caffe"></p>
+<p><a href="[http://caffe.berkeleyvision.org/](http://caffe.berkeleyvision.org/">Caffe</a>)是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在<a href="https://github.com/BVLC/caffe/wiki/Model-Zoo" target="_blank" rel="noopener">Model zoo</a>中找到许多模型的实现。本文以 Caffe 提供的 <a href="https://caffe.berkeleyvision.org/gathered/examples/mnist.html" target="_blank" rel="noopener">Training LeNet on MNIST with Caffe</a> 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。</p>
+<p>本文的目标是能够了解 Caffe 基本的使用流程。</p>
+<a id="more"></a>
+<p><img src="http://image.shuiyujie.com/2019-06-17-18-23-18.png" alt="Caffe 使用流程"></p>
+<h1 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h1><p>在安装和编译 Caffe 之后进入根目录，执行以下命令，将会下载 <a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">MNIST</a> 数据集。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $CAFFE_ROOT</span><br><span class="line">./data/mnist/get_mnist.sh #下载 mnist 数据集</span><br><span class="line">./examples/mnist/create_mnist.sh # 将下载下来的数据集格式调整为 caffe 能够解析的格式</span><br></pre></td></tr></table></figure>
+<p>数据集包括 mnist_train_lmdb 和 mnist_test_lmdb 两部分。</p>
+<h1 id="定义-Net"><a href="#定义-Net" class="headerlink" title="定义 Net"></a>定义 Net</h1><p>Caffe 提供的示例中使用 lenet_train_test.prototxt 定义 <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf" target="_blank" rel="noopener">LeNet</a> 的网络结构。LetNet 网络结构为<code>卷积层 -&gt; 池化层 -&gt; 卷积层 -&gt; 池化层 -&gt; 全连接层 -&gt; 全连接层 -&gt; 全连接层</code>。Caffe 用 layer 来表示表示网络，网络被定义在以<code>.prototxt</code>结尾的文件中，因为 Caffe 使用了 <a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener">Google Protobuf</a> 作为数据传输的格式。</p>
+<p>在 lenet_train_test.prototxt 中我们可看到<code>name: &quot;LeNet&quot;</code>表示网络结构的名称为 LeNet，接下来是</p>
+<figure class="highlight protobuf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">layer &#123;</span><br><span class="line">  name: <span class="hljs-string">"mnist"</span> # 名称</span><br><span class="line">  type: <span class="hljs-string">"Data"</span> # 输入层</span><br><span class="line">  transform_param &#123;</span><br><span class="line">    scale: <span class="hljs-number">0.00390625</span> # 归一化，范围为 <span class="hljs-number">0</span>-<span class="hljs-number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  data_param &#123;</span><br><span class="line">    source: <span class="hljs-string">"mnist_train_lmdb"</span> # 指定要读取的数据</span><br><span class="line">    backend: LMDB</span><br><span class="line">    batch_size: <span class="hljs-number">64</span></span><br><span class="line">  &#125;</span><br><span class="line">  top: <span class="hljs-string">"data"</span></span><br><span class="line">  top: <span class="hljs-string">"label"</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>我们可以通过 <a href="http://ethereon.github.io/netscope/#/editor" target="_blank" rel="noopener">http://ethereon.github.io/netscope/#/editor</a> 生成网络图像，或者使用 caffe 提供的脚本，它在<code>caffe/python/draw_net.py</code>。</p>
+<h1 id="配置-Solver"><a href="#配置-Solver" class="headerlink" title="配置 Solver"></a>配置 Solver</h1><p>Solver 用来指定训练的一些参数，比如使用哪个网络、迭代次数、优化方法、使用 GPU 还是 CPU 等信息。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> The train/test net protocol buffer definition</span><br><span class="line">net: "examples/mnist/lenet_train_test.prototxt"</span><br><span class="line"><span class="hljs-meta">#</span> test_iter specifies how many forward passes the test should carry out.</span><br><span class="line"><span class="hljs-meta">#</span> In the case of MNIST, we have test batch size 100 and 100 test iterations,</span><br><span class="line"><span class="hljs-meta">#</span> covering the full 10,000 testing images.</span><br><span class="line">test_iter: 100</span><br><span class="line"><span class="hljs-meta">#</span> Carry out testing every 500 training iterations.</span><br><span class="line">test_interval: 500</span><br><span class="line"><span class="hljs-meta">#</span> The base learning rate, momentum and the weight decay of the network.</span><br><span class="line">base_lr: 0.01</span><br><span class="line">momentum: 0.9</span><br><span class="line">weight_decay: 0.0005</span><br><span class="line"><span class="hljs-meta">#</span> The learning rate policy</span><br><span class="line">lr_policy: "inv"</span><br><span class="line">gamma: 0.0001</span><br><span class="line">power: 0.75</span><br><span class="line"><span class="hljs-meta">#</span> Display every 100 iterations</span><br><span class="line">display: 100</span><br><span class="line"><span class="hljs-meta">#</span> The maximum number of iterations</span><br><span class="line">max_iter: 10000</span><br><span class="line"><span class="hljs-meta">#</span> snapshot intermediate results</span><br><span class="line">snapshot: 5000</span><br><span class="line">snapshot_prefix: "examples/mnist/lenet"</span><br><span class="line"><span class="hljs-meta">#</span> solver mode: CPU or GPU</span><br><span class="line">solver_mode: GPU</span><br></pre></td></tr></table></figure>
+<h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>训练的时候指定 Solver，保存权值文件的路径，日志：<code>./examples/mnist/train_lenet.sh -gpu 1</code></p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/usr/bin/env sh</span><br><span class="line">set -e</span><br><span class="line">SOLVER=examples/mnist/lenet_solver.prototxt</span><br><span class="line">WEIGHTS=./lenet_iter_10000.caffemodel</span><br><span class="line">./build/tools/caffe train --solver=$&#123;SOLVER&#125; $@ 2&gt;&amp;1 | tee log.txt</span><br></pre></td></tr></table></figure>
+<p>通过解析日志，我们能够可视化模型训练过程中的 accuray 和 loss 的情况。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 解析日志文件,将 acc 和 loss 输出到 .refine 文件</span><br><span class="line">grep "Test net output #0: accuracy =" log.txt &gt; trainacc.refine</span><br><span class="line">grep "Test net output #1: loss =" log.txt &gt; trainloss.refine</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 生成如下所示的 .refine 文件</span><br><span class="line"><span class="hljs-meta">#</span> trainacc.refine</span><br><span class="line">I0615 10:16:15.671094 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.061339 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.451835 11161 solver.cpp:414] Test net output #0: accuracy = 0.988</span><br><span class="line">I0615 10:16:16.850911 11161 solver.cpp:414] Test net output #0: accuracy = 0.9906</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> trainloss.refine</span><br><span class="line">I0615 10:16:15.671116 11161 solver.cpp:414] Test net output #1: loss = 0.0298686 (* 1 = 0.0298686 loss)</span><br><span class="line">I0615 10:16:16.061362 11161 solver.cpp:414] Test net output #1: loss = 0.0285139 (* 1 = 0.0285139 loss)</span><br><span class="line">I0615 10:16:16.451859 11161 solver.cpp:414] Test net output #1: loss = 0.0348767 (* 1 = 0.0348767 loss)</span><br><span class="line">I0615 10:16:16.850932 11161 solver.cpp:414] Test net output #1: loss = 0.0284803 (* 1 = 0.0284803 loss)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 接着用 python 脚本解析 .refine 绘制 acc 和 loss 曲线</span><br><span class="line">python show_acc.py</span><br><span class="line">python show_loss.py</span><br></pre></td></tr></table></figure>
+<p>Python 脚本可以在 <a href="https://gist.github.com/YujieShui/67933c77054410461cb18c031b36057d" target="_blank" rel="noopener">Github Gist</a> 中查看，需要根据之前生成的日志进行小改动。</p>
+<p><img src="http://image.shuiyujie.com/2019-06-17-19-13-31.png" alt="train_loss"></p>
+<p>可以看到迭代 100 次 loss 已经降到很低了,之后略有降低,300次左右基本上就在 0.3, 0.4 左右</p>
+<p><img src="http://image.shuiyujie.com/2019-06-17-19-14-19.png" alt="train_accuracy"></p>
+<p>与之相对的，100 次左右准确率就有 0.96 了,缓慢上升,最后准确率稳定在 0.98 。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>测试的方法和训练的方法基本一致，使用 <code>./examples/mnist/test_lenet.sh -gpu 1</code></p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/usr/bin/env sh</span><br><span class="line">set -e</span><br><span class="line">MODEL=examples/mnist/lenet_iter_10000.caffemodel</span><br><span class="line">TRAIN_NET=examples/mnist/lenet_train_test.prototxt</span><br><span class="line">./build/tools/caffe test -model $&#123;TRAIN_NET&#125; -weights $&#123;MODEL&#125; $@ 2&gt;&amp;1 | tee test_log.txt</span><br><span class="line"><span class="hljs-meta">#</span> 结果如下所示</span><br><span class="line">...</span><br><span class="line">I0616 15:29:32.107722 13441 caffe.cpp:304] Batch 49, accuracy = 1</span><br><span class="line">I0616 15:29:32.107739 13441 caffe.cpp:304] Batch 49, loss = 0.00704199</span><br><span class="line">I0616 15:29:32.107748 13441 caffe.cpp:309] Loss: 0.0412109</span><br><span class="line">I0616 15:29:32.107769 13441 caffe.cpp:321] accuracy = 0.9862</span><br><span class="line">I0616 15:29:32.107782 13441 caffe.cpp:321] loss = 0.0412109 (* 1 = 0.0412109 loss)</span><br></pre></td></tr></table></figure>
+<p>用上面同样的方法能够可视化测试的 loss 和 accuracy。</p>
+<hr>
+<p>本文介绍了 Caffe 的基本使用流程，这样就可以把一些别人写好的网络用起来了。进一步我们需要了解如何用 Caffe 自定义网络结构，调整网络的参数，完成更加个性化的任务。</p>
+<p>参考：</p>
+<p><a href="https://caffe.berkeleyvision.org/gathered/examples/mnist.html" target="_blank" rel="noopener">Training LeNet on MNIST with Caffe</a></p>
+<p><a href="http://shengshuyang.github.io/A-step-by-step-guide-to-Caffe.html" target="_blank" rel="noopener">A step by step guide to Caffe</a></p>
+<p><a href="http://caffe.berkeleyvision.org/" target="_blank" rel="noopener">Caffe</a></p>
+<p><a href="https://github.com/BVLC/caffe/wiki/Model-Zoo#cnn-object-proposal-models-for-salient-object-detection" target="_blank" rel="noopener">Caffe Model zoo</a></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/5ba44047.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/caffe/">caffe</a>, <a class="has-link-grey -link" href="/tags/deeplearning/">deeplearning</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -189,7 +216,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/c002250d.html">
+                <span class="level-item">Markdown 记要</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -270,6 +309,37 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#准备数据">
+        <span class="has-mr-6">1</span>
+        <span>准备数据</span>
+        </a></li><li>
+        <a class="is-flex" href="#定义-Net">
+        <span class="has-mr-6">2</span>
+        <span>定义 Net</span>
+        </a></li><li>
+        <a class="is-flex" href="#配置-Solver">
+        <span class="has-mr-6">3</span>
+        <span>配置 Solver</span>
+        </a></li><li>
+        <a class="is-flex" href="#训练">
+        <span class="has-mr-6">4</span>
+        <span>训练</span>
+        </a></li><li>
+        <a class="is-flex" href="#测试">
+        <span class="has-mr-6">5</span>
+        <span>测试</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1280,7 +1350,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="【Caffe】Caffe实战手写数字分类" height="28">
                 
                 </a>
                 <p class="is-size-7">
