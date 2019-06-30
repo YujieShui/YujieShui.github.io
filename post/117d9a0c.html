@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>学会shell（一）基础篇 - 深页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="shell 脚本是包含一系列命令的文件，通过命令组合可以完成一系列的任务。shell 脚本以.sh结尾的文件，和其他脚本语言一样，shell 脚本需要解释器来运行脚本，一般是/bin/sh或者/bin/bash。 创建一个脚本的流程一般是：编写脚本，赋予脚本可执行权限，运行脚本。当然这样讲很抽象，接下来会先编写一个 shell 脚本的小例子，然后就 shell 中的变量、字符串、命令替换这三个基础">
+<meta name="keywords" content="linux,shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学会shell（一）基础篇">
+<meta property="og:url" content="http://shuiyujie.com/post/117d9a0c.html">
+<meta property="og:site_name" content="深页">
+<meta property="og:description" content="shell 脚本是包含一系列命令的文件，通过命令组合可以完成一系列的任务。shell 脚本以.sh结尾的文件，和其他脚本语言一样，shell 脚本需要解释器来运行脚本，一般是/bin/sh或者/bin/bash。 创建一个脚本的流程一般是：编写脚本，赋予脚本可执行权限，运行脚本。当然这样讲很抽象，接下来会先编写一个 shell 脚本的小例子，然后就 shell 中的变量、字符串、命令替换这三个基础">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-30T12:02:14.941Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学会shell（一）基础篇">
+<meta name="twitter:description" content="shell 脚本是包含一系列命令的文件，通过命令组合可以完成一系列的任务。shell 脚本以.sh结尾的文件，和其他脚本语言一样，shell 脚本需要解释器来运行脚本，一般是/bin/sh或者/bin/bash。 创建一个脚本的流程一般是：编写脚本，赋予脚本可执行权限，运行脚本。当然这样讲很抽象，接下来会先编写一个 shell 脚本的小例子，然后就 shell 中的变量、字符串、命令替换这三个基础">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="学会shell（一）基础篇" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-30T10:34:23.000Z">2019-06-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1762 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                学会shell（一）基础篇
+            
+        </h1>
+        <div class="content">
+            <p>shell 脚本是包含一系列命令的文件，通过命令组合可以完成一系列的任务。shell 脚本以<code>.sh</code>结尾的文件，和其他脚本语言一样，shell 脚本需要解释器来运行脚本，一般是<code>/bin/sh</code>或者<code>/bin/bash</code>。</p>
+<p>创建一个脚本的流程一般是：编写脚本，赋予脚本可执行权限，运行脚本。当然这样讲很抽象，接下来会先编写一个 shell 脚本的小例子，然后就 shell 中的变量、字符串、命令替换这三个基础概念进行说明。</p>
+<a id="more"></a>
+<h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h1><p>前面说了 shell 是脚本语言，脚本语言需要用解释器运行，所以 shell 脚本的第一行一般是<code>#!/bin/bash</code>，接下来是一些命令。比如说<code>echo ${PWD}</code>这条命令将会打印当前的路径。将其写成一个名为 path.sh 的 shell 脚本将会是这样的：</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"></span><br><span class="line">echo $&#123;PWD&#125;</span><br></pre></td></tr></table></figure>
+<p>是的，就这样简单的两行就是一个 shell 脚本了。接下来我们我们希望运行这个 shell 脚本，打印出当前路径。我们在当前路径下以<code>./path</code>运行 shell 脚本。但会发现无法运行这个脚本，这是因为该文件没有可执行<a href="https://shuiyujie.com/post/40efde90.html">权限</a>，所以我们要赋予该脚本可执行权限<code>chmod +x path.sh</code>。再次执行<code>./path</code>试试。</p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>我们知道编程语言中都有变量和常量，shell 中也不意外，当一个常量在文件中被大量使用，我们可以将其定义为一个变量进行复用。</p>
+<p>变量的命名遵循如下的规则：</p>
+<ul>
+<li>变量名称由字母、数字和下划线组成</li>
+<li>变量名称的第一个字符必须是字母或者下划线</li>
+<li>变量名称中不允许空格和标点</li>
+</ul>
+<h2 id="变量匹配"><a href="#变量匹配" class="headerlink" title="变量匹配"></a>变量匹配</h2><p>现在我们有这样一个需求：一张图片的名字叫做 cat.jpg，我想要获取文件的名称，即 cat。当然这有很多的中方法，这里介绍一种方法叫做变量匹配。</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${变量名#匹配规则}</td>
+<td>从变量<strong>开头</strong>进行规则匹配，将符合<strong>最短</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名##匹配规则}</td>
+<td>从变量<strong>开头</strong>进行规则匹配，将符合<strong>最长</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名%匹配规则}</td>
+<td>从变量<strong>结尾</strong>进行规则匹配，将符合<strong>最短</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名%%匹配规则}</td>
+<td>从变量<strong>结尾</strong>进行规则匹配，将符合<strong>最长</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名/旧字符串/新字符串}</td>
+<td>变量中符合规则的<strong>第一个</strong>旧字符串将会被旧字符串代替</td>
+</tr>
+<tr>
+<td>${变量名//旧字符串/新字符串}</td>
+<td>变量中符合规则的<strong>所有</strong>旧字符串将会被旧字符串代替</td>
+</tr>
+</tbody>
+</table>
+<p>回到最开始的需求，就可以使用<code>%</code>来实现</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat="cat.jpg"</span><br><span class="line">echo $&#123;cat&#125; # cat.jpg</span><br><span class="line">echo $&#123;cat%.*&#125; # cat</span><br></pre></td></tr></table></figure>
+<p>首先定义一个变量 cat 并为其赋值，接着用<code>$</code>获取 cat 变量的值并打印出来，最后使用变量替换截取字符串。</p>
+<p>变量匹配在 shell 中会被高频使用，要记住这些规则。</p>
+<h2 id="特殊变量的含义"><a href="#特殊变量的含义" class="headerlink" title="特殊变量的含义"></a>特殊变量的含义</h2><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$0</td>
+<td>当前脚本的文件名</td>
+</tr>
+<tr>
+<td>$n</td>
+<td>传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是<code>$1</code>，第二个参数是<code>$2</code></td>
+</tr>
+<tr>
+<td>$#</td>
+<td>传递给脚本或函数的参数个数。</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>传递给脚本或函数的所有参数。</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>传递给脚本或函数的所有参数。被双引号<code>(&quot; &quot;)</code>包含时，与 <code>$*</code>稍有不同，下面将会讲到。</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>上个命令的退出状态，或函数的返回值。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。</td>
+</tr>
+</tbody>
+</table>
+<p>比如说我们要对 shell 中的输入参数进行校验，可以添加这样一段</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line">if [ $# != 2 ];then</span><br><span class="line">    echo "Usage: $0 &lt;change ID&gt; &lt;target ID&gt;"</span><br><span class="line">    exit -1</span><br><span class="line">fi</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>其中<code>$#</code>表示输入的参数数量，我们通过条件判断在程序的输入参数不为 2 的时候将会进行提示，并退出程序。其中<code>$0</code>一般是可执行文件的名称。</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>字符串处理是在学习编程语言中比较繁琐的一部分知识。</p>
+<h2 id="计算字符串的长度"><a href="#计算字符串的长度" class="headerlink" title="计算字符串的长度"></a>计算字符串的长度</h2><p>shell 中有两种方法可以计算字符串长度。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str="abcde"</span><br><span class="line">echo $&#123;#str&#125; # 5</span><br><span class="line">expr length "$&#123;str&#125;" # 5</span><br></pre></td></tr></table></figure>
+<h2 id="获取子串在字符串中的索引"><a href="#获取子串在字符串中的索引" class="headerlink" title="获取子串在字符串中的索引"></a>获取子串在字符串中的索引</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr index $&#123;string&#125; $&#123;substring&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="抽取子串"><a href="#抽取子串" class="headerlink" title="抽取子串"></a>抽取子串</h2><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${string:position}</td>
+<td>从string中的position开始</td>
+</tr>
+<tr>
+<td>${string:position}</td>
+<td>从position开始，并指定长度为length</td>
+</tr>
+<tr>
+<td>${string:-position}</td>
+<td>从右边开始匹配</td>
+</tr>
+<tr>
+<td>${string:(postion)}</td>
+<td>从左边开始匹配</td>
+</tr>
+<tr>
+<td><code>expr substr $string $position $length</code></td>
+<td>从position开始，匹配长度为length</td>
+</tr>
+</tbody>
+</table>
+<h1 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h1><p>命令替换有两种方式</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 方法一</span><br><span class="line">`command`</span><br><span class="line"><span class="hljs-meta">#</span> 方法二</span><br><span class="line"><span class="hljs-meta">$</span>(command)</span><br></pre></td></tr></table></figure>
+<p>举例说明命令替换的作用，比如获取系统的所有用户并输出 </p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">index=1 </span><br><span class="line">for user in `cat /etc/passwd | cut -d ":" -f 1` </span><br><span class="line">do </span><br><span class="line">	echo "This is $&#123;index&#125; user: $&#123;user&#125;" </span><br><span class="line">	index = $(($index + 1)) </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><code>cat /etc/passwd | cut -d &quot;:&quot; -f 1</code>将会截取用户名，并通过循环来依次获取这些用户。</p>
+<p>再举一个例子，比如获取系统时间计算今年或明年</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "This is $(date +%Y) year" </span><br><span class="line">echo "This is $(($(date +%Y) + 1)) year"</span><br></pre></td></tr></table></figure>
+<h1 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h1><p>整型运算使用<code>expr $num1 operator $num2</code>后者<code>$(($num1 operator $num2))</code>，浮点型运算使用<code>bc</code>。</p>
+<p>shell 基本运算符主要包括算数运算符、关系运算符、布尔运算符、字符串运算符，具体可以在这篇文章中查找：<a href="https://www.runoob.com/linux/linux-shell-basic-operators.html" target="_blank" rel="noopener">Shell 基本运算符</a>。算数运算符我们应该很熟悉了，关系运算符等就需要通过多写、多记、多练来掌握。</p>
+<p>需求：提示用户输入一个正整数 num，然后计算 1+2+3+…+num 的值：必须对 num 是否为正整数做判断，不符合应该允许再次输入</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"><span class="hljs-meta">#</span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "pls input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">    continue</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>expr 只能应用在整数运算上，所以执行 <code>expr $num + 1</code> 的时候，如果 num 是整数<code>$? = 0</code>，否则 <code>$? ≠ 0</code> </p>
+<p>又不希望结果输出到终端，所以可以将其输出到垃圾桶里<code>expr $num + 1 &amp;&gt; /dev/null</code>。</p>
+<p>expr 支持整数运算，不支持浮点数运算，要做浮点数运算那就要用到 bc。bc 是 bash 内建的运算器，支持浮点数运算，内建变量 scale 可以设置，默认为 0。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo "23.3+30" | bc</span><br><span class="line">53.3</span><br><span class="line">echo "scale=4;23.3/3.2" | bc</span><br><span class="line">7.2812</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/linux/">linux</a>, <a class="has-link-grey -link" href="/tags/shell/">shell</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/87698413.html">
+                <span class="level-item">Linux进程</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="水宇杰">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        水宇杰
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        从知道到做到
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        66
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        33
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/YujieShui" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#简单示例">
+        <span class="has-mr-6">1</span>
+        <span>简单示例</span>
+        </a></li><li>
+        <a class="is-flex" href="#变量">
+        <span class="has-mr-6">2</span>
+        <span>变量</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#变量匹配">
+        <span class="has-mr-6">2.1</span>
+        <span>变量匹配</span>
+        </a></li><li>
+        <a class="is-flex" href="#特殊变量的含义">
+        <span class="has-mr-6">2.2</span>
+        <span>特殊变量的含义</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#字符串">
+        <span class="has-mr-6">3</span>
+        <span>字符串</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#计算字符串的长度">
+        <span class="has-mr-6">3.1</span>
+        <span>计算字符串的长度</span>
+        </a></li><li>
+        <a class="is-flex" href="#获取子串在字符串中的索引">
+        <span class="has-mr-6">3.2</span>
+        <span>获取子串在字符串中的索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#抽取子串">
+        <span class="has-mr-6">3.3</span>
+        <span>抽取子串</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#命令替换">
+        <span class="has-mr-6">4</span>
+        <span>命令替换</span>
+        </a></li><li>
+        <a class="is-flex" href="#数学运算">
+        <span class="has-mr-6">5</span>
+        <span>数学运算</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/C-C/">
+            <span class="level-start">
+                <span class="level-item">C/C++</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">26</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DeepLearning/">
+            <span class="level-start">
+                <span class="level-item">DeepLearning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/OpenCV/">
+            <span class="level-start">
+                <span class="level-item">OpenCV</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/分布式/">
+            <span class="level-start">
+                <span class="level-item">分布式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/图像处理/">
+            <span class="level-start">
+                <span class="level-item">图像处理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/工具癖/">
+            <span class="level-start">
+                <span class="level-item">工具癖</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.43px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.57px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 11.43px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.57px;">java</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.71px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 14.29px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.57px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.43px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.43px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.43px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.43px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.43px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 12.86px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.43px;">网站</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T10:34:23.000Z">2019-06-30</time></div>
+                    <a href="/post/117d9a0c.html" class="has-link-black-ter is-size-6">学会shell（一）基础篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-29T15:39:03.000Z">2019-06-29</time></div>
+                    <a href="/post/87698413.html" class="has-link-black-ter is-size-6">Linux进程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-23T13:50:14.000Z">2019-06-23</time></div>
+                    <a href="/post/d907dbe2.html" class="has-link-black-ter is-size-6">Python参考书籍</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T14:21:17.000Z">2019-06-20</time></div>
+                    <a href="/post/6dde8c87.html" class="has-link-black-ter is-size-6">PEP8风格指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time></div>
+                    <a href="/post/96cd1245.html" class="has-link-black-ter is-size-6">【Caffe】Caffe实战手写数字分类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">23</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">17</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RabbitMQ/">
+                        <span class="tag">RabbitMQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RocketMQ/">
+                        <span class="tag">RocketMQ</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c++</span>
+                        <span class="tag is-grey">22</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/caffe/">
+                        <span class="tag">caffe</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/darknet/">
+                        <span class="tag">darknet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/deeplearning/">
+                        <span class="tag">deeplearning</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/protobuf/">
+                        <span class="tag">protobuf</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ssh/">
+                        <span class="tag">ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stl/">
+                        <span class="tag">stl</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ubuntu/">
+                        <span class="tag">ubuntu</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/图像处理/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发编程/">
+                        <span class="tag">并发编程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源框架/">
+                        <span class="tag">开源框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/网站/">
+                        <span class="tag">网站</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源/">
+                        <span class="tag">资源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T10:34:23.000Z">2019-06-30</time></div>
+                    <a href="/post/117d9a0c.html" class="has-link-black-ter is-size-6">学会shell（一）基础篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-29T15:39:03.000Z">2019-06-29</time></div>
+                    <a href="/post/87698413.html" class="has-link-black-ter is-size-6">Linux进程</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-23T13:50:14.000Z">2019-06-23</time></div>
+                    <a href="/post/d907dbe2.html" class="has-link-black-ter is-size-6">Python参考书籍</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-20T14:21:17.000Z">2019-06-20</time></div>
+                    <a href="/post/6dde8c87.html" class="has-link-black-ter is-size-6">PEP8风格指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time></div>
+                    <a href="/post/96cd1245.html" class="has-link-black-ter is-size-6">【Caffe】Caffe实战手写数字分类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">23</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">17</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RabbitMQ/">
+                        <span class="tag">RabbitMQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RocketMQ/">
+                        <span class="tag">RocketMQ</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c++</span>
+                        <span class="tag is-grey">22</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/caffe/">
+                        <span class="tag">caffe</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/darknet/">
+                        <span class="tag">darknet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/deeplearning/">
+                        <span class="tag">deeplearning</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/protobuf/">
+                        <span class="tag">protobuf</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ssh/">
+                        <span class="tag">ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stl/">
+                        <span class="tag">stl</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ubuntu/">
+                        <span class="tag">ubuntu</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/图像处理/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发编程/">
+                        <span class="tag">并发编程</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源框架/">
+                        <span class="tag">开源框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/网站/">
+                        <span class="tag">网站</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源/">
+                        <span class="tag">资源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="学会shell（一）基础篇" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 深页&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
