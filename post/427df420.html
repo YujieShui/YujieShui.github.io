@@ -2,18 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: c - 深页</title>
+<title>学会shell（二）函数 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/c/index.html">
+    <meta name="description" content="通过上一节了解了 shell 中的变量，字符串和数学运算，这一节来聊一聊 shell 中的函数。假设我们要编写一个 shell 脚本，实现加减乘除的操作，思路就会是将加减乘除的操作各自定义成一个函数，一个函数将会用输入参数来接收我们要进行运算的数字，用函数体来做相应运算，并通过返回值来返回运算结果。 所以本节目标就是写出这样一个实现加减乘除功能的脚本。">
+<meta name="keywords" content="linux,shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学会shell（二）函数">
+<meta property="og:url" content="http://shuiyujie.com/post/427df420.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="通过上一节了解了 shell 中的变量，字符串和数学运算，这一节来聊一聊 shell 中的函数。假设我们要编写一个 shell 脚本，实现加减乘除的操作，思路就会是将加减乘除的操作各自定义成一个函数，一个函数将会用输入参数来接收我们要进行运算的数字，用函数体来做相应运算，并通过返回值来返回运算结果。 所以本节目标就是写出这样一个实现加减乘除功能的脚本。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-05T14:48:52.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="学会shell（二）函数">
+<meta name="twitter:description" content="通过上一节了解了 shell 中的变量，字符串和数学运算，这一节来聊一聊 shell 中的函数。假设我们要编写一个 shell 脚本，实现加减乘除的操作，思路就会是将加减乘除的操作各自定义成一个函数，一个函数将会用输入参数来接收我们要进行运算的数字，用函数体来做相应运算，并通过返回值来返回运算结果。 所以本节目标就是写出这样一个实现加减乘除功能的脚本。">
 
 
 
@@ -85,7 +90,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="学会shell（二）函数" height="28">
             
             </a>
         </div>
@@ -106,6 +111,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,33 +129,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">c</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-08T06:51:13.000Z">2019-06-08</time>
+                <time class="level-item has-text-grey" datetime="2019-07-04T14:25:44.000Z">2019-07-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 433 个字)
+                    9 分钟 读完 (大约 1351 个字)
                 </span>
                 
                 
@@ -155,460 +153,107 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/789284ab.html">目录-C/C++学习笔记</a>
+                学会shell（二）函数
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/C_and_C_plus_plus.jpg" alt="C/C++"></p>
-<p>C 语言学习笔记</p>
-<ul>
-<li><a href="https://shuiyujie.com/post/62b06016.html">C语言学习笔记-静态库、动态库的制作和使用</a></li>
-<li><a href="https://shuiyujie.com/post/24de7431.html">C语言学习笔记-写一个最简单的makefile</a></li>
-<li><a href="https://shuiyujie.com/post/fe52dfa7.html">C语言学习笔记-文件操作</a></li>
-<li><a href="https://shuiyujie.com/post/e261fd69.html">C语言学习笔记-结构体</a></li>
-<li><a href="https://shuiyujie.com/post/5c7372a9.html">C语言学习笔记-const关键字</a></li>
-<li><a href="https://shuiyujie.com/post/a99472bd.html">C语言学习笔记-字符串</a></li>
-<li><a href="https://shuiyujie.com/post/2f02c8ae.html">C语言学习笔记-指针01</a></li>
-</ul>
-<p>C++ 学习笔记</p>
-<ul>
-<li><a href="https://shuiyujie.com/post/824d7309.html">C++学习笔记-引用</a></li>
-<li><a href="https://shuiyujie.com/post/e95932f5.html">C++学习笔记-内联函数、默认参数和函数重载</a></li>
-<li><a href="https://shuiyujie.com/post/a51fdb12.html">C++学习笔记-构造函数、析构函数、拷贝构造函数</a></li>
-<li><a href="https://shuiyujie.com/post/cd8fc6b5.html">C++学习笔记-静态方法、静态函数、this指针</a></li>
-<li><a href="https://shuiyujie.com/post/5afabdd4.html">C++学习笔记-继承</a></li>
-<li><a href="https://shuiyujie.com/post/e7609a12.html">C++学习笔记-多态</a></li>
-</ul>
-<p>零散知识点</p>
-<ul>
-<li><a href="https://shuiyujie.com/post/b482364a.html">C/C++ 中的命令行参数</a></li>
-<li><a href="https://shuiyujie.com/post/d37b0970.html">C 语言-格式化输出函数 printf()</a></li>
-</ul>
-<p>STL 学习笔记</p>
-<ul>
-<li><a href="https://shuiyujie.com/post/543335f8.html">STL-STL基础概念</a></li>
-<li><a href="https://shuiyujie.com/post/2d250e1c.html">STL-string 容器</a></li>
-<li><a href="https://shuiyujie.com/post/39bf26c3.html">STL-vector 容器</a></li>
-<li><a href="https://shuiyujie.com/post/564ccba3.html">STL-deque 容器</a></li>
-<li><a href="https://shuiyujie.com/post/4244b416.html">STL-queue 容器</a></li>
-<li><a href="https://shuiyujie.com/post/ac4a7cfa.html">STL-stack 容器</a></li>
-<li><a href="https://shuiyujie.com/post/b0cfebdb.html">STL-list 容器</a></li>
-<li><a href="https://shuiyujie.com/post/adaa2861.html">STL-set and multiset</a></li>
-<li><a href="https://shuiyujie.com/post/8d66854b.html">STL-map and multimap</a></li>
-<li><a href="https://shuiyujie.com/post/b974f564.html">STL-常用算法</a></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-23T13:39:34.000Z">2019-05-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 153 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/d37b0970.html">C 语言-格式化输出函数 printf()</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong>printf  “格式字符串” 候选字符</strong></p>
-<table>
-<thead>
-<tr>
-<th>格式字符串</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>%d</td>
-<td>将整数转成十进制</td>
-</tr>
-<tr>
-<td>%f</td>
-<td>将整数转成浮点数</td>
-</tr>
-<tr>
-<td>%u</td>
-<td>十进制无符号整数</td>
-</tr>
-<tr>
-<td>%o</td>
-<td>将整数转成八进制</td>
-</tr>
-<tr>
-<td>%c</td>
-<td>将整数转成对应的 ASCII 字符</td>
-</tr>
-<tr>
-<td>%s</td>
-<td>将整数转成字符串</td>
-</tr>
-<tr>
-<td>%x</td>
-<td>整数转成小写十六进制</td>
-</tr>
-<tr>
-<td>%X</td>
-<td>整数转成大写十六进制</td>
-</tr>
-<tr>
-<td>%p</td>
-<td>输出</td>
-</tr>
-<tr>
-<td>%%</td>
-<td>输出百分比符号，不进行转换</td>
-</tr>
-</tbody>
-</table>
-<p><strong>printf 中特殊规定的字符</strong></p>
-<table>
-<thead>
-<tr>
-<th>规定字符</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\n</td>
-<td>换行操作</td>
-</tr>
-<tr>
-<td>\f</td>
-<td>清屏并换页</td>
-</tr>
-<tr>
-<td>\r</td>
-<td>回车</td>
-</tr>
-<tr>
-<td>\t</td>
-<td>Tab 符</td>
-</tr>
-<tr>
-<td>\xth</td>
-<td>用 16 进制表示的 ASCII 码</td>
-</tr>
-</tbody>
-</table>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-23T13:27:25.000Z">2019-05-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 194 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/b482364a.html">C/C++ 中的命令行参数</a>
-            
-        </h1>
-        <div class="content">
-            <p>C/C++ 中的 main 函数经常带有 argc, argv ,比如 <code>int main(int argc, char** argv)</code> 或者 <code>int main(int argc, char* argv[])</code>，其中 argc 表示我们从命令行键入的参数，argv[] 即为参数列表。</p>
-<p>Java 中的 <code>public static void main(String argc[])</code> 和 Python 中的 <code>sys.argv</code> 中也都带有命令行参数。</p>
-<p>通过命令行参数我们可以就能由 main 函数入口传递参数到程序内部。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/b482364a.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T07:45:09.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 1944 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/2f02c8ae.html">C语言学习笔记-指针01</a>
-            
-        </h1>
-        <div class="content">
-            <p>指针是 C 语言的灵魂，现在对于指针的掌握肯定是不透彻的，然学习是一个迭代的过程，姑且写出目前自己的理解。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/2f02c8ae.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T07:40:14.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 519 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/a99472bd.html">C语言学习笔记-字符串</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li>字符串初始化</li>
-<li>访问字符串</li>
-<li>字符串的拷贝</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/a99472bd.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T07:32:21.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 271 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/5c7372a9.html">C语言学习笔记-const关键字</a>
-            
-        </h1>
-        <div class="content">
-            <p>c语言中 const 关键字使用示例</p>
+            <p>通过<a href="https://shuiyujie.com/post/117d9a0c.html">上一节</a>了解了 shell 中的变量，字符串和数学运算，这一节来聊一聊 shell 中的函数。假设我们要编写一个 shell 脚本，实现加减乘除的操作，思路就会是将加减乘除的操作各自定义成一个函数，一个函数将会用输入参数来接收我们要进行运算的数字，用函数体来做相应运算，并通过返回值来返回运算结果。</p>
+<p>所以本节目标就是写出这样一个实现加减乘除功能的脚本。</p>
+<a id="more"></a>
+<h1 id="函数定义和使用"><a href="#函数定义和使用" class="headerlink" title="函数定义和使用"></a>函数定义和使用</h1><p>shell 中的函数有两种定义格式，使用任意一种都可以，我比较习惯用第二种形式。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name()</span><br><span class="line">&#123;</span><br><span class="line">	command1</span><br><span class="line">  command2</span><br><span class="line">  ...</span><br><span class="line">  commandn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function name</span><br><span class="line">&#123;</span><br><span class="line">	command1</span><br><span class="line">  command2</span><br><span class="line">  ...</span><br><span class="line">  commandn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们直接来 calculate.sh 这个脚本，用一个函数，使用条件判断来实现加减传给你出的操作。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"><span class="hljs-meta">#</span></span><br><span class="line">function calcu</span><br><span class="line">&#123;</span><br><span class="line">    case $2 in</span><br><span class="line">        +)</span><br><span class="line">            echo "`expr $1 + $3`"</span><br><span class="line">            ;;</span><br><span class="line">        -)</span><br><span class="line">            echo "`expr $1 - $3`"</span><br><span class="line">            ;;</span><br><span class="line">        \*)</span><br><span class="line">            echo "`expr $1 \* $3`"</span><br><span class="line">            ;;</span><br><span class="line">        /)</span><br><span class="line">            echo "`expr $1 / $3`"</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line">calcu $1 $2 $3</span><br></pre></td></tr></table></figure>
+<p>解释一下这个脚本：</p>
 <ol>
-<li>const 修饰的变量定义时要初始化，不初始化后面就没有办法赋值了</li>
-<li>const 运用在指针上</li>
-<li>c 语言中的 const 是个冒牌货，使用指针任然能够修改</li>
+<li>function calcu {…} 是 shell 函数的其中一种格式</li>
+<li><code>case $2 in</code>是一个判断语句，根据<code>$2</code>是 +, -, *, / 来执行相应操作</li>
+<li><code>$1 | $2 | $3</code>表示命令行键入的参数</li>
 </ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/5c7372a9.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T01:40:29.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 888 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/e261fd69.html">C语言学习笔记-结构体</a>
-            
-        </h1>
-        <div class="content">
-            <ul>
-<li><p>结构体的类型和定义</p>
-</li>
-<li><p>结构体的赋值</p>
-</li>
-<li><p>结构体的数组</p>
-</li>
-<li><p>结构体嵌套一级指针</p>
-</li>
-<li>结构体嵌套二级指针</li>
-<li>结构体作为函数参数</li>
-<li>结构体深拷贝、浅拷贝</li>
+<p>使用<code>./calculate 1 + 2</code>来执行这个脚本</p>
+<ol>
+<li>此时<code>$1 = 1</code>,<code>$2 = +</code>,<code>$3 = 2</code></li>
+<li>输出结果为 3</li>
+</ol>
+<p>总结：</p>
+<ol>
+<li>shell 中的函数有两种定义的形式</li>
+<li>shell 中使用 <code>$1</code>,<code>$2</code>这样的形式传递参数</li>
+</ol>
+<h1 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h1><p>函数一般包含函数名，函数体，参数列表，返回值。上面说到 shell 函数的定义方式，参数是如何传递的，我们还需要知道 shell 中的函数是怎么返回值的。</p>
+<p>shell 有两种返回值的方式，一种是使用<code>return</code>，一种是使用<code>echo</code>。</p>
+<ul>
+<li><p>使用<code>return</code></p>
+<ul>
+<li>使用 return 返回值，只能返回 1-255 的整数</li>
+<li>函数使用 return 返回值。通常只能用来供其他地方调用获取状态，因此通常仅返回0或1；0表示成功，1表示失败</li>
 </ul>
+</li>
+<li><p>使用<code>echo</code></p>
+<ul>
+<li>使用 echo 可以返回任何字符串结果</li>
+<li>通常用于返回数据，比如一个字符串值或者列表值</li>
+</ul>
+</li>
+</ul>
+<p>用两个例子来体会一下</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"><span class="hljs-meta">#</span></span><br><span class="line">this_pid=$$</span><br><span class="line">function is_nginx_running</span><br><span class="line">&#123;</span><br><span class="line">    ps -ef | grep nginx | grep -v grep | grep -v $this_pid &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        return</span><br><span class="line">    else</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line">is_nginx_running &amp;&amp; echo "Nginx is running" || echo "Nginx is stoped"</span><br></pre></td></tr></table></figure>
+<p>nginx.sh 采用 return 作为返回值的形式，它做了这样一件事情，使用 ps 命令并做过滤来检查系统中的 nginx 是否正常运行，将结果输出到 <code>/dev/null</code> 中。如果 nginx 在运行则会返回 0，反之返回 1。</p>
+<p>之后可以用后台挂起的形式运行这个脚本，将其作为 nginx 的守护进程：<code>nohup sh nginx.sh &amp;</code>，使用<code>tail -f nohup.out</code>来查看监听结果。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"><span class="hljs-meta">#</span></span><br><span class="line">function get_users</span><br><span class="line">&#123;</span><br><span class="line">    users=`cat /etc/passwd | cut -d: -f1`</span><br><span class="line">    echo $users</span><br><span class="line">&#125;</span><br><span class="line">user_list=`get_users`</span><br><span class="line">index=1</span><br><span class="line">for u in $user_list</span><br><span class="line">do</span><br><span class="line">    echo "The $index user is : $u"</span><br><span class="line">    index=$(($index+1))</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>第二个脚本 get_sys_user.sh 则是使用 echo 来返回字符串，它返回的是系统中的用户名。其中定义的 get_users 这个函数会将所有用户名返回给 user_list 这个变量，并在之后做遍历操作。</p>
+<h1 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h1><p><a href="https://shuiyujie.com/post/117d9a0c.html">上一节</a>中介绍了 shell 中的变量、变量匹配和特殊变量，这一节讲到函数不得不讲的就是局部变量和全局变量，进而就讲到了变量作用域的问题。</p>
+<ul>
+<li>全局变量 <ul>
+<li>不做特殊申明，shell 中变量都是全局变量 </li>
+<li>tips：大型脚本程序中函数中慎用全局变量 </li>
+</ul>
+</li>
+<li>局部变量 <ul>
+<li>定义变量时，使用 local 关键字 </li>
+<li>函数内和外若存在同名变量，则函数内部变量覆盖外部变量 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"><span class="hljs-meta">#</span></span><br><span class="line">var1="Hello world"</span><br><span class="line">function test</span><br><span class="line">&#123;</span><br><span class="line">    local var2=87</span><br><span class="line">&#125;</span><br><span class="line">test</span><br><span class="line">echo $var1</span><br><span class="line">echo $var2</span><br></pre></td></tr></table></figure>
+<p>运行一下<code>var.sh</code>体会一下即可。</p>
+<h1 id="函数库"><a href="#函数库" class="headerlink" title="函数库"></a>函数库</h1><p>最后，我们来实现最开始要实现的功能，就是将加减乘除各自封装成一个函数，需求描述如下： </p>
+<p>定义一个函数库，该函数库实现以下几个函数： </p>
+<ol>
+<li>加法函数 add </li>
+<li>减法函数 reduce </li>
+<li>乘法函数 multiple </li>
+<li>除法函数 divide </li>
+<li>打印系统运行情况的函数 sys_load，该函数显示内存运行情况， </li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function add</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 + $2`"</span><br><span class="line">&#125;</span><br><span class="line">function reduce</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 - $2`"</span><br><span class="line">&#125;</span><br><span class="line">function multiple</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 \* $2`"</span><br><span class="line">&#125;</span><br><span class="line">function divide</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 / $2`"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sys_load</span><br><span class="line">&#123;</span><br><span class="line">    echo "Memory Info"</span><br><span class="line">    echo</span><br><span class="line">    free -m</span><br><span class="line">    echo</span><br><span class="line">    </span><br><span class="line">    echo "Disk Usage"</span><br><span class="line">    echo</span><br><span class="line">    df -h</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将上面文件封装成一个函数库 lib/base_function。</p>
+<ul>
+<li>经常使用的重复代码封装成函数文件 </li>
+<li>一般不直接执行，而是由其他脚本调用 </li>
+</ul>
+<p>接着用一个 shell 脚本 calculate.sh 调用函数库中的函数</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/bash</span><br><span class="line"><span class="hljs-meta">#</span></span><br><span class="line">. /root/lesson/3.5/lib/base_function</span><br><span class="line">add 12 23</span><br><span class="line">reduce 90 30</span><br><span class="line">multiple 12 12</span><br><span class="line">divide 12 2</span><br></pre></td></tr></table></figure>
+<p>编写函数库文件的建议 </p>
+<ul>
+<li>库文件名的后缀是任意的，但一般使用 .lib </li>
+<li>库文件通常没有可执行选项 </li>
+<li>库文件无序和脚本在同级目录，只需在脚本中引用时指定 </li>
+<li>第一行一般使用 #/bin/echo, 输出警告信息，避免用户执行 </li>
+</ul>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/e261fd69.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/linux/">linux</a>, <a class="has-link-grey -link" href="/tags/shell/">shell</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -618,165 +263,19 @@
 
 
 
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T01:11:29.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1028 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/117d9a0c.html">
+                <span class="level-item">学会shell（一）基础篇</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/fe52dfa7.html">C语言学习笔记-文件操作</a>
-            
-        </h1>
-        <div class="content">
-            <p>C语言中我们使用一个指针变量指向一个文件，这个文件就是文件指针。这个文件指针就是 FILE 结构体，它被包含在头文件 “stdio.h” 中。拿到文件指针再结合文件操作的 API，我们就可以对文件进行读写操作。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/fe52dfa7.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-11T00:58:12.000Z">2019-05-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 346 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/24de7431.html">C语言学习笔记-写一个最简单的makefile</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="http://image.shuiyujie.com/makefile.png" alt="makefile思维导图"></p>
-<p><a href="https://github.com/YujieShui/up-up-c/tree/master/how_to_write_makefile" target="_blank" rel="noopener">示例代码</a></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/24de7431.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-02T08:22:20.000Z">2019-05-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 780 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/62b06016.html">C语言学习笔记-静态库、动态库的制作和使用</a>
-            
-        </h1>
-        <div class="content">
-            <p>本文将介绍 C 语言静态库和动态库制作和使用的过程，系统环境是 Ubuntu16.04，其他系统制作方法可能略有差别。</p>
-<p><a href="https://github.com/YujieShui/up-up-c/tree/master/how_to_make_lib" target="_blank" rel="noopener">示例代码</a></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/62b06016.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -857,6 +356,33 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#函数定义和使用">
+        <span class="has-mr-6">1</span>
+        <span>函数定义和使用</span>
+        </a></li><li>
+        <a class="is-flex" href="#函数返回值">
+        <span class="has-mr-6">2</span>
+        <span>函数返回值</span>
+        </a></li><li>
+        <a class="is-flex" href="#局部变量和全局变量">
+        <span class="has-mr-6">3</span>
+        <span>局部变量和全局变量</span>
+        </a></li><li>
+        <a class="is-flex" href="#函数库">
+        <span class="has-mr-6">4</span>
+        <span>函数库</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1895,7 +1421,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="学会shell（二）函数" height="28">
                 
                 </a>
                 <p class="is-size-7">
