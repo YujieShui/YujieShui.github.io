@@ -126,7 +126,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-04T14:25:44.000Z">2019-07-04</time>
+                <time class="level-item has-text-grey" datetime="2019-07-21T14:22:05.000Z">2019-07-21</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
@@ -136,7 +136,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1351 个字)
+                    1 小时 读完 (大约 6920 个字)
                 </span>
                 
                 
@@ -145,72 +145,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/427df420.html">学会shell（二）函数</a>
+                <a class="has-link-black-ter" href="/post/92782b0b.html">学习shell编程</a>
             
         </h1>
         <div class="content">
-            <p>通过<a href="https://shuiyujie.com/post/117d9a0c.html">上一节</a>了解了 shell 中的变量，字符串和数学运算，这一节来聊一聊 shell 中的函数。假设我们要编写一个 shell 脚本，实现加减乘除的操作，思路就会是将加减乘除的操作各自定义成一个函数，一个函数将会用输入参数来接收我们要进行运算的数字，用函数体来做相应运算，并通过返回值来返回运算结果。</p>
-<p>所以本节目标就是写出这样一个实现加减乘除功能的脚本。</p>
+            <p><img src="http://image.shuiyujie.com/hacker-2300772_1920.jpg" alt="学习shell编程"></p>
+<p><em>题图：<a href="https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/" target="_blank" rel="noopener">https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/</a></em></p>
+<p>在正式开始说一说 shell 之前，我们需要先来聊一聊 <strong>shell 和 shell script 的概念</strong>。我们知道计算机的运行离不开硬件，并且我们通过操作系统（OS，Operating System）操作硬件，而我们所说的 linux 严格来说是操作系统（OS）的核心部分——内核（Kernel）。然而，我们依然无法直接操作 kernel，而是借助于 kernel 外的一层壳 shell 与 kernel 进行交互。我看到过一个比较形象的比喻是将 shell、kernel 和 OS 比作前台、管理层和公司，我们通过前台来联系管理层，进而运转整个公司。 </p>
+<p>当然前台（shell）和管理层（kernel）都是可以替换的，不同的 OS 可以使用不同的 kernel，在 kernel 外也可以使用不同的 shell，如果你想知道你的系统中用到的是什么 shell 可以访问 /etc/shells 文件。 </p>
+<p>shell script 指的是为 shell 写的脚本，一般是 .sh 结尾的文件，我们一般说的 shell 通常也是指 shell 脚本，而不是 shell 本身。 </p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/427df420.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-30T10:34:23.000Z">2019-06-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1762 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/117d9a0c.html">学会shell（一）基础篇</a>
-            
-        </h1>
-        <div class="content">
-            <p>shell 脚本是包含一系列命令的文件，通过命令组合可以完成一系列的任务。shell 脚本以<code>.sh</code>结尾的文件，和其他脚本语言一样，shell 脚本需要解释器来运行脚本，一般是<code>/bin/sh</code>或者<code>/bin/bash</code>。</p>
-<p>创建一个脚本的流程一般是：编写脚本，赋予脚本可执行权限，运行脚本。当然这样讲很抽象，接下来会先编写一个 shell 脚本的小例子，然后就 shell 中的变量、字符串、命令替换这三个基础概念进行说明。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/117d9a0c.html#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/post/92782b0b.html#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -697,6 +647,59 @@
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-08T04:15:12.000Z">2019-06-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 571 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/8d66854b.html">STL-map and multimap</a>
+            
+        </h1>
+        <div class="content">
+            <p>map 以键值对的形式存储数据，所有元素根据键值自动排序。pair 的第 一元素被称为键值，第二元素被称为实值。map 也是以红黑树为底层实现机制。</p>
+<p>map 和 multimap 区别在于，map 不允许相同 key 值存在，multimap 则允许相同 key 值存在。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/post/8d66854b.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -763,7 +766,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        66
+                        65
                     </p>
                 </div>
             </div>
@@ -865,7 +868,7 @@
                 <span class="level-item">Linux</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/OpenCV/">
@@ -919,7 +922,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.67px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.33px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 11.67px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 16.67px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.33px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.67px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.67px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.33px;">消息队列</a> <a href="/tags/网站/" style="font-size: 10px;">网站</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.43px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 18.57px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 11.43px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/java/" style="font-size: 18.57px;">java</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.71px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 14.29px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.86px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 18.57px;">stl</a> <a href="/tags/ubuntu/" style="font-size: 11.43px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.43px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.43px;">图像处理</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.43px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.43px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 12.86px;">消息队列</a> <a href="/tags/网站/" style="font-size: 10px;">网站</a>
     </div>
 </div>
 
@@ -938,21 +941,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-04T14:25:44.000Z">2019-07-04</time></div>
-                    <a href="/post/427df420.html" class="has-link-black-ter is-size-6">学会shell（二）函数</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T10:34:23.000Z">2019-06-30</time></div>
-                    <a href="/post/117d9a0c.html" class="has-link-black-ter is-size-6">学会shell（一）基础篇</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T14:22:05.000Z">2019-07-21</time></div>
+                    <a href="/post/92782b0b.html" class="has-link-black-ter is-size-6">学习shell编程</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
                     </p>
@@ -999,6 +989,19 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time></div>
+                    <a href="/post/96cd1245.html" class="has-link-black-ter is-size-6">【Caffe】Caffe实战手写数字分类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1028,7 +1031,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">22</span>
+                    <span class="level-item tag">21</span>
                 </span>
             </a>
         </li>
@@ -1214,7 +1217,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1270,7 +1273,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/shell/">
                         <span class="tag">shell</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1385,21 +1388,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-04T14:25:44.000Z">2019-07-04</time></div>
-                    <a href="/post/427df420.html" class="has-link-black-ter is-size-6">学会shell（二）函数</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-30T10:34:23.000Z">2019-06-30</time></div>
-                    <a href="/post/117d9a0c.html" class="has-link-black-ter is-size-6">学会shell（一）基础篇</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T14:22:05.000Z">2019-07-21</time></div>
+                    <a href="/post/92782b0b.html" class="has-link-black-ter is-size-6">学习shell编程</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
                     </p>
@@ -1446,6 +1436,19 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time></div>
+                    <a href="/post/96cd1245.html" class="has-link-black-ter is-size-6">【Caffe】Caffe实战手写数字分类</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1475,7 +1478,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">22</span>
+                    <span class="level-item tag">21</span>
                 </span>
             </a>
         </li>
@@ -1661,7 +1664,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1717,7 +1720,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/shell/">
                         <span class="tag">shell</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
