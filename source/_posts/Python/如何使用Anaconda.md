@@ -30,6 +30,8 @@ Conda 安装了预编译的包。例如，Anaconda 发行版附带了使用 [MKL
 
 Anaconda 可用于 Windows、Mac OS X 和 Linux。可以在 <https://docs.anaconda.com/anaconda/install/> 上找到安装程序和安装说明。
 
+此外，和我一样使用 Ubuntu 的朋友参考这两篇优秀的文章：[How To Install the Anaconda Python Distribution on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-anaconda-python-distribution-on-ubuntu-16-04) 和 [How to Install Anaconda on Ubuntu 18.04](https://linuxize.com/post/how-to-install-anaconda-on-ubuntu-18-04/)。
+
 完成安装后，会自动进入默认的 conda 环境，而且所有包均已安装完毕，如下面所示。可以在终端或命令提示符中键入 `conda list`，以查看你安装的内容。
 
 ![conda list](http://image.shuiyujie.com/2019-03-20-19-57-17.png)

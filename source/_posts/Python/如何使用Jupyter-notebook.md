@@ -47,6 +47,18 @@ Notebook 运行的核心是 notebook 服务器。你通过浏览器连接到该�
 
 通过在终端中按两次 Ctrl + C，可以关闭整个服务器。再次提醒，这会立即关闭所有运行中的 notebook，因此，请确保你保存了工作！
 
+## 远程运行 notebook
+
+如果你想在本地或者远程的机器上安装Jupyter Notebook，可以参考下面的两个文档。
+
+安装：https://jupyter.org/install.html
+
+运行：https://jupyter.readthedocs.io/en/latest/running.html#running
+
+后台运行使用 `jupyter notebook --allow-root > jupyter.log 2>&1 &`或者 `nohup jupyter notebook --allow-root > jupyter.log 2>&1 &`。
+
+用`&`让命令后台运行, 并把标准输出写入 jupyter.log 中。`nohup`表示no hang up, 就是不挂起, 于是这个命令执行后即使终端退出, 也不会停止运行.
+
 # Notebook 界面
 
 ## Cell
@@ -74,6 +86,12 @@ Cell 可以称为*单元格*。单元格是你编写和运行代码的地方。
 小键盘符号代表命令面板。点击它会弹出一个带有搜索栏的面板，供你搜索不同的命令。这能切实帮助你加快工作速度，因为你无需使用鼠标翻查各个菜单。你只需打开命令面板，然后键入要执行的操作。
 
 ![命令面板](http://image.shuiyujie.com/2019-03-21-07-50-18.png)
+
+## 生成目录
+
+> conda install -c conda-forge jupyter_contrib_nbextensions
+
+在 Nbexyensions 选项卡中开启 Table of Contents(2) 选项，即可在侧边栏生成目录。
 
 # 快捷键
 
@@ -239,5 +257,20 @@ jupyter nbconvert --to html notebook.ipynb
 要将 notebook 与不使用 notebook 的其他人共享，转换为 HTML 很有用。而要在博客和其他接受 Markdown 格式化的文本编辑器中加入 notebook，Markdown 很合适。
 
 像平常一样，要详细了解 `nbconvert`，请阅读相关[文档](https://nbconvert.readthedocs.io/en/latest/usage.html)。
+
+# 更好地使用
+
+现在的技术趋势，则是彻底云端化了，例如Jupyter官方的Binder平台（介绍文 档：https://mybinder.readthedocs.io/en/latest/index.html）和Google提供的 Google Colab环境（介 绍：https://colab.research.google.com/notebooks/welcome.ipynb）。它们让Jupyter Notebook变得和石墨文档、Google Doc在线文档一样，在浏览器点开链接就能运行。
+
+所以，现在当你用Binder打开一份GitHub上的Jupyter Notebook时，你不需要安装任何软件，直接在浏览器 打开一份代码，就能在云端运行。
+
+比如这样一个[GitHub文件](https://github.com/binder-examples/python2_with_3/blob/master/index3.ipynb)。在[Binder](https://mybinder.org/)中，你只要输入其对应的GitHub Repository的名字或者URL，就能在 云端打开整个Repository，选择你需要的[notebook](https://mybinder.org/v2/gh/binder-examples/python2_with_3/master?filepath=index3.ipynb)。
+
+另外，还有下面这些 Jupyter Notebook，可以作为实践的第一站。
+
+第一个是Jupyter官方：https://mybinder.org/v2/gh/binder-examples/matplotlib-versions/mpl-v2.0/?filepath=matplotlib_versions_demo.ipynb
+
+第二个是Google Research提供的Colab环境，尤其适合机器学习的实践应 用：https://colab.research.google.com/notebooks/basic_features_overview.ipynb
+
 
 

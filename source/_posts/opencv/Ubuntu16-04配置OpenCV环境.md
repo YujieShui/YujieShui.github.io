@@ -59,9 +59,12 @@ opencv/
 
 1. 点击 Browse_Source... 引入 opencv-3.4.0 文件夹 
 2. 点击 Browse_Build... 引入 build 文件夹 
-3. 点击 Configure 
-4. 点击 Generate 
-5. 弹出如下对话框，选择使用Makefile生成的系统平台 
+3. 不想编译 protobuf 可以选择 `-D BUILD_PROTOBUF=OFF PROTOBUF_UPDATE_FILES=ON`
+4. dnn 也会依赖 protobuf 也可以选择不编译
+5. cuda 相关的用不到也不可以不编译
+6. 点击 Configure 
+7. 点击 Generate 
+8. 弹出如下对话框，选择使用Makefile生成的系统平台 
 
 ```
 注：

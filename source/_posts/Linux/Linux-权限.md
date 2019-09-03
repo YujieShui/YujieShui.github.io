@@ -127,9 +127,3 @@ chmod u+x haha.dat      表示将haha.dat对所属用户的权限增加x
 > 修改成   rw-rw-r--
 
 一些人喜欢使用八进制表示法，而另一些人则非常喜欢符号表示法。符号表示法的优点是， 允许你设置文件模式的某个属性，而不影响其他的属性。
-
-# 更多
-
-[权限](http://billie66.github.io/TLCL/book/chap10.html)
-[Linux 用户和用户组管理](http://www.runoob.com/linux/linux-user-manage.html)
-

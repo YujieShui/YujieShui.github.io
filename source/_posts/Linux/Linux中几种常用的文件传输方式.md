@@ -5,7 +5,6 @@ categories:
   - Linux
 tags:
   - linux
-  - 文件传输
 abbrlink: a6fc1711
 date: 2018-01-21 20:14:35
 ---

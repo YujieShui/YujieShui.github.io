@@ -40,7 +40,7 @@ transform(iterator beg1, iterator end1, iterator beg2, _callbakc)
 
 
 
-#查找算法 
+# 查找算法
 
 ```c++
 /*
