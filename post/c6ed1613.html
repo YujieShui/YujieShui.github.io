@@ -17,8 +17,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.shuiyujie.com/tensorflow2_coming_soon">
 <meta property="og:image" content="http://image.shuiyujie.com/mnist_front_forward.gif">
-<meta property="og:image" content="http://image.shuiyujie.com/tensorflow_keras.jpeg">
-<meta property="og:updated_time" content="2019-09-05T14:04:32.571Z">
+<meta property="og:image" content="http://image.shuiyujie.com/mnist_in_csv.png">
+<meta property="og:updated_time" content="2019-09-05T14:10:02.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【TensorFlow2.0】手撕前向传播算法">
 <meta name="twitter:description" content="本文介绍如何使用 TensorFlow2.0 实现前向传播,先介绍用 TensorFlow 普通的 API 来实现前向传播,将会介绍:如何加载数据集,如何完成参数初始化和构建前向传播网络,如何计算 accuracy. 由于神经网络的训练流程大同小异,就可以使用 tf.keras 封装的 API 来简化模型训练和测试的流程.本文第二部分将会介绍如何使用 tf.keras 来定义神经网络以及优化器,">
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1947 个字)
+                    13 分钟 读完 (大约 1948 个字)
                 </span>
                 
                 
@@ -180,7 +180,7 @@
 <h2 id="前向传播-amp-自动求导"><a href="#前向传播-amp-自动求导" class="headerlink" title="前向传播 &amp; 自动求导"></a>前向传播 &amp; 自动求导</h2><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 学习率</span></span><br><span class="line">lr = <span class="hljs-number">1e-3</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># train_db 将会被计算 10 次</span></span><br><span class="line"><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>): <span class="hljs-comment"># iterate db for 10</span></span><br><span class="line">    <span class="hljs-comment"># 遍历 train_db</span></span><br><span class="line">    <span class="hljs-keyword">for</span> step, (x, y) <span class="hljs-keyword">in</span> enumerate(train_db, <span class="hljs-number">1</span>):</span><br><span class="line">        <span class="hljs-comment"># x:[128,28,28]</span></span><br><span class="line">        <span class="hljs-comment"># y:[128]</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># 将28x28的张量展开成784</span></span><br><span class="line">        <span class="hljs-comment"># x:[128,28,28] =&gt; [128,784]</span></span><br><span class="line">        x = tf.reshape(x, [<span class="hljs-number">-1</span>,<span class="hljs-number">28</span>*<span class="hljs-number">28</span>])</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># 使用 tf.GradientTape() 自动求导</span></span><br><span class="line">        <span class="hljs-keyword">with</span> tf.GradientTape() <span class="hljs-keyword">as</span> tape:</span><br><span class="line">            <span class="hljs-comment"># 构建前向传播的网络</span></span><br><span class="line">            <span class="hljs-comment"># x:[b,28*28]</span></span><br><span class="line">            <span class="hljs-comment"># h1 = x@w1+b1</span></span><br><span class="line">            <span class="hljs-comment"># [b,784]@[784,256]+[256] =&gt; [b,256] + [256] =&gt; []</span></span><br><span class="line">            h1 = tf.nn.relu(x@w1 + b1)</span><br><span class="line">            h2 = tf.nn.relu(h1@w2 + b2)</span><br><span class="line">            out = h2@w3 + b3</span><br><span class="line">			</span><br><span class="line">            <span class="hljs-comment"># y 使用 one_hot 编码,与神经网络的输出对应</span></span><br><span class="line">            <span class="hljs-comment"># y: [b] =&gt; [b, 10]</span></span><br><span class="line">            y_onehot = tf.one_hot(y, depth=<span class="hljs-number">10</span>)</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment"># 计算均方误差 mse = mean(sum(y-out)^2)</span></span><br><span class="line">            <span class="hljs-comment"># loss:[b,10]</span></span><br><span class="line">            loss = tf.square(y_onehot-out)</span><br><span class="line">            <span class="hljs-comment"># 求误差的请平均值</span></span><br><span class="line">            <span class="hljs-comment"># loss:[b,10] =&gt; scalar</span></span><br><span class="line">            loss = tf.reduce_mean(loss)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># 借助于 tensorflow 自动求导</span></span><br><span class="line">        grads = tape.gradient(loss, [w1, b1, w2, b2, w3, b3])</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># 根据梯度更新参数</span></span><br><span class="line">        <span class="hljs-comment"># w1 = w1 - lr * w1_grad</span></span><br><span class="line">        w1.assign_sub(lr * grads[<span class="hljs-number">0</span>])</span><br><span class="line">        b1.assign_sub(lr * grads[<span class="hljs-number">1</span>])</span><br><span class="line">        w2.assign_sub(lr * grads[<span class="hljs-number">2</span>])</span><br><span class="line">        b2.assign_sub(lr * grads[<span class="hljs-number">3</span>])</span><br><span class="line">        w3.assign_sub(lr * grads[<span class="hljs-number">4</span>])</span><br><span class="line">        b3.assign_sub(lr * grads[<span class="hljs-number">5</span>])</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># 每迭代100次输出一次loss</span></span><br><span class="line">        <span class="hljs-keyword">if</span> step % <span class="hljs-number">100</span> == <span class="hljs-number">0</span>:</span><br><span class="line">            print(epoch+<span class="hljs-number">1</span>, (epoch+<span class="hljs-number">1</span>)*step, <span class="hljs-string">'loss:'</span>, float(loss))</span><br></pre></td></tr></table></figure>
 <h2 id="计算准确率-accuracy"><a href="#计算准确率-accuracy" class="headerlink" title="计算准确率 accuracy"></a>计算准确率 accuracy</h2><p>我们需要通过模型的准确率来评估模型,模型评估需要在 test_db 上进行.</p>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">total_number = <span class="hljs-number">0</span></span><br><span class="line">   total_correct = <span class="hljs-number">0</span></span><br><span class="line">   <span class="hljs-comment"># 遍历 test_db</span></span><br><span class="line">   <span class="hljs-keyword">for</span> step, (x, y) <span class="hljs-keyword">in</span> enumerate(test_db):</span><br><span class="line">	</span><br><span class="line">       <span class="hljs-comment"># [b, 28, 28] =&gt; [b, 28*28]</span></span><br><span class="line">       x = tf.reshape(x,[<span class="hljs-number">-1</span>,<span class="hljs-number">28</span>*<span class="hljs-number">28</span>])</span><br><span class="line">       </span><br><span class="line">       <span class="hljs-comment"># 利用最新的参数完成一次前向传播</span></span><br><span class="line">       <span class="hljs-comment"># [b, 784] =&gt; [b, 256] =&gt; [b, 128] =&gt; [b, 10]</span></span><br><span class="line">       h1 = tf.nn.relu(x@w1 + b1)</span><br><span class="line">       h2 = tf.nn.relu(h1@w2 + b2)</span><br><span class="line">       out = h2@w3 + b3</span><br><span class="line"></span><br><span class="line">       <span class="hljs-comment"># 使用 softmax() 输出每个分类的概率值</span></span><br><span class="line">       <span class="hljs-comment"># [b, 10] ~ R</span></span><br><span class="line">       <span class="hljs-comment"># [b, 10] ~ [0,1]</span></span><br><span class="line">       prob = tf.nn.softmax(out, axis=<span class="hljs-number">1</span>)</span><br><span class="line">       </span><br><span class="line">       <span class="hljs-comment"># 概率最大的值就是模型的预测值</span></span><br><span class="line">       <span class="hljs-comment"># [b, 10] =&gt; [b]</span></span><br><span class="line">       preb = tf.argmax(prob, axis=<span class="hljs-number">1</span>)</span><br><span class="line">       preb = tf.cast(preb, dtype=tf.int32)</span><br><span class="line">       </span><br><span class="line">       <span class="hljs-comment"># 预测值与真实值比较</span></span><br><span class="line">       <span class="hljs-comment"># [b] int32</span></span><br><span class="line">       <span class="hljs-comment"># print(y.dtype, preb.dtype)</span></span><br><span class="line">       correct = tf.cast(tf.equal(y, preb), dtype=tf.int32)</span><br><span class="line">       correct = tf.reduce_sum(correct)</span><br><span class="line">       total_correct += int(correct)</span><br><span class="line">       total_number += x.shape[<span class="hljs-number">0</span>]</span><br><span class="line"></span><br><span class="line">   acc = total_correct / total_number</span><br><span class="line">   print(<span class="hljs-string">"accuracy:"</span>, acc)</span><br></pre></td></tr></table></figure>
-<h1 id="前向传播过程优化"><a href="#前向传播过程优化" class="headerlink" title="前向传播过程优化"></a>前向传播过程优化</h1><p><img src="http://image.shuiyujie.com/tensorflow_keras.jpeg" alt="tensorflow and keras"></p>
+<h1 id="前向传播过程优化"><a href="#前向传播过程优化" class="headerlink" title="前向传播过程优化"></a>前向传播过程优化</h1><p><img src="http://image.shuiyujie.com/mnist_in_csv.png" alt="mnist in csv"></p>
 <h2 id="构建数据集时添加数据预处理"><a href="#构建数据集时添加数据预处理" class="headerlink" title="构建数据集时添加数据预处理"></a>构建数据集时添加数据预处理</h2><p>Tensorflow 鼓励使用 <code>tf.data.Dataset</code>加载数据集,它给我封装了许多处理数据集的方法,比如<code>train_db = train_db.map(preprocess).shuffle(60000).batch(128)</code></p>
 <p>在<code>preprocess(x,y)</code>中进行数据预处理,利用<code>map(preprocess)</code>调用预处理函数,再用<code>shuffle()</code>随机成对打乱数据集,最后用<code>batch()</code>将数据集按照 128 一份来分隔.</p>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">preprocess</span><span class="hljs-params">(x, y)</span>:</span></span><br><span class="line">    <span class="hljs-comment"># 数据预处理,归一化,类型转换</span></span><br><span class="line">    x = tf.cast(x, dtype=tf.float32) / <span class="hljs-number">255.</span></span><br><span class="line">    y = tf.cast(y, dtype=tf.int32)</span><br><span class="line">    <span class="hljs-keyword">return</span> x,y</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># x: [60000,28,28], x_test:[10000,28,28]</span></span><br><span class="line"><span class="hljs-comment"># y: [60000], y_test:[10000]</span></span><br><span class="line">(x, y), (x_text, y_text) = datasets.mnist.load_data()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># tensor =&gt; datasets</span></span><br><span class="line">train_db = tf.data.Dataset.from_tensor_slices((x,y))</span><br><span class="line">train_db = train_db.map(preprocess).shuffle(<span class="hljs-number">60000</span>).batch(<span class="hljs-number">128</span>)</span><br><span class="line"></span><br><span class="line">test_db = tf.data.Dataset.from_tensor_slices((x_text,y_text))</span><br><span class="line">test_db = test_db.map(preprocess).shuffle(<span class="hljs-number">10000</span>).batch(<span class="hljs-number">128</span>)</span><br></pre></td></tr></table></figure>
@@ -211,6 +211,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/714434fb.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">【Java并发编程】Java 中如何创建线程？</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -267,7 +274,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        67
+                        69
                     </p>
                 </div>
             </div>
@@ -416,7 +423,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">11</span>
+                <span class="level-item tag">13</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
@@ -478,7 +485,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.43px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17.14px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 12.86px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 18.57px;">java</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.71px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.86px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 14.29px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17.14px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.43px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.43px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.43px;">图像处理</a> <a href="/tags/工具/" style="font-size: 11.43px;">工具</a> <a href="/tags/并发编程/" style="font-size: 11.43px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.43px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 14.29px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.43px;">网站</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.25px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.25px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 12.5px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 18.75px;">java</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.75px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.25px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.25px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.25px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.25px;">图像处理</a> <a href="/tags/工具/" style="font-size: 11.25px;">工具</a> <a href="/tags/并发编程/" style="font-size: 13.75px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.25px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.75px;">消息队列</a> <a href="/tags/网站/" style="font-size: 11.25px;">网站</a>
     </div>
 </div>
 
@@ -492,6 +499,32 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-07T10:28:41.000Z">2019-09-07</time></div>
+                    <a href="/post/f7a60bf6.html" class="has-link-black-ter is-size-6">【Java并发编程】Java内存模型</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-05T14:21:53.000Z">2019-09-05</time></div>
+                    <a href="/post/714434fb.html" class="has-link-black-ter is-size-6">【Java并发编程】Java 中如何创建线程？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -532,32 +565,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-29T15:39:03.000Z">2019-06-29</time></div>
-                    <a href="/post/87698413.html" class="has-link-black-ter is-size-6">Linux进程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time></div>
-                    <a href="/post/96cd1245.html" class="has-link-black-ter is-size-6">【Caffe】Caffe实战手写数字分类</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -576,7 +583,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -817,7 +824,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -950,7 +957,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/并发编程/">
                         <span class="tag">并发编程</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1002,6 +1009,32 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-07T10:28:41.000Z">2019-09-07</time></div>
+                    <a href="/post/f7a60bf6.html" class="has-link-black-ter is-size-6">【Java并发编程】Java内存模型</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-05T14:21:53.000Z">2019-09-05</time></div>
+                    <a href="/post/714434fb.html" class="has-link-black-ter is-size-6">【Java并发编程】Java 中如何创建线程？</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-05T13:55:06.000Z">2019-09-05</time></div>
                     <a href="/post/c6ed1613.html" class="has-link-black-ter is-size-6">【TensorFlow2.0】手撕前向传播算法</a>
                     <p class="is-size-7 is-uppercase">
@@ -1037,32 +1070,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-29T15:39:03.000Z">2019-06-29</time></div>
-                    <a href="/post/87698413.html" class="has-link-black-ter is-size-6">Linux进程</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time></div>
-                    <a href="/post/96cd1245.html" class="has-link-black-ter is-size-6">【Caffe】Caffe实战手写数字分类</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1081,7 +1088,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1322,7 +1329,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">13</span>
                     </a>
                 </div>
                 
@@ -1455,7 +1462,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/并发编程/">
                         <span class="tag">并发编程</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
