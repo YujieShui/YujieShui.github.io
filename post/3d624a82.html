@@ -2,18 +2,26 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>归档 - 深页</title>
+<title>【Java并发编程】死锁 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/archives/page/6/index.html">
+    <meta name="description" content="我们来想象一个场景。现在你是清朝末年账房里的一个先生，张三要给李四转4两银子，你从柜台取过张三的账本，发现李四的账本不在了，于是你想先留着张三的账本，等会儿再去柜台看看李四的账本别人用完没。 没成想，李四想着给张三转5两银子，另一个账房先生和你同时取了李四的账本。你俩想法一样，他留着李四的账本，等着一会儿去拿张三的账本。 现在的局面正是俩人互相「死等」对方的账本，在代码的世界，这种局面就叫做「死">
+<meta name="keywords" content="java,并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Java并发编程】死锁">
+<meta property="og:url" content="http://shuiyujie.com/post/3d624a82.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="我们来想象一个场景。现在你是清朝末年账房里的一个先生，张三要给李四转4两银子，你从柜台取过张三的账本，发现李四的账本不在了，于是你想先留着张三的账本，等会儿再去柜台看看李四的账本别人用完没。 没成想，李四想着给张三转5两银子，另一个账房先生和你同时取了李四的账本。你俩想法一样，他留着李四的账本，等着一会儿去拿张三的账本。 现在的局面正是俩人互相「死等」对方的账本，在代码的世界，这种局面就叫做「死">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/martha-dominguez-de-gouveia-FjRNGCLnmV0-unsplash.jpg">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-07-23-17-54.png">
+<meta property="og:updated_time" content="2019-09-07T15:58:01.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="【Java并发编程】死锁">
+<meta name="twitter:description" content="我们来想象一个场景。现在你是清朝末年账房里的一个先生，张三要给李四转4两银子，你从柜台取过张三的账本，发现李四的账本不在了，于是你想先留着张三的账本，等会儿再去柜台看看李四的账本别人用完没。 没成想，李四想着给张三转5两银子，另一个账房先生和你同时取了李四的账本。你俩想法一样，他留着李四的账本，等着一会儿去拿张三的账本。 现在的局面正是俩人互相「死等」对方的账本，在代码的世界，这种局面就叫做「死">
+<meta name="twitter:image" content="http://image.shuiyujie.com/martha-dominguez-de-gouveia-FjRNGCLnmV0-unsplash.jpg">
 
 
 
@@ -85,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="【Java并发编程】死锁" height="28">
             
             </a>
         </div>
@@ -106,6 +114,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -119,248 +131,114 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-07T14:57:54.000Z">2019-09-07</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-19T03:03:47.000Z">2019-02-19</time>
-                        <a href="/post/3c98ab20.html" class="has-link-black-ter is-size-6">SpringBoot 错误处理页</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-02-19T03:00:47.000Z">2019-02-19</time>
-                        <a href="/post/f0ba9e07.html" class="has-link-black-ter is-size-6">SpringBoot 配置文件及其读取</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-26T03:03:47.000Z">2019-01-26</time>
-                        <a href="/post/579f9aa4.html" class="has-link-black-ter is-size-6">并发编程的优缺点</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1082 个字)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                【Java并发编程】死锁
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://image.shuiyujie.com/martha-dominguez-de-gouveia-FjRNGCLnmV0-unsplash.jpg" alt="题图:https://unsplash.com/photos/FjRNGCLnmV0"></p>
+<p>我们来想象一个场景。现在你是清朝末年账房里的一个先生，张三要给李四转4两银子，你从柜台取过张三的账本，发现李四的账本不在了，于是你想先留着张三的账本，等会儿再去柜台看看李四的账本别人用完没。</p>
+<p>没成想，李四想着给张三转5两银子，另一个账房先生和你同时取了李四的账本。你俩想法一样，他留着李四的账本，等着一会儿去拿张三的账本。</p>
+<p>现在的局面正是俩人互相「死等」对方的账本，在代码的世界，这种局面就叫做「死锁」。死锁用书面点的方法来说就是：<strong>一组互相竞争的线程互相等待，导致「永久」阻塞的现象。</strong></p>
+<a id="more"></a>
+<h1 id="死锁的局面"><a href="#死锁的局面" class="headerlink" title="死锁的局面"></a>死锁的局面</h1><p>我们现在设法用代买来描述「死锁」的局面。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> balance;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 转账</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">transfer</span><span class="hljs-params">(Account target, <span class="hljs-keyword">int</span> amt)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 锁定转出账户</span></span><br><span class="line">        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>)&#123;</span><br><span class="line">            <span class="hljs-comment">// 锁定转入账户</span></span><br><span class="line">            <span class="hljs-keyword">synchronized</span> (target)&#123;</span><br><span class="line">                <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.balance &gt; amt)&#123;</span><br><span class="line">                    <span class="hljs-keyword">this</span>.balance -= amt;</span><br><span class="line">                    target.balance += amt;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们现在有一个账户类 Account，<code>transfer()</code>是一个转账的方法，它将当前对象的钱转到目标账户中。为了保证<code>transfer()</code>能够并发执行而不出现问题，我们给采用<strong>细粒度锁</strong>，即对资源<code>this</code>和<code>target</code>分别加上了锁，情况如下图所示：</p>
+<p><img src="http://image.shuiyujie.com/2019-09-07-23-17-54.png" alt="死锁的局面"></p>
+<p>当线程 T1 指向由账户 A 向账户 B 转账的操作，线程 T2 指向由账户 B 向账户 A 转账的操作。线程 T1 和 T2 同时执行到<code>synchronized (this)</code>，分别锁定了账户 A 和账户 B。当它们继续向下执行到<code>synchronized (target)</code>时会发现它们互相无法取得自己需要的锁，因为锁已经被对方持有，这就造成了<strong>「死锁的局面」</strong>。</p>
+<h1 id="死锁产生的-4-中条件及解决办法"><a href="#死锁产生的-4-中条件及解决办法" class="headerlink" title="死锁产生的 4 中条件及解决办法"></a>死锁产生的 4 中条件及解决办法</h1><p>并发程序一旦死锁，我们一般只能重启程序。所以没有很好的办法直接解决死锁，我们能做的是<strong>规避死锁</strong>，也就是避免死锁产生的条件，有个叫 Coffman 的牛人已经总结过了，只有以下这四个条件都发生时才会出现死锁：</p>
+<table>
+<thead>
+<tr>
+<th>产生条件</th>
+<th>解决办法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 互斥，共享资源 X 和 Y 只能被一个线程占用</td>
+<td>用锁就是为了互斥，所以不会破坏这个条件</td>
+</tr>
+<tr>
+<td>2. 占有且等待，线程 T1 已经取得共享资源 X，在等待共享资源 Y 的时候，不释放共享资源 X；</td>
+<td>一次性申请所有资源</td>
+</tr>
+<tr>
+<td>3. 不可抢占，其他线程不能强行抢占线程 T1 占有的资源；</td>
+<td>线程进一步申请其他资源时，如果申请不到，可以主动释放它占有的资源</td>
+</tr>
+<tr>
+<td>4. 循环等待，线程 T1 等待线程 T2 占有的资源，线程 T2 等待线程 T1 占有的资源</td>
+<td>按序申请资源</td>
+</tr>
+</tbody>
+</table>
+<p>具体来说一下解决方案：</p>
+<ol>
+<li>一次申请所有资源。用一个 List 保存所有被占用的资源，并用<code>apply()</code>和<code>free()</code>方法来维护这个 List。每次调用<code>transfer()</code>时，循环等待所有资源都不在 List 中，并一次申请所有资源。</li>
+<li>主动释放资源。<code>synchronized</code>采用阻塞等待的方式申请资源，如果想实现主动释放资源可以使用<code>java.util.concurrent</code> 这个包 下面提供的<code>Lock</code></li>
+<li>按序申请。Accout 类中维护一个变量叫 id，每个对象都有自己的 id 序号。每次申请资源都比较两个对象的 id 大小，每次申请资源时，按照先大后小，或者先小后大的固定顺序。这样就保证先申请资源 A，再申请资源 B，不会出现先申请资源 B 再申请资源 A 的情况发生。</li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java/">java</a>, <a class="has-link-grey -link" href="/tags/并发编程/">并发编程</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2018
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-08-31T04:50:15.000Z">2018-08-31</time>
-                        <a href="/post/fd2c899.html" class="has-link-black-ter is-size-6">Linux三剑客——Git</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-02-21T13:36:48.000Z">2018-02-21</time>
-                        <a href="/post/2a772a2b.html" class="has-link-black-ter is-size-6">认识 Docker</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-02-04T09:35:33.000Z">2018-02-04</time>
-                        <a href="/post/29003c34.html" class="has-link-black-ter is-size-6">RabbitMQ 安装和使用</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-01-28T03:06:34.000Z">2018-01-28</time>
-                        <a href="/post/7e6ba807.html" class="has-link-black-ter is-size-6">Protobuf 编译 Java</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-01-25T13:57:27.000Z">2018-01-25</time>
-                        <a href="/post/6fc5439d.html" class="has-link-black-ter is-size-6">部署 RockerMQ 双 Master 模式</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-01-21T12:14:35.000Z">2018-01-21</time>
-                        <a href="/post/a6fc1711.html" class="has-link-black-ter is-size-6">Linux中几种常用的文件传输方式</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-01-21T09:39:45.000Z">2018-01-21</time>
-                        <a href="/post/20e9366a.html" class="has-link-black-ter is-size-6">RocketMQ Start</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-        </div>
-    </div>
-</div>
 
-    
 
-    
+
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/5/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/f7a60bf6.html">
+                <span class="level-item">【Java并发编程】Java内存模型</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/7/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/">1</a></li>
-            
-            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/5/">5</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/page/6/">6</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/7/">7</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -439,6 +317,25 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#死锁的局面">
+        <span class="has-mr-6">1</span>
+        <span>死锁的局面</span>
+        </a></li><li>
+        <a class="is-flex" href="#死锁产生的-4-中条件及解决办法">
+        <span class="has-mr-6">2</span>
+        <span>死锁产生的 4 中条件及解决办法</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1579,7 +1476,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="【Java并发编程】死锁" height="28">
                 
                 </a>
                 <p class="is-size-7">
