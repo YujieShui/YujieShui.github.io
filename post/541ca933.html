@@ -2,18 +2,26 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>归档: 2019/5 - 深页</title>
+<title>【Java并发编程】Java线程的生命周期 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/archives/2019/05/page/2/index.html">
+    <meta name="description" content="在 Java 领域，实现并发程序的主要手段是多线程。线程是操作系统的概念，虽然不同语言对线程操作进行了不同的封装，但是万变不离其综。 通用的线程模型可以用「五态模型」来描述，它们分别是：初始状态，可运行状态，运行状态，休眠状态和终止状态。  这五种状态在不同编程语言里会有简化合并。例如，C 语言的 POSIX Threads 规范，就把初始状态和可运行状态合并了；Java 语言里则把可运行状态和运">
+<meta name="keywords" content="java,并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Java并发编程】Java线程的生命周期">
+<meta property="og:url" content="http://shuiyujie.com/post/541ca933.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="在 Java 领域，实现并发程序的主要手段是多线程。线程是操作系统的概念，虽然不同语言对线程操作进行了不同的封装，但是万变不离其综。 通用的线程模型可以用「五态模型」来描述，它们分别是：初始状态，可运行状态，运行状态，休眠状态和终止状态。  这五种状态在不同编程语言里会有简化合并。例如，C 语言的 POSIX Threads 规范，就把初始状态和可运行状态合并了；Java 语言里则把可运行状态和运">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-08-12-04-35.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-08-12-11-20.png">
+<meta property="og:updated_time" content="2019-09-08T04:29:52.697Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="【Java并发编程】Java线程的生命周期">
+<meta name="twitter:description" content="在 Java 领域，实现并发程序的主要手段是多线程。线程是操作系统的概念，虽然不同语言对线程操作进行了不同的封装，但是万变不离其综。 通用的线程模型可以用「五态模型」来描述，它们分别是：初始状态，可运行状态，运行状态，休眠状态和终止状态。  这五种状态在不同编程语言里会有简化合并。例如，C 语言的 POSIX Threads 规范，就把初始状态和可运行状态合并了；Java 语言里则把可运行状态和运">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-09-08-12-04-35.png">
 
 
 
@@ -85,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="【Java并发编程】Java线程的生命周期" height="28">
             
             </a>
         </div>
@@ -106,6 +114,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -119,172 +131,119 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        五月 2019
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-08T02:47:53.000Z">2019-09-08</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-11T07:45:09.000Z">2019-05-11</time>
-                        <a href="/post/2f02c8ae.html" class="has-link-black-ter is-size-6">C语言学习笔记-指针01</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-11T07:40:14.000Z">2019-05-11</time>
-                        <a href="/post/a99472bd.html" class="has-link-black-ter is-size-6">C语言学习笔记-字符串</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-11T07:32:21.000Z">2019-05-11</time>
-                        <a href="/post/5c7372a9.html" class="has-link-black-ter is-size-6">C语言学习笔记-const关键字</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1384 个字)
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-11T01:40:29.000Z">2019-05-11</time>
-                        <a href="/post/e261fd69.html" class="has-link-black-ter is-size-6">C语言学习笔记-结构体</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-11T01:11:29.000Z">2019-05-11</time>
-                        <a href="/post/fe52dfa7.html" class="has-link-black-ter is-size-6">C语言学习笔记-文件操作</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-11T00:58:12.000Z">2019-05-11</time>
-                        <a href="/post/24de7431.html" class="has-link-black-ter is-size-6">C语言学习笔记-写一个最简单的makefile</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-02T08:22:20.000Z">2019-05-02</time>
-                        <a href="/post/62b06016.html" class="has-link-black-ter is-size-6">C语言学习笔记-静态库、动态库的制作和使用</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                【Java并发编程】Java线程的生命周期
+            
+        </h1>
+        <div class="content">
+            <p>在 Java 领域，实现并发程序的主要手段是多线程。线程是操作系统的概念，虽然不同语言对线程操作进行了不同的封装，但是万变不离其综。</p>
+<p>通用的线程模型可以用「五态模型」来描述，它们分别是：初始状态，可运行状态，运行状态，休眠状态和终止状态。</p>
+<p><img src="http://image.shuiyujie.com/2019-09-08-12-04-35.png" alt="通用线程转换图——五态模型"></p>
+<p>这五种状态在不同编程语言里会有简化合并。例如，C 语言的 POSIX Threads 规范，就把初始状态和可运行状态合并了；Java 语言里则把可运行状态和运行状态合并了，这两个状态在操作系统调度层面有用，而 JVM 层面不关心这两个状态，因为 JVM 把线程调度交给操作系统处理了。</p>
+<p>除了简化合并，这五种状态也有可能被细化，比如，Java 语言里就细化了休眠状态。</p>
+<a id="more"></a>
+<h1 id="Java-线程的生命周期"><a href="#Java-线程的生命周期" class="headerlink" title="Java 线程的生命周期"></a>Java 线程的生命周期</h1><p>Java 语言中的线程有 6 种状态</p>
+<ul>
+<li>NEW (初始状态)</li>
+<li>RUNNABLE (可运行/运行状态)</li>
+<li>BLOCKED (阻塞状态)</li>
+<li>WATTING (无限期等待)</li>
+<li>TIMED_WAITING (有时限等待)</li>
+<li>TERMINATED (终止状态)</li>
+</ul>
+<p>其中 BLOCKED、WATTING 和 TIMED_WAITING 在操作系统层面同属于前面提高的休眠状态。简化的 Java 的生命周期图，如下所示：</p>
+<p><img src="http://image.shuiyujie.com/2019-09-08-12-11-20.png" alt="Java中的线程状态转换图"></p>
+<p>那么些状态是如何产生，如何进行转换的呢？</p>
+<h1 id="从-NEW-到-RUNNABLE"><a href="#从-NEW-到-RUNNABLE" class="headerlink" title="从 NEW 到 RUNNABLE"></a>从 NEW 到 RUNNABLE</h1><p>NEW 状态指的是<strong>在编程语言层面创建了线程，但是操作系统层面还未创建线程。</strong>Java 中刚创建出来的 Thread 对象就是 NEW 状态，创建 Thread 对象的方法有两种：</p>
+<ol>
+<li>继承 Thread 对象，重写 run() 方法</li>
+<li>实现 RUNNABLE 接口，重写 run() 方法</li>
+</ol>
+<p>此时通过<code>MyThread myThread = new MyThread()</code>或者<code>Thread thread = new Thread(new Runner())</code>创建出来的线程就处在 NEW 状态。</p>
+<p>如果想要将线程转换到 RUNNABLE 状态，只需要使用<code>start()</code>方法，即<code>myThread.start()</code> 或者 <code>thread.start()</code>。    </p>
+<h1 id="从-RUNNABLE-到-BLOCKED"><a href="#从-RUNNABLE-到-BLOCKED" class="headerlink" title="从 RUNNABLE 到 BLOCKED"></a>从 RUNNABLE 到 BLOCKED</h1><p>BLOCK 表示阻塞状态，在 Java 中只有一种情况会触发 RUNNABLE 到 BLOCKED 的转换，那就是<strong>线程等待 synchronized 锁</strong>。synchronized 修饰的代码块同一时刻只允许一个线程执行，其他线程就只能等待。当等待的线程拿到 synchronized 隐式锁的时，就会从 BLOCKED 切换到 RUNNABLE。</p>
+<p>这里的 BLOCKED 和操作系统层面的阻塞有所区别。在操作系统层面，当线程调用阻塞时 API，比如说进行 IO 操作，那么该线程就会处于休眠状态。但是在 JVM 层面 Java 程序的状态并不会发生改变，任然会保持为了 RUNNABLE 状态。<strong>JVM 层面并不关系操作系统调度相关的状态</strong>。在 JVM 看来，等待 CPU 的使用权，与等待 I/O 没有区别，都是在等待某个资源，所以都归入到 RUNNABLE 状态。</p>
+<h1 id="从-RUNNBALE-到-WAITING"><a href="#从-RUNNBALE-到-WAITING" class="headerlink" title="从 RUNNBALE 到 WAITING"></a>从 RUNNBALE 到 WAITING</h1><p>总体来说，有三种场景会触发这种转换。</p>
+<ul>
+<li>第一种场景，获得 synchronized 隐式锁的线程，调用无参数的 Object.wait() 方法。</li>
+<li>第二种场景，调用无参数的 Thread.join() 方法。其中的 join() 是一种线程同步方法，例如有一个线程对象 thread A，当调用 A.join() 的时候，执行这条语句的线程会等待 thread A 执行完， 而等待中的这个线程，其状态会从 RUNNABLE 转换到 WAITING。当线程 thread A 执行完，原来等待它的线程又会从 WAITING 状态转换到 RUNNABLE。</li>
+<li>第三种场景，调用 LockSupport.park() 方法。其中的 LockSupport 对象，也许你有点陌生，其实 Java 并发包中的锁，都是基于它实现的。调用 LockSupport.park() 方法，当前线程会阻塞， 线程的状态会从 RUNNABLE 转换到 WAITING。调用 LockSupport.unpark(Thread thread) 可 唤醒目标线程，目标线程的状态又会从 WAITING 状态转换到 RUNNABLE。</li>
+</ul>
+<h1 id="从-RUNNBALE-到-TIMED-WATING"><a href="#从-RUNNBALE-到-TIMED-WATING" class="headerlink" title="从 RUNNBALE 到 TIMED_WATING"></a>从 RUNNBALE 到 TIMED_WATING</h1><p>有五种场景会触发这种转换：</p>
+<ol>
+<li><p>调用带超时参数的 Thread.sleep(long millis) 方法；</p>
+</li>
+<li><p>获得 synchronized 隐式锁的线程，调用带超时参数的 Object.wait(long timeout) 方法；</p>
+</li>
+<li><p>调用带超时参数的 Thread.join(long millis) 方法；</p>
+</li>
+<li><p>调用带超时参数的 LockSupport.parkNanos(Object blocker, long deadline) 方法；</p>
+</li>
+<li><p>调用带超时参数的 LockSupport.parkUntil(long deadline) 方法。</p>
+</li>
+</ol>
+<h1 id="从-RUNNBALE-到-TERMINATED"><a href="#从-RUNNBALE-到-TERMINATED" class="headerlink" title="从 RUNNBALE 到 TERMINATED"></a>从 RUNNBALE 到 TERMINATED</h1><p>线程执行完 run() 方法后，会自动转换到 TERMINATED 状态，当然如果执行 run() 方法的时候异常抛出，也会导致线程终止。有时候我们需要强制中断 run() 方法的执行，例如 run() 方法访 问一个很慢的网络，我们等不下去了，想终止怎么办呢？Java 的 Thread 类里面倒是有个 stop() 方法，不过已经标记为 @Deprecated，所以不建议使用了。正确的姿势其实是<strong>调用 interrupt() 方法</strong>。</p>
+<p>interrupt() 会通过异常或者主动监测的方式通知线程，线程有机会执行后续操作，也可以无视这个通知。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java/">java</a>, <a class="has-link-grey -link" href="/tags/并发编程/">并发编程</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
 
 
 
-    
+
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/05/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/3d624a82.html">
+                <span class="level-item">【Java并发编程】死锁</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/05/page/3/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/2019/05/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/2019/05/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -363,6 +322,41 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Java-线程的生命周期">
+        <span class="has-mr-6">1</span>
+        <span>Java 线程的生命周期</span>
+        </a></li><li>
+        <a class="is-flex" href="#从-NEW-到-RUNNABLE">
+        <span class="has-mr-6">2</span>
+        <span>从 NEW 到 RUNNABLE</span>
+        </a></li><li>
+        <a class="is-flex" href="#从-RUNNABLE-到-BLOCKED">
+        <span class="has-mr-6">3</span>
+        <span>从 RUNNABLE 到 BLOCKED</span>
+        </a></li><li>
+        <a class="is-flex" href="#从-RUNNBALE-到-WAITING">
+        <span class="has-mr-6">4</span>
+        <span>从 RUNNBALE 到 WAITING</span>
+        </a></li><li>
+        <a class="is-flex" href="#从-RUNNBALE-到-TIMED-WATING">
+        <span class="has-mr-6">5</span>
+        <span>从 RUNNBALE 到 TIMED_WATING</span>
+        </a></li><li>
+        <a class="is-flex" href="#从-RUNNBALE-到-TERMINATED">
+        <span class="has-mr-6">6</span>
+        <span>从 RUNNBALE 到 TERMINATED</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1503,7 +1497,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="【Java并发编程】Java线程的生命周期" height="28">
                 
                 </a>
                 <p class="is-size-7">
