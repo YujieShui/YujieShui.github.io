@@ -2,18 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>归档 - 深页</title>
+<title>【Java并发编程】Lock&amp;Condition - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/archives/page/3/index.html">
+    <meta name="description" content="在并发编程中有两个核心问题:一个是互斥,即同一时刻只允许一个线程访问共享资源;另一个是同步,即线程之间如何通信和协作。解决这两个问题的方法前人已经替我们总结出来理论模型,分别是管程模型和信号量模型.  Java中实现管程有两种方式  一是使用synchronized关键字给代码块添加隐式锁实现互斥,同时使用notify()和notifyAll()实现同步 二是使用 Java SDK 并发包下的">
+<meta name="keywords" content="java,并发编程,管程,并发工具类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Java并发编程】Lock&amp;Condition">
+<meta property="og:url" content="http://shuiyujie.com/post/3e6f77c3.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="在并发编程中有两个核心问题:一个是互斥,即同一时刻只允许一个线程访问共享资源;另一个是同步,即线程之间如何通信和协作。解决这两个问题的方法前人已经替我们总结出来理论模型,分别是管程模型和信号量模型.  Java中实现管程有两种方式  一是使用synchronized关键字给代码块添加隐式锁实现互斥,同时使用notify()和notifyAll()实现同步 二是使用 Java SDK 并发包下的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-09-22-20-56.png">
+<meta property="og:updated_time" content="2019-09-09T14:24:11.007Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="【Java并发编程】Lock&amp;Condition">
+<meta name="twitter:description" content="在并发编程中有两个核心问题:一个是互斥,即同一时刻只允许一个线程访问共享资源;另一个是同步,即线程之间如何通信和协作。解决这两个问题的方法前人已经替我们总结出来理论模型,分别是管程模型和信号量模型.  Java中实现管程有两种方式  一是使用synchronized关键字给代码块添加隐式锁实现互斥,同时使用notify()和notifyAll()实现同步 二是使用 Java SDK 并发包下的">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-09-09-22-20-56.png">
 
 
 
@@ -85,7 +92,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="【Java并发编程】Lock&amp;Condition" height="28">
             
             </a>
         </div>
@@ -106,6 +113,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -119,237 +130,99 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-09T14:18:02.000Z">2019-09-09</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-07T15:42:53.000Z">2019-06-07</time>
-                        <a href="/post/39bf26c3.html" class="has-link-black-ter is-size-6">STL-vector 容器</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-07T15:42:37.000Z">2019-06-07</time>
-                        <a href="/post/2d250e1c.html" class="has-link-black-ter is-size-6">STL-string 容器</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-07T15:15:18.000Z">2019-06-07</time>
-                        <a href="/post/543335f8.html" class="has-link-black-ter is-size-6">STL-STL基础概念</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1092 个字)
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-02T11:08:59.000Z">2019-06-02</time>
-                        <a href="/post/1d0f563b.html" class="has-link-black-ter is-size-6">图像处理——边缘检测</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/图像处理/">图像处理</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-02T09:49:20.000Z">2019-06-02</time>
-                        <a href="/post/d966aba8.html" class="has-link-black-ter is-size-6">图像处理——图像降噪</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/图像处理/">图像处理</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-02T09:49:20.000Z">2019-06-02</time>
-                        <a href="/post/1208a55a.html" class="has-link-black-ter is-size-6">OpenCV-Mat表达式</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-02T09:41:57.000Z">2019-06-02</time>
-                        <a href="/post/d4c8e253.html" class="has-link-black-ter is-size-6">OpenCV-选取图像的感兴趣区域</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-25T04:22:04.000Z">2019-05-25</time>
-                        <a href="/post/463fc5c6.html" class="has-link-black-ter is-size-6">OpenCV-基本数据结构</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-25T01:19:43.000Z">2019-05-25</time>
-                        <a href="/post/dfe68fea.html" class="has-link-black-ter is-size-6">OpenCV-图像的遍历</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/OpenCV/">OpenCV</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-23T13:39:34.000Z">2019-05-23</time>
-                        <a href="/post/d37b0970.html" class="has-link-black-ter is-size-6">C 语言-格式化输出函数 printf()</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/C-C/">C/C++</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                【Java并发编程】Lock&amp;Condition
+            
+        </h1>
+        <div class="content">
+            <p>在并发编程中有两个核心问题:一个是<strong>互斥</strong>,即同一时刻只允许一个线程访问共享资源;另一个是<strong>同步</strong>,即线程之间如何通信和协作。解决这两个问题的方法前人已经替我们总结出来理论模型,分别是<strong>管程模型</strong>和<strong>信号量模型</strong>.</p>
+<p><img src="http://image.shuiyujie.com/2019-09-09-22-20-56.png" alt="MESA管程模型"></p>
+<p>Java中实现管程有两种方式</p>
+<ol>
+<li>一是使用<code>synchronized</code>关键字给代码块添加隐式锁实现互斥,同时使用<code>notify()</code>和<code>notifyAll()</code>实现<strong>同步</strong></li>
+<li>二是使用 Java SDK 并发包下的  Lock 和 Condition 两个接口,来实现管程.<ol>
+<li>Lock 的特性包括:能够响应中断、支持超时和非阻塞地获取锁</li>
+<li>Condition 实现了管程模型里面的条件变量。</li>
+</ol>
+</li>
+</ol>
+<p><em>注：Java 参考了 MESA 模型，语言内置的管程（synchronized）对 MESA 模型进行了精简。MESA 模型中，条件变量可以有多个，Java 语言内置的管程里只有一个条件变量。Java 并发包下的 Lock&amp;Condition则则支持多个条件变量。</em></p>
+<a id="more"></a>
+<h1 id="为什么要用-lock-amp-condition-再次实现管程"><a href="#为什么要用-lock-amp-condition-再次实现管程" class="headerlink" title="为什么要用 lock&amp;condition 再次实现管程"></a>为什么要用 lock&amp;condition 再次实现管程</h1><p>Java 已经通过<code>synchronized</code>实现了管程,那么为什么 jdk1.5 还要在并发包中用 lock&amp;condition 来实现管程? 这两种实现方式存在什么区别么? 它们各自有什么样的应用场景?</p>
+<p>在之前的<a href="https://shuiyujie.com/post/3d624a82.html">死锁问题</a>一文中提到了死锁的产生必须同时具备 4 个条件,我们只需要破坏其中任意一个条件都能够预防死锁的发生.其中有一个条件是<strong>不可抢占</strong>,也就是线程 T1 持有某一个资源,其他线程不能强行抢占它持有的资源.</p>
+<p>当我们使用<code>synchronized</code>加锁时,当它持有锁A,但是无法持有到锁 B, 时线程就会直接进入阻塞状态,此时一旦发生死锁就没有办法唤醒这个线程了.Lock&amp;Condition的出现就是为了做到<strong>破坏不可抢占条件</strong>.</p>
+<p>具体来说,怎么才能破坏不可抢占条件呢?有这样 3 个思路:</p>
+<ol>
+<li><strong>能够响应中断</strong>.当线程进入阻塞状态之后,我们能够发送一个中断信号给这个阻塞的线程.该线程能够响应中断信号,就有机会释放持有的锁 A,就能破坏不可抢占的条件.</li>
+<li><strong>超时机制</strong>.线程在一段时间内无法获取到锁,它不会进入阻塞状态,而是返回错误,那么这个线程也有机会释放持有的锁.</li>
+<li><strong>非阻塞地获取锁</strong>.如果尝试获取锁失败，并不进入阻塞状态，而是直接返回.</li>
+</ol>
+<p>这三种方案可以弥补 synchronized 实现的管程无法破坏不可抢占条件的问题,具体来说  Lock 接口实现这里这样 3 个方法:</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 支持中断的 API</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lockInterruptibly</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;</span><br><span class="line"><span class="hljs-comment">// 支持超时的 API</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">(<span class="hljs-keyword">long</span> time, TimeUnit unit)</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;</span><br><span class="line"><span class="hljs-comment">// 支持非阻塞获取锁的 API</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="用两个条件变量实现阻塞队列"><a href="#用两个条件变量实现阻塞队列" class="headerlink" title="用两个条件变量实现阻塞队列"></a>用两个条件变量实现阻塞队列</h1><p> Java 语言内置的管程里只有一个条件变量，而 Lock&amp;Condition 实现的管程是支持多个条件变量的，这是二者的一个重要区别。</p>
+<p>在很多并发场景下，支持多个条件变量能够让我们的并发程序可读性更好，实现起来也更容易。例如，实现一个阻塞队列，就需要两个条件变量。</p>
+<p>一个阻塞队列，需要两个条件变量，一个是队列不空（空队列不允许出队），另一个是队列不满（队列已满不允许入队）。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BlockedQueue</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">final</span> Lock lock = <span class="hljs-keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="hljs-comment">// 条件变量,队列不满</span></span><br><span class="line">    <span class="hljs-keyword">final</span> Condition notFull = lock.newCondition();</span><br><span class="line">    <span class="hljs-comment">// 条件变量.队列不空</span></span><br><span class="line">    <span class="hljs-keyword">final</span>  Condition notEmpty = lock.newCondition();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 入队</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">enq</span><span class="hljs-params">(T x)</span> </span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span>(队列已满)&#123;</span><br><span class="line">                <span class="hljs-comment">// 等待队列不满</span></span><br><span class="line">                notFull.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-comment">// 省略入队操作</span></span><br><span class="line">            <span class="hljs-comment">// 入队后,通知可出队</span></span><br><span class="line">            notEmpty.signal();</span><br><span class="line">        &#125;<span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 出队</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deq</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">            <span class="hljs-keyword">while</span>(队列已空)&#123;</span><br><span class="line">                <span class="hljs-comment">// 等待队列不空</span></span><br><span class="line">                notEmpty.await();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-comment">// 省略出队操作</span></span><br><span class="line">            <span class="hljs-comment">// 出队后,通知可入队</span></span><br><span class="line">            notFull.signal();</span><br><span class="line">        &#125;<span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java/">java</a>, <a class="has-link-grey -link" href="/tags/并发工具类/">并发工具类</a>, <a class="has-link-grey -link" href="/tags/并发编程/">并发编程</a>, <a class="has-link-grey -link" href="/tags/管程/">管程</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
 
-    
 
-    
+
+
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/2/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/541ca933.html">
+                <span class="level-item">【Java并发编程】Java线程的生命周期</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/4/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/2/">2</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/page/3/">3</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/4/">4</a></li>
-            
-            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/8/">8</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -428,6 +301,25 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#为什么要用-lock-amp-condition-再次实现管程">
+        <span class="has-mr-6">1</span>
+        <span>为什么要用 lock&amp;condition 再次实现管程</span>
+        </a></li><li>
+        <a class="is-flex" href="#用两个条件变量实现阻塞队列">
+        <span class="has-mr-6">2</span>
+        <span>用两个条件变量实现阻塞队列</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1596,7 +1488,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="【Java并发编程】Lock&amp;Condition" height="28">
                 
                 </a>
                 <p class="is-size-7">
