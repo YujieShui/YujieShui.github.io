@@ -2,28 +2,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>【Caffe】Caffe实战手写数字分类 - 深页</title>
+<title>FFMPEG使用说明 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Caffe是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在Model zoo中找到许多模型的实现。本文以 Caffe 提供的 Training LeNet on MNIST with Caffe 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。 本文的目标是能够了解 Caffe 基本的使用流程。">
-<meta name="keywords" content="deeplearning,caffe,开源框架">
+    <meta name="description" content="通过Java调用FFMpeg命令的方式来对音视频进行处理（获取信息、截图等等）。 https://github.com/tonydeng/fmj  截图命令截取一张352x240尺寸大小，格式为jpg的图片1ffmpeg -i input_file -y -f image2 -t 0.001 -s 352x240 output.jpg 把视频的前30帧转换成一个Animated Gif1ffm">
+<meta name="keywords" content="图像处理,ffmpeg,音频处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Caffe】Caffe实战手写数字分类">
-<meta property="og:url" content="http://shuiyujie.com/post/96cd1245.html">
+<meta property="og:title" content="FFMPEG使用说明">
+<meta property="og:url" content="http://shuiyujie.com/post/20fed56f.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="Caffe是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在Model zoo中找到许多模型的实现。本文以 Caffe 提供的 Training LeNet on MNIST with Caffe 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。 本文的目标是能够了解 Caffe 基本的使用流程。">
+<meta property="og:description" content="通过Java调用FFMpeg命令的方式来对音视频进行处理（获取信息、截图等等）。 https://github.com/tonydeng/fmj  截图命令截取一张352x240尺寸大小，格式为jpg的图片1ffmpeg -i input_file -y -f image2 -t 0.001 -s 352x240 output.jpg 把视频的前30帧转换成一个Animated Gif1ffm">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-18-25-09.png">
-<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-18-23-18.png">
-<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-19-13-31.png">
-<meta property="og:image" content="http://image.shuiyujie.com/2019-06-17-19-14-19.png">
-<meta property="og:updated_time" content="2019-06-19T14:20:08.526Z">
+<meta property="og:image" content="http://image.shuiyujie.com/mountain-1345746_1920.jpg">
+<meta property="og:updated_time" content="2019-09-11T14:41:03.787Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Caffe】Caffe实战手写数字分类">
-<meta name="twitter:description" content="Caffe是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在Model zoo中找到许多模型的实现。本文以 Caffe 提供的 Training LeNet on MNIST with Caffe 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。 本文的目标是能够了解 Caffe 基本的使用流程。">
-<meta name="twitter:image" content="http://image.shuiyujie.com/2019-06-17-18-25-09.png">
+<meta name="twitter:title" content="FFMPEG使用说明">
+<meta name="twitter:description" content="通过Java调用FFMpeg命令的方式来对音视频进行处理（获取信息、截图等等）。 https://github.com/tonydeng/fmj  截图命令截取一张352x240尺寸大小，格式为jpg的图片1ffmpeg -i input_file -y -f image2 -t 0.001 -s 352x240 output.jpg 把视频的前30帧转换成一个Animated Gif1ffm">
+<meta name="twitter:image" content="http://image.shuiyujie.com/mountain-1345746_1920.jpg">
 
 
 
@@ -95,7 +92,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="【Caffe】Caffe实战手写数字分类" height="28">
+                <img src="/images/logo.svg" alt="FFMPEG使用说明" height="28">
             
             </a>
         </div>
@@ -139,17 +136,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-17T10:21:53.000Z">2019-06-17</time>
+                <time class="level-item has-text-grey" datetime="2019-09-11T14:35:24.000Z">2019-09-11</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                <a class="has-link-grey -link" href="/categories/图像处理/">图像处理</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1203 个字)
+                    13 分钟 读完 (大约 1994 个字)
                 </span>
                 
                 
@@ -158,43 +155,86 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                【Caffe】Caffe实战手写数字分类
+                FFMPEG使用说明
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-06-17-18-25-09.png" alt="Caffe"></p>
-<p><a href="http://caffe.berkeleyvision.org/" target="_blank" rel="noopener">Caffe</a>是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在<a href="https://github.com/BVLC/caffe/wiki/Model-Zoo" target="_blank" rel="noopener">Model zoo</a>中找到许多模型的实现。本文以 Caffe 提供的 <a href="https://caffe.berkeleyvision.org/gathered/examples/mnist.html" target="_blank" rel="noopener">Training LeNet on MNIST with Caffe</a> 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。</p>
-<p>本文的目标是能够了解 Caffe 基本的使用流程。</p>
-<a id="more"></a>
-<p><img src="http://image.shuiyujie.com/2019-06-17-18-23-18.png" alt="Caffe 使用流程"></p>
-<h1 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h1><p>在安装和编译 Caffe 之后进入根目录，执行以下命令，将会下载 <a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">MNIST</a> 数据集。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd $CAFFE_ROOT</span><br><span class="line">./data/mnist/get_mnist.sh #下载 mnist 数据集</span><br><span class="line">./examples/mnist/create_mnist.sh # 将下载下来的数据集格式调整为 caffe 能够解析的格式</span><br></pre></td></tr></table></figure>
-<p>数据集包括 mnist_train_lmdb 和 mnist_test_lmdb 两部分。</p>
-<h1 id="定义-Net"><a href="#定义-Net" class="headerlink" title="定义 Net"></a>定义 Net</h1><p>Caffe 提供的示例中使用 lenet_train_test.prototxt 定义 <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf" target="_blank" rel="noopener">LeNet</a> 的网络结构。LetNet 网络结构为<code>卷积层 -&gt; 池化层 -&gt; 卷积层 -&gt; 池化层 -&gt; 全连接层 -&gt; 全连接层 -&gt; 全连接层</code>。Caffe 用 layer 来表示表示网络，网络被定义在以<code>.prototxt</code>结尾的文件中，因为 Caffe 使用了 <a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener">Google Protobuf</a> 作为数据传输的格式。</p>
-<p>在 lenet_train_test.prototxt 中我们可看到<code>name: &quot;LeNet&quot;</code>表示网络结构的名称为 LeNet，接下来是</p>
-<figure class="highlight protobuf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">layer &#123;</span><br><span class="line">  name: <span class="hljs-string">"mnist"</span> # 名称</span><br><span class="line">  type: <span class="hljs-string">"Data"</span> # 输入层</span><br><span class="line">  transform_param &#123;</span><br><span class="line">    scale: <span class="hljs-number">0.00390625</span> # 归一化，范围为 <span class="hljs-number">0</span>-<span class="hljs-number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  data_param &#123;</span><br><span class="line">    source: <span class="hljs-string">"mnist_train_lmdb"</span> # 指定要读取的数据</span><br><span class="line">    backend: LMDB</span><br><span class="line">    batch_size: <span class="hljs-number">64</span></span><br><span class="line">  &#125;</span><br><span class="line">  top: <span class="hljs-string">"data"</span></span><br><span class="line">  top: <span class="hljs-string">"label"</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>我们可以通过 <a href="http://ethereon.github.io/netscope/#/editor" target="_blank" rel="noopener">http://ethereon.github.io/netscope/#/editor</a> 生成网络图像，或者使用 caffe 提供的脚本，它在<code>caffe/python/draw_net.py</code>。</p>
-<h1 id="配置-Solver"><a href="#配置-Solver" class="headerlink" title="配置 Solver"></a>配置 Solver</h1><p>Solver 用来指定训练的一些参数，比如使用哪个网络、迭代次数、优化方法、使用 GPU 还是 CPU 等信息。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The train/<span class="hljs-built_in">test</span> net protocol buffer definition</span></span><br><span class="line">net: "examples/mnist/lenet_train_test.prototxt"</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> test_iter specifies how many forward passes the <span class="hljs-built_in">test</span> should carry out.</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> In the <span class="hljs-keyword">case</span> of MNIST, we have <span class="hljs-built_in">test</span> batch size 100 and 100 <span class="hljs-built_in">test</span> iterations,</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> covering the full 10,000 testing images.</span></span><br><span class="line">test_iter: 100</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> Carry out testing every 500 training iterations.</span></span><br><span class="line">test_interval: 500</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The base learning rate, momentum and the weight decay of the network.</span></span><br><span class="line">base_lr: 0.01</span><br><span class="line">momentum: 0.9</span><br><span class="line">weight_decay: 0.0005</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The learning rate policy</span></span><br><span class="line">lr_policy: "inv"</span><br><span class="line">gamma: 0.0001</span><br><span class="line">power: 0.75</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> Display every 100 iterations</span></span><br><span class="line">display: 100</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The maximum number of iterations</span></span><br><span class="line">max_iter: 10000</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> snapshot intermediate results</span></span><br><span class="line">snapshot: 5000</span><br><span class="line">snapshot_prefix: "examples/mnist/lenet"</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> solver mode: CPU or GPU</span></span><br><span class="line">solver_mode: GPU</span><br></pre></td></tr></table></figure>
-<h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>训练的时候指定 Solver，保存权值文件的路径，日志：<code>./examples/mnist/train_lenet.sh -gpu 1</code></p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/usr/bin/env sh</span></span><br><span class="line">set -e</span><br><span class="line">SOLVER=examples/mnist/lenet_solver.prototxt</span><br><span class="line">WEIGHTS=./lenet_iter_10000.caffemodel</span><br><span class="line">./build/tools/caffe train --solver=$&#123;SOLVER&#125; $@ 2&gt;&amp;1 | tee log.txt</span><br></pre></td></tr></table></figure>
-<p>通过解析日志，我们能够可视化模型训练过程中的 accuray 和 loss 的情况。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 解析日志文件,将 acc 和 loss 输出到 .refine 文件</span></span><br><span class="line">grep "Test net output #0: accuracy =" log.txt &gt; trainacc.refine</span><br><span class="line">grep "Test net output #1: loss =" log.txt &gt; trainloss.refine</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 生成如下所示的 .refine 文件</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> trainacc.refine</span></span><br><span class="line">I0615 10:16:15.671094 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.061339 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.451835 11161 solver.cpp:414] Test net output #0: accuracy = 0.988</span><br><span class="line">I0615 10:16:16.850911 11161 solver.cpp:414] Test net output #0: accuracy = 0.9906</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> trainloss.refine</span></span><br><span class="line">I0615 10:16:15.671116 11161 solver.cpp:414] Test net output #1: loss = 0.0298686 (* 1 = 0.0298686 loss)</span><br><span class="line">I0615 10:16:16.061362 11161 solver.cpp:414] Test net output #1: loss = 0.0285139 (* 1 = 0.0285139 loss)</span><br><span class="line">I0615 10:16:16.451859 11161 solver.cpp:414] Test net output #1: loss = 0.0348767 (* 1 = 0.0348767 loss)</span><br><span class="line">I0615 10:16:16.850932 11161 solver.cpp:414] Test net output #1: loss = 0.0284803 (* 1 = 0.0284803 loss)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 接着用 python 脚本解析 .refine 绘制 acc 和 loss 曲线</span></span><br><span class="line">python show_acc.py</span><br><span class="line">python show_loss.py</span><br></pre></td></tr></table></figure>
-<p>Python 脚本可以在 <a href="https://gist.github.com/YujieShui/67933c77054410461cb18c031b36057d" target="_blank" rel="noopener">Github Gist</a> 中查看，需要根据之前生成的日志进行小改动。</p>
-<p><img src="http://image.shuiyujie.com/2019-06-17-19-13-31.png" alt="train_loss"></p>
-<p>可以看到迭代 100 次 loss 已经降到很低了,之后略有降低,300次左右基本上就在 0.3, 0.4 左右</p>
-<p><img src="http://image.shuiyujie.com/2019-06-17-19-14-19.png" alt="train_accuracy"></p>
-<p>与之相对的，100 次左右准确率就有 0.96 了,缓慢上升,最后准确率稳定在 0.98 。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>测试的方法和训练的方法基本一致，使用 <code>./examples/mnist/test_lenet.sh -gpu 1</code></p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/usr/bin/env sh</span></span><br><span class="line">set -e</span><br><span class="line">MODEL=examples/mnist/lenet_iter_10000.caffemodel</span><br><span class="line">TRAIN_NET=examples/mnist/lenet_train_test.prototxt</span><br><span class="line">./build/tools/caffe test -model $&#123;TRAIN_NET&#125; -weights $&#123;MODEL&#125; $@ 2&gt;&amp;1 | tee test_log.txt</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 结果如下所示</span></span><br><span class="line">...</span><br><span class="line">I0616 15:29:32.107722 13441 caffe.cpp:304] Batch 49, accuracy = 1</span><br><span class="line">I0616 15:29:32.107739 13441 caffe.cpp:304] Batch 49, loss = 0.00704199</span><br><span class="line">I0616 15:29:32.107748 13441 caffe.cpp:309] Loss: 0.0412109</span><br><span class="line">I0616 15:29:32.107769 13441 caffe.cpp:321] accuracy = 0.9862</span><br><span class="line">I0616 15:29:32.107782 13441 caffe.cpp:321] loss = 0.0412109 (* 1 = 0.0412109 loss)</span><br></pre></td></tr></table></figure>
-<p>用上面同样的方法能够可视化测试的 loss 和 accuracy。</p>
-<hr>
-<p>本文介绍了 Caffe 的基本使用流程，这样就可以把一些别人写好的网络用起来了。进一步我们需要了解如何用 Caffe 自定义网络结构，调整网络的参数，完成更加个性化的任务。</p>
+            <p><img src="http://image.shuiyujie.com/mountain-1345746_1920.jpg" alt="题图:https://pixabay.com/photos/mountain-rays-hill-nature-1345746/"></p>
+<blockquote>
+<p>通过Java调用FFMpeg命令的方式来对音视频进行处理（获取信息、截图等等）。</p>
+<p><a href="https://github.com/tonydeng/fmj" target="_blank" rel="noopener">https://github.com/tonydeng/fmj</a></p>
+</blockquote>
+<h2 id="截图命令"><a href="#截图命令" class="headerlink" title="截图命令"></a>截图命令</h2><h3 id="截取一张352x240尺寸大小，格式为jpg的图片"><a href="#截取一张352x240尺寸大小，格式为jpg的图片" class="headerlink" title="截取一张352x240尺寸大小，格式为jpg的图片"></a>截取一张352x240尺寸大小，格式为jpg的图片</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input_file -y -f image2 -t 0.001 -s 352x240 output.jpg</span><br></pre></td></tr></table></figure>
+<h3 id="把视频的前30帧转换成一个Animated-Gif"><a href="#把视频的前30帧转换成一个Animated-Gif" class="headerlink" title="把视频的前30帧转换成一个Animated Gif"></a>把视频的前30帧转换成一个Animated Gif</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input_file -vframes 30 -y -f gif output.gif</span><br></pre></td></tr></table></figure>
+<h3 id="在视频的第8-01秒出截取230x240的缩略图"><a href="#在视频的第8-01秒出截取230x240的缩略图" class="headerlink" title="在视频的第8.01秒出截取230x240的缩略图"></a>在视频的第8.01秒出截取230x240的缩略图</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input_file -y -f mjpeg -ss 8 -t 0.001 -s 320x240 output.jpg</span><br></pre></td></tr></table></figure>
+<h3 id="每隔一秒截一张图"><a href="#每隔一秒截一张图" class="headerlink" title="每隔一秒截一张图"></a>每隔一秒截一张图</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.mp4 -f image2 -vf fps=fps=1 out%d.png</span><br></pre></td></tr></table></figure>
+<h3 id="每隔20秒截一张图"><a href="#每隔20秒截一张图" class="headerlink" title="每隔20秒截一张图"></a>每隔20秒截一张图</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.mp4 -f image2 -vf fps=fps=1/20 out%d.png</span><br></pre></td></tr></table></figure>
+<h3 id="多张截图合并到一个文件里（2x3）每隔一千帧-秒数-1000-fps25-即40s截一张图"><a href="#多张截图合并到一个文件里（2x3）每隔一千帧-秒数-1000-fps25-即40s截一张图" class="headerlink" title="多张截图合并到一个文件里（2x3）每隔一千帧(秒数=1000/fps25)即40s截一张图"></a>多张截图合并到一个文件里（2x3）每隔一千帧(秒数=1000/fps25)即40s截一张图</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.mp4 -frames 3 -vf &quot;select=not(mod(n\,1000)),scale=320:240,tile=2x3&quot; out.png</span><br></pre></td></tr></table></figure>
+<h3 id="从视频中生成GIF图片"><a href="#从视频中生成GIF图片" class="headerlink" title="从视频中生成GIF图片"></a>从视频中生成GIF图片</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.mp4 -t 10 -pix_fmt rgb24 out.gif</span><br></pre></td></tr></table></figure>
+<h3 id="转换视频为图片（每帧一张图）"><a href="#转换视频为图片（每帧一张图）" class="headerlink" title="转换视频为图片（每帧一张图）"></a>转换视频为图片（每帧一张图）</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.mp4 out%4d.png</span><br></pre></td></tr></table></figure>
+<h3 id="图片转换为视频"><a href="#图片转换为视频" class="headerlink" title="图片转换为视频"></a>图片转换为视频</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -f image2 -i out%4d.png -r 25 video.mp4</span><br></pre></td></tr></table></figure>
+<h2 id="切分视频并生成M3U8文件"><a href="#切分视频并生成M3U8文件" class="headerlink" title="切分视频并生成M3U8文件"></a>切分视频并生成M3U8文件</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -c:v libx264 -c:a aac -strict -2 -f hls -hls_time 20 -hls_list_size 0 -hls_wrap 0 output.m3u8</span><br></pre></td></tr></table></figure>
+<p>相关参数说明：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-i 输入视频文件</span><br><span class="line">-c:v 输出视频格式</span><br><span class="line">-c:a 输出音频格式</span><br><span class="line">-strict</span><br><span class="line">-f hls 输出视频为HTTP Live Stream（M3U8）</span><br><span class="line">-hls_time 设置每片的长度，默认为2，单位为秒</span><br><span class="line">-hls_list_size 设置播放列表保存的最多条目，设置为0会保存所有信息，默认为5</span><br><span class="line">-hls_wrap 设置多少片之后开始覆盖，如果设置为0则不会覆盖，默认值为0。这个选项能够避免在磁盘上存储过多的片，而且能够限制写入磁盘的最多片的数量。</span><br></pre></td></tr></table></figure>
+<p>注意，播放列表的<code>sequence number</code>对每个<code>segment</code>来说都必须是唯一的，而且它不能和片的文件名（当使用<code>wrap</code>选项时，文件名可能会重复使用）混淆。</p>
+<h2 id="分离视频音频流"><a href="#分离视频音频流" class="headerlink" title="分离视频音频流"></a>分离视频音频流</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 分离视频流</span></span><br><span class="line">ffmpeg -i input_file -vcodec copy -an output_file_video</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 分离音频流</span></span><br><span class="line">ffmpeg -i input_file -acodec copy -vn output_file_audio</span><br></pre></td></tr></table></figure>
+<h2 id="视频解复用"><a href="#视频解复用" class="headerlink" title="视频解复用"></a>视频解复用</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i test.mp4 -vcoder copy -an -f m4v test.264</span><br><span class="line">ffmpeg -i test.avi -vcoder copy -an -f m4v test.264</span><br></pre></td></tr></table></figure>
+<h2 id="视频转码"><a href="#视频转码" class="headerlink" title="视频转码"></a>视频转码</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 转码为码流原始文件</span></span><br><span class="line">ffmpeg -i test.mp4 -vcoder h264 -s 352*278 -an -f m4v test.264</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 转码为码流原始文件</span></span><br><span class="line">ffmpeg -i test.mp4 -vcoder h264 -bf 0 -g 25 -s 352-278 -an -f m4v test.264</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 转码为封装文件 -bf B帧数目控制, -g 关键帧间隔控制, -s 分辨率控制</span></span><br><span class="line">ffmpeg -i test.avi -vcoder mpeg4 -vtag xvid -qsame test_xvid.avi</span><br></pre></td></tr></table></figure>
+<h2 id="视频封装"><a href="#视频封装" class="headerlink" title="视频封装"></a>视频封装</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video_file -i audio_file -vcoder copy -acodec copy output_file</span><br></pre></td></tr></table></figure>
+<h2 id="视频剪切"><a href="#视频剪切" class="headerlink" title="视频剪切"></a>视频剪切</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 视频截图</span></span><br><span class="line">ffmpeg -i test.avi -r 1 -f image2 image.jpeg</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 剪切视频 -r 提取图像频率， -ss 开始时间， -t 持续时间</span></span><br><span class="line">ffmpeg -i input.avi -ss 0:1:30 -t 0:0:20 -vcoder copy -acoder copy output.avi</span><br></pre></td></tr></table></figure>
+<h2 id="视频录制"><a href="#视频录制" class="headerlink" title="视频录制"></a>视频录制</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i rtsp://hostname/<span class="hljs-built_in">test</span> -vcoder copy out.avi</span><br></pre></td></tr></table></figure>
+<h2 id="YUV序列播放"><a href="#YUV序列播放" class="headerlink" title="YUV序列播放"></a>YUV序列播放</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -f rawvideo -video_size 1920x1080 input.yuv</span><br></pre></td></tr></table></figure>
+<h2 id="YUV序列转AVI"><a href="#YUV序列转AVI" class="headerlink" title="YUV序列转AVI"></a>YUV序列转AVI</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -s w*h -pix_fmt yuv420p -i input.yuv -vcoder mpeg4 output.avi</span><br></pre></td></tr></table></figure>
+<h3 id="常用参数说明"><a href="#常用参数说明" class="headerlink" title="常用参数说明"></a>常用参数说明</h3><h4 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-i 设定输入流</span><br><span class="line">-f 设定输出格式</span><br><span class="line">-ss 开始时间</span><br></pre></td></tr></table></figure>
+<h4 id="视频参数"><a href="#视频参数" class="headerlink" title="视频参数"></a>视频参数</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-b 设定视频流量，默认是200Kbit/s</span><br><span class="line">-s 设定画面的宽和高</span><br><span class="line">-aspect 设定画面的比例</span><br><span class="line">-vn 不处理视频</span><br><span class="line">-vcoder 设定视频的编码器，未设定时则使用与输入流相同的编解码器</span><br></pre></td></tr></table></figure>
+<h3 id="音频参数"><a href="#音频参数" class="headerlink" title="音频参数"></a>音频参数</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-ar 设定采样率</span><br><span class="line">-ac 设定声音的Channel数</span><br><span class="line">-acodec 设定沈阳的Channel数</span><br><span class="line">-an 不处理音频</span><br></pre></td></tr></table></figure>
+<h2 id="使用ffmpeg合并MP4文件"><a href="#使用ffmpeg合并MP4文件" class="headerlink" title="使用ffmpeg合并MP4文件"></a>使用ffmpeg合并MP4文件</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i <span class="hljs-string">"Apache Sqoop Tutorial Part 1.mp4"</span> -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate1.ts</span><br><span class="line">ffmpeg -i <span class="hljs-string">"Apache Sqoop Tutorial Part 2.mp4"</span> -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate2.ts</span><br><span class="line">ffmpeg -i <span class="hljs-string">"Apache Sqoop Tutorial Part 3.mp4"</span> -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate3.ts</span><br><span class="line">ffmpeg -i <span class="hljs-string">"Apache Sqoop Tutorial Part 4.mp4"</span> -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate4.ts</span><br><span class="line">ffmpeg -i <span class="hljs-string">"concat:intermediate1.ts|intermediate2.ts|intermediate3.ts|intermediate4.ts"</span> -c copy -bsf:a aac_adtstoasc <span class="hljs-string">"Apache Sqoop Tutorial.mp4"</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用ffmpeg转换flv到mp4"><a href="#使用ffmpeg转换flv到mp4" class="headerlink" title="使用ffmpeg转换flv到mp4"></a>使用ffmpeg转换flv到mp4</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.flv -vcodec copy -acodec copy out.mp4</span><br></pre></td></tr></table></figure>
+<h2 id="视频添加水印"><a href="#视频添加水印" class="headerlink" title="视频添加水印"></a>视频添加水印</h2><h3 id="水印局中"><a href="#水印局中" class="headerlink" title="水印局中"></a>水印局中</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i out.mp4 -i sxyx2008@163.com.gif -filter_complex overlay=<span class="hljs-string">"(main_w/2)-(overlay_w/2):(main_h/2)-(overlay_h)/2"</span> output.mp4</span><br></pre></td></tr></table></figure>
+<p>参数解释</p>
+<ul>
+<li>-i out.mp4(视频源)</li>
+<li>-i <a href="mailto:sxyx2008@163.com.gif" target="_blank" rel="noopener">sxyx2008@163.com.gif</a>(水印图片)</li>
+<li>overlay 水印的位置</li>
+<li>output.mp4 输出文件</li>
+</ul>
+<h2 id="视频翻转和旋转"><a href="#视频翻转和旋转" class="headerlink" title="视频翻转和旋转"></a>视频翻转和旋转</h2><h3 id="翻转"><a href="#翻转" class="headerlink" title="翻转"></a>翻转</h3><h4 id="水平翻转语法-vf-hflip"><a href="#水平翻转语法-vf-hflip" class="headerlink" title="水平翻转语法: -vf hflip"></a>水平翻转语法: -vf hflip</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -i out.mp4 -vf hflip</span><br></pre></td></tr></table></figure>
+<h4 id="垂直翻转语法：-vf-vflip"><a href="#垂直翻转语法：-vf-vflip" class="headerlink" title="垂直翻转语法：-vf vflip"></a>垂直翻转语法：-vf vflip</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -i out.mp4 -vf vflip</span><br></pre></td></tr></table></figure>
+<h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><p>语法：<code>transpose={0,1,2,3}</code></p>
+<ul>
+<li>0:逆时针旋转90°然后垂直翻转</li>
+<li>1:顺时针旋转90°</li>
+<li>2:逆时针旋转90°</li>
+<li>3:顺时针旋转90°然后水平翻转</li>
+</ul>
+<h3 id="将视频顺时针旋转90度"><a href="#将视频顺时针旋转90度" class="headerlink" title="将视频顺时针旋转90度"></a>将视频顺时针旋转90度</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -i out.mp4 -vf transpose=1</span><br></pre></td></tr></table></figure>
+<h3 id="将视频水平翻转-左右翻转"><a href="#将视频水平翻转-左右翻转" class="headerlink" title="将视频水平翻转(左右翻转)"></a>将视频水平翻转(左右翻转)</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -i out.mp4 -vf hflip</span><br></pre></td></tr></table></figure>
+<h3 id="顺时针旋转90度并水平翻转"><a href="#顺时针旋转90度并水平翻转" class="headerlink" title="顺时针旋转90度并水平翻转"></a>顺时针旋转90度并水平翻转</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffplay -i out.mp4 -vf transpose=1,hflip</span><br></pre></td></tr></table></figure>
+<h2 id="添加字幕"><a href="#添加字幕" class="headerlink" title="添加字幕"></a>添加字幕</h2><p>有的时候你需要给视频加一个字幕(subtitle)，使用ffmpeg也可以做。一般我们见到的字幕以srt字幕为主，在ffmpeg里需要首先将srt字幕转化为ass字幕，然后就可以集成到视频中了(不是单独的字幕流，而是直接改写视频流)。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i my_subtitle.srt my_subtitle.ass</span><br><span class="line">ffmpeg -i inputfile.mp4 -vf ass=my_subtitle.ass outputfile.mp4</span><br></pre></td></tr></table></figure>
+<p>但是值得注意的是：</p>
+<blockquote>
+<p><code>my_subtitle.srt</code>需要使用<code>UTF8</code>编码，老外不会注意到这一点，但是中文这是必须要考虑的；</p>
+</blockquote>
+<p>将字幕直接写入视频流需要将每个字符渲染到画面上，因此有一个字体的问题，在<code>ass</code>文件中会指定一个缺省字体，例如<code>Arial</code>，但是我们首先需要让<code>ffmpeg</code>能找到字体文件，不然文字的渲染就无从谈起了。<code>ffmpeg</code>使用了<code>fontconfig</code>来设置字体配置。你需要首先设置一下<code>FONTCONFIG_PATH</code>或者<code>FONTCONFIG_FILE</code>环境变量，不然<code>fontconfig</code>是无法找到配置文件的，这一点请参看这篇文章，如果你设置的是<code>FONTCONFIG_PATH</code>，那把配置文件保存为<code>%FONTCONFIG_PATH%/font.conf</code>即可，然后你可以在<code>font.conf</code>文件中配置字体文件的路径之类的。</p>
+<p><code>Windows</code>下为<code>fontconfig</code>设置如下的环境变量</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FC_CONFIG_DIR=C:\ffmpeg</span><br><span class="line">FONTCONFIG_FILE=font.conf</span><br><span class="line">FONTCONFIG_PATH=C:\ffmpeg</span><br><span class="line">PATH=C:\ffmpeg\bin;%PATH%</span><br></pre></td></tr></table></figure>
+<p>下面是一个简单的<code>Windows</code>版<code>font.conf</code>文件。</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">fontconfig</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dir</span>&gt;</span>C:\WINDOWS\Fonts<span class="hljs-tag">&lt;/<span class="hljs-name">dir</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">match</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"pattern"</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">qual</span>=<span class="hljs-string">"any"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>mono<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">edit</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"assign"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">edit</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">match</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">match</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"pattern"</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">qual</span>=<span class="hljs-string">"all"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"not_eq"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>sans-serif<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">qual</span>=<span class="hljs-string">"all"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"not_eq"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>serif<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">qual</span>=<span class="hljs-string">"all"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"not_eq"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">edit</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"append_last"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>sans-serif<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">edit</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">match</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Times<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Times New Roman<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">default</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>serif<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">default</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Helvetica<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Arial<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">default</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>sans<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">default</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Courier<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Courier New<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">default</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">default</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>serif<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Times New Roman<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>sans<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Arial<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Andale Mono<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">match</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"pattern"</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"eq"</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Courier New<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">edit</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"prepend"</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;/<span class="hljs-name">edit</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">match</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">match</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"pattern"</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"eq"</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Courier<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;<span class="hljs-name">edit</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"prepend"</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span></span><br><span class="line">   <span class="hljs-tag">&lt;/<span class="hljs-name">edit</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">match</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">fontconfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面这个是<code>Linux</code>系统下改版过来的</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="hljs-meta">&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!-- /etc/fonts/fonts.conf file to configure system font access --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">fontconfig</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!-- </span></span><br><span class="line"><span class="hljs-comment">    Find fonts in these directories</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dir</span>&gt;</span>C:/Windows/Fonts<span class="hljs-tag">&lt;/<span class="hljs-name">dir</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">&lt;dir&gt;/usr/X11R6/lib/X11/fonts&lt;/dir&gt;</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">    Accept deprecated 'mono' alias, replacing it with 'monospace'</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">match</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"pattern"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">test</span> <span class="hljs-attr">qual</span>=<span class="hljs-string">"any"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>mono<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">edit</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"family"</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">"assign"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">edit</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">match</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">    Load per-user customization file, but don't complain</span></span><br><span class="line"><span class="hljs-comment">    if it doesn't exist</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">ignore_missing</span>=<span class="hljs-string">"yes"</span> <span class="hljs-attr">prefix</span>=<span class="hljs-string">"xdg"</span>&gt;</span>fontconfig/fonts.conf<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">    Load local customization files, but don't complain</span></span><br><span class="line"><span class="hljs-comment">    if there aren't any</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">ignore_missing</span>=<span class="hljs-string">"yes"</span>&gt;</span>conf.d<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">ignore_missing</span>=<span class="hljs-string">"yes"</span>&gt;</span>local.conf<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">    Alias well known font names to available TrueType fonts.</span></span><br><span class="line"><span class="hljs-comment">    These substitute TrueType faces for similar Type1</span></span><br><span class="line"><span class="hljs-comment">    faces to improve screen appearance.</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Times<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Times New Roman<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">default</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>serif<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">default</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Helvetica<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Arial<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">default</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>sans<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">default</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Courier<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Courier New<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">default</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">default</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&lt;!--</span></span><br><span class="line"><span class="hljs-comment">    Provide required aliases for standard names</span></span><br><span class="line"><span class="hljs-comment">    Do these after the users configuration file so that</span></span><br><span class="line"><span class="hljs-comment">    any aliases there are used preferentially</span></span><br><span class="line"><span class="hljs-comment">--&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>serif<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Times New Roman<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>sans<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Arial<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>monospace<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">prefer</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">family</span>&gt;</span>Andale Mono<span class="hljs-tag">&lt;/<span class="hljs-name">family</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">prefer</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">alias</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">fontconfig</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>参考：</p>
-<p><a href="https://caffe.berkeleyvision.org/gathered/examples/mnist.html" target="_blank" rel="noopener">Training LeNet on MNIST with Caffe</a></p>
-<p><a href="http://shengshuyang.github.io/A-step-by-step-guide-to-Caffe.html" target="_blank" rel="noopener">A step by step guide to Caffe</a></p>
-<p><a href="http://caffe.berkeleyvision.org/" target="_blank" rel="noopener">Caffe</a></p>
-<p><a href="https://github.com/BVLC/caffe/wiki/Model-Zoo#cnn-object-proposal-models-for-salient-object-detection" target="_blank" rel="noopener">Caffe Model zoo</a></p>
+<ul>
+<li><a href="http://blog.raphaelzhang.com/2013/04/video-streaming-and-ffmpeg-transcoding/" target="_blank" rel="noopener">http://blog.raphaelzhang.com/2013/04/video-streaming-and-ffmpeg-transcoding/</a></li>
+</ul>
+<h2 id="嵌入字幕"><a href="#嵌入字幕" class="headerlink" title="嵌入字幕"></a>嵌入字幕</h2><p>在一个MP4文件里面添加字幕，不是把 .srt 字幕文件集成到 MP4 文件里，而是在播放器里选择字幕，这种集成字幕比较简单，速度也相当快</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -i subtitles.srt -c:s mov_text -c:v copy -c:a copy output.mp4</span><br></pre></td></tr></table></figure>
+<p>希望字幕直接显示出来，其实也不难</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i subtitle.srt subtitle.ass</span><br><span class="line">ffmpeg -i input.mp4 -vf ass=subtitle.ass output.mp4</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="http://blog.neten.de/posts/2013/10/06/use-ffmpeg-to-burn-subtitles-into-the-video/" target="_blank" rel="noopener">http://blog.neten.de/posts/2013/10/06/use-ffmpeg-to-burn-subtitles-into-the-video/</a></li>
+</ul>
 
         </div>
         
@@ -202,7 +242,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/caffe/">caffe</a>, <a class="has-link-grey -link" href="/tags/deeplearning/">deeplearning</a>, <a class="has-link-grey -link" href="/tags/开源框架/">开源框架</a>
+                    <a class="has-link-grey -link" href="/tags/ffmpeg/">ffmpeg</a>, <a class="has-link-grey -link" href="/tags/图像处理/">图像处理</a>, <a class="has-link-grey -link" href="/tags/音频处理/">音频处理</a>
                 </div>
             </div>
         </div>
@@ -219,17 +259,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/87698413.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Linux进程</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/c002250d.html">
-                <span class="level-item">Markdown 记要</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/9027adc3.html">
+                <span class="level-item">计算机视觉学习路线</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -323,25 +356,153 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#准备数据">
+        <a class="is-flex" href="#截图命令">
         <span class="has-mr-6">1</span>
-        <span>准备数据</span>
+        <span>截图命令</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#截取一张352x240尺寸大小，格式为jpg的图片">
+        <span class="has-mr-6">1.1</span>
+        <span>截取一张352x240尺寸大小，格式为jpg的图片</span>
         </a></li><li>
-        <a class="is-flex" href="#定义-Net">
+        <a class="is-flex" href="#把视频的前30帧转换成一个Animated-Gif">
+        <span class="has-mr-6">1.2</span>
+        <span>把视频的前30帧转换成一个Animated Gif</span>
+        </a></li><li>
+        <a class="is-flex" href="#在视频的第8-01秒出截取230x240的缩略图">
+        <span class="has-mr-6">1.3</span>
+        <span>在视频的第8.01秒出截取230x240的缩略图</span>
+        </a></li><li>
+        <a class="is-flex" href="#每隔一秒截一张图">
+        <span class="has-mr-6">1.4</span>
+        <span>每隔一秒截一张图</span>
+        </a></li><li>
+        <a class="is-flex" href="#每隔20秒截一张图">
+        <span class="has-mr-6">1.5</span>
+        <span>每隔20秒截一张图</span>
+        </a></li><li>
+        <a class="is-flex" href="#多张截图合并到一个文件里（2x3）每隔一千帧-秒数-1000-fps25-即40s截一张图">
+        <span class="has-mr-6">1.6</span>
+        <span>多张截图合并到一个文件里（2x3）每隔一千帧(秒数=1000/fps25)即40s截一张图</span>
+        </a></li><li>
+        <a class="is-flex" href="#从视频中生成GIF图片">
+        <span class="has-mr-6">1.7</span>
+        <span>从视频中生成GIF图片</span>
+        </a></li><li>
+        <a class="is-flex" href="#转换视频为图片（每帧一张图）">
+        <span class="has-mr-6">1.8</span>
+        <span>转换视频为图片（每帧一张图）</span>
+        </a></li><li>
+        <a class="is-flex" href="#图片转换为视频">
+        <span class="has-mr-6">1.9</span>
+        <span>图片转换为视频</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#切分视频并生成M3U8文件">
         <span class="has-mr-6">2</span>
-        <span>定义 Net</span>
+        <span>切分视频并生成M3U8文件</span>
         </a></li><li>
-        <a class="is-flex" href="#配置-Solver">
+        <a class="is-flex" href="#分离视频音频流">
         <span class="has-mr-6">3</span>
-        <span>配置 Solver</span>
+        <span>分离视频音频流</span>
         </a></li><li>
-        <a class="is-flex" href="#训练">
+        <a class="is-flex" href="#视频解复用">
         <span class="has-mr-6">4</span>
-        <span>训练</span>
+        <span>视频解复用</span>
         </a></li><li>
-        <a class="is-flex" href="#测试">
+        <a class="is-flex" href="#视频转码">
         <span class="has-mr-6">5</span>
-        <span>测试</span>
+        <span>视频转码</span>
+        </a></li><li>
+        <a class="is-flex" href="#视频封装">
+        <span class="has-mr-6">6</span>
+        <span>视频封装</span>
+        </a></li><li>
+        <a class="is-flex" href="#视频剪切">
+        <span class="has-mr-6">7</span>
+        <span>视频剪切</span>
+        </a></li><li>
+        <a class="is-flex" href="#视频录制">
+        <span class="has-mr-6">8</span>
+        <span>视频录制</span>
+        </a></li><li>
+        <a class="is-flex" href="#YUV序列播放">
+        <span class="has-mr-6">9</span>
+        <span>YUV序列播放</span>
+        </a></li><li>
+        <a class="is-flex" href="#YUV序列转AVI">
+        <span class="has-mr-6">10</span>
+        <span>YUV序列转AVI</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#常用参数说明">
+        <span class="has-mr-6">10.1</span>
+        <span>常用参数说明</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#主要参数">
+        <span class="has-mr-6">10.1.1</span>
+        <span>主要参数</span>
+        </a></li><li>
+        <a class="is-flex" href="#视频参数">
+        <span class="has-mr-6">10.1.2</span>
+        <span>视频参数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#音频参数">
+        <span class="has-mr-6">10.2</span>
+        <span>音频参数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#使用ffmpeg合并MP4文件">
+        <span class="has-mr-6">11</span>
+        <span>使用ffmpeg合并MP4文件</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用ffmpeg转换flv到mp4">
+        <span class="has-mr-6">12</span>
+        <span>使用ffmpeg转换flv到mp4</span>
+        </a></li><li>
+        <a class="is-flex" href="#视频添加水印">
+        <span class="has-mr-6">13</span>
+        <span>视频添加水印</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#水印局中">
+        <span class="has-mr-6">13.1</span>
+        <span>水印局中</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#视频翻转和旋转">
+        <span class="has-mr-6">14</span>
+        <span>视频翻转和旋转</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#翻转">
+        <span class="has-mr-6">14.1</span>
+        <span>翻转</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#水平翻转语法-vf-hflip">
+        <span class="has-mr-6">14.1.1</span>
+        <span>水平翻转语法: -vf hflip</span>
+        </a></li><li>
+        <a class="is-flex" href="#垂直翻转语法：-vf-vflip">
+        <span class="has-mr-6">14.1.2</span>
+        <span>垂直翻转语法：-vf vflip</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#旋转">
+        <span class="has-mr-6">14.2</span>
+        <span>旋转</span>
+        </a></li><li>
+        <a class="is-flex" href="#将视频顺时针旋转90度">
+        <span class="has-mr-6">14.3</span>
+        <span>将视频顺时针旋转90度</span>
+        </a></li><li>
+        <a class="is-flex" href="#将视频水平翻转-左右翻转">
+        <span class="has-mr-6">14.4</span>
+        <span>将视频水平翻转(左右翻转)</span>
+        </a></li><li>
+        <a class="is-flex" href="#顺时针旋转90度并水平翻转">
+        <span class="has-mr-6">14.5</span>
+        <span>顺时针旋转90度并水平翻转</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#添加字幕">
+        <span class="has-mr-6">15</span>
+        <span>添加字幕</span>
+        </a></li><li>
+        <a class="is-flex" href="#嵌入字幕">
+        <span class="has-mr-6">16</span>
+        <span>嵌入字幕</span>
         </a></li></ul>
         </div>
     </div>
@@ -1571,7 +1732,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="【Caffe】Caffe实战手写数字分类" height="28">
+                    <img src="/images/logo.svg" alt="FFMPEG使用说明" height="28">
                 
                 </a>
                 <p class="is-size-7">
