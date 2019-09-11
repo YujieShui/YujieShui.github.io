@@ -175,18 +175,18 @@
 <figure class="highlight protobuf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">layer &#123;</span><br><span class="line">  name: <span class="hljs-string">"mnist"</span> # 名称</span><br><span class="line">  type: <span class="hljs-string">"Data"</span> # 输入层</span><br><span class="line">  transform_param &#123;</span><br><span class="line">    scale: <span class="hljs-number">0.00390625</span> # 归一化，范围为 <span class="hljs-number">0</span>-<span class="hljs-number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  data_param &#123;</span><br><span class="line">    source: <span class="hljs-string">"mnist_train_lmdb"</span> # 指定要读取的数据</span><br><span class="line">    backend: LMDB</span><br><span class="line">    batch_size: <span class="hljs-number">64</span></span><br><span class="line">  &#125;</span><br><span class="line">  top: <span class="hljs-string">"data"</span></span><br><span class="line">  top: <span class="hljs-string">"label"</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>我们可以通过 <a href="http://ethereon.github.io/netscope/#/editor" target="_blank" rel="noopener">http://ethereon.github.io/netscope/#/editor</a> 生成网络图像，或者使用 caffe 提供的脚本，它在<code>caffe/python/draw_net.py</code>。</p>
 <h1 id="配置-Solver"><a href="#配置-Solver" class="headerlink" title="配置 Solver"></a>配置 Solver</h1><p>Solver 用来指定训练的一些参数，比如使用哪个网络、迭代次数、优化方法、使用 GPU 还是 CPU 等信息。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The train/<span class="hljs-built_in">test</span> net protocol buffer definition</span></span><br><span class="line">net: "examples/mnist/lenet_train_test.prototxt"</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> test_iter specifies how many forward passes the <span class="hljs-built_in">test</span> should carry out.</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> In the <span class="hljs-keyword">case</span> of MNIST, we have <span class="hljs-built_in">test</span> batch size 100 and 100 <span class="hljs-built_in">test</span> iterations,</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> covering the full 10,000 testing images.</span></span><br><span class="line">test_iter: 100</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> Carry out testing every 500 training iterations.</span></span><br><span class="line">test_interval: 500</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The base learning rate, momentum and the weight decay of the network.</span></span><br><span class="line">base_lr: 0.01</span><br><span class="line">momentum: 0.9</span><br><span class="line">weight_decay: 0.0005</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The learning rate policy</span></span><br><span class="line">lr_policy: "inv"</span><br><span class="line">gamma: 0.0001</span><br><span class="line">power: 0.75</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> Display every 100 iterations</span></span><br><span class="line">display: 100</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> The maximum number of iterations</span></span><br><span class="line">max_iter: 10000</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> snapshot intermediate results</span></span><br><span class="line">snapshot: 5000</span><br><span class="line">snapshot_prefix: "examples/mnist/lenet"</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> solver mode: CPU or GPU</span></span><br><span class="line">solver_mode: GPU</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> The train/test net protocol buffer definition</span><br><span class="line">net: "examples/mnist/lenet_train_test.prototxt"</span><br><span class="line"><span class="hljs-meta">#</span> test_iter specifies how many forward passes the test should carry out.</span><br><span class="line"><span class="hljs-meta">#</span> In the case of MNIST, we have test batch size 100 and 100 test iterations,</span><br><span class="line"><span class="hljs-meta">#</span> covering the full 10,000 testing images.</span><br><span class="line">test_iter: 100</span><br><span class="line"><span class="hljs-meta">#</span> Carry out testing every 500 training iterations.</span><br><span class="line">test_interval: 500</span><br><span class="line"><span class="hljs-meta">#</span> The base learning rate, momentum and the weight decay of the network.</span><br><span class="line">base_lr: 0.01</span><br><span class="line">momentum: 0.9</span><br><span class="line">weight_decay: 0.0005</span><br><span class="line"><span class="hljs-meta">#</span> The learning rate policy</span><br><span class="line">lr_policy: "inv"</span><br><span class="line">gamma: 0.0001</span><br><span class="line">power: 0.75</span><br><span class="line"><span class="hljs-meta">#</span> Display every 100 iterations</span><br><span class="line">display: 100</span><br><span class="line"><span class="hljs-meta">#</span> The maximum number of iterations</span><br><span class="line">max_iter: 10000</span><br><span class="line"><span class="hljs-meta">#</span> snapshot intermediate results</span><br><span class="line">snapshot: 5000</span><br><span class="line">snapshot_prefix: "examples/mnist/lenet"</span><br><span class="line"><span class="hljs-meta">#</span> solver mode: CPU or GPU</span><br><span class="line">solver_mode: GPU</span><br></pre></td></tr></table></figure>
 <h1 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h1><p>训练的时候指定 Solver，保存权值文件的路径，日志：<code>./examples/mnist/train_lenet.sh -gpu 1</code></p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/usr/bin/env sh</span></span><br><span class="line">set -e</span><br><span class="line">SOLVER=examples/mnist/lenet_solver.prototxt</span><br><span class="line">WEIGHTS=./lenet_iter_10000.caffemodel</span><br><span class="line">./build/tools/caffe train --solver=$&#123;SOLVER&#125; $@ 2&gt;&amp;1 | tee log.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/usr/bin/env sh</span><br><span class="line">set -e</span><br><span class="line">SOLVER=examples/mnist/lenet_solver.prototxt</span><br><span class="line">WEIGHTS=./lenet_iter_10000.caffemodel</span><br><span class="line">./build/tools/caffe train --solver=$&#123;SOLVER&#125; $@ 2&gt;&amp;1 | tee log.txt</span><br></pre></td></tr></table></figure>
 <p>通过解析日志，我们能够可视化模型训练过程中的 accuray 和 loss 的情况。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 解析日志文件,将 acc 和 loss 输出到 .refine 文件</span></span><br><span class="line">grep "Test net output #0: accuracy =" log.txt &gt; trainacc.refine</span><br><span class="line">grep "Test net output #1: loss =" log.txt &gt; trainloss.refine</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 生成如下所示的 .refine 文件</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> trainacc.refine</span></span><br><span class="line">I0615 10:16:15.671094 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.061339 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.451835 11161 solver.cpp:414] Test net output #0: accuracy = 0.988</span><br><span class="line">I0615 10:16:16.850911 11161 solver.cpp:414] Test net output #0: accuracy = 0.9906</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> trainloss.refine</span></span><br><span class="line">I0615 10:16:15.671116 11161 solver.cpp:414] Test net output #1: loss = 0.0298686 (* 1 = 0.0298686 loss)</span><br><span class="line">I0615 10:16:16.061362 11161 solver.cpp:414] Test net output #1: loss = 0.0285139 (* 1 = 0.0285139 loss)</span><br><span class="line">I0615 10:16:16.451859 11161 solver.cpp:414] Test net output #1: loss = 0.0348767 (* 1 = 0.0348767 loss)</span><br><span class="line">I0615 10:16:16.850932 11161 solver.cpp:414] Test net output #1: loss = 0.0284803 (* 1 = 0.0284803 loss)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 接着用 python 脚本解析 .refine 绘制 acc 和 loss 曲线</span></span><br><span class="line">python show_acc.py</span><br><span class="line">python show_loss.py</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 解析日志文件,将 acc 和 loss 输出到 .refine 文件</span><br><span class="line">grep "Test net output #0: accuracy =" log.txt &gt; trainacc.refine</span><br><span class="line">grep "Test net output #1: loss =" log.txt &gt; trainloss.refine</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 生成如下所示的 .refine 文件</span><br><span class="line"><span class="hljs-meta">#</span> trainacc.refine</span><br><span class="line">I0615 10:16:15.671094 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.061339 11161 solver.cpp:414] Test net output #0: accuracy = 0.9903</span><br><span class="line">I0615 10:16:16.451835 11161 solver.cpp:414] Test net output #0: accuracy = 0.988</span><br><span class="line">I0615 10:16:16.850911 11161 solver.cpp:414] Test net output #0: accuracy = 0.9906</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> trainloss.refine</span><br><span class="line">I0615 10:16:15.671116 11161 solver.cpp:414] Test net output #1: loss = 0.0298686 (* 1 = 0.0298686 loss)</span><br><span class="line">I0615 10:16:16.061362 11161 solver.cpp:414] Test net output #1: loss = 0.0285139 (* 1 = 0.0285139 loss)</span><br><span class="line">I0615 10:16:16.451859 11161 solver.cpp:414] Test net output #1: loss = 0.0348767 (* 1 = 0.0348767 loss)</span><br><span class="line">I0615 10:16:16.850932 11161 solver.cpp:414] Test net output #1: loss = 0.0284803 (* 1 = 0.0284803 loss)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 接着用 python 脚本解析 .refine 绘制 acc 和 loss 曲线</span><br><span class="line">python show_acc.py</span><br><span class="line">python show_loss.py</span><br></pre></td></tr></table></figure>
 <p>Python 脚本可以在 <a href="https://gist.github.com/YujieShui/67933c77054410461cb18c031b36057d" target="_blank" rel="noopener">Github Gist</a> 中查看，需要根据之前生成的日志进行小改动。</p>
 <p><img src="http://image.shuiyujie.com/2019-06-17-19-13-31.png" alt="train_loss"></p>
 <p>可以看到迭代 100 次 loss 已经降到很低了,之后略有降低,300次左右基本上就在 0.3, 0.4 左右</p>
 <p><img src="http://image.shuiyujie.com/2019-06-17-19-14-19.png" alt="train_accuracy"></p>
 <p>与之相对的，100 次左右准确率就有 0.96 了,缓慢上升,最后准确率稳定在 0.98 。</p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>测试的方法和训练的方法基本一致，使用 <code>./examples/mnist/test_lenet.sh -gpu 1</code></p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/usr/bin/env sh</span></span><br><span class="line">set -e</span><br><span class="line">MODEL=examples/mnist/lenet_iter_10000.caffemodel</span><br><span class="line">TRAIN_NET=examples/mnist/lenet_train_test.prototxt</span><br><span class="line">./build/tools/caffe test -model $&#123;TRAIN_NET&#125; -weights $&#123;MODEL&#125; $@ 2&gt;&amp;1 | tee test_log.txt</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 结果如下所示</span></span><br><span class="line">...</span><br><span class="line">I0616 15:29:32.107722 13441 caffe.cpp:304] Batch 49, accuracy = 1</span><br><span class="line">I0616 15:29:32.107739 13441 caffe.cpp:304] Batch 49, loss = 0.00704199</span><br><span class="line">I0616 15:29:32.107748 13441 caffe.cpp:309] Loss: 0.0412109</span><br><span class="line">I0616 15:29:32.107769 13441 caffe.cpp:321] accuracy = 0.9862</span><br><span class="line">I0616 15:29:32.107782 13441 caffe.cpp:321] loss = 0.0412109 (* 1 = 0.0412109 loss)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/usr/bin/env sh</span><br><span class="line">set -e</span><br><span class="line">MODEL=examples/mnist/lenet_iter_10000.caffemodel</span><br><span class="line">TRAIN_NET=examples/mnist/lenet_train_test.prototxt</span><br><span class="line">./build/tools/caffe test -model $&#123;TRAIN_NET&#125; -weights $&#123;MODEL&#125; $@ 2&gt;&amp;1 | tee test_log.txt</span><br><span class="line"><span class="hljs-meta">#</span> 结果如下所示</span><br><span class="line">...</span><br><span class="line">I0616 15:29:32.107722 13441 caffe.cpp:304] Batch 49, accuracy = 1</span><br><span class="line">I0616 15:29:32.107739 13441 caffe.cpp:304] Batch 49, loss = 0.00704199</span><br><span class="line">I0616 15:29:32.107748 13441 caffe.cpp:309] Loss: 0.0412109</span><br><span class="line">I0616 15:29:32.107769 13441 caffe.cpp:321] accuracy = 0.9862</span><br><span class="line">I0616 15:29:32.107782 13441 caffe.cpp:321] loss = 0.0412109 (* 1 = 0.0412109 loss)</span><br></pre></td></tr></table></figure>
 <p>用上面同样的方法能够可视化测试的 loss 和 accuracy。</p>
 <hr>
 <p>本文介绍了 Caffe 的基本使用流程，这样就可以把一些别人写好的网络用起来了。进一步我们需要了解如何用 Caffe 自定义网络结构，调整网络的参数，完成更加个性化的任务。</p>
@@ -281,7 +281,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        75
+                        76
                     </p>
                 </div>
             </div>
@@ -291,7 +291,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        9
+                        11
                     </p>
                 </div>
             </div>
@@ -301,7 +301,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        40
+                        41
                     </p>
                 </div>
             </div>
@@ -406,9 +406,25 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">16</span>
+                <span class="level-item tag">17</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Java/JVM/">
+            <span class="level-start">
+                <span class="level-item">JVM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/Java并发编程/">
+            <span class="level-start">
+                <span class="level-item">Java并发编程</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
                 <span class="level-item">Linux</span>
@@ -468,7 +484,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.25px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.25px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 13.75px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 18.75px;">java</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.75px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.25px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.25px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.25px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12.5px;">图像处理</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11.25px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.25px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.75px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.25px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.25px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/deeplearning/" style="font-size: 13.75px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 18.75px;">java</a> <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.75px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.25px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.25px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.25px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12.5px;">图像处理</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11.25px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.25px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.75px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 12.5px;">网站</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -482,6 +498,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-11T15:02:35.000Z">2019-09-11</time></div>
+                    <a href="/post/5b2f68e0.html" class="has-link-black-ter is-size-6">JVM-双亲委派模型</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -529,20 +558,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-09T14:18:02.000Z">2019-09-09</time></div>
                     <a href="/post/3e6f77c3.html" class="has-link-black-ter is-size-6">【Java并发编程】Lock&amp;Condition</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-08T02:47:53.000Z">2019-09-08</time></div>
-                    <a href="/post/541ca933.html" class="has-link-black-ter is-size-6">【Java并发编程】Java线程的生命周期</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Java并发编程/">Java并发编程</a>
                     </p>
                 </div>
             </div>
@@ -566,7 +582,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -814,7 +830,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">16</span>
+                        <span class="tag is-grey">17</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1034,6 +1057,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-11T15:02:35.000Z">2019-09-11</time></div>
+                    <a href="/post/5b2f68e0.html" class="has-link-black-ter is-size-6">JVM-双亲委派模型</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-11T14:35:24.000Z">2019-09-11</time></div>
                     <a href="/post/20fed56f.html" class="has-link-black-ter is-size-6">FFMPEG使用说明</a>
                     <p class="is-size-7 is-uppercase">
@@ -1076,20 +1112,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-09T14:18:02.000Z">2019-09-09</time></div>
                     <a href="/post/3e6f77c3.html" class="has-link-black-ter is-size-6">【Java并发编程】Lock&amp;Condition</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-08T02:47:53.000Z">2019-09-08</time></div>
-                    <a href="/post/541ca933.html" class="has-link-black-ter is-size-6">【Java并发编程】Java线程的生命周期</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Java并发编程/">Java并发编程</a>
                     </p>
                 </div>
             </div>
@@ -1113,7 +1136,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
@@ -1361,7 +1384,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">16</span>
+                        <span class="tag is-grey">17</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
