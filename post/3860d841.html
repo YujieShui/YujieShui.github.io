@@ -7,21 +7,21 @@
 
 
 
-    <meta name="description" content="在JVM-Java中的类加载机制一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。 那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？ 什么是 JVM 中的内存区域划分当 JVM 运行我们的代码时，它会使用多块不同的内存，不同的内存存放">
+    <meta name="description" content="在JVM-Java中的类加载机制一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。 那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？">
 <meta name="keywords" content="java,jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM-JVM中内存区域划分">
 <meta property="og:url" content="http://shuiyujie.com/post/3860d841.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="在JVM-Java中的类加载机制一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。 那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？ 什么是 JVM 中的内存区域划分当 JVM 运行我们的代码时，它会使用多块不同的内存，不同的内存存放">
+<meta property="og:description" content="在JVM-Java中的类加载机制一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。 那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-09-12-21-12-10.png">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-09-12-21-20-50.png">
 <meta property="og:image" content="http://image.shuiyujie.com/2019-09-12-21-44-18.png">
-<meta property="og:updated_time" content="2019-09-12T13:45:17.300Z">
+<meta property="og:updated_time" content="2019-09-12T13:47:45.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM-JVM中内存区域划分">
-<meta name="twitter:description" content="在JVM-Java中的类加载机制一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。 那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？ 什么是 JVM 中的内存区域划分当 JVM 运行我们的代码时，它会使用多块不同的内存，不同的内存存放">
+<meta name="twitter:description" content="在JVM-Java中的类加载机制一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。 那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？">
 <meta name="twitter:image" content="http://image.shuiyujie.com/2019-09-12-21-12-10.png">
 
 
@@ -148,7 +148,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 712 个字)
+                    5 分钟 读完 (大约 713 个字)
                 </span>
                 
                 
@@ -163,6 +163,7 @@
         <div class="content">
             <p>在<a href="https://shuiyujie.com/post/5e4eb5a4.html">JVM-Java中的类加载机制</a>一文中，我讲述了 Java 类加载的过程，它包含加载、验证、准备、解析、初始化、使用、卸载这几个步骤。我们在准备阶段会将类加载到内存中，为类变量分配内存并赋予初值；在初始化阶段则会正式执行初始化代码。</p>
 <p><strong>那么在准备阶段和初始化阶段，JVM 具体是怎么为类分配内存的呢？</strong></p>
+<a id="more"></a>
 <h1 id="什么是-JVM-中的内存区域划分"><a href="#什么是-JVM-中的内存区域划分" class="headerlink" title="什么是 JVM 中的内存区域划分"></a>什么是 JVM 中的内存区域划分</h1><p>当 JVM 运行我们的代码时，它会使用多块不同的内存，不同的内存存放不同的数据，再配合代码的执行流程，这样就能把程序运行起来了。</p>
 <p><img src="http://image.shuiyujie.com/2019-09-12-21-12-10.png" alt="JVM内存区域"></p>
 <p>概括来讲 JVM 中的内存空间可以分成三大块：</p>
