@@ -2,18 +2,27 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: darknet - 深页</title>
+<title>JVM-如何设置JVM的参数 - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/darknet/index.html">
+    <meta name="description" content="新生代、老生代、永久代的概念 JVM内存相关核心参数图解 如何在启动系统的时候设置 JVM 参数">
+<meta name="keywords" content="java,jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM-如何设置JVM的参数">
+<meta property="og:url" content="http://shuiyujie.com/post/1410ce3d.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="新生代、老生代、永久代的概念 JVM内存相关核心参数图解 如何在启动系统的时候设置 JVM 参数">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-13-16-10-29.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-13-16-42-52.png">
+<meta property="og:image" content="http://image.shuiyujie.com/Java内存参数设置.png">
+<meta property="og:updated_time" content="2019-09-13T09:00:47.681Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="JVM-如何设置JVM的参数">
+<meta name="twitter:description" content="新生代、老生代、永久代的概念 JVM内存相关核心参数图解 如何在启动系统的时候设置 JVM 参数">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-09-13-16-10-29.png">
 
 
 
@@ -85,7 +94,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="JVM-如何设置JVM的参数" height="28">
             
             </a>
         </div>
@@ -106,6 +115,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,33 +133,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">darknet</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-13T13:09:45.000Z">2019-06-13</time>
+                <time class="level-item has-text-grey" datetime="2019-09-13T07:58:49.000Z">2019-09-13</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                <a class="has-link-grey -link" href="/categories/Java/">Java</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 10548 个字)
+                    4 分钟 读完 (大约 549 个字)
                 </span>
                 
                 
@@ -155,31 +157,49 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/5ba44047.html">【Darknet】darknet实战</a>
+                JVM-如何设置JVM的参数
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-06-13-21-01-25.png" alt="darknet"></p>
-<blockquote>
-<p>Darknet is an open source neural network framework written in C and CUDA. It is fast, easy to install, and supports CPU and GPU computation.</p>
-<p>—— <a href="https://pjreddie.com/darknet/" target="_blank" rel="noopener">https://pjreddie.com/darknet/</a></p>
-</blockquote>
-<p>本文是对使用 darknet 进行目标检测的小结，包括：</p>
-<ol>
-<li>数据集准备：如何使用 labelimage 对数据进行标注，注意事项，文件格式转换</li>
-<li>darknet 使用：如何编译和修改配置文件</li>
-<li>模型评估：如何查看 loss、计算 IoU、recall、mAP</li>
+            <ol>
+<li>新生代、老生代、永久代的概念</li>
+<li>JVM内存相关核心参数图解</li>
+<li>如何在启动系统的时候设置 JVM 参数</li>
 </ol>
+<a id="more"></a>
+<h1 id="新生代、老生代、永久代的概念"><a href="#新生代、老生代、永久代的概念" class="headerlink" title="新生代、老生代、永久代的概念"></a>新生代、老生代、永久代的概念</h1><p><a href="https://shuiyujie.com/post/3860d841.html#more">JVM-JVM中内存区域划分</a>这一章中讲过，每执行一个方法，该方法都会有一个栈帧进入 Java 虚拟机栈，栈帧中保存着方法中的局部变量、返回值地址等信息。</p>
+<p>栈帧中保存的局部变量如果是一个对象，它就会指向 Java 堆中某个具体的对象实例，如下图所示：</p>
+<p><img src="http://image.shuiyujie.com/2019-09-13-16-10-29.png" alt="Java虚拟机栈和 Java 堆"></p>
+<ul>
+<li>新生代：刚创建的对象都会在新生代，变量将会指向这个对象实例。如果没有任何变量指向这个对象，该对象就可能被回收。</li>
+<li>老年代：新生代内存满了之后就会触发 <code>Minor GC</code> ，垃圾回收器会回收新生代中没有人引用的对象实例。如果一个对象实例经过10多次回收都没有被回收掉，就算它年龄有 10 多岁了，将会进入到老年代。</li>
+<li>永久代：可以理解成方法区中的类和类信息</li>
+</ul>
+<h1 id="JVM内存相关核心参数图解"><a href="#JVM内存相关核心参数图解" class="headerlink" title="JVM内存相关核心参数图解"></a>JVM内存相关核心参数图解</h1><p>在JVM内存分配中的核心参数，如下所示。</p>
+<ol>
+<li><strong>-Xms</strong>：Java堆内存的大小</li>
+<li><strong>-Xmx</strong>：Java堆内存的最大大小</li>
+<li><strong>-Xmn</strong>：Java堆内存中的新生代大小，扣除新生代剩下的就是老年代的内存大小了</li>
+<li><strong>-XX:PermSize</strong>：永久代大小</li>
+<li><strong>-XX:MaxPermSize</strong>：永久代最大大小</li>
+<li><strong>-Xss</strong>：每个线程的栈内存大小</li>
+</ol>
+<p><img src="http://image.shuiyujie.com/2019-09-13-16-42-52.png" alt="JVM内存参数"></p>
+<h1 id="启动时设置-JVM-参数"><a href="#启动时设置-JVM-参数" class="headerlink" title="启动时设置 JVM 参数"></a>启动时设置 JVM 参数</h1><p>IDEA 可以在 <code>Run-edit configration..</code> 中设置参数，如下所示：</p>
+<p><img src="http://image.shuiyujie.com/Java内存参数设置.png" alt="Java内存参数设置"></p>
+<p>如果在线上部署系统，可以使用<code>java -jar</code>方式启动，如：<code>java -Xms512M -Xmx512M -Xmn256M -Xss1M -XX:PermSize=128M -XX:MaxPermSize=128M -jar App.jar</code></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/5ba44047.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/java/">java</a>, <a class="has-link-grey -link" href="/tags/jvm/">jvm</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -189,7 +209,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/3860d841.html">
+                <span class="level-item">JVM-JVM中内存区域划分</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -270,6 +302,29 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#新生代、老生代、永久代的概念">
+        <span class="has-mr-6">1</span>
+        <span>新生代、老生代、永久代的概念</span>
+        </a></li><li>
+        <a class="is-flex" href="#JVM内存相关核心参数图解">
+        <span class="has-mr-6">2</span>
+        <span>JVM内存相关核心参数图解</span>
+        </a></li><li>
+        <a class="is-flex" href="#启动时设置-JVM-参数">
+        <span class="has-mr-6">3</span>
+        <span>启动时设置 JVM 参数</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1524,7 +1579,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="JVM-如何设置JVM的参数" height="28">
                 
                 </a>
                 <p class="is-size-7">
