@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>如何自建数据集 - 深页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="(1) 学会使用爬虫爬取图像和视频,从视频中提取图片。 (2) 对获得的图片数据进行整理,包括重命名,格式统一,去重。">
+<meta name="keywords" content="deeplearning,dataset">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何自建数据集">
+<meta property="og:url" content="http://shuiyujie.com/post/b64b0362.html">
+<meta property="og:site_name" content="深页">
+<meta property="og:description" content="(1) 学会使用爬虫爬取图像和视频,从视频中提取图片。 (2) 对获得的图片数据进行整理,包括重命名,格式统一,去重。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-06-04-22-23-29.png">
+<meta property="og:updated_time" content="2019-09-17T11:31:47.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何自建数据集">
+<meta name="twitter:description" content="(1) 学会使用爬虫爬取图像和视频,从视频中提取图片。 (2) 对获得的图片数据进行整理,包括重命名,格式统一,去重。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-06-04-22-23-29.png">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="如何自建数据集" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-17T11:28:57.000Z">2019-09-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2220 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                如何自建数据集
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://image.shuiyujie.com/2019-06-04-22-23-29.png" alt="自建数据集"></p>
+<p>(1) 学会使用爬虫爬取图像和视频,从视频中提取图片。</p>
+<p>(2) 对获得的图片数据进行整理,包括重命名,格式统一,去重。</p>
+<a id="more"></a>
+<h1 id="爬取图片"><a href="#爬取图片" class="headerlink" title="爬取图片"></a>爬取图片</h1><p>有些任务没有直接对应的开源数据集,或者开源数据集中的数据比较少,这就需要我们通过搜索引擎自行爬取图片。</p>
+<p><a href="https://github.com/YujieShui/deeplearning_tools/tree/master/%E7%88%AC%E8%99%AB/baidu_crawler" target="_blank" rel="noopener">百度图片爬虫</a></p>
+<p><a href="https://github.com/sczhengyabin/Image-Downloader" target="_blank" rel="noopener">Download images from Google, Bing, Baidu. 谷歌、百度、必应图片下载</a></p>
+<p><a href="https://github.com/YoongiKim/AutoCrawler" target="_blank" rel="noopener">Google, Naver multiprocess image web crawler (Selenium)</a></p>
+<h1 id="数据集整理"><a href="#数据集整理" class="headerlink" title="数据集整理"></a>数据集整理</h1><p>爬取的如果是视频需要先转换成图片，如果是图片就要做好统一格式、数据清洗的工作。</p>
+<h2 id="视频转换成图片"><a href="#视频转换成图片" class="headerlink" title="视频转换成图片"></a>视频转换成图片</h2><p>使用爬虫爬取数据,如果是视频可以使用 <code>python getimagefromvideo.py &lt;video_path&gt;</code> 将视频转换为图片</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#coding:utf8</span></span><br><span class="line"><span class="hljs-keyword">import</span> cv2</span><br><span class="line"><span class="hljs-keyword">import</span> dlib</span><br><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"></span><br><span class="line">video_capture = cv2.VideoCapture(sys.argv[<span class="hljs-number">1</span>])</span><br><span class="line">video_id = sys.argv[<span class="hljs-number">1</span>].split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">0</span>]</span><br><span class="line">os.mkdir(video_id)</span><br><span class="line"></span><br><span class="line">count = <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:</span><br><span class="line">    is_sucessfully_read, im = video_capture.read()</span><br><span class="line">    <span class="hljs-keyword">if</span> is_sucessfully_read == <span class="hljs-keyword">False</span>:</span><br><span class="line">        <span class="hljs-keyword">break</span></span><br><span class="line">    cv2.imwrite(os.path.join(video_id,str(count)+<span class="hljs-string">'.jpg'</span>),im)</span><br><span class="line">    <span class="hljs-keyword">print</span> <span class="hljs-string">"image shape="</span>,im.shape</span><br><span class="line">    count = count + <span class="hljs-number">1</span></span><br><span class="line">    <span class="hljs-keyword">print</span> count</span><br></pre></td></tr></table></figure>
+<h2 id="统一图片后缀格式"><a href="#统一图片后缀格式" class="headerlink" title="统一图片后缀格式"></a>统一图片后缀格式</h2><p>统一后缀格式可以<em>减少以后写数据 API 时的压力,也可以测试图片是不是可以正常的读取</em>,及时防止未知问题的出现,这很重要。</p>
+<p>使用 <code>python reformat_image.py &lt;images_folder_path&gt;</code> 将图片全部转换为 jpg 格式,这也是所有框架支持的格式。</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> cv2</span><br><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">listfiles</span><span class="hljs-params">(rootDir)</span>:</span></span><br><span class="line">    list_dirs = os.walk(rootDir)</span><br><span class="line">    <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> list_dirs:</span><br><span class="line">        <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> dirs:</span><br><span class="line">            <span class="hljs-keyword">print</span> os.path.join(root,d)</span><br><span class="line">        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> files:</span><br><span class="line">                </span><br><span class="line">            fileid = f.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">0</span>] </span><br><span class="line"></span><br><span class="line">            filepath = os.path.join(root,f)</span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                src = cv2.imread(filepath,<span class="hljs-number">1</span>)</span><br><span class="line">                <span class="hljs-keyword">print</span> <span class="hljs-string">"src="</span>,filepath,src.shape</span><br><span class="line">                os.remove(filepath)</span><br><span class="line">                cv2.imwrite(os.path.join(root,fileid+<span class="hljs-string">".jpg"</span>),src)</span><br><span class="line">            <span class="hljs-keyword">except</span>:</span><br><span class="line">                os.remove(filepath)</span><br><span class="line">                <span class="hljs-keyword">continue</span></span><br><span class="line"></span><br><span class="line">listfiles(sys.argv[<span class="hljs-number">1</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="按格式重命名图片"><a href="#按格式重命名图片" class="headerlink" title="按格式重命名图片"></a>按格式重命名图片</h2><p>统一格式的命名有利于区分和整理数据</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir tmp</span><br><span class="line">./rename_files_function.sh &lt;images_folder_path&gt; ./tmp/ &lt;label&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">i=0</span><br><span class="line">dir=$1</span><br><span class="line">resultdir=$2</span><br><span class="line">app=$3</span><br><span class="line">for file in $dir""* </span><br><span class="line">do </span><br><span class="line">	arr=$(echo $file | tr "/" "\n")</span><br><span class="line">	for x in $arr</span><br><span class="line">	do</span><br><span class="line">		filename=$x</span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	brr=$(echo $filename | tr "." "\n")</span><br><span class="line">	brrs=( $brr )</span><br><span class="line">	fileid=$&#123;brrs[0]&#125;</span><br><span class="line"></span><br><span class="line">	num=$&#123;#brrs[@]&#125;  </span><br><span class="line">	index=$(expr $num - 1)</span><br><span class="line">	fileformat=$&#123;brrs[index]&#125;</span><br><span class="line">	</span><br><span class="line">	echo file=""$file</span><br><span class="line">	echo fileid=""$fileid</span><br><span class="line">	echo fileformat=""$fileformat</span><br><span class="line"></span><br><span class="line">	if [ $fileformat == jpeg -o $fileformat == png -o $fileformat == jpg -o $fileformat == bmp ] ;</span><br><span class="line">    	then</span><br><span class="line">        #echo "good"</span><br><span class="line">		i=$(expr $i + 1)</span><br><span class="line">		resultfile=$resultdir""$app""$i"".$fileformat</span><br><span class="line">		echo file=""$file"",resultfile=""$resultfile</span><br><span class="line">		mv "$file" "$resultfile"</span><br><span class="line">	else</span><br><span class="line">		echo $file""not good</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo 执行删除""$dir""*</span><br><span class="line"><span class="hljs-meta">#</span>rm $dir""*</span><br><span class="line">echo 执行mv""$resultdir""*</span><br><span class="line">mv $resultdir""* $dir</span><br></pre></td></tr></table></figure>
+<h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><p>如果你使用多个关键词或者使用不同的搜索引擎同样的关键词,或者从视频中提取图片,那么爬取回来的图片很可能有重复或者非常的相似,这样的样本应该被去除。</p>
+<p>去除有很多种方法,比如直接比较两幅图像是不是完全相同,通过 hash 等相似度方法来进行相似度,这里我们提供一个方法,利用<em>相似度</em>来进行去重。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> sudo pip install python-Levenshtein</span><br><span class="line">conda install -c conda-forge python-levenshtein </span><br><span class="line">python remove_repeat.py &lt;image_path&gt;</span><br><span class="line"></span><br><span class="line">https://anaconda.org/conda-forge/python-levenshtein</span><br></pre></td></tr></table></figure>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment">#coding:utf8</span></span><br><span class="line"><span class="hljs-keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image</span><br><span class="line"><span class="hljs-keyword">import</span> Levenshtein</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BWImageCompare</span><span class="hljs-params">(object)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Compares two images (b/w)."""</span></span><br><span class="line"></span><br><span class="line">    _pixel = <span class="hljs-number">255</span></span><br><span class="line">    _colour = <span class="hljs-keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, imga, imgb, maxsize=<span class="hljs-number">64</span>)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Save a copy of the image objects."""</span></span><br><span class="line"></span><br><span class="line">        sizea, sizeb = imga.size, imgb.size</span><br><span class="line"></span><br><span class="line">        newx = min(sizea[<span class="hljs-number">0</span>], sizeb[<span class="hljs-number">0</span>], maxsize)</span><br><span class="line">        newy = min(sizea[<span class="hljs-number">1</span>], sizeb[<span class="hljs-number">1</span>], maxsize)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># Rescale to a common size:</span></span><br><span class="line">        imga = imga.resize((newx, newy), Image.BICUBIC)</span><br><span class="line">        imgb = imgb.resize((newx, newy), Image.BICUBIC)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._colour:</span><br><span class="line">            <span class="hljs-comment"># Store the images in B/W Int format</span></span><br><span class="line">            imga = imga.convert(<span class="hljs-string">'I'</span>)</span><br><span class="line">            imgb = imgb.convert(<span class="hljs-string">'I'</span>)</span><br><span class="line"></span><br><span class="line">        self._imga = imga</span><br><span class="line">        self._imgb = imgb</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># Store the common image size</span></span><br><span class="line">        self.x, self.y = newx, newy</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_img_int</span><span class="hljs-params">(self, img)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Convert an image to a list of pixels."""</span></span><br><span class="line"></span><br><span class="line">        x, y = img.size</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> xrange(x):</span><br><span class="line">            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> xrange(y):</span><br><span class="line">                <span class="hljs-keyword">yield</span> img.getpixel((i, j))</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">imga_int</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Return a tuple representing the first image."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_imga_int'</span>):</span><br><span class="line">            self._imga_int = tuple(self._img_int(self._imga))</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._imga_int</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">imgb_int</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Return a tuple representing the second image."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_imgb_int'</span>):</span><br><span class="line">            self._imgb_int = tuple(self._img_int(self._imgb))</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._imgb_int</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mse</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Return the mean square error between the two images."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_mse'</span>):</span><br><span class="line">            tmp = sum((a-b)**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> a, b <span class="hljs-keyword">in</span> zip(self.imga_int, self.imgb_int))</span><br><span class="line">            self._mse = float(tmp) / self.x / self.y</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._mse</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">psnr</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the peak signal-to-noise ratio."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_psnr'</span>):</span><br><span class="line">            self._psnr = <span class="hljs-number">20</span> * math.log(self._pixel / math.sqrt(self.mse), <span class="hljs-number">10</span>)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._psnr</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nrmsd</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the normalized root mean square deviation."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_nrmsd'</span>):</span><br><span class="line">            self._nrmsd = math.sqrt(self.mse) / self._pixel</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._nrmsd</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levenshtein</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the Levenshtein distance."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_lv'</span>):</span><br><span class="line">            stra = <span class="hljs-string">''</span>.join((chr(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb = <span class="hljs-string">''</span>.join((chr(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line"></span><br><span class="line">            lv = Levenshtein.distance(stra, strb)</span><br><span class="line"></span><br><span class="line">            self._lv = float(lv) / self.x / self.y</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._lv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ImageCompare</span><span class="hljs-params">(BWImageCompare)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Compares two images (colour)."""</span></span><br><span class="line"></span><br><span class="line">    _pixel = <span class="hljs-number">255</span> ** <span class="hljs-number">3</span></span><br><span class="line">    _colour = <span class="hljs-keyword">True</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_img_int</span><span class="hljs-params">(self, img)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Convert an image to a list of pixels."""</span></span><br><span class="line"></span><br><span class="line">        x, y = img.size</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> xrange(x):</span><br><span class="line">            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> xrange(y):</span><br><span class="line">                pixel = img.getpixel((i, j))</span><br><span class="line">                <span class="hljs-keyword">yield</span> pixel[<span class="hljs-number">0</span>] | (pixel[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">8</span>) | (pixel[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levenshtein</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the Levenshtein distance."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_lv'</span>):</span><br><span class="line">            stra_r = <span class="hljs-string">''</span>.join((chr(x&gt;&gt;<span class="hljs-number">16</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb_r = <span class="hljs-string">''</span>.join((chr(x&gt;&gt;<span class="hljs-number">16</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line">            lv_r = Levenshtein.distance(stra_r, strb_r)</span><br><span class="line"></span><br><span class="line">            stra_g = <span class="hljs-string">''</span>.join((chr((x&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb_g = <span class="hljs-string">''</span>.join((chr((x&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line">            lv_g = Levenshtein.distance(stra_g, strb_g)</span><br><span class="line"></span><br><span class="line">            stra_b = <span class="hljs-string">''</span>.join((chr(x&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb_b = <span class="hljs-string">''</span>.join((chr(x&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line">            lv_b = Levenshtein.distance(stra_b, strb_b)</span><br><span class="line"></span><br><span class="line">            self._lv = (lv_r + lv_g + lv_b) / <span class="hljs-number">3.</span> / self.x / self.y</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._lv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FuzzyImageCompare</span><span class="hljs-params">(object)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Compares two images based on the previous comparison values."""</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, imga, imgb, lb=<span class="hljs-number">1</span>, tol=<span class="hljs-number">15</span>)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Store the images in the instance."""</span></span><br><span class="line"></span><br><span class="line">        self._imga, self._imgb, self._lb, self._tol = imga, imgb, lb, tol</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compare</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Run all the comparisons."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> hasattr(self, <span class="hljs-string">'_compare'</span>):</span><br><span class="line">            <span class="hljs-keyword">return</span> self._compare</span><br><span class="line"></span><br><span class="line">        lb, i = self._lb, <span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line">        diffs = &#123;</span><br><span class="line">            <span class="hljs-string">'levenshtein'</span>: [],</span><br><span class="line">            <span class="hljs-string">'nrmsd'</span>: [],</span><br><span class="line">            <span class="hljs-string">'psnr'</span>: [],</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stop = &#123;</span><br><span class="line">            <span class="hljs-string">'levenshtein'</span>: <span class="hljs-keyword">False</span>,</span><br><span class="line">            <span class="hljs-string">'nrmsd'</span>: <span class="hljs-keyword">False</span>,</span><br><span class="line">            <span class="hljs-string">'psnr'</span>: <span class="hljs-keyword">False</span>,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> all(stop.values()):</span><br><span class="line">            cmp = ImageCompare(self._imga, self._imgb, i)</span><br><span class="line"></span><br><span class="line">            diff = diffs[<span class="hljs-string">'levenshtein'</span>]</span><br><span class="line">            <span class="hljs-keyword">if</span> len(diff) &gt;= lb+<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> \</span><br><span class="line">                abs(diff[<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-1</span>]) &lt;= abs(diff[-lb<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-2</span>]):</span><br><span class="line">                stop[<span class="hljs-string">'levenshtein'</span>] = <span class="hljs-keyword">True</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                diff.append(cmp.levenshtein)</span><br><span class="line"></span><br><span class="line">            diff = diffs[<span class="hljs-string">'nrmsd'</span>]</span><br><span class="line">            <span class="hljs-keyword">if</span> len(diff) &gt;= lb+<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> \</span><br><span class="line">                abs(diff[<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-1</span>]) &lt;= abs(diff[-lb<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-2</span>]):</span><br><span class="line">                stop[<span class="hljs-string">'nrmsd'</span>] = <span class="hljs-keyword">True</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                diff.append(cmp.nrmsd)</span><br><span class="line"></span><br><span class="line">            diff = diffs[<span class="hljs-string">'psnr'</span>]</span><br><span class="line">            <span class="hljs-keyword">if</span> len(diff) &gt;= lb+<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> \</span><br><span class="line">                abs(diff[<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-1</span>]) &lt;= abs(diff[-lb<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-2</span>]):</span><br><span class="line">                stop[<span class="hljs-string">'psnr'</span>] = <span class="hljs-keyword">True</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                <span class="hljs-keyword">try</span>:</span><br><span class="line">                    diff.append(cmp.psnr)</span><br><span class="line">                <span class="hljs-keyword">except</span> ZeroDivisionError:</span><br><span class="line">                    diff.append(<span class="hljs-number">-1</span>)  <span class="hljs-comment"># to indicate that the images are identical</span></span><br><span class="line"></span><br><span class="line">            i *= <span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line">        self._compare = &#123;</span><br><span class="line">            <span class="hljs-string">'levenshtein'</span>: <span class="hljs-number">100</span> - diffs[<span class="hljs-string">'levenshtein'</span>][<span class="hljs-number">-1</span>] * <span class="hljs-number">100</span>,</span><br><span class="line">            <span class="hljs-string">'nrmsd'</span>: <span class="hljs-number">100</span> - diffs[<span class="hljs-string">'nrmsd'</span>][<span class="hljs-number">-1</span>] * <span class="hljs-number">100</span>,</span><br><span class="line">            <span class="hljs-string">'psnr'</span>: diffs[<span class="hljs-string">'psnr'</span>][<span class="hljs-number">-1</span>] == <span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">100.0</span> <span class="hljs-keyword">or</span> diffs[<span class="hljs-string">'psnr'</span>][<span class="hljs-number">-1</span>],</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._compare</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">similarity</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Try to calculate the image similarity."""</span></span><br><span class="line"></span><br><span class="line">        cmp = self.compare()</span><br><span class="line"></span><br><span class="line">        lnrmsd = (cmp[<span class="hljs-string">'levenshtein'</span>] + cmp[<span class="hljs-string">'nrmsd'</span>]) / <span class="hljs-number">2</span></span><br><span class="line">        <span class="hljs-keyword">return</span> lnrmsd</span><br><span class="line">        <span class="hljs-keyword">return</span> min(lnrmsd * cmp[<span class="hljs-string">'psnr'</span>] / self._tol, <span class="hljs-number">100.0</span>)  <span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> fix psnr!</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">import</span> sys</span><br><span class="line">    <span class="hljs-keyword">import</span> os</span><br><span class="line">    </span><br><span class="line">    srcimages = os.listdir(sys.argv[<span class="hljs-number">1</span>])</span><br><span class="line">    srcimages.sort()</span><br><span class="line">   </span><br><span class="line">    tot = len(srcimages)</span><br><span class="line">    tot = (tot ** <span class="hljs-number">2</span> - tot) / <span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">print</span> <span class="hljs-string">'Comparing %d images:'</span> % tot</span><br><span class="line">	</span><br><span class="line">    images = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">###向后删除图片</span></span><br><span class="line">    similarity_thresh = <span class="hljs-number">0.5</span> <span class="hljs-comment">##相似度阈值，超过即判断为相同图片</span></span><br><span class="line">    i = <span class="hljs-number">0</span></span><br><span class="line">    <span class="hljs-keyword">while</span>(i &lt; len(srcimages)<span class="hljs-number">-1</span>):</span><br><span class="line">        <span class="hljs-keyword">print</span> <span class="hljs-string">"i="</span>, i,<span class="hljs-string">"num of srcimages"</span>,len(srcimages)</span><br><span class="line"></span><br><span class="line">        imga = Image.open(os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i]))</span><br><span class="line">        imgb = Image.open(os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>]))</span><br><span class="line">        cmp = FuzzyImageCompare(imga, imgb)</span><br><span class="line">        sim = cmp.similarity() / <span class="hljs-number">100</span></span><br><span class="line">        <span class="hljs-keyword">print</span> <span class="hljs-string">"image "</span>,os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i]),<span class="hljs-string">" and image"</span>,os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>]),<span class="hljs-string">" sim="</span>,sim</span><br><span class="line">        <span class="hljs-keyword">if</span> sim &gt; similarity_thresh:</span><br><span class="line">            <span class="hljs-keyword">print</span> <span class="hljs-string">"delete "</span>,os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>])</span><br><span class="line">            os.remove(os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>]))</span><br><span class="line">            srcimages.pop(i+<span class="hljs-number">1</span>)</span><br><span class="line">        <span class="hljs-keyword">else</span>:</span><br><span class="line">            i = i+<span class="hljs-number">1</span> </span><br><span class="line"></span><br><span class="line">    <span class="hljs-string">'''</span></span><br><span class="line"><span class="hljs-string">    results, i = &#123;&#125;, 1</span></span><br><span class="line"><span class="hljs-string">    for namea, imga in images.items():</span></span><br><span class="line"><span class="hljs-string">        for nameb, imgb in images.items():</span></span><br><span class="line"><span class="hljs-string">            if namea == nameb or (nameb, namea) in results:</span></span><br><span class="line"><span class="hljs-string">                continue</span></span><br><span class="line"><span class="hljs-string">            print ' * %2d / %2d:' % (i, tot),</span></span><br><span class="line"><span class="hljs-string">            print namea, nameb, '...',</span></span><br><span class="line"><span class="hljs-string">            cmp = FuzzyImageCompare(imga, imgb)</span></span><br><span class="line"><span class="hljs-string">            sim = cmp.similarity()</span></span><br><span class="line"><span class="hljs-string">            results[(namea, nameb)] = sim</span></span><br><span class="line"><span class="hljs-string">            print '%.2f %%' % sim</span></span><br><span class="line"><span class="hljs-string">            i += 1</span></span><br><span class="line"><span class="hljs-string">    res = max(results.values())</span></span><br><span class="line"><span class="hljs-string">    imgs = [k for k, v in results.iteritems() if v == res][0]</span></span><br><span class="line"><span class="hljs-string">    print 'Most similar images: %s %s (%.2f %%)' % (imgs[0], imgs[1], res)</span></span><br><span class="line"><span class="hljs-string">    </span></span><br><span class="line"><span class="hljs-string">    '''</span></span><br></pre></td></tr></table></figure>
+<p>在此之后还需要自己手动筛选图片，工作量其实也不小，不过经过去重还是可以减少不少工作量的。</p>
+<h1 id="数据集标注"><a href="#数据集标注" class="headerlink" title="数据集标注"></a>数据集标注</h1><p>爬取的图片需要自己标注，可以使用下面这些标注工具。</p>
+<p><a href="https://github.com/tzutalin/labelImg" target="_blank" rel="noopener">https://github.com/tzutalin/labelImg</a></p>
+<blockquote>
+<p>LabelImg is a graphical image annotation tool and label object bounding boxes in images <a href="https://youtu.be/p0nR2YsCY_U" target="_blank" rel="noopener">https://youtu.be/p0nR2YsCY_U</a></p>
+</blockquote>
+<p><a href="https://github.com/wkentaro/labelme" target="_blank" rel="noopener">https://github.com/wkentaro/labelme</a></p>
+<blockquote>
+<p>Image Polygonal Annotation with Python (polygon, rectangle, circle, line, point and image-level flag annotation).</p>
+</blockquote>
+<p><a href="https://github.com/Microsoft/VoTT" target="_blank" rel="noopener">https://github.com/Microsoft/VoTT</a></p>
+<blockquote>
+<p>Visual Object Tagging Tool: An electron app for building end to end Object Detection Models from Images and Videos.</p>
+</blockquote>
+<h1 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h1><p>一般会按照 8:1:1 将数据集划分为训练集、验证集、测试集。这个要根据自己的情况编写 shell 脚本，下面是我用 darknet 训练 yolov3 模型时划分数据的脚本。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if [ $# != 1 ];then</span><br><span class="line">    echo "Usage: $0 &lt;full path&gt;"</span><br><span class="line">    exit -1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">path=$1</span><br><span class="line"></span><br><span class="line">for sub_dir in `ls $path`</span><br><span class="line">    do</span><br><span class="line">        # 获取子文件夹的全路径</span><br><span class="line">        sub_dir_path=$path/$sub_dir</span><br><span class="line">        if [ -d $sub_dir_path ]</span><br><span class="line">            then</span><br><span class="line">                # 将子目录下所有文件移动到父目录中</span><br><span class="line">                `mv $sub_dir_path/* $path`</span><br><span class="line">                # 删除子目录</span><br><span class="line">                `rm -rf $sub_dir_path`</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">        # 给所有文件添加前缀</span><br><span class="line"></span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">`rm tmp.txt`</span><br><span class="line"><span class="hljs-meta">#</span> 将文件夹下指定类型的文件写到文件中</span><br><span class="line"><span class="hljs-meta">#</span> ***** 问题：最后会有个空行 *****</span><br><span class="line"><span class="hljs-meta">#</span> 图片文件存在对应的 txt 文件,则将图片路径追加到 tmp.txt 文件中</span><br><span class="line">for image in `find $path | grep -E 'jpg|png|JPEG|JPG|PNG'`</span><br><span class="line">do</span><br><span class="line">    </span><br><span class="line">    txt=$&#123;image%.*&#125;".txt"</span><br><span class="line"></span><br><span class="line">    if [ -f $txt ]</span><br><span class="line">        then</span><br><span class="line">            echo $&#123;image&#125; </span><br><span class="line">            `echo $&#123;image&#125; &gt;&gt; tmp.txt`</span><br><span class="line">    fi</span><br><span class="line">    </span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将路径 8:1:1 放到 train.txt,val.txt,test.txt</span><br><span class="line"><span class="hljs-meta">#</span> 1. 计算 tmp,txt 文件行数</span><br><span class="line"><span class="hljs-meta">#</span> 2. 计算得出分配到各个文件的行号</span><br><span class="line"><span class="hljs-meta">#</span> 3. 将对应行数的内容写到对应文件夹中</span><br><span class="line">line=`cat tmp.txt | wc -l`</span><br><span class="line">line1=$(($line/10*8))</span><br><span class="line">line2=$(($line/10*8+line/10+1))</span><br><span class="line"></span><br><span class="line">`sed -n 1,$&#123;line1&#125;p tmp.txt &gt;&gt; train.txt`</span><br><span class="line">`sed -n $(($&#123;line1&#125;+1)),$&#123;line2&#125;p tmp.txt &gt;&gt; val.txt`</span><br><span class="line">`sed -n $(($&#123;line2&#125;+1)),$(($&#123;line&#125;-1))p tmp.txt &gt;&gt; test.txt`</span><br></pre></td></tr></table></figure>
+<p>yolov3 的标注格式如下所示</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9 0.732955 0.591102 0.270317 0.193503</span><br></pre></td></tr></table></figure>
+<p>统计标签的时候可以使用</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk '&#123;print $1&#125;' *.txt | sort -g | uniq -c</span><br></pre></td></tr></table></figure>
+<p>以上就是自己建立一个数据集的流程：爬取图片-&gt;整理图片-&gt;标注图片-&gt;训练。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/dataset/">dataset</a>, <a class="has-link-grey -link" href="/tags/deeplearning/">deeplearning</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/790a1fa3.html">
+                <span class="level-item">【Java并发编程】线程本地存储模式ThreadLocal</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="水宇杰">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        水宇杰
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        从知道到做到
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Hangzhou</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        83
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        12
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        44
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="http://github.com/YujieShui" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#爬取图片">
+        <span class="has-mr-6">1</span>
+        <span>爬取图片</span>
+        </a></li><li>
+        <a class="is-flex" href="#数据集整理">
+        <span class="has-mr-6">2</span>
+        <span>数据集整理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#视频转换成图片">
+        <span class="has-mr-6">2.1</span>
+        <span>视频转换成图片</span>
+        </a></li><li>
+        <a class="is-flex" href="#统一图片后缀格式">
+        <span class="has-mr-6">2.2</span>
+        <span>统一图片后缀格式</span>
+        </a></li><li>
+        <a class="is-flex" href="#按格式重命名图片">
+        <span class="has-mr-6">2.3</span>
+        <span>按格式重命名图片</span>
+        </a></li><li>
+        <a class="is-flex" href="#去重">
+        <span class="has-mr-6">2.4</span>
+        <span>去重</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#数据集标注">
+        <span class="has-mr-6">3</span>
+        <span>数据集标注</span>
+        </a></li><li>
+        <a class="is-flex" href="#数据集划分">
+        <span class="has-mr-6">4</span>
+        <span>数据集划分</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/C-C/">
+            <span class="level-start">
+                <span class="level-item">C/C++</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">26</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/DeepLearning/">
+            <span class="level-start">
+                <span class="level-item">DeepLearning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Java/JVM/">
+            <span class="level-start">
+                <span class="level-item">JVM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Java/Java并发编程/">
+            <span class="level-start">
+                <span class="level-item">Java并发编程</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Java并发编程/">
+            <span class="level-start">
+                <span class="level-item">Java并发编程</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/OpenCV/">
+            <span class="level-start">
+                <span class="level-item">OpenCV</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/分布式/">
+            <span class="level-start">
+                <span class="level-item">分布式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/善用佳软/">
+            <span class="level-start">
+                <span class="level-item">善用佳软</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/图像处理/">
+            <span class="level-start">
+                <span class="level-item">图像处理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17.78px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 14.44px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14.44px;">jvm</a> <a href="/tags/linux/" style="font-size: 18.89px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.56px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.22px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17.78px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.11px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12.22px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11.11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.11px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.33px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.33px;">网站</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T11:28:57.000Z">2019-09-17</time></div>
+                    <a href="/post/b64b0362.html" class="has-link-black-ter is-size-6">如何自建数据集</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-16T14:29:45.000Z">2019-09-16</time></div>
+                    <a href="/post/790a1fa3.html" class="has-link-black-ter is-size-6">【Java并发编程】线程本地存储模式ThreadLocal</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java并发编程/">Java并发编程</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-14T02:06:20.000Z">2019-09-14</time></div>
+                    <a href="/post/e2ebbcff.html" class="has-link-black-ter is-size-6">JVM-垃圾回收算法与垃圾回收器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-13T07:58:49.000Z">2019-09-13</time></div>
+                    <a href="/post/1410ce3d.html" class="has-link-black-ter is-size-6">JVM-如何设置JVM的参数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-12T08:07:13.000Z">2019-09-12</time></div>
+                    <a href="/post/3860d841.html" class="has-link-black-ter is-size-6">JVM-JVM中内存区域划分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">16</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">20</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">17</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RabbitMQ/">
+                        <span class="tag">RabbitMQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RocketMQ/">
+                        <span class="tag">RocketMQ</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c++</span>
+                        <span class="tag is-grey">22</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/caffe/">
+                        <span class="tag">caffe</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/darknet/">
+                        <span class="tag">darknet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dataset/">
+                        <span class="tag">dataset</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/deeplearning/">
+                        <span class="tag">deeplearning</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ffmpeg/">
+                        <span class="tag">ffmpeg</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
+                        <span class="tag is-grey">22</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/machinelearning/">
+                        <span class="tag">machinelearning</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/protobuf/">
+                        <span class="tag">protobuf</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ssh/">
+                        <span class="tag">ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stl/">
+                        <span class="tag">stl</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tensorflow/">
+                        <span class="tag">tensorflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ubuntu/">
+                        <span class="tag">ubuntu</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/图像处理/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/图片素材/">
+                        <span class="tag">图片素材</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/学习资料/">
+                        <span class="tag">学习资料</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发工具类/">
+                        <span class="tag">并发工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发编程/">
+                        <span class="tag">并发编程</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源框架/">
+                        <span class="tag">开源框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/管程/">
+                        <span class="tag">管程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/网站/">
+                        <span class="tag">网站</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/音频处理/">
+                        <span class="tag">音频处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T11:28:57.000Z">2019-09-17</time></div>
+                    <a href="/post/b64b0362.html" class="has-link-black-ter is-size-6">如何自建数据集</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-16T14:29:45.000Z">2019-09-16</time></div>
+                    <a href="/post/790a1fa3.html" class="has-link-black-ter is-size-6">【Java并发编程】线程本地存储模式ThreadLocal</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java并发编程/">Java并发编程</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-14T02:06:20.000Z">2019-09-14</time></div>
+                    <a href="/post/e2ebbcff.html" class="has-link-black-ter is-size-6">JVM-垃圾回收算法与垃圾回收器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-13T07:58:49.000Z">2019-09-13</time></div>
+                    <a href="/post/1410ce3d.html" class="has-link-black-ter is-size-6">JVM-如何设置JVM的参数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-12T08:07:13.000Z">2019-09-12</time></div>
+                    <a href="/post/3860d841.html" class="has-link-black-ter is-size-6">JVM-JVM中内存区域划分</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">16</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">20</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">17</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MQ/">
+                        <span class="tag">MQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RabbitMQ/">
+                        <span class="tag">RabbitMQ</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RocketMQ/">
+                        <span class="tag">RocketMQ</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/c/">
+                        <span class="tag">c++</span>
+                        <span class="tag is-grey">22</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/caffe/">
+                        <span class="tag">caffe</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/darknet/">
+                        <span class="tag">darknet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dataset/">
+                        <span class="tag">dataset</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/deeplearning/">
+                        <span class="tag">deeplearning</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/docker/">
+                        <span class="tag">docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ffmpeg/">
+                        <span class="tag">ffmpeg</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/git/">
+                        <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/java/">
+                        <span class="tag">java</span>
+                        <span class="tag is-grey">22</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jvm/">
+                        <span class="tag">jvm</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">11</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/machinelearning/">
+                        <span class="tag">machinelearning</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/markdown/">
+                        <span class="tag">markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/maven/">
+                        <span class="tag">maven</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/numpy/">
+                        <span class="tag">numpy</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/protobuf/">
+                        <span class="tag">protobuf</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/python/">
+                        <span class="tag">python</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/shell/">
+                        <span class="tag">shell</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/springboot/">
+                        <span class="tag">springboot</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ssh/">
+                        <span class="tag">ssh</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/stl/">
+                        <span class="tag">stl</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tensorflow/">
+                        <span class="tag">tensorflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ubuntu/">
+                        <span class="tag">ubuntu</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/zookeeper/">
+                        <span class="tag">zookeeper</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/分布式/">
+                        <span class="tag">分布式</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/图像处理/">
+                        <span class="tag">图像处理</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/图片素材/">
+                        <span class="tag">图片素材</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/学习资料/">
+                        <span class="tag">学习资料</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发工具类/">
+                        <span class="tag">并发工具类</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/并发编程/">
+                        <span class="tag">并发编程</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源框架/">
+                        <span class="tag">开源框架</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/消息队列/">
+                        <span class="tag">消息队列</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/管程/">
+                        <span class="tag">管程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/网站/">
+                        <span class="tag">网站</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/音频处理/">
+                        <span class="tag">音频处理</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="如何自建数据集" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 深页&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
