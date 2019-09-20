@@ -175,10 +175,10 @@
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> cv2</span><br><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">listfiles</span><span class="hljs-params">(rootDir)</span>:</span></span><br><span class="line">    list_dirs = os.walk(rootDir)</span><br><span class="line">    <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> list_dirs:</span><br><span class="line">        <span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> dirs:</span><br><span class="line">            <span class="hljs-keyword">print</span> os.path.join(root,d)</span><br><span class="line">        <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> files:</span><br><span class="line">                </span><br><span class="line">            fileid = f.split(<span class="hljs-string">'.'</span>)[<span class="hljs-number">0</span>] </span><br><span class="line"></span><br><span class="line">            filepath = os.path.join(root,f)</span><br><span class="line">            <span class="hljs-keyword">try</span>:</span><br><span class="line">                src = cv2.imread(filepath,<span class="hljs-number">1</span>)</span><br><span class="line">                <span class="hljs-keyword">print</span> <span class="hljs-string">"src="</span>,filepath,src.shape</span><br><span class="line">                os.remove(filepath)</span><br><span class="line">                cv2.imwrite(os.path.join(root,fileid+<span class="hljs-string">".jpg"</span>),src)</span><br><span class="line">            <span class="hljs-keyword">except</span>:</span><br><span class="line">                os.remove(filepath)</span><br><span class="line">                <span class="hljs-keyword">continue</span></span><br><span class="line"></span><br><span class="line">listfiles(sys.argv[<span class="hljs-number">1</span>])</span><br></pre></td></tr></table></figure>
 <h2 id="按格式重命名图片"><a href="#按格式重命名图片" class="headerlink" title="按格式重命名图片"></a>按格式重命名图片</h2><p>统一格式的命名有利于区分和整理数据</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir tmp</span><br><span class="line">./rename_files_function.sh &lt;images_folder_path&gt; ./tmp/ &lt;label&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">i=0</span><br><span class="line">dir=$1</span><br><span class="line">resultdir=$2</span><br><span class="line">app=$3</span><br><span class="line">for file in $dir""* </span><br><span class="line">do </span><br><span class="line">	arr=$(echo $file | tr "/" "\n")</span><br><span class="line">	for x in $arr</span><br><span class="line">	do</span><br><span class="line">		filename=$x</span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	brr=$(echo $filename | tr "." "\n")</span><br><span class="line">	brrs=( $brr )</span><br><span class="line">	fileid=$&#123;brrs[0]&#125;</span><br><span class="line"></span><br><span class="line">	num=$&#123;#brrs[@]&#125;  </span><br><span class="line">	index=$(expr $num - 1)</span><br><span class="line">	fileformat=$&#123;brrs[index]&#125;</span><br><span class="line">	</span><br><span class="line">	echo file=""$file</span><br><span class="line">	echo fileid=""$fileid</span><br><span class="line">	echo fileformat=""$fileformat</span><br><span class="line"></span><br><span class="line">	if [ $fileformat == jpeg -o $fileformat == png -o $fileformat == jpg -o $fileformat == bmp ] ;</span><br><span class="line">    	then</span><br><span class="line">        #echo "good"</span><br><span class="line">		i=$(expr $i + 1)</span><br><span class="line">		resultfile=$resultdir""$app""$i"".$fileformat</span><br><span class="line">		echo file=""$file"",resultfile=""$resultfile</span><br><span class="line">		mv "$file" "$resultfile"</span><br><span class="line">	else</span><br><span class="line">		echo $file""not good</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo 执行删除""$dir""*</span><br><span class="line"><span class="hljs-meta">#</span>rm $dir""*</span><br><span class="line">echo 执行mv""$resultdir""*</span><br><span class="line">mv $resultdir""* $dir</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">i=0</span><br><span class="line">dir=$1</span><br><span class="line">resultdir=$2</span><br><span class="line">app=$3</span><br><span class="line">for file in $dir""* </span><br><span class="line">do </span><br><span class="line">	arr=$(echo $file | tr "/" "\n")</span><br><span class="line">	for x in $arr</span><br><span class="line">	do</span><br><span class="line">		filename=$x</span><br><span class="line">	done</span><br><span class="line"></span><br><span class="line">	brr=$(echo $filename | tr "." "\n")</span><br><span class="line">	brrs=( $brr )</span><br><span class="line">	fileid=$&#123;brrs[0]&#125;</span><br><span class="line"></span><br><span class="line">	num=$&#123;#brrs[@]&#125;  </span><br><span class="line">	index=$(expr $num - 1)</span><br><span class="line">	fileformat=$&#123;brrs[index]&#125;</span><br><span class="line">	</span><br><span class="line">	echo file=""$file</span><br><span class="line">	echo fileid=""$fileid</span><br><span class="line">	echo fileformat=""$fileformat</span><br><span class="line"></span><br><span class="line">	if [ $fileformat == jpeg -o $fileformat == png -o $fileformat == jpg -o $fileformat == bmp ] ;</span><br><span class="line">    	then</span><br><span class="line">        #echo "good"</span><br><span class="line">		i=$(expr $i + 1)</span><br><span class="line">		resultfile=$resultdir""$app""$i"".$fileformat</span><br><span class="line">		echo file=""$file"",resultfile=""$resultfile</span><br><span class="line">		mv "$file" "$resultfile"</span><br><span class="line">	else</span><br><span class="line">		echo $file""not good</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo 执行删除""$dir""*</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">rm <span class="hljs-variable">$dir</span><span class="hljs-string">""</span>*</span></span><br><span class="line">echo 执行mv""$resultdir""*</span><br><span class="line">mv $resultdir""* $dir</span><br></pre></td></tr></table></figure>
 <h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><p>如果你使用多个关键词或者使用不同的搜索引擎同样的关键词,或者从视频中提取图片,那么爬取回来的图片很可能有重复或者非常的相似,这样的样本应该被去除。</p>
 <p>去除有很多种方法,比如直接比较两幅图像是不是完全相同,通过 hash 等相似度方法来进行相似度,这里我们提供一个方法,利用<em>相似度</em>来进行去重。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> sudo pip install python-Levenshtein</span><br><span class="line">conda install -c conda-forge python-levenshtein </span><br><span class="line">python remove_repeat.py &lt;image_path&gt;</span><br><span class="line"></span><br><span class="line">https://anaconda.org/conda-forge/python-levenshtein</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> sudo pip install python-Levenshtein</span></span><br><span class="line">conda install -c conda-forge python-levenshtein </span><br><span class="line">python remove_repeat.py &lt;image_path&gt;</span><br><span class="line"></span><br><span class="line">https://anaconda.org/conda-forge/python-levenshtein</span><br></pre></td></tr></table></figure>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment">#coding:utf8</span></span><br><span class="line"><span class="hljs-keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image</span><br><span class="line"><span class="hljs-keyword">import</span> Levenshtein</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BWImageCompare</span><span class="hljs-params">(object)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Compares two images (b/w)."""</span></span><br><span class="line"></span><br><span class="line">    _pixel = <span class="hljs-number">255</span></span><br><span class="line">    _colour = <span class="hljs-keyword">False</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, imga, imgb, maxsize=<span class="hljs-number">64</span>)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Save a copy of the image objects."""</span></span><br><span class="line"></span><br><span class="line">        sizea, sizeb = imga.size, imgb.size</span><br><span class="line"></span><br><span class="line">        newx = min(sizea[<span class="hljs-number">0</span>], sizeb[<span class="hljs-number">0</span>], maxsize)</span><br><span class="line">        newy = min(sizea[<span class="hljs-number">1</span>], sizeb[<span class="hljs-number">1</span>], maxsize)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># Rescale to a common size:</span></span><br><span class="line">        imga = imga.resize((newx, newy), Image.BICUBIC)</span><br><span class="line">        imgb = imgb.resize((newx, newy), Image.BICUBIC)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._colour:</span><br><span class="line">            <span class="hljs-comment"># Store the images in B/W Int format</span></span><br><span class="line">            imga = imga.convert(<span class="hljs-string">'I'</span>)</span><br><span class="line">            imgb = imgb.convert(<span class="hljs-string">'I'</span>)</span><br><span class="line"></span><br><span class="line">        self._imga = imga</span><br><span class="line">        self._imgb = imgb</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># Store the common image size</span></span><br><span class="line">        self.x, self.y = newx, newy</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_img_int</span><span class="hljs-params">(self, img)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Convert an image to a list of pixels."""</span></span><br><span class="line"></span><br><span class="line">        x, y = img.size</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> xrange(x):</span><br><span class="line">            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> xrange(y):</span><br><span class="line">                <span class="hljs-keyword">yield</span> img.getpixel((i, j))</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">imga_int</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Return a tuple representing the first image."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_imga_int'</span>):</span><br><span class="line">            self._imga_int = tuple(self._img_int(self._imga))</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._imga_int</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">imgb_int</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Return a tuple representing the second image."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_imgb_int'</span>):</span><br><span class="line">            self._imgb_int = tuple(self._img_int(self._imgb))</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._imgb_int</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mse</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Return the mean square error between the two images."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_mse'</span>):</span><br><span class="line">            tmp = sum((a-b)**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> a, b <span class="hljs-keyword">in</span> zip(self.imga_int, self.imgb_int))</span><br><span class="line">            self._mse = float(tmp) / self.x / self.y</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._mse</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">psnr</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the peak signal-to-noise ratio."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_psnr'</span>):</span><br><span class="line">            self._psnr = <span class="hljs-number">20</span> * math.log(self._pixel / math.sqrt(self.mse), <span class="hljs-number">10</span>)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._psnr</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nrmsd</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the normalized root mean square deviation."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_nrmsd'</span>):</span><br><span class="line">            self._nrmsd = math.sqrt(self.mse) / self._pixel</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._nrmsd</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levenshtein</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the Levenshtein distance."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_lv'</span>):</span><br><span class="line">            stra = <span class="hljs-string">''</span>.join((chr(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb = <span class="hljs-string">''</span>.join((chr(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line"></span><br><span class="line">            lv = Levenshtein.distance(stra, strb)</span><br><span class="line"></span><br><span class="line">            self._lv = float(lv) / self.x / self.y</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._lv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ImageCompare</span><span class="hljs-params">(BWImageCompare)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Compares two images (colour)."""</span></span><br><span class="line"></span><br><span class="line">    _pixel = <span class="hljs-number">255</span> ** <span class="hljs-number">3</span></span><br><span class="line">    _colour = <span class="hljs-keyword">True</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_img_int</span><span class="hljs-params">(self, img)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Convert an image to a list of pixels."""</span></span><br><span class="line"></span><br><span class="line">        x, y = img.size</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> xrange(x):</span><br><span class="line">            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> xrange(y):</span><br><span class="line">                pixel = img.getpixel((i, j))</span><br><span class="line">                <span class="hljs-keyword">yield</span> pixel[<span class="hljs-number">0</span>] | (pixel[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-number">8</span>) | (pixel[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">    @property</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levenshtein</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Calculate the Levenshtein distance."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> hasattr(self, <span class="hljs-string">'_lv'</span>):</span><br><span class="line">            stra_r = <span class="hljs-string">''</span>.join((chr(x&gt;&gt;<span class="hljs-number">16</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb_r = <span class="hljs-string">''</span>.join((chr(x&gt;&gt;<span class="hljs-number">16</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line">            lv_r = Levenshtein.distance(stra_r, strb_r)</span><br><span class="line"></span><br><span class="line">            stra_g = <span class="hljs-string">''</span>.join((chr((x&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb_g = <span class="hljs-string">''</span>.join((chr((x&gt;&gt;<span class="hljs-number">8</span>)&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line">            lv_g = Levenshtein.distance(stra_g, strb_g)</span><br><span class="line"></span><br><span class="line">            stra_b = <span class="hljs-string">''</span>.join((chr(x&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imga_int))</span><br><span class="line">            strb_b = <span class="hljs-string">''</span>.join((chr(x&amp;<span class="hljs-number">0xff</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> self.imgb_int))</span><br><span class="line">            lv_b = Levenshtein.distance(stra_b, strb_b)</span><br><span class="line"></span><br><span class="line">            self._lv = (lv_r + lv_g + lv_b) / <span class="hljs-number">3.</span> / self.x / self.y</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._lv</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FuzzyImageCompare</span><span class="hljs-params">(object)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Compares two images based on the previous comparison values."""</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, imga, imgb, lb=<span class="hljs-number">1</span>, tol=<span class="hljs-number">15</span>)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Store the images in the instance."""</span></span><br><span class="line"></span><br><span class="line">        self._imga, self._imgb, self._lb, self._tol = imga, imgb, lb, tol</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compare</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Run all the comparisons."""</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> hasattr(self, <span class="hljs-string">'_compare'</span>):</span><br><span class="line">            <span class="hljs-keyword">return</span> self._compare</span><br><span class="line"></span><br><span class="line">        lb, i = self._lb, <span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line">        diffs = &#123;</span><br><span class="line">            <span class="hljs-string">'levenshtein'</span>: [],</span><br><span class="line">            <span class="hljs-string">'nrmsd'</span>: [],</span><br><span class="line">            <span class="hljs-string">'psnr'</span>: [],</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stop = &#123;</span><br><span class="line">            <span class="hljs-string">'levenshtein'</span>: <span class="hljs-keyword">False</span>,</span><br><span class="line">            <span class="hljs-string">'nrmsd'</span>: <span class="hljs-keyword">False</span>,</span><br><span class="line">            <span class="hljs-string">'psnr'</span>: <span class="hljs-keyword">False</span>,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> all(stop.values()):</span><br><span class="line">            cmp = ImageCompare(self._imga, self._imgb, i)</span><br><span class="line"></span><br><span class="line">            diff = diffs[<span class="hljs-string">'levenshtein'</span>]</span><br><span class="line">            <span class="hljs-keyword">if</span> len(diff) &gt;= lb+<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> \</span><br><span class="line">                abs(diff[<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-1</span>]) &lt;= abs(diff[-lb<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-2</span>]):</span><br><span class="line">                stop[<span class="hljs-string">'levenshtein'</span>] = <span class="hljs-keyword">True</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                diff.append(cmp.levenshtein)</span><br><span class="line"></span><br><span class="line">            diff = diffs[<span class="hljs-string">'nrmsd'</span>]</span><br><span class="line">            <span class="hljs-keyword">if</span> len(diff) &gt;= lb+<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> \</span><br><span class="line">                abs(diff[<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-1</span>]) &lt;= abs(diff[-lb<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-2</span>]):</span><br><span class="line">                stop[<span class="hljs-string">'nrmsd'</span>] = <span class="hljs-keyword">True</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                diff.append(cmp.nrmsd)</span><br><span class="line"></span><br><span class="line">            diff = diffs[<span class="hljs-string">'psnr'</span>]</span><br><span class="line">            <span class="hljs-keyword">if</span> len(diff) &gt;= lb+<span class="hljs-number">2</span> <span class="hljs-keyword">and</span> \</span><br><span class="line">                abs(diff[<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-1</span>]) &lt;= abs(diff[-lb<span class="hljs-number">-1</span>] - diff[-lb<span class="hljs-number">-2</span>]):</span><br><span class="line">                stop[<span class="hljs-string">'psnr'</span>] = <span class="hljs-keyword">True</span></span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                <span class="hljs-keyword">try</span>:</span><br><span class="line">                    diff.append(cmp.psnr)</span><br><span class="line">                <span class="hljs-keyword">except</span> ZeroDivisionError:</span><br><span class="line">                    diff.append(<span class="hljs-number">-1</span>)  <span class="hljs-comment"># to indicate that the images are identical</span></span><br><span class="line"></span><br><span class="line">            i *= <span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line">        self._compare = &#123;</span><br><span class="line">            <span class="hljs-string">'levenshtein'</span>: <span class="hljs-number">100</span> - diffs[<span class="hljs-string">'levenshtein'</span>][<span class="hljs-number">-1</span>] * <span class="hljs-number">100</span>,</span><br><span class="line">            <span class="hljs-string">'nrmsd'</span>: <span class="hljs-number">100</span> - diffs[<span class="hljs-string">'nrmsd'</span>][<span class="hljs-number">-1</span>] * <span class="hljs-number">100</span>,</span><br><span class="line">            <span class="hljs-string">'psnr'</span>: diffs[<span class="hljs-string">'psnr'</span>][<span class="hljs-number">-1</span>] == <span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">100.0</span> <span class="hljs-keyword">or</span> diffs[<span class="hljs-string">'psnr'</span>][<span class="hljs-number">-1</span>],</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> self._compare</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">similarity</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        <span class="hljs-string">"""Try to calculate the image similarity."""</span></span><br><span class="line"></span><br><span class="line">        cmp = self.compare()</span><br><span class="line"></span><br><span class="line">        lnrmsd = (cmp[<span class="hljs-string">'levenshtein'</span>] + cmp[<span class="hljs-string">'nrmsd'</span>]) / <span class="hljs-number">2</span></span><br><span class="line">        <span class="hljs-keyword">return</span> lnrmsd</span><br><span class="line">        <span class="hljs-keyword">return</span> min(lnrmsd * cmp[<span class="hljs-string">'psnr'</span>] / self._tol, <span class="hljs-number">100.0</span>)  <span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> fix psnr!</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">import</span> sys</span><br><span class="line">    <span class="hljs-keyword">import</span> os</span><br><span class="line">    </span><br><span class="line">    srcimages = os.listdir(sys.argv[<span class="hljs-number">1</span>])</span><br><span class="line">    srcimages.sort()</span><br><span class="line">   </span><br><span class="line">    tot = len(srcimages)</span><br><span class="line">    tot = (tot ** <span class="hljs-number">2</span> - tot) / <span class="hljs-number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">print</span> <span class="hljs-string">'Comparing %d images:'</span> % tot</span><br><span class="line">	</span><br><span class="line">    images = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">###向后删除图片</span></span><br><span class="line">    similarity_thresh = <span class="hljs-number">0.5</span> <span class="hljs-comment">##相似度阈值，超过即判断为相同图片</span></span><br><span class="line">    i = <span class="hljs-number">0</span></span><br><span class="line">    <span class="hljs-keyword">while</span>(i &lt; len(srcimages)<span class="hljs-number">-1</span>):</span><br><span class="line">        <span class="hljs-keyword">print</span> <span class="hljs-string">"i="</span>, i,<span class="hljs-string">"num of srcimages"</span>,len(srcimages)</span><br><span class="line"></span><br><span class="line">        imga = Image.open(os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i]))</span><br><span class="line">        imgb = Image.open(os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>]))</span><br><span class="line">        cmp = FuzzyImageCompare(imga, imgb)</span><br><span class="line">        sim = cmp.similarity() / <span class="hljs-number">100</span></span><br><span class="line">        <span class="hljs-keyword">print</span> <span class="hljs-string">"image "</span>,os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i]),<span class="hljs-string">" and image"</span>,os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>]),<span class="hljs-string">" sim="</span>,sim</span><br><span class="line">        <span class="hljs-keyword">if</span> sim &gt; similarity_thresh:</span><br><span class="line">            <span class="hljs-keyword">print</span> <span class="hljs-string">"delete "</span>,os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>])</span><br><span class="line">            os.remove(os.path.join(sys.argv[<span class="hljs-number">1</span>],srcimages[i+<span class="hljs-number">1</span>]))</span><br><span class="line">            srcimages.pop(i+<span class="hljs-number">1</span>)</span><br><span class="line">        <span class="hljs-keyword">else</span>:</span><br><span class="line">            i = i+<span class="hljs-number">1</span> </span><br><span class="line"></span><br><span class="line">    <span class="hljs-string">'''</span></span><br><span class="line"><span class="hljs-string">    results, i = &#123;&#125;, 1</span></span><br><span class="line"><span class="hljs-string">    for namea, imga in images.items():</span></span><br><span class="line"><span class="hljs-string">        for nameb, imgb in images.items():</span></span><br><span class="line"><span class="hljs-string">            if namea == nameb or (nameb, namea) in results:</span></span><br><span class="line"><span class="hljs-string">                continue</span></span><br><span class="line"><span class="hljs-string">            print ' * %2d / %2d:' % (i, tot),</span></span><br><span class="line"><span class="hljs-string">            print namea, nameb, '...',</span></span><br><span class="line"><span class="hljs-string">            cmp = FuzzyImageCompare(imga, imgb)</span></span><br><span class="line"><span class="hljs-string">            sim = cmp.similarity()</span></span><br><span class="line"><span class="hljs-string">            results[(namea, nameb)] = sim</span></span><br><span class="line"><span class="hljs-string">            print '%.2f %%' % sim</span></span><br><span class="line"><span class="hljs-string">            i += 1</span></span><br><span class="line"><span class="hljs-string">    res = max(results.values())</span></span><br><span class="line"><span class="hljs-string">    imgs = [k for k, v in results.iteritems() if v == res][0]</span></span><br><span class="line"><span class="hljs-string">    print 'Most similar images: %s %s (%.2f %%)' % (imgs[0], imgs[1], res)</span></span><br><span class="line"><span class="hljs-string">    </span></span><br><span class="line"><span class="hljs-string">    '''</span></span><br></pre></td></tr></table></figure>
 <p>在此之后还需要自己手动筛选图片，工作量其实也不小，不过经过去重还是可以减少不少工作量的。</p>
 <h1 id="数据集标注"><a href="#数据集标注" class="headerlink" title="数据集标注"></a>数据集标注</h1><p>爬取的图片需要自己标注，可以使用下面这些标注工具。</p>
@@ -195,7 +195,7 @@
 <p>Visual Object Tagging Tool: An electron app for building end to end Object Detection Models from Images and Videos.</p>
 </blockquote>
 <h1 id="数据集划分"><a href="#数据集划分" class="headerlink" title="数据集划分"></a>数据集划分</h1><p>一般会按照 8:1:1 将数据集划分为训练集、验证集、测试集。这个要根据自己的情况编写 shell 脚本，下面是我用 darknet 训练 yolov3 模型时划分数据的脚本。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if [ $# != 1 ];then</span><br><span class="line">    echo "Usage: $0 &lt;full path&gt;"</span><br><span class="line">    exit -1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">path=$1</span><br><span class="line"></span><br><span class="line">for sub_dir in `ls $path`</span><br><span class="line">    do</span><br><span class="line">        # 获取子文件夹的全路径</span><br><span class="line">        sub_dir_path=$path/$sub_dir</span><br><span class="line">        if [ -d $sub_dir_path ]</span><br><span class="line">            then</span><br><span class="line">                # 将子目录下所有文件移动到父目录中</span><br><span class="line">                `mv $sub_dir_path/* $path`</span><br><span class="line">                # 删除子目录</span><br><span class="line">                `rm -rf $sub_dir_path`</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">        # 给所有文件添加前缀</span><br><span class="line"></span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">`rm tmp.txt`</span><br><span class="line"><span class="hljs-meta">#</span> 将文件夹下指定类型的文件写到文件中</span><br><span class="line"><span class="hljs-meta">#</span> ***** 问题：最后会有个空行 *****</span><br><span class="line"><span class="hljs-meta">#</span> 图片文件存在对应的 txt 文件,则将图片路径追加到 tmp.txt 文件中</span><br><span class="line">for image in `find $path | grep -E 'jpg|png|JPEG|JPG|PNG'`</span><br><span class="line">do</span><br><span class="line">    </span><br><span class="line">    txt=$&#123;image%.*&#125;".txt"</span><br><span class="line"></span><br><span class="line">    if [ -f $txt ]</span><br><span class="line">        then</span><br><span class="line">            echo $&#123;image&#125; </span><br><span class="line">            `echo $&#123;image&#125; &gt;&gt; tmp.txt`</span><br><span class="line">    fi</span><br><span class="line">    </span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span> 将路径 8:1:1 放到 train.txt,val.txt,test.txt</span><br><span class="line"><span class="hljs-meta">#</span> 1. 计算 tmp,txt 文件行数</span><br><span class="line"><span class="hljs-meta">#</span> 2. 计算得出分配到各个文件的行号</span><br><span class="line"><span class="hljs-meta">#</span> 3. 将对应行数的内容写到对应文件夹中</span><br><span class="line">line=`cat tmp.txt | wc -l`</span><br><span class="line">line1=$(($line/10*8))</span><br><span class="line">line2=$(($line/10*8+line/10+1))</span><br><span class="line"></span><br><span class="line">`sed -n 1,$&#123;line1&#125;p tmp.txt &gt;&gt; train.txt`</span><br><span class="line">`sed -n $(($&#123;line1&#125;+1)),$&#123;line2&#125;p tmp.txt &gt;&gt; val.txt`</span><br><span class="line">`sed -n $(($&#123;line2&#125;+1)),$(($&#123;line&#125;-1))p tmp.txt &gt;&gt; test.txt`</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line">if [ $# != 1 ];then</span><br><span class="line">    echo "Usage: $0 &lt;full path&gt;"</span><br><span class="line">    exit -1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">path=$1</span><br><span class="line"></span><br><span class="line">for sub_dir in `ls $path`</span><br><span class="line">    do</span><br><span class="line">        # 获取子文件夹的全路径</span><br><span class="line">        sub_dir_path=$path/$sub_dir</span><br><span class="line">        if [ -d $sub_dir_path ]</span><br><span class="line">            then</span><br><span class="line">                # 将子目录下所有文件移动到父目录中</span><br><span class="line">                `mv $sub_dir_path/* $path`</span><br><span class="line">                # 删除子目录</span><br><span class="line">                `rm -rf $sub_dir_path`</span><br><span class="line">        fi</span><br><span class="line"></span><br><span class="line">        # 给所有文件添加前缀</span><br><span class="line"></span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line">`rm tmp.txt`</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 将文件夹下指定类型的文件写到文件中</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> ***** 问题：最后会有个空行 *****</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 图片文件存在对应的 txt 文件,则将图片路径追加到 tmp.txt 文件中</span></span><br><span class="line">for image in `find $path | grep -E 'jpg|png|JPEG|JPG|PNG'`</span><br><span class="line">do</span><br><span class="line">    </span><br><span class="line">    txt=$&#123;image%.*&#125;".txt"</span><br><span class="line"></span><br><span class="line">    if [ -f $txt ]</span><br><span class="line">        then</span><br><span class="line">            echo $&#123;image&#125; </span><br><span class="line">            `echo $&#123;image&#125; &gt;&gt; tmp.txt`</span><br><span class="line">    fi</span><br><span class="line">    </span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 将路径 8:1:1 放到 train.txt,val.txt,test.txt</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 1. 计算 tmp,txt 文件行数</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 2. 计算得出分配到各个文件的行号</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 3. 将对应行数的内容写到对应文件夹中</span></span><br><span class="line">line=`cat tmp.txt | wc -l`</span><br><span class="line">line1=$(($line/10*8))</span><br><span class="line">line2=$(($line/10*8+line/10+1))</span><br><span class="line"></span><br><span class="line">`sed -n 1,$&#123;line1&#125;p tmp.txt &gt;&gt; train.txt`</span><br><span class="line">`sed -n $(($&#123;line1&#125;+1)),$&#123;line2&#125;p tmp.txt &gt;&gt; val.txt`</span><br><span class="line">`sed -n $(($&#123;line2&#125;+1)),$(($&#123;line&#125;-1))p tmp.txt &gt;&gt; test.txt`</span><br></pre></td></tr></table></figure>
 <p>yolov3 的标注格式如下所示</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9 0.732955 0.591102 0.270317 0.193503</span><br></pre></td></tr></table></figure>
 <p>统计标签的时候可以使用</p>
@@ -224,6 +224,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/9c334df9.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">软件设计的7大原则</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -280,7 +287,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        84
+                        89
                     </p>
                 </div>
             </div>
@@ -290,7 +297,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        12
+                        14
                     </p>
                 </div>
             </div>
@@ -300,7 +307,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        44
+                        45
                     </p>
                 </div>
             </div>
@@ -412,12 +419,20 @@
                 <span class="level-item tag">5</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Docker-K8s/">
+            <span class="level-start">
+                <span class="level-item">Docker&K8s</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Java/">
             <span class="level-start">
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">21</span>
+                <span class="level-item tag">23</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Java/JVM/">
@@ -433,17 +448,9 @@
                 <span class="level-item">Java并发编程</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Java并发编程/">
-            <span class="level-start">
-                <span class="level-item">Java并发编程</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
             <span class="level-start">
                 <span class="level-item">Linux</span>
@@ -468,12 +475,28 @@
                 <span class="level-item tag">3</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/computer-science/">
+            <span class="level-start">
+                <span class="level-item">computer science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/computer-science/设计模式/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/分布式/">
             <span class="level-start">
                 <span class="level-item">分布式</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/善用佳软/">
@@ -503,7 +526,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17.78px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 14.44px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14.44px;">jvm</a> <a href="/tags/linux/" style="font-size: 18.89px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.56px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.22px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17.78px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.11px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12.22px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11.11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.11px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.33px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.33px;">网站</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11.11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17.78px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 14.44px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 11.11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14.44px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 18.89px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11.11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.56px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12.22px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13.33px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17.78px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12.22px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.22px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11.11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12.22px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11.11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16.67px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11.11px;">开源框架</a> <a href="/tags/消息队列/" style="font-size: 13.33px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.33px;">网站</a> <a href="/tags/设计模式/" style="font-size: 11.11px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -517,6 +540,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-18T15:42:34.000Z">2019-09-18</time></div>
+                    <a href="/post/9c334df9.html" class="has-link-black-ter is-size-6">软件设计的7大原则</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a> / <a class="has-link-grey -link" href="/categories/computer-science/设计模式/">设计模式</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -538,7 +574,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-16T14:29:45.000Z">2019-09-16</time></div>
                     <a href="/post/790a1fa3.html" class="has-link-black-ter is-size-6">【Java并发编程】线程本地存储模式ThreadLocal</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java并发编程/">Java并发编程</a>
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Java并发编程/">Java并发编程</a>
                     </p>
                 </div>
             </div>
@@ -570,19 +606,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-12T08:07:13.000Z">2019-09-12</time></div>
-                    <a href="/post/3860d841.html" class="has-link-black-ter is-size-6">JVM-JVM中内存区域划分</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -601,7 +624,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">16</span>
+                    <span class="level-item tag">17</span>
                 </span>
             </a>
         </li>
@@ -645,7 +668,7 @@
                     <span class="level-item">五月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">17</span>
+                    <span class="level-item tag">19</span>
                 </span>
             </a>
         </li>
@@ -656,7 +679,7 @@
                     <span class="level-item">三月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -676,6 +699,17 @@
             <a class="level is-marginless" href="/archives/2019/01/">
                 <span class="level-start">
                     <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -835,7 +869,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -868,6 +902,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
                         <span class="tag is-grey">12</span>
@@ -891,7 +932,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -968,14 +1009,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ubuntu/">
                         <span class="tag">ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zookeeper/">
                         <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1059,7 +1100,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1097,6 +1138,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-18T15:42:34.000Z">2019-09-18</time></div>
+                    <a href="/post/9c334df9.html" class="has-link-black-ter is-size-6">软件设计的7大原则</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a> / <a class="has-link-grey -link" href="/categories/computer-science/设计模式/">设计模式</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-17T11:28:57.000Z">2019-09-17</time></div>
                     <a href="/post/b64b0362.html" class="has-link-black-ter is-size-6">如何自建数据集</a>
                     <p class="is-size-7 is-uppercase">
@@ -1113,7 +1167,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-16T14:29:45.000Z">2019-09-16</time></div>
                     <a href="/post/790a1fa3.html" class="has-link-black-ter is-size-6">【Java并发编程】线程本地存储模式ThreadLocal</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java并发编程/">Java并发编程</a>
+                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/Java并发编程/">Java并发编程</a>
                     </p>
                 </div>
             </div>
@@ -1145,19 +1199,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-12T08:07:13.000Z">2019-09-12</time></div>
-                    <a href="/post/3860d841.html" class="has-link-black-ter is-size-6">JVM-JVM中内存区域划分</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a> / <a class="has-link-grey -link" href="/categories/Java/JVM/">JVM</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1176,7 +1217,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">16</span>
+                    <span class="level-item tag">17</span>
                 </span>
             </a>
         </li>
@@ -1220,7 +1261,7 @@
                     <span class="level-item">五月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">17</span>
+                    <span class="level-item tag">19</span>
                 </span>
             </a>
         </li>
@@ -1231,7 +1272,7 @@
                     <span class="level-item">三月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1251,6 +1292,17 @@
             <a class="level is-marginless" href="/archives/2019/01/">
                 <span class="level-start">
                     <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
@@ -1410,7 +1462,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1443,6 +1495,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/k8s/">
+                        <span class="tag">k8s</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/linux/">
                         <span class="tag">linux</span>
                         <span class="tag is-grey">12</span>
@@ -1466,7 +1525,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/maven/">
                         <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1543,14 +1602,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/ubuntu/">
                         <span class="tag">ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zookeeper/">
                         <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1634,7 +1693,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
