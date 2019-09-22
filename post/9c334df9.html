@@ -7,18 +7,25 @@
 
 
 
-    <meta name="description" content="开闭原则定义：一个软件实体如类、模块和函数应该对扩展开发，对修改关闭。 优点：提高软件系统的可复用性及可维护性 版本更新尽量不更改源代码，但是可以添加新功能； 弹性工作时间，每天工作8小时不变，早点来早点走，晚点来晚点走 面向抽象编程，继承、多态机制">
+    <meta name="description" content="开闭原则、依赖倒置原则、单一职责原则、接口隔离原则、迪米特原则、里氏替换原则、合成复用原则。">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件设计的7大原则">
 <meta property="og:url" content="http://shuiyujie.com/post/9c334df9.html">
 <meta property="og:site_name" content="深页">
-<meta property="og:description" content="开闭原则定义：一个软件实体如类、模块和函数应该对扩展开发，对修改关闭。 优点：提高软件系统的可复用性及可维护性 版本更新尽量不更改源代码，但是可以添加新功能； 弹性工作时间，每天工作8小时不变，早点来早点走，晚点来晚点走 面向抽象编程，继承、多态机制">
+<meta property="og:description" content="开闭原则、依赖倒置原则、单一职责原则、接口隔离原则、迪米特原则、里氏替换原则、合成复用原则。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-19T14:18:52.943Z">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-15-23-44.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-20-08-41.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-20-51-45.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-21-10-31.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-21-32-36.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-21-34-30.png">
+<meta property="og:updated_time" content="2019-09-21T13:49:34.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件设计的7大原则">
-<meta name="twitter:description" content="开闭原则定义：一个软件实体如类、模块和函数应该对扩展开发，对修改关闭。 优点：提高软件系统的可复用性及可维护性 版本更新尽量不更改源代码，但是可以添加新功能； 弹性工作时间，每天工作8小时不变，早点来早点走，晚点来晚点走 面向抽象编程，继承、多态机制">
+<meta name="twitter:description" content="开闭原则、依赖倒置原则、单一职责原则、接口隔离原则、迪米特原则、里氏替换原则、合成复用原则。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-09-21-15-23-44.png">
 
 
 
@@ -134,7 +141,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-18T15:42:34.000Z">2019-09-18</time>
+                <time class="level-item has-text-grey" datetime="2018-09-18T15:42:34.000Z">2018-09-18</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/computer-science/设计模式/">设计模式</a>
@@ -144,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 120 个字)
+                    12 分钟 读完 (大约 1743 个字)
                 </span>
                 
                 
@@ -157,12 +164,86 @@
             
         </h1>
         <div class="content">
-            <h1 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h1><p>定义：一个软件实体如类、模块和函数应该<strong>对扩展开发</strong>，<strong>对修改关闭</strong>。</p>
-<p>优点：提高软件系统的可复用性及可维护性</p>
-<p>版本更新尽量不更改源代码，但是可以添加新功能；</p>
-<p>弹性工作时间，每天工作8小时不变，早点来早点走，晚点来晚点走</p>
+            <p>开闭原则、依赖倒置原则、单一职责原则、接口隔离原则、迪米特原则、里氏替换原则、合成复用原则。</p>
+<a id="more"></a>
+<h1 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h1><ul>
+<li>what：一个软件实体如类、模块和函数应该<strong>对扩展开发</strong>，<strong>对修改关闭</strong>。</li>
+<li><p>why：提高软件系统的可复用性及可维护性</p>
+</li>
+<li><p>how: 版本更新尽量不更改源代码，但是可以添加新功能；</p>
+</li>
+<li><p>example: 弹性工作时间，每天工作8小时不变，早点来早点走，晚点来晚点走</p>
+</li>
+</ul>
 <p>面向抽象编程，继承、多态机制</p>
-
+<p><img src="http://image.shuiyujie.com/2019-09-21-15-23-44.png" alt="开闭原则"></p>
+<p>左图表示我们有一个订单接口，现在要在其基础上扩展一个功能，能够实现打折的功能。<strong>如何才能实现打折功能呢？</strong></p>
+<ol>
+<li>在 IOrder 接口中添加一个 getDiscountPrice()，并在其实现类中实现这个方法。这样可行么？如果这样做就需要在所有实现这个方法的类中，添加 getDiscountPrice()。</li>
+<li>修改 getPrice() 的实现，这样原价去哪里获取呢？也不是很好</li>
+<li>我们可以写一个类 <code>ShoeDiscoutOrder</code> 继承 <code>ShoeOrder</code> 然后 @Override getPrice() 来实现打折功能，而原价则使用 getOriginPrice()，并在其中使用 <code>super.getPrice()</code> 调用父类方法。</li>
+</ol>
+<p><strong>这是开闭原则的简单应用：扩展是开启的，但是对接口和基类的修改是关闭的。</strong></p>
+<h1 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h1><ul>
+<li>what: 高层模块不应该依赖低层模块，二者都应该依赖其抽象</li>
+<li>why: 减少雷剑的耦合性，提高系统稳定性，提高代码可读性和可维护性，降低修改程序所造成的风险</li>
+<li><p>how：抽象不应该依赖细节；细节应该依赖抽象。针对接口编程，不要针对实现编程。</p>
+</li>
+<li><p>example：对比扩展类中的方法编程，以及面向接口编程的区别。</p>
+</li>
+</ul>
+<p>现在有一个 course 类，类中有上各种课程的方法，我在应用层调用各种上课的方法，就需要在 course 中新增相应的方法。此时就造成了一种局面：<strong>高层模块依赖于低层模块</strong>。代码是这样的：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 应用层（高层）调用低层的方法</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">       Geely geely = <span class="hljs-keyword">new</span> Geely();</span><br><span class="line">       geely.studyJavaCourse();</span><br><span class="line">       geely.studyFECourse();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 低层想要扩展就要加方法</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Geely</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">studyJava</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">  	<span class="hljs-comment">// 业务代码</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">studyPython</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">  	<span class="hljs-comment">// 业务代码</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment">// 更多课程都要添加新的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们希望高层模块不依赖低层模块，并且让它们依赖其抽象。具体来说是什么意思呢？就是说我有一个接口实现了 <code>stydyCouse()</code> 这一个方法，具体什么课，怎么学都由该接口的实现类负责。我从高层传入对象，就可以调用相应的类。</p>
+<p><img src="http://image.shuiyujie.com/2019-09-21-20-08-41.png" alt="依赖倒置原则实现" style="zoom:50%;"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 高层调用低层，只要注入具体的实现类</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Geely geely = <span class="hljs-keyword">new</span> Geely();</span><br><span class="line">        geely.setiCourse(<span class="hljs-keyword">new</span> JavaCourse());</span><br><span class="line">        geely.studyImoocCourse();</span><br><span class="line"></span><br><span class="line">        geely.setiCourse(<span class="hljs-keyword">new</span> FECourse());</span><br><span class="line">        geely.studyImoocCourse();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 低层调用方法无需变动</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Geely</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> ICourse iCourse;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setiCourse</span><span class="hljs-params">(ICourse iCourse)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.iCourse = iCourse;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">studyImoocCourse</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        iCourse.studyCourse();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>依赖倒置的核心是<strong>面向接口编程</strong>。</p>
+<h1 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h1><ul>
+<li>what: 不要存在多余一个导致类变更的原则</li>
+<li>why: 一个类有多个职责会导致它变更，修改某一个职责可能导致其他职责出错</li>
+<li><p>how: 一个类/接口/方法只负责一个职责</p>
+</li>
+<li><p>example：类、接口和方法级别的单一职责实现。</p>
+</li>
+</ul>
+<h2 id="类级别"><a href="#类级别" class="headerlink" title="类级别"></a>类级别</h2><p>现在有一个 bird 类，有的鸟靠飞，有的鸟靠走。我们可能会用一个逻辑判断来实现。如果说遵循单一职责原则，就应该将其拆成两个类 <code>FlyBird</code> 和 <code>WalkBird</code> ，然后由应用层来判断是哪种鸟。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bird</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mainMoveMode</span><span class="hljs-params">(String birdName)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-string">"鸵鸟"</span>.equals(birdName))&#123;</span><br><span class="line">            System.out.println(birdName+<span class="hljs-string">"用脚走"</span>);</span><br><span class="line">        &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">            System.out.println(birdName+<span class="hljs-string">"用翅膀飞"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="接口级别"><a href="#接口级别" class="headerlink" title="接口级别"></a>接口级别</h2><p>比如说有个 ICourse 接口，接口中有若干方法，一些方法负责获取课程信息，一些方法负责管理可能。比如说，有个方法是退订这门课，那就不能获取课程信息了对不对。总之，这样一个接口现在负责了两种职责，我们就应该将其拆成两组接口。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ICourse</span> </span>&#123;</span><br><span class="line">  <span class="hljs-comment">// 职责一：负责获取课程信息</span></span><br><span class="line">    <span class="hljs-function">String <span class="hljs-title">getCourseName</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-keyword">byte</span>[] getCourseVideo();</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">// 职责二：负责管理课程</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">studyCourse</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">refundCourse</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://image.shuiyujie.com/2019-09-21-20-51-45.png" alt="单一职责原则的实现"></p>
+<h2 id="方法级别"><a href="#方法级别" class="headerlink" title="方法级别"></a>方法级别</h2><p>方法中做逻辑判断，负责多个任务，实际上是可以拆分开的。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateUsername</span><span class="hljs-params">(String userName)</span></span>&#123;</span><br><span class="line">	userName = <span class="hljs-string">"geely"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateUserAddress</span><span class="hljs-params">(String address)</span></span>&#123;</span><br><span class="line">	address = <span class="hljs-string">"beijing"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 多个职责，条件判断，拆！</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateUserInfo</span><span class="hljs-params">(String userName,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">         String address,<span class="hljs-keyword">boolean</span> bool)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(bool)&#123;</span><br><span class="line">            <span class="hljs-comment">//todo something1</span></span><br><span class="line">        &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">            <span class="hljs-comment">//todo something2</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        userName = <span class="hljs-string">"geely"</span>;</span><br><span class="line">        address = <span class="hljs-string">"beijing"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h1><ul>
+<li>what: 用多个专门的接口，而不使用单一的总接口，客户端不应该依赖它不需要的接口</li>
+<li>why: 符合高内聚低耦合的设计思想，从而使得类具有很好的可读性、可扩展性和可维护性</li>
+<li><p>how：</p>
+<ul>
+<li>一类对一个类的依赖应该建立在最小的接口上</li>
+<li>建立单一接口，不要建立庞大臃肿的接口</li>
+<li>尽量细化接口，接口中的方法尽量少</li>
+<li>注意适度原则，一定要适度</li>
+</ul>
+</li>
+<li><p>example: 一个关于动物的接口承载太多的方法，将其拆分的例子</p>
+</li>
+</ul>
+<p>同样是动物但是这个动物能做的事儿，其他动物可能不能做。如果动物都实现同样的接口，那么有些方法的实现就要空着了。所以要拆分。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IAnimalAction</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拆分前，拆分后如下所示：</p>
+<p><img src="http://image.shuiyujie.com/2019-09-21-21-10-31.png" alt="接口隔离原则演示" style="zoom:50%;"></p>
+<p>接口隔离原则看着简单，但是把握好接口隔离的粒度还是需要仔细考量的。</p>
+<h1 id="迪米特原则"><a href="#迪米特原则" class="headerlink" title="迪米特原则"></a>迪米特原则</h1><ul>
+<li>what: 一个对象应该对其他对象保持最少的了解，又叫最少知道原则</li>
+<li>why: 降低类之间的耦合</li>
+<li>how: 尽量降低类和类之间的耦合</li>
+<li>example：</li>
+</ul>
+<p>Boss 类只需要和 TeamLeader 打交道，而不需要和 course 打交道。</p>
+<p><img src="http://image.shuiyujie.com/2019-09-21-21-32-36.png" alt="耦合"></p>
+<p>修改之后如下所示：</p>
+<p><img src="http://image.shuiyujie.com/2019-09-21-21-34-30.png" alt="修改之后"></p>
+<p>迪米特原则的关键就是梳理出这个类应该和哪些类打交道，不应该和哪些类打交道，做到尽可能合理。</p>
+<h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><h1 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h1>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -187,16 +268,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/dd983220.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/6d867605.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">卷积神经网络基础</span>
+                <span class="level-item">工厂相关设计模式</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/b64b0362.html">
-                <span class="level-item">如何自建数据集</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/fd2c899.html">
+                <span class="level-item">Linux三剑客——Git</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -248,7 +329,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        95
+                        104
                     </p>
                 </div>
             </div>
@@ -268,7 +349,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        48
+                        49
                     </p>
                 </div>
             </div>
@@ -293,6 +374,42 @@
         <a class="is-flex" href="#开闭原则">
         <span class="has-mr-6">1</span>
         <span>开闭原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#依赖倒置原则">
+        <span class="has-mr-6">2</span>
+        <span>依赖倒置原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#单一职责原则">
+        <span class="has-mr-6">3</span>
+        <span>单一职责原则</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#类级别">
+        <span class="has-mr-6">3.1</span>
+        <span>类级别</span>
+        </a></li><li>
+        <a class="is-flex" href="#接口级别">
+        <span class="has-mr-6">3.2</span>
+        <span>接口级别</span>
+        </a></li><li>
+        <a class="is-flex" href="#方法级别">
+        <span class="has-mr-6">3.3</span>
+        <span>方法级别</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#接口隔离原则">
+        <span class="has-mr-6">4</span>
+        <span>接口隔离原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#迪米特原则">
+        <span class="has-mr-6">5</span>
+        <span>迪米特原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#里氏替换原则">
+        <span class="has-mr-6">6</span>
+        <span>里氏替换原则</span>
+        </a></li><li>
+        <a class="is-flex" href="#合成复用原则">
+        <span class="has-mr-6">7</span>
+        <span>合成复用原则</span>
         </a></li></ul>
         </div>
     </div>
@@ -349,7 +466,7 @@
                 <span class="level-item">DeepLearning</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">11</span>
+                <span class="level-item tag">15</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Docker-K8s/">
@@ -365,7 +482,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">23</span>
+                <span class="level-item tag">24</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Java/JVM/">
@@ -413,7 +530,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -421,7 +538,7 @@
                 <span class="level-item">设计模式</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/分布式/">
@@ -429,7 +546,7 @@
                 <span class="level-item">分布式</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/善用佳软/">
@@ -437,7 +554,7 @@
                 <span class="level-item">善用佳软</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/图像处理/">
@@ -459,7 +576,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 11px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 19px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11px;">开源框架</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/消息队列/" style="font-size: 13px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13px;">网站</a> <a href="/tags/设计模式/" style="font-size: 11px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 12px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 11px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 19px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 13px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13px;">网站</a> <a href="/tags/设计模式/" style="font-size: 13px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -557,7 +674,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">23</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -590,7 +707,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -601,7 +718,7 @@
                     <span class="level-item">五月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -645,7 +762,7 @@
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -700,7 +817,7 @@
                     <span class="level-item">十一月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -774,7 +891,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/caffe/">
                         <span class="tag">caffe</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -795,7 +912,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/deeplearning/">
                         <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">15</span>
                     </a>
                 </div>
                 
@@ -816,6 +933,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/git/">
                         <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -942,7 +1066,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tensorflow/">
                         <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -956,7 +1080,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zookeeper/">
                         <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1010,13 +1134,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/开源框架/">
-                        <span class="tag">开源框架</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据增强/">
                         <span class="tag">数据增强</span>
                         <span class="tag is-grey">1</span>
@@ -1026,6 +1143,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/模型评估/">
                         <span class="tag">模型评估</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/正则表达式/">
+                        <span class="tag">正则表达式</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1054,7 +1178,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1171,7 +1295,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">23</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -1204,7 +1328,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -1215,7 +1339,7 @@
                     <span class="level-item">五月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1259,7 +1383,7 @@
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1314,7 +1438,7 @@
                     <span class="level-item">十一月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1388,7 +1512,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/caffe/">
                         <span class="tag">caffe</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1409,7 +1533,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/deeplearning/">
                         <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">15</span>
                     </a>
                 </div>
                 
@@ -1430,6 +1554,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/git/">
                         <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1556,7 +1687,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tensorflow/">
                         <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1570,7 +1701,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zookeeper/">
                         <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1624,13 +1755,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/开源框架/">
-                        <span class="tag">开源框架</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据增强/">
                         <span class="tag">数据增强</span>
                         <span class="tag is-grey">1</span>
@@ -1640,6 +1764,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/模型评估/">
                         <span class="tag">模型评估</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/正则表达式/">
+                        <span class="tag">正则表达式</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1668,7 +1799,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="深页">
 <meta property="og:description" content="本文介绍 zookeeper 的一些基本概念。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-20T11:41:45.070Z">
+<meta property="og:updated_time" content="2019-09-21T02:51:15.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper的基本概念">
 <meta name="twitter:description" content="本文介绍 zookeeper 的一些基本概念。">
@@ -144,7 +144,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 536 个字)
+                    5 分钟 读完 (大约 695 个字)
                 </span>
                 
                 
@@ -181,6 +181,13 @@
 <li>临时节点：与客户端的会话绑定，一旦客户端绘画是小，这个客户端创建的所有临时节点都会被移除</li>
 <li>SEQUENTIAL Znode：创建临时节点时，如果设置属性 SEQUENTIAL，则会自动在节点名后面追加一个整型数字</li>
 </ul>
+<h1 id="持久节点"><a href="#持久节点" class="headerlink" title="持久节点"></a>持久节点</h1><p>启动一个 zkCli 创建一个持久节点，即使创建节点的会话关闭，该节点也不会被删除。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 10] create /node nodedata</span><br><span class="line">Created /node</span><br><span class="line">[zk: localhost:2181(CONNECTED) 11] ls /</span><br><span class="line">[node, zookeeper]</span><br></pre></td></tr></table></figure>
+<h2 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h2><p>启动一个 zkCli 之后创建临时节点</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 3] create -e /node1 node1data</span><br><span class="line">Created /node1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /</span><br><span class="line">[zookeeper, node1]</span><br></pre></td></tr></table></figure>
+<p>将创建临时节点的会话关闭之后，临时节点将会消失。(可以再起一个 zkCli 验证)</p>
+<h2 id="顺序节点"><a href="#顺序节点" class="headerlink" title="顺序节点"></a>顺序节点</h2><p>创建数据节点</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 12] create -s /node/seq 321</span><br><span class="line">Created /node/seq0000000000</span><br><span class="line">[zk: localhost:2181(CONNECTED) 13] create -s /node/seq 322</span><br><span class="line">Created /node/seq0000000001</span><br><span class="line">[zk: localhost:2181(CONNECTED) 15] ls /node</span><br><span class="line">[seq0000000000, seq0000000001]</span><br></pre></td></tr></table></figure>
 <h1 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h1><ul>
 <li>Leader: 为客户端提供读和写服务</li>
 <li>Follower: 提供读服务，所有写服务都需要转交给Leader角色，参与选举</li>
@@ -236,9 +243,9 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/24de7431.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/5ddebf1a.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">C语言学习笔记-写一个最简单的makefile</span>
+                <span class="level-item">zookeepre源码编译</span>
             </a>
         </div>
         
@@ -297,7 +304,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        95
+                        104
                     </p>
                 </div>
             </div>
@@ -317,7 +324,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        48
+                        49
                     </p>
                 </div>
             </div>
@@ -347,24 +354,36 @@
         <span class="has-mr-6">2</span>
         <span>数据节点(Znode)</span>
         </a></li><li>
-        <a class="is-flex" href="#集群角色">
+        <a class="is-flex" href="#持久节点">
         <span class="has-mr-6">3</span>
+        <span>持久节点</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#临时节点">
+        <span class="has-mr-6">3.1</span>
+        <span>临时节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#顺序节点">
+        <span class="has-mr-6">3.2</span>
+        <span>顺序节点</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#集群角色">
+        <span class="has-mr-6">4</span>
         <span>集群角色</span>
         </a></li><li>
         <a class="is-flex" href="#会发-Session">
-        <span class="has-mr-6">4</span>
+        <span class="has-mr-6">5</span>
         <span>会发(Session)</span>
         </a></li><li>
         <a class="is-flex" href="#版本">
-        <span class="has-mr-6">5</span>
+        <span class="has-mr-6">6</span>
         <span>版本</span>
         </a></li><li>
         <a class="is-flex" href="#Watcher">
-        <span class="has-mr-6">6</span>
+        <span class="has-mr-6">7</span>
         <span>Watcher</span>
         </a></li><li>
         <a class="is-flex" href="#ACL">
-        <span class="has-mr-6">7</span>
+        <span class="has-mr-6">8</span>
         <span>ACL</span>
         </a></li></ul>
         </div>
@@ -422,7 +441,7 @@
                 <span class="level-item">DeepLearning</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">11</span>
+                <span class="level-item tag">15</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Docker-K8s/">
@@ -438,7 +457,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">23</span>
+                <span class="level-item tag">24</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Java/JVM/">
@@ -486,7 +505,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -494,7 +513,7 @@
                 <span class="level-item">设计模式</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/分布式/">
@@ -502,7 +521,7 @@
                 <span class="level-item">分布式</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/善用佳软/">
@@ -510,7 +529,7 @@
                 <span class="level-item">善用佳软</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/图像处理/">
@@ -532,7 +551,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 10px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 11px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 19px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16px;">并发编程</a> <a href="/tags/开源框架/" style="font-size: 11px;">开源框架</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/消息队列/" style="font-size: 13px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13px;">网站</a> <a href="/tags/设计模式/" style="font-size: 11px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 12px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 11px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 19px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 13px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13px;">网站</a> <a href="/tags/设计模式/" style="font-size: 13px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -630,7 +649,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">23</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -663,7 +682,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -674,7 +693,7 @@
                     <span class="level-item">五月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -718,7 +737,7 @@
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -773,7 +792,7 @@
                     <span class="level-item">十一月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -847,7 +866,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/caffe/">
                         <span class="tag">caffe</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -868,7 +887,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/deeplearning/">
                         <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">15</span>
                     </a>
                 </div>
                 
@@ -889,6 +908,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/git/">
                         <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1015,7 +1041,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tensorflow/">
                         <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1029,7 +1055,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zookeeper/">
                         <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1083,13 +1109,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/开源框架/">
-                        <span class="tag">开源框架</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据增强/">
                         <span class="tag">数据增强</span>
                         <span class="tag is-grey">1</span>
@@ -1099,6 +1118,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/模型评估/">
                         <span class="tag">模型评估</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/正则表达式/">
+                        <span class="tag">正则表达式</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1127,7 +1153,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1244,7 +1270,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">23</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -1277,7 +1303,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">24</span>
                 </span>
             </a>
         </li>
@@ -1288,7 +1314,7 @@
                     <span class="level-item">五月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1332,7 +1358,7 @@
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1387,7 +1413,7 @@
                     <span class="level-item">十一月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1461,7 +1487,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/caffe/">
                         <span class="tag">caffe</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1482,7 +1508,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/deeplearning/">
                         <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">15</span>
                     </a>
                 </div>
                 
@@ -1503,6 +1529,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/git/">
                         <span class="tag">git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/idea/">
+                        <span class="tag">idea</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1629,7 +1662,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tensorflow/">
                         <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1643,7 +1676,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/zookeeper/">
                         <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1697,13 +1730,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/开源框架/">
-                        <span class="tag">开源框架</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据增强/">
                         <span class="tag">数据增强</span>
                         <span class="tag is-grey">1</span>
@@ -1713,6 +1739,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/模型评估/">
                         <span class="tag">模型评估</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/正则表达式/">
+                        <span class="tag">正则表达式</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1741,7 +1774,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
