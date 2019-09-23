@@ -252,7 +252,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 545 个字)
+                    4 分钟 读完 (大约 551 个字)
                 </span>
                 
                 
@@ -265,7 +265,8 @@
             
         </h1>
         <div class="content">
-            <blockquote>
+            <p><img src="http://image.shuiyujie.com/2019-06-17-18-25-09.png" alt="Caffe"></p>
+<blockquote>
 <p>Caffe 安装看 <a href="http://caffe.berkeleyvision.org/installation.html" target="_blank" rel="noopener">Installation</a>, 第一个例子可以看 <a href="http://caffe.berkeleyvision.org/gathered/examples/mnist.html" target="_blank" rel="noopener">Training LeNet on MNIST with caffe</a>  的示例.跟着示例做一遍,精确度能有 98% 左右,做完很有成就感.跑完之后可以跑更多的官方示例,它包括 Notebook Example 和 Command Line Example.</p>
 <p><a href="http://caffe.berkeleyvision.org/tutorial/" target="_blank" rel="noopener">Caffe Tutorial</a>介绍了 Caffe 的基础,其中也包括各种数据结构 <a href="http://caffe.berkeleyvision.org/tutorial/" target="_blank" rel="noopener">http://caffe.berkeleyvision.org/tutorial/</a></p>
 <p><a href="http://caffe.berkeleyvision.org/model_zoo.html" target="_blank" rel="noopener">Model Zoo</a>有很多实现的网络和训练好的模型</p>
@@ -309,7 +310,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 894 个字)
+                    6 分钟 读完 (大约 901 个字)
                 </span>
                 
                 
@@ -322,116 +323,77 @@
             
         </h1>
         <div class="content">
-            <blockquote>
+            <p><img src="http://image.shuiyujie.com/2019-06-17-18-25-09.png" alt="Caffe"></p>
+<blockquote>
 <p>Deep networks are compositional models that are naturally represented as a collection of inter-connected layers that work on chunks of data. Caffe defines a net layer-by-layer in its own model schema. The network defines the entire model bottom-to-top from input data to loss. As data and derivatives flow through the network in the <a href="https://caffe.berkeleyvision.org/tutorial/forward_backward.html" target="_blank" rel="noopener">forward and backward passes</a> Caffe stores, communicates, and manipulates the information as <em>blobs</em>: the blob is the standard array and unified memory interface for the framework. The layer comes next as the foundation of both model and computation. The net follows as the collection and connection of layers. The details of blob describe how information is stored and communicated in and across layers and nets.</p>
 <p><a href="https://caffe.berkeleyvision.org/tutorial/solver.html" target="_blank" rel="noopener">Solving</a> is configured separately to decouple modeling and optimization.</p>
 <p>We will go over the details of these components in more detail.</p>
 <p><a href="https://caffe.berkeleyvision.org/tutorial/net_layer_blob.html" target="_blank" rel="noopener">https://caffe.berkeleyvision.org/tutorial/net_layer_blob.html</a></p>
 </blockquote>
-<h1 id="blob"><a href="#blob" class="headerlink" title="blob"></a>blob</h1><p><img src="http://image.shuiyujie.com/2019-09-22-22-08-31.png" alt="Caffe的数据层次"></p>
-<p>数据表示为四维张量 (N, C, H, W)</p>
-<ul>
-<li>N 是 batch Size 大小</li>
-<li>C 是 channel</li>
-<li>H, W 为图片宽高</li>
-</ul>
-<p><img src="http://image.shuiyujie.com/2019-09-22-22-09-32.png" alt="blob"></p>
-<ul>
-<li>data 存储数据</li>
-<li>diff 存储梯度</li>
-<li>shape 分别为 blob 的尺度</li>
-<li>count 是所有数据数目,即 N<em>C</em>H*W</li>
-</ul>
-<h1 id="layer"><a href="#layer" class="headerlink" title="layer"></a>layer</h1><p>layer 是基本计算单元,除了输入层没有 bottom,输出层没有 top,每一层都有 bottom 和 top,分别串接前一层和后一层.每一种 layer 都有对应的 layer_param,用于实现该层参数的配置。</p>
-<p><img src="http://image.shuiyujie.com/2019-09-22-22-12-34.png" alt="layer"></p>
-<ul>
-<li>需要实现 setup, forward, backward 登函数</li>
-<li>使用 prototxt 配置</li>
-<li>包含网络层参数,如输入数据层的 data_param</li>
-</ul>
-<h2 id="Caffe-中的序列化"><a href="#Caffe-中的序列化" class="headerlink" title="Caffe 中的序列化"></a>Caffe 中的序列化</h2><p><img src="http://image.shuiyujie.com/2019-09-22-22-14-01.png" alt="序列化"></p>
-<p><code>/caffe/src/caffe/proto/caffe.proto</code>使用 protobuf 协议进行数据序列化和解析,实际使用的时候回编译成与所定义的数据结构对应的代码,从而实现数据的读取,解析和存储</p>
-<p><strong>Caffe 中的 LayerParameter 示例</strong></p>
-<figure class="highlight protobuf hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// NOTE</span><br><span class="line">// Update the next available ID when you add a new LayerParameter field.</span><br><span class="line">//</span><br><span class="line">// LayerParameter next available layer-specific ID: 149 (last added: clip_param)</span><br><span class="line">message LayerParameter &#123;</span><br><span class="line">  optional string name = 1; // the layer name</span><br><span class="line">  optional string type = 2; // the layer type</span><br><span class="line">  repeated string bottom = 3; // the name of each bottom blob</span><br><span class="line">  repeated string top = 4; // the name of each top blob</span><br><span class="line"></span><br><span class="line">  // The train / test phase for computation.</span><br><span class="line">  optional Phase phase = 10;</span><br><span class="line"></span><br><span class="line">  // The amount of weight to assign each top blob in the objective.</span><br><span class="line">  // Each layer assigns a default value, usually of either 0 or 1,</span><br><span class="line">  // to each top blob.</span><br><span class="line">  repeated float loss_weight = 5;</span><br><span class="line"></span><br><span class="line">  // Specifies training parameters (multipliers on global learning constants,</span><br><span class="line">  // and the name and other settings used for weight sharing).</span><br><span class="line">  repeated ParamSpec param = 6;</span><br><span class="line"></span><br><span class="line">  // The blobs containing the numeric parameters of the layer.</span><br><span class="line">  repeated BlobProto blobs = 7;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href="https://github.com/BVLC/caffe/blob/master/src/caffe/proto/caffe.proto" target="_blank" rel="noopener">https://github.com/BVLC/caffe/blob/master/src/caffe/proto/caffe.proto</a></p>
-</blockquote>
-<h1 id="net"><a href="#net" class="headerlink" title="net"></a>net</h1><p>Net 就是一个由 layer 实例组成的完整的 CNN 模型</p>
-<p><img src="http://image.shuiyujie.com/2019-09-22-22-20-25.png" alt="net"></p>
-<p><a href="https://zhuanlan.zhihu.com/p/21878314" target="_blank" rel="noopener">Caffe中的Net类是如何工作的</a></p>
-<h2 id="Caffe-中的训练参数"><a href="#Caffe-中的训练参数" class="headerlink" title="Caffe 中的训练参数"></a>Caffe 中的训练参数</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>net</td>
-<td>网络文件路径</td>
-</tr>
-<tr>
-<td>test_iter</td>
-<td>一次测试的 batch 数目，如果它等于 1，就说明支取一个 batch size 的数据来做测试，如果 batch size 太小，那么对于分类任务来说统计出来的指标也不可信，所以一次测试，用到所有测试数据，因为常令 test_iter *test_batchsize = 测试集合的大小</td>
-</tr>
-<tr>
-<td>test_interval</td>
-<td>测试间隔，即每隔多少次迭代进行一次测试</td>
-</tr>
-<tr>
-<td>base_lr</td>
-<td>学习率</td>
-</tr>
-<tr>
-<td>lr_policy</td>
-<td>学习率策略，base_lr 和 lr_policy 决定了学习率大小如何变化，而不同的学习率变化方法又有不同的参数 学习率的变化方法很多：fixed, step, exp, inv, multistep, poly, sigmoid</td>
-</tr>
-<tr>
-<td>type</td>
-<td>优化方法</td>
-</tr>
-<tr>
-<td>clip_gradients</td>
-<td>固定梯度范围</td>
-</tr>
-<tr>
-<td>momentum</td>
-<td>动量项</td>
-</tr>
-<tr>
-<td>momentum</td>
-<td>优化策略 Adam 用到的参数</td>
-</tr>
-<tr>
-<td>weight_decay</td>
-<td>权重衰减率</td>
-</tr>
-<tr>
-<td>display</td>
-<td>显示间隔 debug_info</td>
-</tr>
-<tr>
-<td>max_iter</td>
-<td>最大迭代次数</td>
-</tr>
-<tr>
-<td>snapshot</td>
-<td>存储模型间隔</td>
-</tr>
-<tr>
-<td>snapshot_prefix</td>
-<td>存储路径与前缀</td>
-</tr>
-<tr>
-<td>solver_mode</td>
-<td>GPU/CPU 开关，可以指定用 GPU 或者 CPU 进行训</td>
-</tr>
-</tbody>
-</table>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/post/691f534d.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-13T13:19:45.000Z">2019-06-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 1957 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/3054b634.html">【Darknet】改进版Darknet</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://image.shuiyujie.com/2019-06-13-21-01-25.png" alt="darknet"></p>
+<p><a href="AlexeyAB/darknet">AlexeyAB/darknet</a> 在<a href="http://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">原版darknet</a>的基础上做了一些改进，用得最舒服的两个点是：可以实时查看 loss 和 mAP；可以自动计算一些模型评估指标。</p>
+<p>下面是对其 README.md 的翻译。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/post/3054b634.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -469,7 +431,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/5ba44047.html">【Darknet】darknet实战</a>
+                <a class="has-link-black-ter" href="/post/5ba44047.html">【Darknet】Darknet实战</a>
             
         </h1>
         <div class="content">
@@ -568,7 +530,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        104
+                        107
                     </p>
                 </div>
             </div>
@@ -578,7 +540,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        14
+                        15
                     </p>
                 </div>
             </div>
@@ -588,7 +550,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        49
+                        52
                     </p>
                 </div>
             </div>
@@ -654,7 +616,7 @@
                 <span class="level-item">DeepLearning</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">15</span>
+                <span class="level-item tag">16</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Docker-K8s/">
@@ -718,9 +680,17 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a><ul><li>
+        <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
             <span class="level-start">
                 <span class="level-item">设计模式</span>
@@ -742,7 +712,7 @@
                 <span class="level-item">善用佳软</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/图像处理/">
@@ -764,7 +734,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 12px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10px;">darknet</a> <a href="/tags/dataset/" style="font-size: 11px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 19px;">deeplearning</a> <a href="/tags/docker/" style="font-size: 11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 13px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13px;">网站</a> <a href="/tags/设计模式/" style="font-size: 13px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 11px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 12px;">caffe</a> <a href="/tags/darknet/" style="font-size: 11px;">darknet</a> <a href="/tags/dataset/" style="font-size: 11px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 19px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 11px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 11px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 13px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 13px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 11px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 12px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 11px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 13px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13px;">网站</a> <a href="/tags/设计模式/" style="font-size: 13px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -895,7 +865,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">24</span>
+                    <span class="level-item tag">26</span>
                 </span>
             </a>
         </li>
@@ -961,7 +931,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1086,7 +1056,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/darknet/">
                         <span class="tag">darknet</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1100,7 +1070,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/deeplearning/">
                         <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">16</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dns/">
+                        <span class="tag">dns</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1168,6 +1145,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mac/">
+                        <span class="tag">mac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/machinelearning/">
                         <span class="tag">machinelearning</span>
                         <span class="tag is-grey">1</span>
@@ -1191,6 +1175,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/mybatis/">
                         <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/network/">
+                        <span class="tag">network</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1516,7 +1507,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">24</span>
+                    <span class="level-item tag">26</span>
                 </span>
             </a>
         </li>
@@ -1582,7 +1573,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1707,7 +1698,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/darknet/">
                         <span class="tag">darknet</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1721,7 +1712,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/deeplearning/">
                         <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">16</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dns/">
+                        <span class="tag">dns</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1789,6 +1787,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mac/">
+                        <span class="tag">mac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/machinelearning/">
                         <span class="tag">machinelearning</span>
                         <span class="tag is-grey">1</span>
@@ -1812,6 +1817,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/mybatis/">
                         <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/network/">
+                        <span class="tag">network</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
