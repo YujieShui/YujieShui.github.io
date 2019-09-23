@@ -2,18 +2,26 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: ssh - 深页</title>
+<title>【TensorFlow2.0】实现ResNet - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/ssh/index.html">
+    <meta name="description" content="深度残差网络（Deep residual network, ResNet）的提出是CNN图像史上的一件里程碑事件，ResNet取得了5项第一，并又一次刷新了CNN模型在ImageNet上的历史。 本文介绍如何用 TensorFlow2.0 来实现 ResNet18，并用其训练 cifar100 的分类模型。">
+<meta name="keywords" content="deeplearning,tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【TensorFlow2.0】实现ResNet">
+<meta property="og:url" content="http://shuiyujie.com/post/3a297e7b.html">
 <meta property="og:site_name" content="深页">
+<meta property="og:description" content="深度残差网络（Deep residual network, ResNet）的提出是CNN图像史上的一件里程碑事件，ResNet取得了5项第一，并又一次刷新了CNN模型在ImageNet上的历史。 本文介绍如何用 TensorFlow2.0 来实现 ResNet18，并用其训练 cifar100 的分类模型。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-23-19-27-13.png">
+<meta property="og:image" content="http://image.shuiyujie.com/2019-09-23-19-28-45.png">
+<meta property="og:updated_time" content="2019-09-23T11:37:13.046Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深页">
+<meta name="twitter:title" content="【TensorFlow2.0】实现ResNet">
+<meta name="twitter:description" content="深度残差网络（Deep residual network, ResNet）的提出是CNN图像史上的一件里程碑事件，ResNet取得了5项第一，并又一次刷新了CNN模型在ImageNet上的历史。 本文介绍如何用 TensorFlow2.0 来实现 ResNet18，并用其训练 cifar100 的分类模型。">
+<meta name="twitter:image" content="http://image.shuiyujie.com/2019-09-23-19-27-13.png">
 
 
 
@@ -85,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="深页" height="28">
+                <img src="/images/logo.svg" alt="【TensorFlow2.0】实现ResNet" height="28">
             
             </a>
         </div>
@@ -106,6 +114,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -120,33 +132,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">ssh</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-12-19T03:57:18.000Z">2017-12-19</time>
+                <time class="level-item has-text-grey" datetime="2019-09-05T14:05:06.000Z">2019-09-05</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 978 个字)
+                    6 分钟 读完 (大约 839 个字)
                 </span>
                 
                 
@@ -155,23 +156,32 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/ea055f0d.html">实现 SSH 免密登录</a>
+                【TensorFlow2.0】实现ResNet
             
         </h1>
         <div class="content">
-            <p>SSH (Secure Shell的) 是一种网络协议，用于计算机之间的加密登录。</p>
-<p>通过使用SSH，你可以把所有传输的数据进行加密更加安全可靠。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH 有很多功能，它既可以代替 Telnet，又可以为FTP、Pop、甚至为 PPP 提供一个安全的”通道”。</p>
-<p><img src="http://image.shuiyujie.com/2019-05-09-23-08-57.png" alt="SSH"></p>
+            <p><img src="http://image.shuiyujie.com/2019-09-23-19-27-13.png" alt="ResNet"></p>
+<p>深度残差网络（Deep residual network, ResNet）的提出是CNN图像史上的一件里程碑事件，ResNet取得了5项第一，并又一次刷新了CNN模型在ImageNet上的历史。</p>
+<p>本文介绍如何用 TensorFlow2.0 来实现 ResNet18，并用其训练 cifar100 的分类模型。</p>
+<a id="more"></a>
+<h1 id="ResNet-的实现"><a href="#ResNet-的实现" class="headerlink" title="ResNet 的实现"></a>ResNet 的实现</h1><p><img src="http://image.shuiyujie.com/2019-09-23-19-28-45.png" alt="a residual block" style="zoom:50%;"></p>
+<p>ResNet 的基本结构如上图所示，为了解决网络层次过深而导致的退化问题（Degradation problem）。ResNet 设计了一种短路连接（shortcut connection）来解决这个问题。</p>
+<p>在编程实现的角度来看，首先我们要建一个 <code>BasicBlock</code> ，它包括两个 layer，以及一个 shortcut connection。ResNet 则是由多个 <code>BasicBlock</code> 堆叠而成。</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span>  tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span>    tensorflow <span class="hljs-keyword">import</span> keras</span><br><span class="line"><span class="hljs-keyword">from</span>    tensorflow.keras <span class="hljs-keyword">import</span> layers, Sequential</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasicBlock</span><span class="hljs-params">(layers.Layer)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, filter_num, stride=<span class="hljs-number">1</span>)</span>:</span></span><br><span class="line">        super(BasicBlock, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.conv1 = layers.Conv2D(filter_num, (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), strides=stride, padding=<span class="hljs-string">'same'</span>)</span><br><span class="line">        self.bn1 = layers.BatchNormalization()</span><br><span class="line">        self.relu = layers.Activation(<span class="hljs-string">'relu'</span>)</span><br><span class="line"></span><br><span class="line">        self.conv2 = layers.Conv2D(filter_num, (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), strides=<span class="hljs-number">1</span>, padding=<span class="hljs-string">'same'</span>)</span><br><span class="line">        self.bn2 = layers.BatchNormalization()</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> stride != <span class="hljs-number">1</span>:</span><br><span class="line">            self.downsample = Sequential()</span><br><span class="line">            self.downsample.add(layers.Conv2D(filter_num, (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>), strides=stride))</span><br><span class="line">        <span class="hljs-keyword">else</span>:</span><br><span class="line">            self.downsample = <span class="hljs-keyword">lambda</span> x:x</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">call</span><span class="hljs-params">(self, inputs, training=None)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># [b, h, w, c]</span></span><br><span class="line">        out = self.conv1(inputs)</span><br><span class="line">        out = self.bn1(out)</span><br><span class="line">        out = self.relu(out)</span><br><span class="line"></span><br><span class="line">        out = self.conv2(out)</span><br><span class="line">        out = self.bn2(out)</span><br><span class="line"></span><br><span class="line">        identity = self.downsample(inputs)</span><br><span class="line"></span><br><span class="line">        output = layers.add([out, identity])</span><br><span class="line">        output = tf.nn.relu(output)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResNet</span><span class="hljs-params">(keras.Model)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, layer_dims, num_classes=<span class="hljs-number">100</span>)</span>:</span> <span class="hljs-comment"># [2, 2, 2, 2]</span></span><br><span class="line">        super(ResNet, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.stem = Sequential([layers.Conv2D(<span class="hljs-number">64</span>, (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), strides=(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)),</span><br><span class="line">                                layers.BatchNormalization(),</span><br><span class="line">                                layers.Activation(<span class="hljs-string">'relu'</span>),</span><br><span class="line">                                layers.MaxPool2D(pool_size=(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>), strides=(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>), padding=<span class="hljs-string">'same'</span>)</span><br><span class="line">                                ])</span><br><span class="line"></span><br><span class="line">        self.layer1 = self.build_resblock(<span class="hljs-number">64</span>,  layer_dims[<span class="hljs-number">0</span>])</span><br><span class="line">        self.layer2 = self.build_resblock(<span class="hljs-number">128</span>, layer_dims[<span class="hljs-number">1</span>], stride=<span class="hljs-number">2</span>)</span><br><span class="line">        self.layer3 = self.build_resblock(<span class="hljs-number">256</span>, layer_dims[<span class="hljs-number">2</span>], stride=<span class="hljs-number">2</span>)</span><br><span class="line">        self.layer4 = self.build_resblock(<span class="hljs-number">512</span>, layer_dims[<span class="hljs-number">3</span>], stride=<span class="hljs-number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># output: [b, 512, h, w],</span></span><br><span class="line">        self.avgpool = layers.GlobalAveragePooling2D()</span><br><span class="line">        self.fc = layers.Dense(num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">call</span><span class="hljs-params">(self, inputs, training=None)</span>:</span></span><br><span class="line"></span><br><span class="line">        x = self.stem(inputs)</span><br><span class="line"></span><br><span class="line">        x = self.layer1(x)</span><br><span class="line">        x = self.layer2(x)</span><br><span class="line">        x = self.layer3(x)</span><br><span class="line">        x = self.layer4(x)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># [b, c]</span></span><br><span class="line">        x = self.avgpool(x)</span><br><span class="line">        <span class="hljs-comment"># [b, 100]</span></span><br><span class="line">        x = self.fc(x)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> x</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_resblock</span><span class="hljs-params">(self, filter_num, blocks, stride=<span class="hljs-number">1</span>)</span>:</span></span><br><span class="line"></span><br><span class="line">        res_blocks = Sequential()</span><br><span class="line">        <span class="hljs-comment"># may down sample</span></span><br><span class="line">        res_blocks.add(BasicBlock(filter_num, stride))</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, blocks):</span><br><span class="line">            res_blocks.add(BasicBlock(filter_num, stride=<span class="hljs-number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> res_blocks</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">resnet18</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    <span class="hljs-keyword">return</span> ResNet([<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">resnet34</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    <span class="hljs-keyword">return</span> ResNet([<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">3</span>])</span><br></pre></td></tr></table></figure>
+<h1 id="使用-ResNet"><a href="#使用-ResNet" class="headerlink" title="使用 ResNet"></a>使用 ResNet</h1><p>ResNet 的使用和一般的模型使用没有什么区别，如果不清楚可以看这篇文章：<a href="https://shuiyujie.com/post/c6ed1613.html">【TensorFlow2.0】手撕前向传播算法</a>。</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span>  tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span>    tensorflow.keras <span class="hljs-keyword">import</span> layers, optimizers, datasets, Sequential</span><br><span class="line"><span class="hljs-keyword">import</span>  os</span><br><span class="line"><span class="hljs-keyword">from</span>    resnet1 <span class="hljs-keyword">import</span> resnet18</span><br><span class="line"></span><br><span class="line">os.environ[<span class="hljs-string">'TF_CPP_MIN_LOG_LEVEL'</span>]=<span class="hljs-string">'2'</span></span><br><span class="line">tf.random.set_seed(<span class="hljs-number">2345</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">preprocess</span><span class="hljs-params">(x, y)</span>:</span></span><br><span class="line">    <span class="hljs-comment"># [-1~1]</span></span><br><span class="line">    x = tf.cast(x, dtype=tf.float32) / <span class="hljs-number">255.</span> - <span class="hljs-number">0.5</span></span><br><span class="line">    y = tf.cast(y, dtype=tf.int32)</span><br><span class="line">    <span class="hljs-keyword">return</span> x,y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(x,y), (x_test, y_test) = datasets.cifar100.load_data()</span><br><span class="line">y = tf.squeeze(y, axis=<span class="hljs-number">1</span>)</span><br><span class="line">y_test = tf.squeeze(y_test, axis=<span class="hljs-number">1</span>)</span><br><span class="line">print(x.shape, y.shape, x_test.shape, y_test.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">train_db = tf.data.Dataset.from_tensor_slices((x,y))</span><br><span class="line">train_db = train_db.shuffle(<span class="hljs-number">1000</span>).map(preprocess).batch(<span class="hljs-number">512</span>)</span><br><span class="line"></span><br><span class="line">test_db = tf.data.Dataset.from_tensor_slices((x_test,y_test))</span><br><span class="line">test_db = test_db.map(preprocess).batch(<span class="hljs-number">512</span>)</span><br><span class="line"></span><br><span class="line">sample = next(iter(train_db))</span><br><span class="line">print(<span class="hljs-string">'sample:'</span>, sample[<span class="hljs-number">0</span>].shape, sample[<span class="hljs-number">1</span>].shape,</span><br><span class="line">      tf.reduce_min(sample[<span class="hljs-number">0</span>]), tf.reduce_max(sample[<span class="hljs-number">0</span>]))</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment"># [b, 32, 32, 3] =&gt; [b, 1, 1, 512]</span></span><br><span class="line">    model = resnet18()</span><br><span class="line">    model.build(input_shape=(<span class="hljs-keyword">None</span>, <span class="hljs-number">32</span>, <span class="hljs-number">32</span>, <span class="hljs-number">3</span>))</span><br><span class="line">    model.summary()</span><br><span class="line">    optimizer = optimizers.Adam(lr=<span class="hljs-number">1e-3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> range(<span class="hljs-number">500</span>):</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> step, (x,y) <span class="hljs-keyword">in</span> enumerate(train_db):</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">with</span> tf.GradientTape() <span class="hljs-keyword">as</span> tape:</span><br><span class="line">                <span class="hljs-comment"># [b, 32, 32, 3] =&gt; [b, 100]</span></span><br><span class="line">                logits = model(x)</span><br><span class="line">                <span class="hljs-comment"># [b] =&gt; [b, 100]</span></span><br><span class="line">                y_onehot = tf.one_hot(y, depth=<span class="hljs-number">100</span>)</span><br><span class="line">                <span class="hljs-comment"># compute loss</span></span><br><span class="line">                loss = tf.losses.categorical_crossentropy(y_onehot, logits, from_logits=<span class="hljs-keyword">True</span>)</span><br><span class="line">                loss = tf.reduce_mean(loss)</span><br><span class="line"></span><br><span class="line">            grads = tape.gradient(loss, model.trainable_variables)</span><br><span class="line">            optimizer.apply_gradients(zip(grads, model.trainable_variables))</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> step %<span class="hljs-number">50</span> == <span class="hljs-number">0</span>:</span><br><span class="line">                print(epoch, step, <span class="hljs-string">'loss:'</span>, float(loss))</span><br><span class="line"></span><br><span class="line">        total_num = <span class="hljs-number">0</span></span><br><span class="line">        total_correct = <span class="hljs-number">0</span></span><br><span class="line">        <span class="hljs-keyword">for</span> x,y <span class="hljs-keyword">in</span> test_db:</span><br><span class="line"></span><br><span class="line">            logits = model(x)</span><br><span class="line">            prob = tf.nn.softmax(logits, axis=<span class="hljs-number">1</span>)</span><br><span class="line">            pred = tf.argmax(prob, axis=<span class="hljs-number">1</span>)</span><br><span class="line">            pred = tf.cast(pred, dtype=tf.int32)</span><br><span class="line"></span><br><span class="line">            correct = tf.cast(tf.equal(pred, y), dtype=tf.int32)</span><br><span class="line">            correct = tf.reduce_sum(correct)</span><br><span class="line"></span><br><span class="line">            total_num += x.shape[<span class="hljs-number">0</span>]</span><br><span class="line">            total_correct += int(correct)</span><br><span class="line"></span><br><span class="line">        acc = total_correct / total_num</span><br><span class="line">        print(epoch, <span class="hljs-string">'acc:'</span>, acc)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/ea055f0d.html#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/deeplearning/">deeplearning</a>, <a class="has-link-grey -link" href="/tags/tensorflow/">tensorflow</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -181,7 +191,26 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/714434fb.html">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">【Java并发编程】Java 中如何创建线程？</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/post/c6ed1613.html">
+                <span class="level-item">【TensorFlow2.0】手撕前向传播算法</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -262,6 +291,25 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#ResNet-的实现">
+        <span class="has-mr-6">1</span>
+        <span>ResNet 的实现</span>
+        </a></li><li>
+        <a class="is-flex" href="#使用-ResNet">
+        <span class="has-mr-6">2</span>
+        <span>使用 ResNet</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -1724,7 +1772,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="深页" height="28">
+                    <img src="/images/logo.svg" alt="【TensorFlow2.0】实现ResNet" height="28">
                 
                 </a>
                 <p class="is-size-7">
