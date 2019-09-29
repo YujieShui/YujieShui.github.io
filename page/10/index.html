@@ -126,6 +126,64 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-09-18T15:42:36.000Z">2018-09-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/computer-science/设计模式/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 329 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/6d867605.html">工厂相关设计模式</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1><ul>
+<li>定义：由一个工厂对象决定创建出哪一种产品类的实例</li>
+<li>类型：创建型，但不属于 GOF 23 种类设计模式</li>
+<li>适用场景：<ul>
+<li>工厂类负责创建的对象比较少</li>
+<li>客户端(应用层)只知道传入工厂类的参数，对于创建对象对象(逻辑)不关心</li>
+</ul>
+</li>
+<li>优点：只需要传入一个正确的参数，就可以获取你所需要的对象，无需知道其创建细节</li>
+<li>缺点：工厂类的职责相对过重，增加新的产品需要修改工厂类的判断逻辑，违背开闭原则</li>
+</ul>
+<p>简单工厂模式中，应用层  <code>Test</code> 通过一个工厂类 <code>VideoFactory</code> 来获取一个对象。从应用层来看，这样做的优点是不需要单独创建一个 video 对象，而是采用工厂统一来创建对象，应用层只需要传入参数就可以了。</p>
+<p>入参可能是字符串等，通过逻辑判断来返回相应的实例对象；入参也有可能是一个类，通过反射来获取对象。</p>
+<p><img src="http://image.shuiyujie.com/2019-09-22-00-49-19.png" alt="简单工厂模式"></p>
+<h1 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h1><h1 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h1>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-09-18T15:42:34.000Z">2018-09-18</time>
                 
                 <div class="level-item">
@@ -223,6 +281,123 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-22T18:48:34.000Z">2018-08-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/computer-science/计算机网络/">计算机网络</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 673 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/38134907.html">ISO/OSI参考模型</a>
+            
+        </h1>
+        <div class="content">
+            <p>Open System Interconnection，简称 ISO/OSI RM 是一个逻辑结构，并非一个具体的计算机设备或网络。任何两个遵守协议的标准的系统都可以互连通信，描述的是通信软件的结构。</p>
+<h1 id="ISO（国际标准化组织）"><a href="#ISO（国际标准化组织）" class="headerlink" title="ISO（国际标准化组织）"></a>ISO（国际标准化组织）</h1><p>ISO是一个代表了130个国家的标准组织的集体，它的总部设在瑞士 的日内瓦。ISO的目标是制定国际技术标准以促进全球信息交换和无 障碍贸易。</p>
+<p>ISO的权威性不仅限于信息处理和通信工业，它还适用于纺织品业、 包装业、货物分发、能源生产和利用、造船业，以及银行业务和金融 服务。事实上，在ISO的大约12,000个标准中，仅有大约500个应用 于计算机相关的产品和功能中。国际电子与电气工程标准是由一个相 似的国际标准组织IEC（国际电子技术协会）单独制定的。ISO所有的 信息技术标准设计与IEC相一致。</p>
+<h1 id="OSI-标准"><a href="#OSI-标准" class="headerlink" title="OSI 标准"></a>OSI 标准</h1><p>只要遵循 OSI 标准，一个系统就可以和位于世界上任何地方的 、也遵循这同一标准的其他任何系统进行通信。</p>
+<p>在市场化方面 OSI 却失败了。</p>
+<ul>
+<li>OSI 的专家们在完成 OSI 标准时没有商业驱动力；</li>
+<li>OSI 的协议实现起来过分复杂，且运行效率很低；</li>
+<li>OSI 标准的制定周期太长，因而使得按 OSI 标准生产的设备无法及 时进入市场；</li>
+<li>OSI 的层次划分并也不太合理，有些功能在多个层次中重复出现。</li>
+</ul>
+<h1 id="网络分层体系结构"><a href="#网络分层体系结构" class="headerlink" title="网络分层体系结构"></a>网络分层体系结构</h1><p><img src="http://image.shuiyujie.com/2019-09-26-23-31-00.png" alt="ISO/OSI七层（参考）模型"></p>
+<ul>
+<li>网络中的任何一个系统都 是按照层次结构来组织的</li>
+<li>同一网络中，任意两个端 系统必须具有相同的层次</li>
+<li>每层使用其下层提供的服 务，并向其上层提供服务</li>
+<li>通信只在对等层间进行（ 间接的、逻辑的、虚拟的 ），非对等层之间不能互 相“通信”</li>
+<li>实际的物理通信只在最底 层完成</li>
+<li>Pn：第n层协议，即第 n 层对等实体间通信时必须 遵循的规则或约定</li>
+</ul>
+<h1 id="第7层，应用层"><a href="#第7层，应用层" class="headerlink" title="第7层，应用层"></a>第7层，应用层</h1><h1 id="第6层，表示层"><a href="#第6层，表示层" class="headerlink" title="第6层，表示层"></a>第6层，表示层</h1><h1 id="第5层，会话层"><a href="#第5层，会话层" class="headerlink" title="第5层，会话层"></a>第5层，会话层</h1><h1 id="第4层，传输层"><a href="#第4层，传输层" class="headerlink" title="第4层，传输层"></a>第4层，传输层</h1><h1 id="第3层，网络层"><a href="#第3层，网络层" class="headerlink" title="第3层，网络层"></a>第3层，网络层</h1><h1 id="第2层，数据链路层"><a href="#第2层，数据链路层" class="headerlink" title="第2层，数据链路层"></a>第2层，数据链路层</h1><h1 id="第1层，物理层"><a href="#第1层，物理层" class="headerlink" title="第1层，物理层"></a>第1层，物理层</h1>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-22T17:48:34.000Z">2018-08-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/computer-science/计算机网络/">计算机网络</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1221 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/92ea9430.html">通信协议的概念</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="http://image.shuiyujie.com/2019-09-26-22-56-12.png" alt="通信协议经典例子"></p>
+<p>占据两个山顶的蓝军与驻扎在这山谷的白军作战。力量对比是：一个山顶上的蓝军打不过白军，但两个山顶的蓝军协同作战就可战胜白军 。一个山顶上的蓝军拟于次日正午向白军发起攻击。于是发送电文给 另一山顶上的友军。但通信线路很不好，电文出错的可能性很大。因此要求收到电文的友军必须发送确认电文。但确认电文也可能出错。 试问能否设计出一种协议，使得蓝军能实现协同作战因而一定(即100 %)取得胜利？</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/post/92ea9430.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-08-22T16:48:34.000Z">2018-08-23</time>
                 
                 <div class="level-item">
@@ -263,6 +438,239 @@
                 </div>
             </div>
         </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-05-29T12:59:41.000Z">2018-05-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 295 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/813d855e.html">Mysql版本升级</a>
+            
+        </h1>
+        <div class="content">
+            <ul>
+<li>MySQL 升级要考虑什么？</li>
+<li>如何进行升级？</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/post/813d855e.html#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-05-29T12:39:39.000Z">2018-05-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/数据库/">数据库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 263 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/df0ea61.html">Mysql不同发行版的区别</a>
+            
+        </h1>
+        <div class="content">
+            <ul>
+<li>MySQL 常见的发行版本<ul>
+<li>MySQL 官方版本（社区版、企业版）</li>
+<li>Percona MySQL：在 MySQL 官方发行版上进行二次开发</li>
+<li>MariaDB</li>
+</ul>
+</li>
+<li>各个发行版本之间的区别和优缺点</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MySQL</th>
+<th>Percona MySQL</th>
+<th>MariaDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务器特性</td>
+<td>开源</td>
+<td>开源</td>
+<td>开源</td>
+</tr>
+<tr>
+<td></td>
+<td>支持分区表</td>
+<td>支持分区表</td>
+<td>支持分区表</td>
+</tr>
+<tr>
+<td></td>
+<td>InnoDB</td>
+<td>XtraDB</td>
+<td>XtraDB</td>
+</tr>
+<tr>
+<td></td>
+<td>企业版监控工具<br>社区版不提供</td>
+<td>Percon Monitor 工具</td>
+<td>Monyog</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>高可用特性</td>
+<td>基于日志点复制</td>
+<td>基于日志点复制</td>
+<td>基于日志点复制</td>
+</tr>
+<tr>
+<td></td>
+<td>基于 Gtid 复制</td>
+<td>基于 Gtid 复制</td>
+<td>基于 Gtid 复制，但 Gtid 同 MySQL 不兼容</td>
+</tr>
+<tr>
+<td></td>
+<td>MGR</td>
+<td>MGR &amp; PXC</td>
+<td>Galera Cluster</td>
+</tr>
+<tr>
+<td></td>
+<td>MySQL Router</td>
+<td>Proxy SQL</td>
+<td>MaxScale</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>安全特性</td>
+<td>企业级防火墙</td>
+<td>ProxySQL FireWall</td>
+<td>MaxScale FireWall</td>
+</tr>
+<tr>
+<td></td>
+<td>企业版用户审计</td>
+<td>审计日志</td>
+<td>审计日志</td>
+</tr>
+<tr>
+<td></td>
+<td>用户密码生命周期</td>
+<td>用户密码生命周期</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>sha256_password<br>caching_sha_password</td>
+<td>sha256_password<br>caching_sha_pass_word</td>
+<td>ed25519<br>sha256_password</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>开发及管理</td>
+<td>窗口函数(8.0)</td>
+<td>窗口函数(8.0)</td>
+<td>窗口函数(10.2)</td>
+</tr>
+<tr>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>支持基于日志回滚</td>
+</tr>
+<tr>
+<td></td>
+<td>-</td>
+<td>-</td>
+<td>支持记在表中记录修改</td>
+</tr>
+<tr>
+<td></td>
+<td>Super read_only</td>
+<td>Super read_only</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+        
         
         
     </div>
@@ -379,276 +787,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-28T03:06:34.000Z">2018-01-28</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 408 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/7e6ba807.html">Protobuf 编译 Java</a>
-            
-        </h1>
-        <div class="content">
-            <p>Google Protocol Buffers 简称 Protobuf，它提供了一种灵活、高效、自动序列化结构数据的机制，可以联想 XML，但是比 XML 更小、更快、更简单。仅需要自定义一次你所需的数据格式，然后用户就可以使用 Protobuf 编译器自动生成各种语言的源码，方便的读写用户自定义的格式化的数据。与语言无关，与平台无关，还可以在不破坏原数据格式的基础上，依据老的数据格式，更新现有的数据格式。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/7e6ba807.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-25T13:57:27.000Z">2018-01-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1759 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/6fc5439d.html">部署 RockerMQ 双 Master 模式</a>
-            
-        </h1>
-        <div class="content">
-            <p>本文介绍搭建双 master 的 RocektMQ 的集群。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/6fc5439d.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-21T12:14:35.000Z">2018-01-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 2009 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/a6fc1711.html">Linux中几种常用的文件传输方式</a>
-            
-        </h1>
-        <div class="content">
-            <p>整理<code>scp</code>,<code>wget</code>,<code>ftp</code>以及其他Linux中常用的文件传输方式的介绍。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/a6fc1711.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-01-21T09:39:45.000Z">2018-01-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/分布式/">分布式</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1098 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/20e9366a.html">RocketMQ Start</a>
-            
-        </h1>
-        <div class="content">
-            <p>RocketMQ 是一款分布式、队列模型的消息中间件，具有以下特点：</p>
-<ol>
-<li>能够保证严格的消息顺序 </li>
-<li>提供丰富的消息拉取模式 </li>
-<li>高效的订阅者水平扩展能力 </li>
-<li>实时的消息订阅机制 </li>
-<li>亿级消息堆积能力</li>
-</ol>
-<p>今天开始试着理解她。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/20e9366a.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-12-19T03:57:18.000Z">2017-12-19</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 978 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/post/ea055f0d.html">实现 SSH 免密登录</a>
-            
-        </h1>
-        <div class="content">
-            <p>SSH (Secure Shell的) 是一种网络协议，用于计算机之间的加密登录。</p>
-<p>通过使用SSH，你可以把所有传输的数据进行加密更加安全可靠。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH 有很多功能，它既可以代替 Telnet，又可以为FTP、Pop、甚至为 PPP 提供一个安全的”通道”。</p>
-<p><img src="http://image.shuiyujie.com/2019-05-09-23-08-57.png" alt="SSH"></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/ea055f0d.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -670,6 +808,8 @@
             <li><a class="pagination-link is-current" href="/page/10/">10</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/11/">11</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
             
         </ul>
     </nav>
@@ -717,7 +857,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        110
+                        115
                     </p>
                 </div>
             </div>
@@ -727,7 +867,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        15
+                        16
                     </p>
                 </div>
             </div>
@@ -737,7 +877,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        52
+                        54
                     </p>
                 </div>
             </div>
@@ -819,7 +959,7 @@
                 <span class="level-item">Java</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">25</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Java/JVM/">
@@ -827,7 +967,7 @@
                 <span class="level-item">JVM</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Java/Java并发编程/">
@@ -867,7 +1007,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">6</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
@@ -875,7 +1015,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -909,6 +1049,14 @@
             <span class="level-end">
                 <span class="level-item tag">3</span>
             </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数据库/">
+            <span class="level-start">
+                <span class="level-item">数据库</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
         </a></li>
             </ul>
         </div>
@@ -921,7 +1069,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 17.27px;">c</a> <a href="/tags/c/" style="font-size: 20px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 19.09px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 18.18px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/network/" style="font-size: 10px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15.45px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 17.27px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 16.36px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 14.55px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 11.82px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -1019,7 +1167,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">27</span>
+                    <span class="level-item tag">28</span>
                 </span>
             </a>
         </li>
@@ -1116,6 +1264,17 @@
             <a class="level is-marginless" href="/archives/2018/08/">
                 <span class="level-start">
                     <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
@@ -1306,14 +1465,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">22</span>
+                        <span class="tag is-grey">23</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/jvm/">
                         <span class="tag">jvm</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1367,9 +1526,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1545,6 +1711,13 @@
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
                         <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/通信协议/">
+                        <span class="tag">通信协议</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1661,7 +1834,7 @@
                     <span class="level-item">九月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">27</span>
+                    <span class="level-item tag">28</span>
                 </span>
             </a>
         </li>
@@ -1758,6 +1931,17 @@
             <a class="level is-marginless" href="/archives/2018/08/">
                 <span class="level-start">
                     <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">2</span>
@@ -1948,14 +2132,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/java/">
                         <span class="tag">java</span>
-                        <span class="tag is-grey">22</span>
+                        <span class="tag is-grey">23</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/jvm/">
                         <span class="tag">jvm</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2009,9 +2193,16 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2187,6 +2378,13 @@
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
                         <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/通信协议/">
+                        <span class="tag">通信协议</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
