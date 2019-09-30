@@ -176,7 +176,7 @@
 <p>ssh-keygen</p>
 </blockquote>
 <p>之后可以在<code>/root/.ssh</code>中看到生成的密匙对</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@main /]# cd /root/.ssh/</span><br><span class="line">[root@main .ssh]# ls</span><br><span class="line">id_rsa id_rsa.pub</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@main /]# cd /root/.ssh/</span><br><span class="line">[root@main .ssh]# ls</span><br><span class="line">id_rsa id_rsa.pub</span><br></pre></td></tr></table></figure>
 <p>2.拷贝一份 A 的公钥给 B</p>
 <blockquote>
 <p>ssh-copy-id 192.168.0.10<br>输入密码</p>
@@ -204,7 +204,7 @@
 <p>vi /etc/hosts<br>添加上 ip 和 hostname 的键值对</p>
 </blockquote>
 <p>例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.0.11 main</span><br><span class="line">192.168.0.10 slave</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.0.11 main</span><br><span class="line">192.168.0.10 slave</span><br></pre></td></tr></table></figure>
 <p>两边都配置完成可以用<code>ssh slave</code>直接连接<code>slave</code>。如果你想自己免密连接自己那就按照上面的步骤给自己配置一份密匙就行了，动手试试吧。</p>
 <h1 id="SSH-协议是什么以及更多参考"><a href="#SSH-协议是什么以及更多参考" class="headerlink" title="SSH 协议是什么以及更多参考"></a>SSH 协议是什么以及更多参考</h1><p><a href="http://blog.csdn.net/macrossdzh/article/details/5691924" target="_blank" rel="noopener">SSH 协议介绍</a></p>
 <p><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="noopener">数字签名是什么</a></p>

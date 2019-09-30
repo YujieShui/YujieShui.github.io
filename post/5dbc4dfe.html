@@ -163,7 +163,7 @@
 <p>本文会实战 Young GC 的场景，并且带大家查看 GC 日志。</p>
 <a id="more"></a>
 <h1 id="模拟-Young-GC-场景"><a href="#模拟-Young-GC-场景" class="headerlink" title="模拟 Young GC 场景"></a>模拟 Young GC 场景</h1><p>首先我们将 JVM 的参数按如下所示设置：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:NewSize=5242880 -XX:MaxNewSize=5242880 -XX:InitialHeapSize=10485760 -XX:MaxHeapSize=10485760 -XX:SurvivorRatio=8 -XX:PretenureSizeThreshold=10485760 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:gc.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:NewSize=5242880 -XX:MaxNewSize=5242880 -XX:InitialHeapSize=10485760 -XX:MaxHeapSize=10485760 -XX:SurvivorRatio=8 -XX:PretenureSizeThreshold=10485760 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:gc.log</span><br></pre></td></tr></table></figure>
 <p>以上参数都是 JDK1.8 版本的参数，其他版本略有不同，但也没差多少：</p>
 <table>
 <thead>

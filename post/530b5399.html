@@ -183,13 +183,13 @@
 <p>source /etc/profile</p>
 </blockquote>
 <h1 id="修改-zookeeper-配置文件"><a href="#修改-zookeeper-配置文件" class="headerlink" title="修改 zookeeper 配置文件"></a>修改 zookeeper 配置文件</h1><p>配置文件放置在 <code>zookeeper/conf</code> 目录下，查看目录文件有三个，其中<code>zoo_sample.cfg</code>是范例配置文件：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ls</span><br><span class="line">configuration.xsl  log4j.properties  zoo_sample.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ls</span><br><span class="line">configuration.xsl  log4j.properties  zoo_sample.cfg</span><br></pre></td></tr></table></figure>
 <p>复制<code>zoo_sample.cfg</code>并重命名<code>zoo.cfg</code>,<code>zoo.cfg</code>就是需要的配置文件：</p>
 <blockquote>
 <p>cp zoo_sample.cfg zoo.cfg<br>vi zoo.cfg</p>
 </blockquote>
 <p>配置文件中添加或修改如下内容：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 数据目录</span><br><span class="line">dataDir=/home/hadoop/zookeeper/data</span><br><span class="line"># 日志目录</span><br><span class="line">dataLogDir=/home/hadoop/zookeeper/log</span><br><span class="line"># 包括自己在内的所有主机名称</span><br><span class="line">server.1=slave1:2888:3888 (主机名, 心跳端口、数据端口)</span><br><span class="line">server.2=slave2:2888:3888</span><br><span class="line">server.3=slave3:2888:3888</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 数据目录</span><br><span class="line">dataDir=/home/hadoop/zookeeper/data</span><br><span class="line"># 日志目录</span><br><span class="line">dataLogDir=/home/hadoop/zookeeper/log</span><br><span class="line"># 包括自己在内的所有主机名称</span><br><span class="line">server.1=slave1:2888:3888 (主机名, 心跳端口、数据端口)</span><br><span class="line">server.2=slave2:2888:3888</span><br><span class="line">server.3=slave3:2888:3888</span><br></pre></td></tr></table></figure>
 <p><em>注意：slave1、slave2、slave3 是主机名即 hostname。所以需要配置主机名和 ip 的映射。</em></p>
 <p>新建对应的文件夹:</p>
 <blockquote>
@@ -213,7 +213,7 @@
 <blockquote>
 <p>zkServer.sh status</p>
 </blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Using config: /apps/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: leader</span><br><span class="line">----</span><br><span class="line">Using config: /apps/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Using config: /apps/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: leader</span><br><span class="line">----</span><br><span class="line">Using config: /apps/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line">Mode: follower</span><br></pre></td></tr></table></figure>
 <p><strong>以上，zookeeper 的基本安装配置完毕。</strong></p>
 
         </div>

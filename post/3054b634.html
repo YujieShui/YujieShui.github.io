@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="深页">
 <meta property="og:description" content="AlexeyAB/darknet 在原版darknet的基础上做了一些改进，用得最舒服的两个点是：可以实时查看 loss 和 mAP；可以自动计算一些模型评估指标。 下面是对其 README.md 的翻译。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/2019-06-13-21-01-25.png">
-<meta property="og:image" content="http://image.shuiyujie.com/2019-09-21-00-45-23.png">
-<meta property="og:updated_time" content="2019-09-22T23:39:42.427Z">
+<meta property="og:image" content="https://image.shuiyujie.com/2019-06-13-21-01-25.png">
+<meta property="og:image" content="https://image.shuiyujie.com/2019-09-21-00-45-23.png">
+<meta property="og:updated_time" content="2019-09-30T14:47:04.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Darknet】改进版Darknet">
 <meta name="twitter:description" content="AlexeyAB/darknet 在原版darknet的基础上做了一些改进，用得最舒服的两个点是：可以实时查看 loss 和 mAP；可以自动计算一些模型评估指标。 下面是对其 README.md 的翻译。">
-<meta name="twitter:image" content="http://image.shuiyujie.com/2019-06-13-21-01-25.png">
+<meta name="twitter:image" content="https://image.shuiyujie.com/2019-06-13-21-01-25.png">
 
 
 
@@ -160,7 +160,7 @@
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-06-13-21-01-25.png" alt="darknet"></p>
+            <p><img src="https://image.shuiyujie.com/2019-06-13-21-01-25.png" alt="darknet"></p>
 <p><a href="AlexeyAB/darknet">AlexeyAB/darknet</a> 在<a href="http://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener">原版darknet</a>的基础上做了一些改进，用得最舒服的两个点是：可以实时查看 loss 和 mAP；可以自动计算一些模型评估指标。</p>
 <p>下面是对其 README.md 的翻译。</p>
 <a id="more"></a>
@@ -291,7 +291,7 @@
 <li>darknet.exe detector map data/obj.data yolo-obj.cfg backup\yolo-obj_8000.weights</li>
 <li>darknet.exe detector map data/obj.data yolo-obj.cfg backup\yolo-obj_9000.weights</li>
 </ol>
-<p><img src="http://image.shuiyujie.com/2019-09-21-00-45-23.png" alt="IOU"></p>
+<p><img src="https://image.shuiyujie.com/2019-09-21-00-45-23.png" alt="IOU"></p>
 <ul>
 <li>接着对比每一个 weight(7000,8000,9000)最后一行输出</li>
 </ul>
@@ -306,7 +306,7 @@
 <li>mAP 每 4 个 Epochs 会使用 valid=valid.txt 文件（1 Epoch = images_in_train_txt / batchiterations）</li>
 <li>可以用通过修改  <a href="https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L20" target="_blank" rel="noopener">max_batches=</a> 来改变 x 轴坐标的最大值，一般来说 max_batches=2000*classes</li>
 </ol>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span> 单张图测试</span><br><span class="line">./darknet detector test data/obj.data yolo-obj.cfg backup/yolo-obj_8000.weights</span><br><span class="line"><span class="hljs-meta">#</span> 计算 mAP</span><br><span class="line">./darknet detector map data/obj.data yolo-obj.cfg backup/yolo-obj_7000.weights</span><br></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 单张图测试</span></span><br><span class="line">./darknet detector test data/obj.data yolo-obj.cfg backup/yolo-obj_8000.weights</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 计算 mAP</span></span><br><span class="line">./darknet detector map data/obj.data yolo-obj.cfg backup/yolo-obj_7000.weights</span><br></pre></td></tr></table></figure>
 
         </div>
         

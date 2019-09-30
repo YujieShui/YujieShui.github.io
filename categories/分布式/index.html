@@ -162,11 +162,11 @@
         <div class="content">
             <p>我们首先 fork 一份 zookeeper 在 github 上的项目，地址为：<a href="https://github.com/apache/zookeeper。再将" target="_blank" rel="noopener">https://github.com/apache/zookeeper。再将</a> fork 之后的项目 clone 到本地。</p>
 <p>我们不使用最新版本的代码，而是使用 3.4.11 这个版本的，所以我们根据 tag，checkout 一个分支出来：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b zookeeper3.4.11 release-3.4.11</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b zookeeper3.4.11 release-3.4.11</span><br></pre></td></tr></table></figure>
 <p>由于 zookeeper 是用 ant 构建的，所以要安装 ant。我使用的是 macOS，直接用 homebrew 安装比较方便：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install ant</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install ant</span><br></pre></td></tr></table></figure>
 <p>之后用 ant 构建一个 eclipse 项目</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ant eclipse</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ant eclipse</span><br></pre></td></tr></table></figure>
 <p>最后，将导入项目。</p>
 
         </div>
@@ -317,7 +317,7 @@
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/2019-05-09-23-02-26.png" alt="消息队列思维导图"></p>
+            <p><img src="https://image.shuiyujie.com/2019-05-09-23-02-26.png" alt="消息队列思维导图"></p>
 <h1 id="1-引子"><a href="#1-引子" class="headerlink" title="1. 引子"></a>1. 引子</h1><p>消息队列分布式系统中重要的组件，一种存放消息的容器，主要作用有解耦、异步、削锋，是大型分布式系统不可缺少的中间件。</p>
 <p>常见的消息队列有 ActiveMQ，RabbitMQ，RocketMQ，Kafka。</p>
 <p>简历中涉及到了消息队列，面试官先问了这样几个问题：</p>
