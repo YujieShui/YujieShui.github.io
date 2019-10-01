@@ -20,9 +20,9 @@
       
         <tags>
             
-            <tag> deeplearning </tag>
-            
             <tag> linux </tag>
+            
+            <tag> deeplearning </tag>
             
         </tags>
       
@@ -412,9 +412,9 @@
       
         <tags>
             
-            <tag> ffmpeg </tag>
-            
             <tag> 图像处理 </tag>
+            
+            <tag> ffmpeg </tag>
             
             <tag> 音频处理 </tag>
             
@@ -1451,31 +1451,6 @@
     
     
     <entry>
-      <title>OpenCV-Mat表达式</title>
-      <link href="/post/1208a55a.html"/>
-      <url>/post/1208a55a.html</url>
-      
-        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> OpenCV </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> opencv </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>图像处理——图像降噪</title>
       <link href="/post/d966aba8.html"/>
       <url>/post/d966aba8.html</url>
@@ -1495,6 +1470,31 @@
             <tag> opencv </tag>
             
             <tag> 图像处理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OpenCV-Mat表达式</title>
+      <link href="/post/1208a55a.html"/>
+      <url>/post/1208a55a.html</url>
+      
+        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> OpenCV </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
             
         </tags>
       
@@ -2499,11 +2499,40 @@
     
     
     <entry>
+      <title>IP分片</title>
+      <link href="/post/4a388439.html"/>
+      <url>/post/4a388439.html</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/2019-10-01-17-17-04.png" alt="IP分片"></p><p>IP 数据报由首部和数据部分组成。数据部分存储我们要传输的数据，数据体积如果太大，就需要将其拆分开来，分成多次传输。这就是 <strong>IP 分片</strong>。</p><p>在 TCP/IP 分层中，数据链路层用MTU（Maximum Transmission Unit，最大传输单元）来限制所能传输的数据包大小，MTU是指一次传送的数据最大长度，不包括数据链路层数据帧的帧头，如以太网的MTU为1500字节，实际上数据帧的最大长度为1512字节，其中以太网数据帧的帧头为12字节。</p><p>当发送的IP数据报的大小超过了MTU时，IP层就需要对数据进行分片，否则数据将无法发送成功。</p><a id="more"></a><p>比如说上图中的数据大小为 3800 字节，将其分成三个数据包片：0~1399、1400~2799、2800~3799。</p><p>我们分片之后，我们还需要将其按照序号组装起来，如何组装就要通过 IP 数据报的首部来进行标记了。</p><p><img src="http://image.shuiyujie.com/2019-10-01-16-18-50.png" alt="IP协议"></p><p>在 IP 首部中有 4 个字节是和 IP 分片相关的：</p><ol><li>标识(identification) : 占 16 bit，其本质是一个计数器，用来产生数据报的标识，同一个数据报的各个分片的标识是一样的。</li><li>标志(flag)：占 3 bit，其中有1位用来表示是否有更多的分片，如果是最后一个分片，该标志位为0，否则为1<ol><li>R：目前只有后两个比特有意义。</li><li>DF：Don’t Fragment,“不分片”位，<code>DF=1</code>表示不分片；</li><li>MF：More Fragment,“更多的片”，除了最后一片外，其它每个组成数据报的片都要把比特置1</li></ol></li><li>片偏移：占13 bit，某片在原分组中的相对位置。片偏移以 8 个字节为偏移单位，所以要除以8</li></ol><p><strong>参考：</strong></p><p><a href="https://www.cnblogs.com/diegodu/p/4647644.html" target="_blank" rel="noopener">IP分片浅析</a></p><p><a href="https://blog.csdn.net/yusiguyuan/article/details/22782943" target="_blank" rel="noopener">TCP层的分段和IP层的分片之间的关系 &amp; MTU和MSS之间的关系</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> computer science </category>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> network </tag>
+            
+            <tag> tcp/ip </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>TCP、IP协议</title>
       <link href="/post/f305b41d.html"/>
       <url>/post/f305b41d.html</url>
       
-        <content type="html"><![CDATA[<p>在<a href="https://shuiyujie.com/post/38134907.html">ISO/OSI参考模型</a>一文中介绍了 OSI 七层参考模型，但是</p><p>ISO/OSI参考模型有这样两个缺陷：</p><ol><li>有些功能在多个层次中多次出现</li></ol><p>没有任何一家公司按照七层模型开发，但</p><p>OSI七层模型的缺点：</p><p>TCP/IP 是为了解决异种计算机网络的通信联系</p><p>TCP/IP协议体系概述</p><ul><li>TCP/IP 协议是针对 Internet 开发的一种体系结构和协议标准</li><li>TCP/IP 协议是国际互联网 Internet 采用的协议标准</li><li>TCP/IP 是一组通信协议的代名词，是由一系列协议组成的协议簇</li></ul><p>TCP/IP 是指传输控制协议/网际协议，是针对 Internet 开发的一 种体系结构和协议标准，其目的在于<strong>解决异种计算机网络的通信问题</strong>，使得网络在互连时把技术细节隐藏起来，为用户提供 一种通用、一致的通信服务。通常所说的TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此更确切地说，TCP/IP 是一个协议族而不是一种协议</p><p>TCP/IP协议的特点</p><ul><li>TCP/IP是开放的协议标准</li><li>TCP/IP独立于特定的网络硬件，可以运行在局域网、广域网等各种网 络环境</li><li>TCP/IP使用统一的网络地址分配方案，使得整个TCP/IP设备在网络 中只有惟一的地址</li><li>TCP/IP是标准化的高层协议，可以提供多种可靠的用户服务</li></ul><h1 id="TCP-IP协议集的主要协议"><a href="#TCP-IP协议集的主要协议" class="headerlink" title="TCP/IP协议集的主要协议"></a>TCP/IP协议集的主要协议</h1><table><thead><tr><th>协议</th><th>全称</th><th>提供服务</th><th>相应 OSI 层</th></tr></thead><tbody><tr><td>IP</td><td>Internet Protocol<br>互联网报文协议</td><td>数据报服务</td><td>3</td></tr><tr><td>ICMP</td><td>Internet Control Message <br>互联网控制报文协议</td><td>差错和控制</td><td>3</td></tr><tr><td>ARP</td><td>Address Resolution Protocol<br>地址解析协议</td><td>互联网地址 -&gt; 物理地址</td><td>3</td></tr><tr><td>RARP</td><td>Reverse Address Resolution Protocol<br>反向地址解析协议</td><td>物理地址 -&gt; 互联网地址</td><td>3</td></tr><tr><td>TCP</td><td></td><td>可靠流服务</td><td>4</td></tr><tr><td>FTP</td><td></td><td>文件传送</td><td>5~7</td></tr><tr><td>TELENT</td><td></td><td>终端仿真</td><td>5~7</td></tr><tr><td>DNS</td><td></td><td>域名 -&gt; 互联网地址</td><td>5~7</td></tr></tbody></table>]]></content>
+        <content type="html"><![CDATA[<p>在<a href="https://shuiyujie.com/post/38134907.html">ISO/OSI参考模型</a>一文中介绍了 OSI 七层参考模型。</p><p>ISO/OSI参考模型有这样两个缺陷：</p><ol><li>有些功能在多个层次中多次出现</li></ol><p>没有任何一家公司按照七层模型开发，但</p><p>OSI七层模型的缺点：</p><p>TCP/IP 是为了解决异种计算机网络的通信联系</p><p>TCP/IP协议体系概述</p><ul><li>TCP/IP 协议是针对 Internet 开发的一种体系结构和协议标准</li><li>TCP/IP 协议是国际互联网 Internet 采用的协议标准</li><li>TCP/IP 是一组通信协议的代名词，是由一系列协议组成的协议簇</li></ul><p>TCP/IP 是指传输控制协议/网际协议，是针对 Internet 开发的一 种体系结构和协议标准，其目的在于<strong>解决异种计算机网络的通信问题</strong>，使得网络在互连时把技术细节隐藏起来，为用户提供 一种通用、一致的通信服务。通常所说的TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此更确切地说，TCP/IP 是一个协议族而不是一种协议</p><p>TCP/IP协议的特点</p><ul><li>TCP/IP是开放的协议标准</li><li>TCP/IP独立于特定的网络硬件，可以运行在局域网、广域网等各种网 络环境</li><li>TCP/IP使用统一的网络地址分配方案，使得整个TCP/IP设备在网络 中只有惟一的地址</li><li>TCP/IP是标准化的高层协议，可以提供多种可靠的用户服务</li></ul><h1 id="TCP-IP协议集的主要协议"><a href="#TCP-IP协议集的主要协议" class="headerlink" title="TCP/IP协议集的主要协议"></a>TCP/IP协议集的主要协议</h1><table><thead><tr><th>协议</th><th>全称</th><th>提供服务</th><th>相应 OSI 层</th></tr></thead><tbody><tr><td>IP</td><td>Internet Protocol<br>互联网报文协议</td><td>数据报服务</td><td>3</td></tr><tr><td>ICMP</td><td>Internet Control Message <br>互联网控制报文协议</td><td>差错和控制</td><td>3</td></tr><tr><td>ARP</td><td>Address Resolution Protocol<br>地址解析协议</td><td>互联网地址 -&gt; 物理地址</td><td>3</td></tr><tr><td>RARP</td><td>Reverse Address Resolution Protocol<br>反向地址解析协议</td><td>物理地址 -&gt; 互联网地址</td><td>3</td></tr><tr><td>TCP</td><td></td><td>可靠流服务</td><td>4</td></tr><tr><td>FTP</td><td></td><td>文件传送</td><td>5~7</td></tr><tr><td>TELENT</td><td></td><td>终端仿真</td><td>5~7</td></tr><tr><td>DNS</td><td></td><td>域名 -&gt; 互联网地址</td><td>5~7</td></tr></tbody></table><h1 id="网络接口层"><a href="#网络接口层" class="headerlink" title="网络接口层"></a>网络接口层</h1><p>IEEE 国际电气与电子协会 =》 研究局域网的概念和定义</p><p>MAC - 介质访问控制层</p><p>LLC - 逻辑链路控制层</p><p>在TCP/IP模型中，网络接口层对应ISO/OSI参考模型的物理层和数据链路层</p><p>链路层协议执行的主要任务：</p><ul><li><p>管理对所使用的任何联网介质的访问，称为介质访问控制（MAC）–与传输媒体有关</p></li><li><p>创建一对MAC层地址之间点到点的临时连接以传输数据，称为逻辑链路控制（LLC）</p></li></ul><p>为了使数据链路层更好的适应多种局域网，802 委员会就将局域网的数据链路层拆 成两个子层：</p><ul><li><p>MAC 子层的主要功能是：帧的封装和拆封，物理介质传输差错的检测，寻址，实现介质访问控 制协议</p></li><li><p>LLC 子层的主要功能是：连接管理（建立和释放链接），与高层的接口，帧的可靠，按序传输及流量控制</p></li></ul><p>局域网中使用网络接口层协议的代表</p><ul><li><p>以太网</p></li><li><p>令牌环</p></li><li><p>FDDI</p></li></ul><p>广域网中使用网络接口层协议的代表</p><ul><li><p>SLIP（串行链路网际协议）</p></li><li><p>PPP（点对点协议）</p></li></ul><h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>LAN？？？</p><p>WAN？？</p><ul><li>IP协议</li><li>ARP（地址解析协议）</li><li>RARP（反向地址解析协议）</li><li>ICMP（互联网控制消息协议）</li></ul><h2 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h2><p>IP协议功能</p><ul><li>寻址和路由</li><li>传递服务<ul><li>不可靠，可靠性由上层协议提供</li><li>无连接</li></ul></li><li>数据报分段和重组</li></ul><p>寻址和路由：比如要从北京往南京发一封邮件，找到南京这个地方就叫寻址；北京到南京有好多条路线，选择走哪条路就叫路由。</p><p>传递服务：IP 协议是不可靠的，其可靠性由上层协议来保证，比如用 TCP 协议来保证。IP 协议就是尽最大努力来做事，不保证一定能做到。</p><p>数据报的分段是充足：从北京往南京发货物，货物比较大，一车装不下。那就要拆成好几个部分发送。到达目的地再把各个部件组合起来。</p><p><img src="http://image.shuiyujie.com/2019-10-01-16-18-50.png" alt="IP协议"></p><p>IP 数据报由首部和数据部分组成。</p><p>首部由固定部分(20bit)和可变部分组成  （20~60bit）</p><ul><li>版本——占 4 bit，指IP协议的版本。目前的 IP 协议版本号为 4 (即 IPv4)</li><li>首部长度——占 4 bit，可表示的最大数值是 15 个单位(一个单位为 4 字节)。因此 IP 的首部长度的最大值是60字节。</li><li>服务类型——占 8 bit，用来获得更好的服务。这个字段以前一直没有被人们使用</li><li>总长度——占 16 bit，首部长度 + 数据长度，单位为字节，因此数据报的最大长度为 2^16-1=65535 字节。总长度必须不超过最大传送单元 MTU。</li><li>标识(identification)占 16 bit，它是一个计数器，用来产生数据报的标识</li><li>标志(flag)——占 3 bit，目前只有后两个比特有意义。标志字段的最低位是 MF (More Fragment)。MF = 1 表示后面“还有分片”。MF = 0 表示最后一个分片。标志字段中间的一位是 DF (Don’t Fragment) 。只有当 DF = 0 时才允许分片。</li><li>片偏移(13 bit)指出：较长的分组在分片后，某片在原分组中的相对位置。片偏移以 8 个字节为偏移单位。</li><li>生存时间(8 bit)记为 TTL (Time To Live)，这是为了限制数据报在网络中的生存时间，其单位最初是秒，但为了方便，现在都用「跳数」作为 TTL 的单位。数据报每经过一个路由器，其 TTL 值就减 1。</li><li>协议(8 bit)字段指出此数据报携带的数据使用何种协议。以便目的主机的 IP 层将数据部分上交给哪个处理过程。</li><li>首部检验和(16 bit)字段只检验数据报的首部不包括数据部分。这里不采用 CRC 检验码而采用简单的计算方法。</li><li>源地址和目的地址都各占 4 字节。源地址就是我们发送数据的机器的 IP 地址，目的地址就是目标机器的 IP 地址。</li></ul><p>标识、标志、片偏移：运一批苹果，一次运不过要分开来运送。</p><p>好几趟火车我们运过去给火车做标记，就叫红富士苹果。这就是标识</p><p>标志，D=1标识不分批，M=1标识分批运</p><p>片偏移：第一辆火车出去，第二辆要多久能到。</p><p>IP分片</p><p>生存时间：在路由环路发生的时，会造成网络资源的浪费，就设置了一个 TTL 值，一般 windows 是 64。每次经过一个路由器，这个值就减小1，减到0的时候就把这个报文给干掉。</p><p>IP 数据报首部的可变部分</p><ul><li>IP 首部的可变部分就是一个选项字段，用来支持排错、测量以及安全 等措施，内容很丰富</li><li>选项字段的长度可变，从 1 个比特到 32个比特不等，取决于所选择 的项目</li><li>增加首部的可变部分是为了增加 IP 数据报的功能，但这同时也使得 IP 数据报的首部长度成为可变的。这就增加了每一个路由器处理数据报的开销</li><li>实际上这些选项很少被使用</li></ul><p>##ARP（地址解析协议） </p><h2 id="RARP（反向地址解析协议）"><a href="#RARP（反向地址解析协议）" class="headerlink" title="RARP（反向地址解析协议）"></a>RARP（反向地址解析协议）</h2><h2 id="ICMP（互联网控制消息协议）"><a href="#ICMP（互联网控制消息协议）" class="headerlink" title="ICMP（互联网控制消息协议）"></a>ICMP（互联网控制消息协议）</h2><h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1>]]></content>
       
       
       <categories>
