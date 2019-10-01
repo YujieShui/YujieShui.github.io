@@ -6,12 +6,11 @@ categories:
 tags:
   - deeplearning
   - caffe
-  - 开源框架
 abbrlink: 96cd1245
 date: 2019-06-17 18:21:53
 ---
 
-![Caffe](http://image.shuiyujie.com/2019-06-17-18-25-09.png)
+![Caffe](https://image.shuiyujie.com/2019-06-17-18-25-09.png)
 
 [Caffe](http://caffe.berkeleyvision.org/)是优秀的深度学习开源框架，并具有良好的开源生态，我们可以在[Model zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo)中找到许多模型的实现。本文以 Caffe 提供的 [Training LeNet on MNIST with Caffe](https://caffe.berkeleyvision.org/gathered/examples/mnist.html) 为例，介绍 Caffe 使用流程，并且在原文基础上增加可视化 accuracy 和 loss 的内容。
 
@@ -19,7 +18,7 @@ date: 2019-06-17 18:21:53
 
 <!-- more -->
 
-![Caffe 使用流程](http://image.shuiyujie.com/2019-06-17-18-23-18.png)
+![Caffe 使用流程](https://image.shuiyujie.com/2019-06-17-18-23-18.png)
 
 # 准备数据
 
@@ -130,11 +129,11 @@ python show_loss.py
 
 Python 脚本可以在 [Github Gist](https://gist.github.com/YujieShui/67933c77054410461cb18c031b36057d) 中查看，需要根据之前生成的日志进行小改动。
 
-![train_loss](http://image.shuiyujie.com/2019-06-17-19-13-31.png)
+![train_loss](https://image.shuiyujie.com/2019-06-17-19-13-31.png)
 
 可以看到迭代 100 次 loss 已经降到很低了,之后略有降低,300次左右基本上就在 0.3, 0.4 左右
 
-![train_accuracy](http://image.shuiyujie.com/2019-06-17-19-14-19.png)
+![train_accuracy](https://image.shuiyujie.com/2019-06-17-19-14-19.png)
 
 与之相对的，100 次左右准确率就有 0.96 了,缓慢上升,最后准确率稳定在 0.98 。
 
@@ -163,7 +162,7 @@ I0616 15:29:32.107782 13441 caffe.cpp:321] loss = 0.0412109 (* 1 = 0.0412109 los
 
 本文介绍了 Caffe 的基本使用流程，这样就可以把一些别人写好的网络用起来了。进一步我们需要了解如何用 Caffe 自定义网络结构，调整网络的参数，完成更加个性化的任务。
 
-参考：
+# 参考：
 
 [Training LeNet on MNIST with Caffe](https://caffe.berkeleyvision.org/gathered/examples/mnist.html)
 

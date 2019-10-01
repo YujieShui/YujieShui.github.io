@@ -2,7 +2,8 @@
 title: Java 多线程基础知识
 toc: true
 categories:
-  - Java
+- Java
+- Java并发编程
 tags:
   - java
   - 并发编程

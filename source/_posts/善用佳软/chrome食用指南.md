@@ -2,7 +2,7 @@
 title: chrome食用指南
 toc: true
 categories:
-  - 工具癖
+  - 善用佳软
 tags:
   - 网站
   - 工具

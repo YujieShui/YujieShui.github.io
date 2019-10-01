@@ -1,7 +1,7 @@
 ---
 title: Markdown 记要
 categories:
-  - 工具癖
+  - 善用佳软
 tags:
   - markdown
 abbrlink: c002250d
@@ -69,3 +69,7 @@ Mike |  32
 分隔线
 ***
 ```
+
+
+
+- 微信公众号 makedown 排版工具：*http://prod.zkqiang.cn/wxeditor*

@@ -1,17 +1,16 @@
 ---
-title: 【darknet】darknet实战
+title: 【Darknet】Darknet实战
 toc: true
 categories:
   - DeepLearning
 tags:
   - darknet
-  - 开源框架
   - deeplearning
 abbrlink: 5ba44047
 date: 2019-06-13 21:09:45
 ---
 
-![darknet](http://image.shuiyujie.com/2019-06-13-21-01-25.png)
+![darknet](https://image.shuiyujie.com/2019-06-13-21-01-25.png)
 
 > Darknet is an open source neural network framework written in C and CUDA. It is fast, easy to install, and supports CPU and GPU computation.
 >
@@ -27,7 +26,7 @@ date: 2019-06-13 21:09:45
 
 # 数据集准备
 
-![如图](http://image.shuiyujie.com/2019-06-04-22-23-29.png)
+![如图](https://image.shuiyujie.com/2019-06-04-22-23-29.png)
 
 大多数情况下，数据集决定了任务的成败。一开始我认为标注数据是一件非常枯燥和乏味的事情，但是当模型指标一直上不去，检测和识别效果也一直不好时，回过头才会发现是因为数据标注的有问题。
 
@@ -56,7 +55,7 @@ date: 2019-06-13 21:09:45
 
 启动 labelimg 之后的界面如下图所示
 
-![labelimg 界面](http://image.shuiyujie.com/labelimg.png)
+![labelimg 界面](https://image.shuiyujie.com/labelimg.png)
 
 注意：
 

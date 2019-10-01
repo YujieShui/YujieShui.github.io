@@ -2,10 +2,11 @@
 title: 并发编程的优缺点
 toc: true
 categories:
-  - Java
+- Java
+- Java并发编程
 tags:
-  - java
-  - 并发编程
+- java
+- 并发编程
 abbrlink: 579f9aa4
 date: 2019-01-26 11:03:47
 ---
