@@ -160,23 +160,23 @@
             <p>Mat 类提供了多种方便的方法来选择图像的局部区域。使用这些方法时需要注意,这些方法并不进行内存的复制操作。如果将局部区域赋值给新的 Mat 对象,新对象与原始对象共用相同的数据区域,不新申请内存,因此这些方法的执行速度都比较快。</p>
 <a id="more"></a>
 <h2 id="单行或者单列选择"><a href="#单行或者单列选择" class="headerlink" title="单行或者单列选择"></a>单行或者单列选择</h2><p>提取矩阵的一行或者一列可以使用函数 row()或 col()。函数的声明如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mat Mat::row(<span class="keyword">int</span> i) <span class="keyword">const</span></span><br><span class="line">Mat Mat::col(<span class="keyword">int</span> j) <span class="keyword">const</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mat Mat::row(<span class="hljs-keyword">int</span> i) <span class="hljs-keyword">const</span></span><br><span class="line">Mat Mat::col(<span class="hljs-keyword">int</span> j) <span class="hljs-keyword">const</span></span><br></pre></td></tr></table></figure>
 <p>参数 i 和 j 分别是行标和列标。例如取出 A 矩阵的第 i 行可以使用如下代码:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat line = A.row(i);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat line = A.row(i);</span><br></pre></td></tr></table></figure>
 <p>例如取出 A 矩阵的第 i 行,将这一行的所有元素都乘以 2,然后赋值给第 j 行,可以这样写:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.row(j) = A.row(i)*<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.row(j) = A.row(i)*<span class="hljs-number">2</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="用-Range-选择多行或多列"><a href="#用-Range-选择多行或多列" class="headerlink" title="用 Range 选择多行或多列"></a>用 Range 选择多行或多列</h2><p>Range 是 OpenCV 中新增的类,该类有两个关键变量 star 和 end。Range 对象可以用来表示矩阵的多个连续的行或者多个连续的列。其表示的范围为从 start到 end,包含 start,但不包含 end。Range 类的定义如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Range</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">int</span> start, end;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Range</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">    <span class="hljs-keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-keyword">int</span> start, end;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>Range 类还提供了一个静态方法 all(),这个方法的作用如同 Matlab 中的“:”,表示所有的行或者所有的列。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个单位阵</span></span><br><span class="line">Mat A = Mat::eye(<span class="number">10</span>, <span class="number">10</span>, CV_32S);</span><br><span class="line"><span class="comment">//提取第 1 到 3 列(不包括 3)</span></span><br><span class="line">Mat B = A(Range::all(), Range(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line"><span class="comment">//提取 B 的第 5 至 9 行(不包括 9)</span></span><br><span class="line"><span class="comment">//其实等价于 C = A(Range(5, 9), Range(1, 3))</span></span><br><span class="line">Mat C = B(Range(<span class="number">5</span>, <span class="number">9</span>), Range::all());</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//创建一个单位阵</span></span><br><span class="line">Mat A = Mat::eye(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, CV_32S);</span><br><span class="line"><span class="hljs-comment">//提取第 1 到 3 列(不包括 3)</span></span><br><span class="line">Mat B = A(Range::all(), Range(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>));</span><br><span class="line"><span class="hljs-comment">//提取 B 的第 5 至 9 行(不包括 9)</span></span><br><span class="line"><span class="hljs-comment">//其实等价于 C = A(Range(5, 9), Range(1, 3))</span></span><br><span class="line">Mat C = B(Range(<span class="hljs-number">5</span>, <span class="hljs-number">9</span>), Range::all());</span><br></pre></td></tr></table></figure>
 <h2 id="感兴趣区域"><a href="#感兴趣区域" class="headerlink" title="感兴趣区域"></a>感兴趣区域</h2><p>从图像中提取感兴趣区域(Region of interest)有两种方法,一种是使用构造函数,如下例所示:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建宽度为 320,高度为 240 的 3 通道图像</span></span><br><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(Size(<span class="number">320</span>,<span class="number">240</span>),CV_8UC3)</span></span>;</span><br><span class="line"><span class="comment">//roi 是表示 img 中 Rect(10,10,100,100)区域的对象</span></span><br><span class="line"><span class="function">Mat <span class="title">roi</span><span class="params">(img, Rect(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>))</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//创建宽度为 320,高度为 240 的 3 通道图像</span></span><br><span class="line"><span class="hljs-function">Mat <span class="hljs-title">img</span><span class="hljs-params">(Size(<span class="hljs-number">320</span>,<span class="hljs-number">240</span>),CV_8UC3)</span></span>;</span><br><span class="line"><span class="hljs-comment">//roi 是表示 img 中 Rect(10,10,100,100)区域的对象</span></span><br><span class="line"><span class="hljs-function">Mat <span class="hljs-title">roi</span><span class="hljs-params">(img, Rect(<span class="hljs-number">10</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>,<span class="hljs-number">100</span>))</span></span>;</span><br></pre></td></tr></table></figure>
 <p>除了使用构造函数,还可以使用括号运算符,如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat roi2 = img(Rect(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat roi2 = img(Rect(<span class="hljs-number">10</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>,<span class="hljs-number">100</span>));</span><br></pre></td></tr></table></figure>
 <p>当然也可以使用 Range 对象来定义感兴趣区域,如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用括号运算符</span></span><br><span class="line">Mat roi3 = img(Range(<span class="number">10</span>,<span class="number">100</span>),Range(<span class="number">10</span>,<span class="number">100</span>));</span><br><span class="line"><span class="comment">//使用构造函数</span></span><br><span class="line"><span class="function">Mat <span class="title">roi4</span><span class="params">(img, Range(<span class="number">10</span>,<span class="number">100</span>),Range(<span class="number">10</span>,<span class="number">100</span>))</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//使用括号运算符</span></span><br><span class="line">Mat roi3 = img(Range(<span class="hljs-number">10</span>,<span class="hljs-number">100</span>),Range(<span class="hljs-number">10</span>,<span class="hljs-number">100</span>));</span><br><span class="line"><span class="hljs-comment">//使用构造函数</span></span><br><span class="line"><span class="hljs-function">Mat <span class="hljs-title">roi4</span><span class="hljs-params">(img, Range(<span class="hljs-number">10</span>,<span class="hljs-number">100</span>),Range(<span class="hljs-number">10</span>,<span class="hljs-number">100</span>))</span></span>;</span><br></pre></td></tr></table></figure>
 <h2 id="取对角线元素"><a href="#取对角线元素" class="headerlink" title="取对角线元素"></a>取对角线元素</h2><p>矩阵的对角线元素可以使用 Mat 类的 diag()函数获取,该函数的定义如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat Mat::diag(<span class="keyword">int</span> d) <span class="keyword">const</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mat Mat::diag(<span class="hljs-keyword">int</span> d) <span class="hljs-keyword">const</span></span><br></pre></td></tr></table></figure>
 <p>参数 d=0 时,表示取主对角线;当参数 d&gt;0 是,表示取主对角线下方的次对角线,如 d=1 时,表示取主对角线下方,且紧贴主多角线的元素;当参数 d&lt;0 时,表示取主对角线上方的次对角线。</p>
 <p>如同 row()和 col()函数, diag()函数也不进行内存复制操作,其复杂度也是 O(1)。</p>
 
@@ -204,9 +204,9 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/1208a55a.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/post/d966aba8.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">OpenCV-Mat表达式</span>
+                <span class="level-item">图像处理——图像降噪</span>
             </a>
         </div>
         
@@ -265,7 +265,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        115
+                        116
                     </p>
                 </div>
             </div>
@@ -285,7 +285,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        54
+                        55
                     </p>
                 </div>
             </div>
@@ -442,7 +442,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
@@ -450,7 +450,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -504,7 +504,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 11.82px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -701,7 +701,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -970,7 +970,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1027,6 +1027,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1368,7 +1375,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1637,7 +1644,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1694,6 +1701,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -194,7 +194,7 @@
 <p><em>然后，hadoop用户就可以用sudo来执行系统级别的指令</em></p>
 <h1 id="文件权限的操作"><a href="#文件权限的操作" class="headerlink" title="文件权限的操作"></a>文件权限的操作</h1><p>前面说过用户具有对文件的的访问控制权，访问控制权具有<strong>可读、可写、可操作</strong>三种，我们来具体看一下</p>
 <h2 id="linux-文件权限的描述格式解读"><a href="#linux-文件权限的描述格式解读" class="headerlink" title="linux 文件权限的描述格式解读"></a>linux 文件权限的描述格式解读</h2><p>用<code>ll</code>命令来看一下根目录下的文件信息,我们复制其中的一部分：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dr-xr-xr-x.   5 root root 4096 11月  2 10:34 boot</span><br><span class="line">drwxr-xr-x.  20 root root 3140 11月  2 10:36 dev</span><br><span class="line">drwxr-xr-x.  74 root root 8192 11月  2 20:48 etc</span><br><span class="line">drwxr-xr-x.   3 root root   18 11月  2 19:03 home</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dr-xr-xr-x.   5 root root 4096 11月  2 10:34 boot</span><br><span class="line">drwxr-xr-x.  20 root root 3140 11月  2 10:36 dev</span><br><span class="line">drwxr-xr-x.  74 root root 8192 11月  2 20:48 etc</span><br><span class="line">drwxr-xr-x.   3 root root   18 11月  2 19:03 home</span><br></pre></td></tr></table></figure>
 <p><strong>每个文件的信息大同小异，关注最前面的十个字符，他就表示文件的操作权限。</strong></p>
 <p>以/etc目录的信息为例<code>drwxr-xr-x.  74 root root 8192 11月  2 20:48 etc</code></p>
 <p>第一位表示文件类型,d 表示这是一个文件夹，文件属性还有以下内容</p>
@@ -210,7 +210,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/5430305-51db58cc1b768d91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="权限表"></p>
 <h1 id="chmod-更改权限"><a href="#chmod-更改权限" class="headerlink" title="chmod 更改权限"></a>chmod 更改权限</h1><p>只有<code>root</code>和文件的所有者才能更改文件的权限，更改文件的权限有两种方式，一种是使用符号，另一种是使用八进制数字。</p>
 <h2 id="符号方式修改文件权限"><a href="#符号方式修改文件权限" class="headerlink" title="符号方式修改文件权限"></a>符号方式修改文件权限</h2><p>符号即前面<code>rwx</code>对应的含义，<code>ugoa</code>则分别表示用户(user)、用户组(group)、其他人(other)和所有(all),一组示例来演示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod g-rw haha.dat    表示将haha.dat对所属组的rw权限取消</span><br><span class="line">chmod o-rw haha.dat 	表示将haha.dat对其他人的rw权限取消</span><br><span class="line">chmod u+x haha.dat      表示将haha.dat对所属用户的权限增加x</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod g-rw haha.dat    表示将haha.dat对所属组的rw权限取消</span><br><span class="line">chmod o-rw haha.dat 	表示将haha.dat对其他人的rw权限取消</span><br><span class="line">chmod u+x haha.dat      表示将haha.dat对所属用户的权限增加x</span><br></pre></td></tr></table></figure>
 <h2 id="八进制的方式来修改权限"><a href="#八进制的方式来修改权限" class="headerlink" title="八进制的方式来修改权限"></a>八进制的方式来修改权限</h2><p>一个八进制数字可以表示三个二进制数，二进制的 111 对应八进制的 7，而 111 正好可以表示 rwx 的含义，1 则代表有权限 0 则代表没有权限。</p>
 <table>
 <thead>
@@ -354,7 +354,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        115
+                        116
                     </p>
                 </div>
             </div>
@@ -374,7 +374,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        54
+                        55
                     </p>
                 </div>
             </div>
@@ -551,7 +551,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
@@ -559,7 +559,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -613,7 +613,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 11.82px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -810,7 +810,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1079,7 +1079,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1136,6 +1136,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1477,7 +1484,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1746,7 +1753,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1803,6 +1810,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

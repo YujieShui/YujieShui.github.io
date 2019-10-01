@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: mac - 深页</title>
+<title>标签: tcp/ip - 深页</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="深页">
-<meta property="og:url" content="http://shuiyujie.com/tags/mac/index.html">
+<meta property="og:url" content="http://shuiyujie.com/tags/tcp-ip/index.html">
 <meta property="og:site_name" content="深页">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -124,7 +124,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">mac</a></li>
+            <li class="is-active"><a href="#" aria-current="page">tcp/ip</a></li>
         </ul>
         </nav>
     </div>
@@ -136,17 +136,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-22T16:39:34.000Z">2019-06-23</time>
+                <time class="level-item has-text-grey" datetime="2018-08-23T18:48:34.000Z">2018-08-24</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/善用佳软/">善用佳软</a>
+                <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/computer-science/计算机网络/">计算机网络</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 238 个字)
+                    4 分钟 读完 (大约 561 个字)
                 </span>
                 
                 
@@ -155,22 +155,95 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/post/ccb5aaa3.html">备忘-Mac使用小技巧</a>
+                <a class="has-link-black-ter" href="/post/f305b41d.html">TCP、IP协议</a>
             
         </h1>
         <div class="content">
-            <p><img src="http://image.shuiyujie.com/apple-1839046_1920.jpg" alt="题图: https://pixabay.com/photos/apple-books-computers-desk-desktop-1839046/"></p>
-<p>备忘：一些使用 mac 的小 tips。</p>
+            <p>在<a href="https://shuiyujie.com/post/38134907.html">ISO/OSI参考模型</a>一文中介绍了 OSI 七层参考模型，但是</p>
+<p>ISO/OSI参考模型有这样两个缺陷：</p>
+<ol>
+<li>有些功能在多个层次中多次出现</li>
+</ol>
+<p>没有任何一家公司按照七层模型开发，但</p>
+<p>OSI七层模型的缺点：</p>
+<p>TCP/IP 是为了解决异种计算机网络的通信联系</p>
+<p>TCP/IP协议体系概述</p>
+<ul>
+<li>TCP/IP 协议是针对 Internet 开发的一种体系结构和协议标准</li>
+<li>TCP/IP 协议是国际互联网 Internet 采用的协议标准</li>
+<li>TCP/IP 是一组通信协议的代名词，是由一系列协议组成的协议簇</li>
+</ul>
+<p>TCP/IP 是指传输控制协议/网际协议，是针对 Internet 开发的一 种体系结构和协议标准，其目的在于<strong>解决异种计算机网络的通信问题</strong>，使得网络在互连时把技术细节隐藏起来，为用户提供 一种通用、一致的通信服务。通常所说的TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此更确切地说，TCP/IP 是一个协议族而不是一种协议</p>
+<p>TCP/IP协议的特点</p>
+<ul>
+<li>TCP/IP是开放的协议标准</li>
+<li>TCP/IP独立于特定的网络硬件，可以运行在局域网、广域网等各种网 络环境</li>
+<li>TCP/IP使用统一的网络地址分配方案，使得整个TCP/IP设备在网络 中只有惟一的地址</li>
+<li>TCP/IP是标准化的高层协议，可以提供多种可靠的用户服务</li>
+</ul>
+<h1 id="TCP-IP协议集的主要协议"><a href="#TCP-IP协议集的主要协议" class="headerlink" title="TCP/IP协议集的主要协议"></a>TCP/IP协议集的主要协议</h1><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>全称</th>
+<th>提供服务</th>
+<th>相应 OSI 层</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP</td>
+<td>Internet Protocol<br>互联网报文协议</td>
+<td>数据报服务</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>Internet Control Message <br>互联网控制报文协议</td>
+<td>差错和控制</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ARP</td>
+<td>Address Resolution Protocol<br>地址解析协议</td>
+<td>互联网地址 -&gt; 物理地址</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RARP</td>
+<td>Reverse Address Resolution Protocol<br>反向地址解析协议</td>
+<td>物理地址 -&gt; 互联网地址</td>
+<td>3</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td></td>
+<td>可靠流服务</td>
+<td>4</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td></td>
+<td>文件传送</td>
+<td>5~7</td>
+</tr>
+<tr>
+<td>TELENT</td>
+<td></td>
+<td>终端仿真</td>
+<td>5~7</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td></td>
+<td>域名 -&gt; 互联网地址</td>
+<td>5~7</td>
+</tr>
+</tbody>
+</table>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/post/ccb5aaa3.html#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>

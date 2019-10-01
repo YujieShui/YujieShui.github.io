@@ -160,7 +160,7 @@
 <li>c 语言中的 const 是个冒牌货，使用指针任然能够修改</li>
 </ol>
 <a id="more"></a>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[] = <span class="string">"dfasfadsgafdg"</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *p = buf;</span><br><span class="line">    <span class="comment">// p[1] = "2"; err</span></span><br><span class="line">    p = <span class="string">"0x11"</span>;</span><br><span class="line">    <span class="comment">// const 此时修饰的是 *p，表示 p 指向的那块内存的内容 *p 是不可变的</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">// char const *p1 = buf;</span></span><br><span class="line">    <span class="comment">// p1[1] = '2;</span></span><br><span class="line">    <span class="comment">// 交换顺序这里 const char 与 char const 相同</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">char</span> * <span class="keyword">const</span> p1 = buf;</span><br><span class="line">    p1[<span class="number">1</span>] = <span class="string">'2'</span>;</span><br><span class="line">    <span class="comment">// p1 = "0x11"; err</span></span><br><span class="line">    <span class="comment">// const 此时修饰的是 p，表示指针变量 p 本身是不可修改的，而指针变量指向的内容 *p 是可以修改的</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> p3 = buf;</span><br><span class="line">    <span class="comment">// p3[1] = '2; err</span></span><br><span class="line">    <span class="comment">// p3 = "abc"; err</span></span><br><span class="line">    <span class="comment">// 两个 const 分别修饰了 p 和 *p，此时无论是指针还是指针指向的内存都不可变，完成处于只读状态</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">123</span>;</span><br><span class="line">    <span class="comment">// a = 321; err</span></span><br><span class="line">    <span class="keyword">int</span> *q = <span class="literal">NULL</span>;</span><br><span class="line">    q = &amp;a;</span><br><span class="line">    *q = <span class="number">321</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a: %d\n"</span>, a);</span><br><span class="line">    <span class="comment">// c 语言中的 const 是个冒牌货，使用指针任然能够修改</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> buf[] = <span class="hljs-string">"dfasfadsgafdg"</span>;</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *p = buf;</span><br><span class="line">    <span class="hljs-comment">// p[1] = "2"; err</span></span><br><span class="line">    p = <span class="hljs-string">"0x11"</span>;</span><br><span class="line">    <span class="hljs-comment">// const 此时修饰的是 *p，表示 p 指向的那块内存的内容 *p 是不可变的</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-comment">// char const *p1 = buf;</span></span><br><span class="line">    <span class="hljs-comment">// p1[1] = '2;</span></span><br><span class="line">    <span class="hljs-comment">// 交换顺序这里 const char 与 char const 相同</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">char</span> * <span class="hljs-keyword">const</span> p1 = buf;</span><br><span class="line">    p1[<span class="hljs-number">1</span>] = <span class="hljs-string">'2'</span>;</span><br><span class="line">    <span class="hljs-comment">// p1 = "0x11"; err</span></span><br><span class="line">    <span class="hljs-comment">// const 此时修饰的是 p，表示指针变量 p 本身是不可修改的，而指针变量指向的内容 *p 是可以修改的</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * <span class="hljs-keyword">const</span> p3 = buf;</span><br><span class="line">    <span class="hljs-comment">// p3[1] = '2; err</span></span><br><span class="line">    <span class="hljs-comment">// p3 = "abc"; err</span></span><br><span class="line">    <span class="hljs-comment">// 两个 const 分别修饰了 p 和 *p，此时无论是指针还是指针指向的内存都不可变，完成处于只读状态</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">123</span>;</span><br><span class="line">    <span class="hljs-comment">// a = 321; err</span></span><br><span class="line">    <span class="hljs-keyword">int</span> *q = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    q = &amp;a;</span><br><span class="line">    *q = <span class="hljs-number">321</span>;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"a: %d\n"</span>, a);</span><br><span class="line">    <span class="hljs-comment">// c 语言中的 const 是个冒牌货，使用指针任然能够修改</span></span><br><span class="line"> </span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -247,7 +247,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        115
+                        116
                     </p>
                 </div>
             </div>
@@ -267,7 +267,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        54
+                        55
                     </p>
                 </div>
             </div>
@@ -397,7 +397,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
@@ -405,7 +405,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -459,7 +459,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 11.82px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -656,7 +656,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -925,7 +925,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -982,6 +982,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1323,7 +1330,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1592,7 +1599,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1649,6 +1656,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

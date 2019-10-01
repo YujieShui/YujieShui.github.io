@@ -139,6 +139,132 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-23T18:48:34.000Z">2018-08-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/computer-science/">computer science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/computer-science/计算机网络/">计算机网络</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 561 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/post/f305b41d.html">TCP、IP协议</a>
+            
+        </h1>
+        <div class="content">
+            <p>在<a href="https://shuiyujie.com/post/38134907.html">ISO/OSI参考模型</a>一文中介绍了 OSI 七层参考模型，但是</p>
+<p>ISO/OSI参考模型有这样两个缺陷：</p>
+<ol>
+<li>有些功能在多个层次中多次出现</li>
+</ol>
+<p>没有任何一家公司按照七层模型开发，但</p>
+<p>OSI七层模型的缺点：</p>
+<p>TCP/IP 是为了解决异种计算机网络的通信联系</p>
+<p>TCP/IP协议体系概述</p>
+<ul>
+<li>TCP/IP 协议是针对 Internet 开发的一种体系结构和协议标准</li>
+<li>TCP/IP 协议是国际互联网 Internet 采用的协议标准</li>
+<li>TCP/IP 是一组通信协议的代名词，是由一系列协议组成的协议簇</li>
+</ul>
+<p>TCP/IP 是指传输控制协议/网际协议，是针对 Internet 开发的一 种体系结构和协议标准，其目的在于<strong>解决异种计算机网络的通信问题</strong>，使得网络在互连时把技术细节隐藏起来，为用户提供 一种通用、一致的通信服务。通常所说的TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此更确切地说，TCP/IP 是一个协议族而不是一种协议</p>
+<p>TCP/IP协议的特点</p>
+<ul>
+<li>TCP/IP是开放的协议标准</li>
+<li>TCP/IP独立于特定的网络硬件，可以运行在局域网、广域网等各种网 络环境</li>
+<li>TCP/IP使用统一的网络地址分配方案，使得整个TCP/IP设备在网络 中只有惟一的地址</li>
+<li>TCP/IP是标准化的高层协议，可以提供多种可靠的用户服务</li>
+</ul>
+<h1 id="TCP-IP协议集的主要协议"><a href="#TCP-IP协议集的主要协议" class="headerlink" title="TCP/IP协议集的主要协议"></a>TCP/IP协议集的主要协议</h1><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>全称</th>
+<th>提供服务</th>
+<th>相应 OSI 层</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP</td>
+<td>Internet Protocol<br>互联网报文协议</td>
+<td>数据报服务</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>Internet Control Message <br>互联网控制报文协议</td>
+<td>差错和控制</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ARP</td>
+<td>Address Resolution Protocol<br>地址解析协议</td>
+<td>互联网地址 -&gt; 物理地址</td>
+<td>3</td>
+</tr>
+<tr>
+<td>RARP</td>
+<td>Reverse Address Resolution Protocol<br>反向地址解析协议</td>
+<td>物理地址 -&gt; 互联网地址</td>
+<td>3</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td></td>
+<td>可靠流服务</td>
+<td>4</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td></td>
+<td>文件传送</td>
+<td>5~7</td>
+</tr>
+<tr>
+<td>TELENT</td>
+<td></td>
+<td>终端仿真</td>
+<td>5~7</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td></td>
+<td>域名 -&gt; 互联网地址</td>
+<td>5~7</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-08-22T18:48:34.000Z">2018-08-23</time>
                 
                 <div class="level-item">
@@ -149,7 +275,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 673 个字)
+                    8 分钟 读完 (大约 1207 个字)
                 </span>
                 
                 
@@ -182,7 +308,38 @@
 <li>实际的物理通信只在最底 层完成</li>
 <li>Pn：第n层协议，即第 n 层对等实体间通信时必须 遵循的规则或约定</li>
 </ul>
-<h1 id="第7层，应用层"><a href="#第7层，应用层" class="headerlink" title="第7层，应用层"></a>第7层，应用层</h1><h1 id="第6层，表示层"><a href="#第6层，表示层" class="headerlink" title="第6层，表示层"></a>第6层，表示层</h1><h1 id="第5层，会话层"><a href="#第5层，会话层" class="headerlink" title="第5层，会话层"></a>第5层，会话层</h1><h1 id="第4层，传输层"><a href="#第4层，传输层" class="headerlink" title="第4层，传输层"></a>第4层，传输层</h1><h1 id="第3层，网络层"><a href="#第3层，网络层" class="headerlink" title="第3层，网络层"></a>第3层，网络层</h1><h1 id="第2层，数据链路层"><a href="#第2层，数据链路层" class="headerlink" title="第2层，数据链路层"></a>第2层，数据链路层</h1><h1 id="第1层，物理层"><a href="#第1层，物理层" class="headerlink" title="第1层，物理层"></a>第1层，物理层</h1>
+<p>OSI 七层模型的作用：</p>
+<ul>
+<li>应用层：提供应用程序运行的环境、负责管理和执行应用程序</li>
+<li>表示层：为数据在传输之前，对加密、解密、压缩、解压缩及终端数据格式转换提供一套规则和约定</li>
+<li>会话层：对对话的双方进行资格审查和验证和规则，同时规定发送时的双工模式</li>
+<li>传输层：<ol>
+<li>传输层可以提供在不同系统之间的进程间数据交互的可靠服务，在网络内两个实体之间建立端到端的通信信道，用来传输信息或报文分组，本层提供两端点可靠、透明的数据传输</li>
+<li>可以为会话层提供与网络类型无关的可靠信息传输机制，对会话层屏蔽了下层网络操作细节</li>
+</ol>
+</li>
+<li>网络层：负责建立、保持和终止中间设备的连接，同时负责通信子网内路径选择和拥挤控制</li>
+<li>数据链路层：<ol>
+<li>如何将数据组装成帧，帧是数据链路层基本的传输单位</li>
+<li>如何处理数据在传输过程中出现的差错</li>
+<li>如何调节发送速率使之与接收方匹配</li>
+<li>在两个网络实体之间提供数据链路的建立、维持和释放管理</li>
+</ol>
+</li>
+<li>物理层：<ul>
+<li>物理层包括设备之间物理接口和用户设备与网络终端设备之间的传输规则</li>
+<li>物理层有四个重要的特性：<ul>
+<li>机械特性：规定了物理连接时对插头和插座的几何尺寸、插针或插孔芯数及排列方式</li>
+<li>电气特性：规定了信号状态的电压、电流的识别，最大传输速率等</li>
+<li>功能特性：规定了接口信号的来源、作用及与其他信号之间的关系</li>
+<li>过程特性：规定了使用交换电路进行数据交换的控制步骤，这些控制步骤应用便利比特流出阿叔得以顺利完成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="OSI七层模型的使用"><a href="#OSI七层模型的使用" class="headerlink" title="OSI七层模型的使用"></a>OSI七层模型的使用</h1><p><img src="http://image.shuiyujie.com/2019-10-01-10-49-25.png" alt="OSI七层模型的使用"></p>
+
         </div>
         
         
@@ -351,7 +508,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        115
+                        116
                     </p>
                 </div>
             </div>
@@ -371,7 +528,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        54
+                        55
                     </p>
                 </div>
             </div>
@@ -501,7 +658,7 @@
                 <span class="level-item">computer science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
@@ -509,7 +666,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/computer-science/设计模式/">
@@ -563,7 +720,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 11.82px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
+        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.91px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.36px;">c</a> <a href="/tags/c/" style="font-size: 19.09px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.82px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.91px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.91px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.18px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.91px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 13.64px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.27px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.91px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.91px;">mysql</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 14.55px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.73px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.36px;">stl</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 12.73px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.73px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.91px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.82px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.91px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.45px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.73px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 13.64px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.73px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
     </div>
 </div>
 
@@ -760,7 +917,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1029,7 +1186,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1086,6 +1243,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1427,7 +1591,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1696,7 +1860,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/network/">
                         <span class="tag">network</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1753,6 +1917,13 @@
                     <a class="tags has-addons" href="/tags/stl/">
                         <span class="tag">stl</span>
                         <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tcp-ip/">
+                        <span class="tag">tcp/ip</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
