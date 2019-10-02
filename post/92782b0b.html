@@ -1,172 +1,280 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-<title>快，学会shell - 深页</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>快，学会shell | 深页</title>
+  
+  
 
+  
+  <link rel="alternate" href="/atom.xml" title="深页">
+  
 
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
 
-    <meta name="description" content="题图：https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/ 本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。">
-<meta name="keywords" content="linux,shell">
-<meta property="og:type" content="article">
-<meta property="og:title" content="快，学会shell">
-<meta property="og:url" content="http://shuiyujie.com/post/92782b0b.html">
-<meta property="og:site_name" content="深页">
-<meta property="og:description" content="题图：https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/ 本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/hacker-2300772_1920.jpg">
-<meta property="og:updated_time" content="2019-08-31T04:54:22.336Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快，学会shell">
-<meta name="twitter:description" content="题图：https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/ 本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。">
-<meta name="twitter:image" content="http://image.shuiyujie.com/hacker-2300772_1920.jpg">
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
 
+  
 
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+  
 
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
 
-
-<link rel="icon" href="/images/favicon.svg">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
-    
-    
-    
-    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-    
-
-    
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-    
-
-    
-    
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-
-    
-    
-    
-    
-
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-<link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-
-    
-    
-    
-
-    
-    
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
+  
+  
 </head>
-<body class="is-3-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">弄浪的鱼</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          深页
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;首页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/categories/" rel="nofollow" id="blogcategories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/tags/" rel="nofollow" id="blogtags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/92782b0b.html">
+        快，学会shell
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
             
-                <img src="/images/logo.svg" alt="快，学会shell" height="28">
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-21</p>
+  </a>
+</div>
+
+          
+        
+          
             
-            </a>
-        </div>
-        <div class="navbar-menu">
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Linux/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
             
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="搜索" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
     </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    
-    <div class="card-content article ">
+  
+
+
+          
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-21T14:22:05.000Z">2019-07-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    44 分钟 读完 (大约 6533 个字)
-                </span>
-                
-                
-            </div>
-        </div>
+          
+            
+
+          
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                快，学会shell
-            
-        </h1>
-        <div class="content">
-            <p><img src="http://image.shuiyujie.com/hacker-2300772_1920.jpg" alt="学习shell编程"></p>
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="http://image.shuiyujie.com/hacker-2300772_1920.jpg" alt="学习shell编程"></p>
 <p><em>题图：<a href="https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/" target="_blank" rel="noopener">https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/</a></em></p>
 <p>本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。</p>
 <a id="more"></a>
 <p>我们先来聊一聊 shell 和 shell script 的概念。计算机的运行离不开硬件，我们通过操作系统（OS，Operating System）操作硬件，而我们所说的 linux 严格来说是操作系统（OS）的核心部分——内核（Kernel）。我们无法直接操作 kernel，需要借助于 kernel 外的一层壳 shell 才能与 kernel 进行交互。如果把操作系统(OS)看做是一家公司，shell 就是前台，kernel 就是董事会。当我们访问公司的时候，先和前台(shell)打个招呼，前台通知董事会(kernel)，董事会来控制公司(OS)。</p>
 <p>俗话说“铁打的营盘流水的兵”，就是公司人来人往，都不会影响公司的运转。对于操作系统也一样，我们可以替换操作系统的前台(shell)，甚至董事会(kernel)。如果你想知道你的系统中用到的是什么 shell 可以访问 /etc/shells 文件。,我的电脑上就有下面几种 shell</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> /etc/shells: valid login shells</span></span><br><span class="line">/bin/sh</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/bash</span><br><span class="line">/bin/rbash</span><br><span class="line">/bin/zsh</span><br><span class="line">/usr/bin/zsh</span><br></pre></td></tr></table></figure>
-<h1 id="入门篇"><a href="#入门篇" class="headerlink" title="入门篇"></a>入门篇</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line">for ((i=0; i&lt;10; i++));</span><br><span class="line">do</span><br><span class="line">    echo $&#123;i&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> /etc/shells: valid login shells</span></span><br><span class="line">/bin/sh</span><br><span class="line">/bin/dash</span><br><span class="line">/bin/bash</span><br><span class="line">/bin/rbash</span><br><span class="line">/bin/zsh</span><br><span class="line">/usr/bin/zsh</span><br></pre></td></tr></table></figure>
+<h1 id="入门篇"><a href="#入门篇" class="headerlink" title="入门篇"></a>入门篇</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for ((i=0; i&lt;10; i++));</span><br><span class="line">do</span><br><span class="line">    echo $&#123;i&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>直接来看一个例子吧。创建一个名为 shell001.sh 的文件，写上上面几行代码： </p>
 <ul>
 <li>第 1 行，指定 shell 的解释器。shell 脚本就和 python 或者 jsp 需要用解释器来解析，第 1 行就是用于指定解释器，也就是之前提到的 /etc/shells 下面列出来的。 </li>
@@ -183,7 +291,7 @@
 <li>变量名称中不允许空格和标点</li>
 </ul>
 <p>比如说一个变量为<code>name=&quot;shuiyj&quot;</code>，那么使用变量就要加上<code>$</code>符号，打印这个变量就使用<code>echo ${name}</code>。此外变量除了显示地赋值，还可以使用语句给变量赋值:</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 获取该文件夹下后缀为 jpg 结尾的列表</span></span><br><span class="line">for image in `ls *.jpg`</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取该文件夹下后缀为 jpg 结尾的列表</span></span><br><span class="line">for image in `ls *.jpg`</span><br></pre></td></tr></table></figure>
 <h3 id="变量匹配"><a href="#变量匹配" class="headerlink" title="变量匹配"></a>变量匹配</h3><p>我们会定义和使用一个变量了，接下来我会介绍几个使用的处理变量的方法。</p>
 <p>现在一张图片的名字叫做 cat.jpg，我想要获取文件的名称，即 cat。当然这有很多的中方法，这里介绍一种实用的方法——变量匹配。</p>
 <table>
@@ -221,7 +329,7 @@
 </tbody>
 </table>
 <p>回到最开始的需求，就可以使用<code>%</code>来实现</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat="cat.jpg"</span><br><span class="line">echo $&#123;cat&#125; # cat.jpg</span><br><span class="line">echo $&#123;cat%.*&#125; # cat</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat="cat.jpg"</span><br><span class="line">echo $&#123;cat&#125; # cat.jpg</span><br><span class="line">echo $&#123;cat%.*&#125; # cat</span><br></pre></td></tr></table></figure>
 <p>首先定义一个变量 cat 并为其赋值，接着用<code>$</code>获取 cat 变量的值并打印出来，最后使用变量替换截取字符串。</p>
 <p>变量匹配在 shell 中会被高频使用，要记住这些规则。</p>
 <h3 id="特殊变量的含义"><a href="#特殊变量的含义" class="headerlink" title="特殊变量的含义"></a>特殊变量的含义</h3><p>shell 中有一些特殊的变量，它们有很多实用的功能，比如说校验输入的参数，允许追加更多参数，判断上一条命令是否执行成功等。</p>
@@ -264,11 +372,11 @@
 </tbody>
 </table>
 <p>比如说我们要对 shell 中的输入参数进行校验，可以添加这样一段</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line">if [ $# != 2 ];then</span><br><span class="line">    echo "Usage: $0 &lt;change ID&gt; &lt;target ID&gt;"</span><br><span class="line">    exit -1</span><br><span class="line">fi</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">if [ $# != 2 ];then</span><br><span class="line">    echo "Usage: $0 &lt;change ID&gt; &lt;target ID&gt;"</span><br><span class="line">    exit -1</span><br><span class="line">fi</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>其中<code>$#</code>表示输入的参数数量，我们通过条件判断在程序的输入参数不为 2 的时候将会进行提示，并退出程序。其中<code>$0</code>一般是可执行文件的名称。</p>
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>变量的话题就先讲到这里，接下来讲 shell 中处理字符串的一些注意事项和技巧。无论学习哪一门编程语言，字符串的处理都是一个绕不开的话题，并且在 shell 编程中用的最多的就是字符串。</p>
 <h3 id="单引号和双引号的区别"><a href="#单引号和双引号的区别" class="headerlink" title="单引号和双引号的区别"></a>单引号和双引号的区别</h3><p>字符串可以用单引号，也可以用双引号，还可以不用引号，我们要注意它们之间的区别。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 单引号</span></span><br><span class="line">str='this is a string'</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 双引号</span></span><br><span class="line">your_name='qinjx'</span><br><span class="line">str="Hello, I know your are \"$your_name\"! \n"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 单引号</span></span><br><span class="line">str='this is a string'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 双引号</span></span><br><span class="line">your_name='qinjx'</span><br><span class="line">str="Hello, I know your are \"$your_name\"! \n"</span><br></pre></td></tr></table></figure>
 <p>单引号</p>
 <ul>
 <li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的</li>
@@ -281,10 +389,10 @@
 </ul>
 <p>想要了解更多它们之间的区别可以看这篇文章：<a href="https://github.com/wzb56/13_questions_of_shell/blob/master/4.%22%22%E4%B8%8E&#39;&#39;%E7%9A%84%E5%B7%AE%E5%9C%A8%E5%93%AA.md" target="_blank" rel="noopener">shell十三问之4：””(双引号)与’’(单引号)差在哪？</a>。</p>
 <h3 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h3><p>shell 中的字符串拼接只要直接连在一起就可以。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">first_name="yujie"</span><br><span class="line">last_name="shui"</span><br><span class="line">greeting="hello,$&#123;first_name&#125; $&#123;last_name&#125;"</span><br><span class="line"></span><br><span class="line">echo $&#123;greeting&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">first_name="yujie"</span><br><span class="line">last_name="shui"</span><br><span class="line">greeting="hello,$&#123;first_name&#125; $&#123;last_name&#125;"</span><br><span class="line"></span><br><span class="line">echo $&#123;greeting&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="计算字符串的长度"><a href="#计算字符串的长度" class="headerlink" title="计算字符串的长度"></a>计算字符串的长度</h3><p>shell 中有两种方法可以计算字符串长度。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str="abcde"</span><br><span class="line">echo $&#123;#str&#125; # 5</span><br><span class="line">expr length "$&#123;str&#125;" # 5</span><br></pre></td></tr></table></figure>
-<h3 id="获取子串在字符串中的索引"><a href="#获取子串在字符串中的索引" class="headerlink" title="获取子串在字符串中的索引"></a>获取子串在字符串中的索引</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr index $&#123;string&#125; $&#123;substring&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str="abcde"</span><br><span class="line">echo $&#123;#str&#125; # 5</span><br><span class="line">expr length "$&#123;str&#125;" # 5</span><br></pre></td></tr></table></figure>
+<h3 id="获取子串在字符串中的索引"><a href="#获取子串在字符串中的索引" class="headerlink" title="获取子串在字符串中的索引"></a>获取子串在字符串中的索引</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expr index $&#123;string&#125; $&#123;substring&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="抽取子串"><a href="#抽取子串" class="headerlink" title="抽取子串"></a>抽取子串</h3><table>
 <thead>
 <tr>
@@ -316,65 +424,65 @@
 </tbody>
 </table>
 <h2 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h2><p>命令替换指的是 shell执行命令并将命令替换部分替换为执行该命令后的结果（先执行该命令，然后用结果代换到命令行中），共有有两种实现命令替换的方式：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 方法一</span></span><br><span class="line">`command`</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 方法二</span></span><br><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash">(<span class="hljs-built_in">command</span>)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法一</span></span><br><span class="line">`command`</span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法二</span></span><br><span class="line"><span class="meta">$</span><span class="bash">(<span class="built_in">command</span>)</span></span><br></pre></td></tr></table></figure>
 <p>还记得之前讲变量的时候提到变量既可以直接获取，也可以从语句获取么？</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 获取该文件夹下后缀为 jpg 结尾的列表</span></span><br><span class="line">for image in `ls *.jpg`</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取该文件夹下后缀为 jpg 结尾的列表</span></span><br><span class="line">for image in `ls *.jpg`</span><br></pre></td></tr></table></figure>
 <p>可以看到 Image 获取到的是<code>ls *.jpg</code>的返回值，也就是一个文件的列表。这里就用到命令替换的符号<code></code>即两个反引号。</p>
 <p>再比如获取系统的所有用户并输出</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">index=1 </span><br><span class="line">for user in `cat /etc/passwd | cut -d ":" -f 1` </span><br><span class="line">do </span><br><span class="line">	echo "This is $&#123;index&#125; user: $&#123;user&#125;" </span><br><span class="line">	index = $(($index + 1)) </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">index=1 </span><br><span class="line">for user in `cat /etc/passwd | cut -d ":" -f 1` </span><br><span class="line">do </span><br><span class="line">	echo "This is $&#123;index&#125; user: $&#123;user&#125;" </span><br><span class="line">	index = $(($index + 1)) </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p><code>cat /etc/passwd | cut -d &quot;:&quot; -f 1</code>将会截取用户名，由于使用了命令替换，其执行结果会返回给 user 变量，此时的 user 就是一个包含用户名称的列表。</p>
 <p>最后再举一个使用<code>$()</code>的例子，比如获取系统时间计算今年或明年</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "This is $(date +%Y) year" </span><br><span class="line">echo "This is $(($(date +%Y) + 1)) year"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo "This is $(date +%Y) year" </span><br><span class="line">echo "This is $(($(date +%Y) + 1)) year"</span><br></pre></td></tr></table></figure>
 <h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><p>shell 中就两种变量，字符串和数字，数字又要按照整型和浮点型分开进行处理，处理它们的函数是不同的。整型运算需要使用<code>expr $num1 operator $num2</code>或者<code>$(($num1 operator $num2))</code>，浮点型运算则需要使用<code>bc</code>。</p>
 <p>任然是通过案例的方式进行说明，假设现在有这样一个需求：提示用户输入一个正整数 num，然后计算 1+2+3+…+num 的值，并且必须对 num 是否为正整数做判断，不符合应该允许再次输入。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "please input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "please input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>这个脚本优点复杂但是不用着急，我们先关注于数学运算<code>expr $num + 1</code> 这一部分，其中关于<code>if</code>判断的部分会在下一节讲解。</p>
 <p><code>expr $num + 1</code> 意思就是做一次整数运算，将 num 和 1 相加。做这个操作的目的是判断 num 是不是一个整数，因为 expr 只能应用在整数运算上，所以执行<code>expr $num + 1</code>之后，如果 num 是整数<strong>退出状态</strong>就是正常的<code>$? = 0</code>，否则 <code>$? ≠ 0</code> ，并且我们并不需要返回结果，可以将结果重定向到<code>/dev/null</code>中，即<code>expr $num + 1 &amp;&gt; /dev/null</code>。</p>
 <p><em>注：在特殊变量的含义这一节可以了解<code>$?</code>的含义。退出状态指的是命令执行完毕之后像操作系统返回的值，成功则为 0。</em></p>
 <p>expr 支持整数运算，不支持浮点数运算，要做浮点数运算那就要用到 bc。bc 是 bash 内建的运算器，支持浮点数运算，使用方法如下所示：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo "23.3+30" | bc</span><br><span class="line">53.3</span><br><span class="line">echo "scale=4;23.3/3.2" | bc</span><br><span class="line">7.2812</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo "23.3+30" | bc</span><br><span class="line">53.3</span><br><span class="line">echo "scale=4;23.3/3.2" | bc</span><br><span class="line">7.2812</span><br></pre></td></tr></table></figure>
 <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><p>在前面的入门篇，我们了解了变量、字符串和数学运算，接下来我将会介绍 shell 中流程控制的语法规则，以及 shell 中如何使用函数以及函数库。当我们掌握以上这些内容，shell 就可以算是入门了，那么就一起开始吧。</p>
 <h2 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h2><p>流控制就是用判断语句，循环语句来控制程序执行的逻辑，就从我们在上一节数学运算中的那个脚本讲起吧，它既包含了<code>if</code>又包含了<code>while</code>循环，是一个很好的例子。</p>
-<h3 id="IF-控制语句"><a href="#IF-控制语句" class="headerlink" title="IF 控制语句"></a>IF 控制语句</h3><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "please input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="IF-控制语句"><a href="#IF-控制语句" class="headerlink" title="IF 控制语句"></a>IF 控制语句</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "please input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>上一节中的脚本中<code>expr $num + 1 &amp;&gt; /dev/null</code>是关于数学运算的部分，紧跟着的<code>if</code>就是一个控制语句，我们抛开无关部分，开看一下关于<code>if</code>的骨架</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ];then</span><br><span class="line">		...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ];then</span><br><span class="line">		...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <p>这里首选要进一步解释<strong>退出状态</strong>的含义。之前已经说了，退出状态指的是命令（包括脚本和函数）在执行完毕之后，向操作系统返回的值。这个值是一个 0~255 的整数，用来表示命令执行成功还是失败，其中 0 代表命令执行成功。参数<code>$?</code>则用于保存这个返回值。</p>
 <p>由此可以看出<code>if</code>在这里做的就是判断<code>expr $num + 1 &amp;&gt; /dev/null</code>是否执行成功。</p>
 <p>此外，我们也可以使用<code>if...elif..else</code>的形式，如下：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if condition1</span><br><span class="line">then</span><br><span class="line">	command1</span><br><span class="line">elif condition2</span><br><span class="line">	command2</span><br><span class="line">else</span><br><span class="line">	commandN</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if condition1</span><br><span class="line">then</span><br><span class="line">	command1</span><br><span class="line">elif condition2</span><br><span class="line">	command2</span><br><span class="line">else</span><br><span class="line">	commandN</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <p>此外，在实际开发过程中还经常会对文件状态进行判断，比如说判断这是不是一个文件夹、是不是一个文本文件等；或者会对字符串进行判断，比如说字符串是否为空，字符串长度是否符合要求；还会对数值进行比较操作，就像例子中提到到值是不是为 0 等。</p>
-<h4 id="判断表达式"><a href="#判断表达式" class="headerlink" title="判断表达式"></a>判断表达式</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if test     #表达式为真</span><br><span class="line">if test !   #表达式为假</span><br><span class="line">test 表达式1 –a 表达式2     #两个表达式都为真</span><br><span class="line">test 表达式1 –o 表达式2     #两个表达式有一个为真</span><br><span class="line">test 表达式1 ! 表达式2       #条件求反</span><br></pre></td></tr></table></figure>
-<h4 id="文件表达式"><a href="#文件表达式" class="headerlink" title="文件表达式"></a>文件表达式</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">test File1 –ef File2    #两个文件是否为同一个文件，可用于硬连接。主要判断两个文件是否指向同一个inode。</span><br><span class="line">test File1 –nt File2    #判断文件1是否比文件2新</span><br><span class="line">test File1 –ot File2    #判断文件1比是否文件2旧</span><br><span class="line">test –b file   #文件是否块设备文件</span><br><span class="line">test –c File   #文件并且是字符设备文件</span><br><span class="line">test –d File   #文件并且是目录</span><br><span class="line">test –e File   #文件是否存在 （常用）</span><br><span class="line">test –f File   #文件是否为正规文件 （常用）</span><br><span class="line">test –g File   #文件是否是设置了组id</span><br><span class="line">test –G File   #文件属于的有效组ID</span><br><span class="line">test –h File   #文件是否是一个符号链接（同-L）</span><br><span class="line">test –k File   #文件是否设置了Sticky bit位</span><br><span class="line">test –b File   #文件存在并且是块设备文件</span><br><span class="line">test –L File   #文件是否是一个符号链接（同-h）</span><br><span class="line">test –o File   #文件的属于有效用户ID</span><br><span class="line">test –p File   #文件是一个命名管道</span><br><span class="line">test –r File   #文件是否可读</span><br><span class="line">test –s File   #文件是否是非空白文件</span><br><span class="line">test –t FD     #文件描述符是在一个终端打开的</span><br><span class="line">test –u File   #文件存在并且设置了它的set-user-id位</span><br><span class="line">test –w File   #文件是否存在并可写</span><br><span class="line">test –x File   #文件属否存在并可执行</span><br></pre></td></tr></table></figure>
-<h4 id="字符串表达式"><a href="#字符串表达式" class="headerlink" title="字符串表达式"></a>字符串表达式</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test string #string不为空</span><br><span class="line">test –n 字符串    #字符串的长度非零</span><br><span class="line">test –z 字符串    #字符串的长度是否为零</span><br><span class="line">test 字符串1＝字符串2       #字符串是否相等，若相等返回true</span><br><span class="line">test 字符串1＝=字符串2      #字符串是否相等，若相等返回true</span><br><span class="line">test 字符串1!＝字符串2      #字符串是否不等，若不等反悔false</span><br><span class="line">test 字符串1&gt;字符串2				# 在排序时，string1 在 string2 之后</span><br><span class="line">test 字符串1&lt;字符串2				# 在排序时，string1 在 string2 之前</span><br></pre></td></tr></table></figure>
-<h4 id="整数表达式"><a href="#整数表达式" class="headerlink" title="整数表达式"></a>整数表达式</h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test 整数1 -eq 整数2    #整数相等</span><br><span class="line">test 整数1 -ge 整数2    #整数1大于等于整数2</span><br><span class="line">test 整数1 -gt 整数2    #整数1大于整数2</span><br><span class="line">test 整数1 -le 整数2    #整数1小于等于整数2</span><br><span class="line">test 整数1 -lt 整数2    #整数1小于整数2</span><br><span class="line">test 整数1 -ne 整数2    #整数1不等于整数2</span><br></pre></td></tr></table></figure>
+<h4 id="判断表达式"><a href="#判断表达式" class="headerlink" title="判断表达式"></a>判断表达式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if test     #表达式为真</span><br><span class="line">if test !   #表达式为假</span><br><span class="line">test 表达式1 –a 表达式2     #两个表达式都为真</span><br><span class="line">test 表达式1 –o 表达式2     #两个表达式有一个为真</span><br><span class="line">test 表达式1 ! 表达式2       #条件求反</span><br></pre></td></tr></table></figure>
+<h4 id="文件表达式"><a href="#文件表达式" class="headerlink" title="文件表达式"></a>文件表达式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">test File1 –ef File2    #两个文件是否为同一个文件，可用于硬连接。主要判断两个文件是否指向同一个inode。</span><br><span class="line">test File1 –nt File2    #判断文件1是否比文件2新</span><br><span class="line">test File1 –ot File2    #判断文件1比是否文件2旧</span><br><span class="line">test –b file   #文件是否块设备文件</span><br><span class="line">test –c File   #文件并且是字符设备文件</span><br><span class="line">test –d File   #文件并且是目录</span><br><span class="line">test –e File   #文件是否存在 （常用）</span><br><span class="line">test –f File   #文件是否为正规文件 （常用）</span><br><span class="line">test –g File   #文件是否是设置了组id</span><br><span class="line">test –G File   #文件属于的有效组ID</span><br><span class="line">test –h File   #文件是否是一个符号链接（同-L）</span><br><span class="line">test –k File   #文件是否设置了Sticky bit位</span><br><span class="line">test –b File   #文件存在并且是块设备文件</span><br><span class="line">test –L File   #文件是否是一个符号链接（同-h）</span><br><span class="line">test –o File   #文件的属于有效用户ID</span><br><span class="line">test –p File   #文件是一个命名管道</span><br><span class="line">test –r File   #文件是否可读</span><br><span class="line">test –s File   #文件是否是非空白文件</span><br><span class="line">test –t FD     #文件描述符是在一个终端打开的</span><br><span class="line">test –u File   #文件存在并且设置了它的set-user-id位</span><br><span class="line">test –w File   #文件是否存在并可写</span><br><span class="line">test –x File   #文件属否存在并可执行</span><br></pre></td></tr></table></figure>
+<h4 id="字符串表达式"><a href="#字符串表达式" class="headerlink" title="字符串表达式"></a>字符串表达式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test string #string不为空</span><br><span class="line">test –n 字符串    #字符串的长度非零</span><br><span class="line">test –z 字符串    #字符串的长度是否为零</span><br><span class="line">test 字符串1＝字符串2       #字符串是否相等，若相等返回true</span><br><span class="line">test 字符串1＝=字符串2      #字符串是否相等，若相等返回true</span><br><span class="line">test 字符串1!＝字符串2      #字符串是否不等，若不等反悔false</span><br><span class="line">test 字符串1&gt;字符串2				# 在排序时，string1 在 string2 之后</span><br><span class="line">test 字符串1&lt;字符串2				# 在排序时，string1 在 string2 之前</span><br></pre></td></tr></table></figure>
+<h4 id="整数表达式"><a href="#整数表达式" class="headerlink" title="整数表达式"></a>整数表达式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test 整数1 -eq 整数2    #整数相等</span><br><span class="line">test 整数1 -ge 整数2    #整数1大于等于整数2</span><br><span class="line">test 整数1 -gt 整数2    #整数1大于整数2</span><br><span class="line">test 整数1 -le 整数2    #整数1小于等于整数2</span><br><span class="line">test 整数1 -lt 整数2    #整数1小于整数2</span><br><span class="line">test 整数1 -ne 整数2    #整数1不等于整数2</span><br></pre></td></tr></table></figure>
 <p>以上表达式摘自<a href="https://www.jishuchi.com/read/linux-command-collection/1576?wd=%E7%BC%96%E7%A8%8B" target="_blank" rel="noopener">test - shell环境中测试条件表达式工具</a>，test 是测试条件表达式的工具，test 后面部分的内容可以用于<code>if</code>条件判断中。</p>
 <h3 id="WHILE-和-UNTIL-循环"><a href="#WHILE-和-UNTIL-循环" class="headerlink" title="WHILE 和 UNTIL 循环"></a>WHILE 和 UNTIL 循环</h3><p>再接之前的脚本来讲解 while 的用法</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "please input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    read -p "please input a positive number: " num</span><br><span class="line">    expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        if [ `expr $num \&gt; 0` -eq 1 ];then</span><br><span class="line">            for((i=1;i&lt;=$num;i++))</span><br><span class="line">            do</span><br><span class="line">                sum=`expr $sum + $i`</span><br><span class="line">            done    </span><br><span class="line">            echo "1+2+3+....+$num = $sum"</span><br><span class="line">            exit</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">    echo "error,input enlegal"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>前面也说过，这个脚本的目的是接收一个 num，如果输入的 num 不是一个整数就一直让用户输入，直到输入的 num 是一个整数为止。这里就用到了 while 循环，并且将循环条件设置为 true，也就是一个永久的循环。循环不能终止，按照逻辑我们要在用户输入整数并完成计算之后推出程序,所以这里通过<code>exit</code>来退出程序，这里也可以使用<code>break</code>来跳出循环。我们还可以配合使用<code>continue</code>表示继续执行，这里没有举例说明。</p>
 <p>while命令退出状态不为0时终止循环，而until命令则刚好相反。除此之外，until命令与while命令很相似。until循环会在接收到为0的退出状态时终止。在while-count脚本中，循环会一直重复到count变量小于等于5。使用until改写脚本也可以达到相同的效果。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> until-count: display a series of numbers</span></span><br><span class="line"></span><br><span class="line">count=1</span><br><span class="line"></span><br><span class="line">until [ $count -gt 5 ]; do</span><br><span class="line">　　　　　echo $count</span><br><span class="line">　　　　　count=$((count + 1))</span><br><span class="line">done</span><br><span class="line">echo "Finished."</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> until-count: display a series of numbers</span></span><br><span class="line"></span><br><span class="line">count=1</span><br><span class="line"></span><br><span class="line">until [ $count -gt 5 ]; do</span><br><span class="line">　　　　　echo $count</span><br><span class="line">　　　　　count=$((count + 1))</span><br><span class="line">done</span><br><span class="line">echo "Finished."</span><br></pre></td></tr></table></figure>
 <p>将测试表达式改写为<code>count –gt 5 until</code>就可以在合适的时刻终止循环。选择使用while还是until，通常取决于哪种循环能够允许程序员写出最明了的测试表达式。</p>
 <h3 id="case-分支"><a href="#case-分支" class="headerlink" title="case 分支"></a>case 分支</h3><p>前面讲了使用<code>if</code>做条件判断，在其他语言比如 C++ 或者 Java 等中都存在<code>switch..case..</code>这样的语句，shell 也提供了<code>case</code>这个多选项符合命令，它的命令格式是这样的：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">case word in</span><br><span class="line">　　　　[pattern [| pattern]...) commands ;;]...</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">case word in</span><br><span class="line">　　　　[pattern [| pattern]...) commands ;;]...</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 <p>在这里我想举一个做算数运算的例子，这和例子与下一节讲解的函数相关，其中用到了<code>case</code>，但是即使不了解函数怎么使用，也不会对理解<code>case</code>的运用造成影响。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">function calcu</span><br><span class="line">&#123;</span><br><span class="line">    case $2 in</span><br><span class="line">        +)</span><br><span class="line">            echo "`expr $1 + $3`"</span><br><span class="line">            ;;</span><br><span class="line">        -)</span><br><span class="line">            echo "`expr $1 - $3`"</span><br><span class="line">            ;;</span><br><span class="line">        \*)</span><br><span class="line">            echo "`expr $1 \* $3`"</span><br><span class="line">            ;;</span><br><span class="line">        /)</span><br><span class="line">            echo "`expr $1 / $3`"</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line">calcu $1 $2 $3</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">function calcu</span><br><span class="line">&#123;</span><br><span class="line">    case $2 in</span><br><span class="line">        +)</span><br><span class="line">            echo "`expr $1 + $3`"</span><br><span class="line">            ;;</span><br><span class="line">        -)</span><br><span class="line">            echo "`expr $1 - $3`"</span><br><span class="line">            ;;</span><br><span class="line">        \*)</span><br><span class="line">            echo "`expr $1 \* $3`"</span><br><span class="line">            ;;</span><br><span class="line">        /)</span><br><span class="line">            echo "`expr $1 / $3`"</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line">calcu $1 $2 $3</span><br></pre></td></tr></table></figure>
 <p>这个脚本希望做的是一次算数运算，根据操作符是<code>+ - * /</code>来进行运算。</p>
 <h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><p>现在到了流控制的最后一节了，for 循环其实在文章一开始我们就见过了，在文章最开始我举了两个例子：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 获取该文件夹下后缀为 jpg 结尾的列表</span></span><br><span class="line">for image in `ls *.jpg`</span><br><span class="line">do</span><br><span class="line">	....</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 输出 0-9 共 10 个数字</span></span><br><span class="line">for ((i=0; i&lt;10; i++));</span><br><span class="line">do</span><br><span class="line">    echo $&#123;i&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取该文件夹下后缀为 jpg 结尾的列表</span></span><br><span class="line">for image in `ls *.jpg`</span><br><span class="line">do</span><br><span class="line">	....</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出 0-9 共 10 个数字</span></span><br><span class="line">for ((i=0; i&lt;10; i++));</span><br><span class="line">do</span><br><span class="line">    echo $&#123;i&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>第一种是传统的形式，和 python 中的 for 循环很像，我们可以像这样<code>for i in A B C D;do echo $i; done</code>使用 for 循环，可以将循环的内容就当成 python 中的一个列表，也可以像<code>for i in {A..E};do echo $i; done</code>这样创建字符列表。</p>
 <p>第二种方式就是 C 语言的形式了<code>for ((i=0; i&lt;10; i++))</code>，比较常规也没什么值得讲的。</p>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>在上一节中，我们介绍了 shell 中的流控制的语法：if, while, until, case和 for。再之前我们讲了变量、字符串和数学运算。到这一节就可以讲一下函数这个话题了。</p>
 <p>了解了上面这些内容理论上已经能够写出任何的程序的，不过写程序的过程中会有许多类似的代码，如果全部重新写一遍程序就会显得冗长，所以一般的做法就是将可以复用的代码抽取出来形成函数。shell 自然也支持函数的使用，接下里就看看在 shell 中怎么定义和使用函数。</p>
 <p>首先看 shell 中函数是怎么定义的。shell 中的函数有两种定义格式，使用任意一种都可以。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name()</span><br><span class="line">&#123;</span><br><span class="line">	command1</span><br><span class="line">  command2</span><br><span class="line">  ...</span><br><span class="line">  commandn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function name</span><br><span class="line">&#123;</span><br><span class="line">	command1</span><br><span class="line">  command2</span><br><span class="line">  ...</span><br><span class="line">  commandn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">name()</span><br><span class="line">&#123;</span><br><span class="line">	command1</span><br><span class="line">  command2</span><br><span class="line">  ...</span><br><span class="line">  commandn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function name</span><br><span class="line">&#123;</span><br><span class="line">	command1</span><br><span class="line">  command2</span><br><span class="line">  ...</span><br><span class="line">  commandn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我比较习惯用第二种形式，你可以选择任何一种方式，不过我接下来的例子是按照第二种定义方式。</p>
 <p>我们知道了函数定义的架构，但是如果你用过其他编程语言会发现它没有参数列表，也没有返回值，这在一开始也让我觉得很困惑，但是我们在变量那一节学过特殊变量的含义，其中有一个变量是<code>$0</code>表示函数的名称，shell 中的变量是通过命令行键入，再用<code>$1 $2 $3</code>读取的。这就和 C++ 或者 Java 中的主函数读取参数一个道理，<code>char** argv</code>和<code>String[] args</code>就是由命令行键入的参数列表。</p>
 <p>下面就用一个具体函数的例子进行说明，这个例子在 流控制——case 这一节也讲过，但是没有讲完：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">function calcu</span><br><span class="line">&#123;</span><br><span class="line">    case $2 in</span><br><span class="line">        +)</span><br><span class="line">            echo "`expr $1 + $3`"</span><br><span class="line">            ;;</span><br><span class="line">        -)</span><br><span class="line">            echo "`expr $1 - $3`"</span><br><span class="line">            ;;</span><br><span class="line">        \*)</span><br><span class="line">            echo "`expr $1 \* $3`"</span><br><span class="line">            ;;</span><br><span class="line">        /)</span><br><span class="line">            echo "`expr $1 / $3`"</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">calcu $1 $2 $3</span><br><span class="line">echo ""calcu $1 $2 $3""</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">function calcu</span><br><span class="line">&#123;</span><br><span class="line">    case $2 in</span><br><span class="line">        +)</span><br><span class="line">            echo "`expr $1 + $3`"</span><br><span class="line">            ;;</span><br><span class="line">        -)</span><br><span class="line">            echo "`expr $1 - $3`"</span><br><span class="line">            ;;</span><br><span class="line">        \*)</span><br><span class="line">            echo "`expr $1 \* $3`"</span><br><span class="line">            ;;</span><br><span class="line">        /)</span><br><span class="line">            echo "`expr $1 / $3`"</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">calcu $1 $2 $3</span><br><span class="line">echo ""calcu $1 $2 $3""</span><br></pre></td></tr></table></figure>
 <p>首先这个脚本的文件名为 calcu，其中定义了一个函数 calcu，采用的是第二种函数定义方式，在函数体中我们利用<code>case</code>做了一个多条件判断。</p>
 <p>在脚本的结尾我们调用了 calcu 这个函数，并将输入了三个参数，紧接着为了给大家看到三个参数分别是什么我选择将其打印出来。调用函数的过程是这样的：</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-2-ubuntu:/tmp$ ./calcu.sh 5 + 3</span><br><span class="line">8</span><br><span class="line">calcu 5 + 3</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-2-ubuntu:/tmp$ ./calcu.sh 5 + 3</span><br><span class="line">8</span><br><span class="line">calcu 5 + 3</span><br></pre></td></tr></table></figure>
 <p>可以看到在这里<code>$1 = 5, $2 = +, $3 = 3</code>，这就是 shell 中传递参数的方式。</p>
 <p>再看 shell 中返回值这个问题，shell 有两种返回值的方式，一种是使用<code>return</code>，一种是使用<code>echo</code>。</p>
 <ul>
@@ -390,12 +498,12 @@
 </li>
 </ul>
 <p><code>echo</code>的内容作为返回值可以看一下上面这个例子，这里再举一个<code>return</code>来返回值的例子。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">this_pid=$$</span><br><span class="line">function is_nginx_running</span><br><span class="line">&#123;</span><br><span class="line">    ps -ef | grep nginx | grep -v grep | grep -v $this_pid &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        return</span><br><span class="line">    else</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line">is_nginx_running &amp;&amp; echo "Nginx is running" || echo "Nginx is stoped"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">this_pid=$$</span><br><span class="line">function is_nginx_running</span><br><span class="line">&#123;</span><br><span class="line">    ps -ef | grep nginx | grep -v grep | grep -v $this_pid &amp;&gt; /dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        return</span><br><span class="line">    else</span><br><span class="line">        return 1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line">is_nginx_running &amp;&amp; echo "Nginx is running" || echo "Nginx is stoped"</span><br></pre></td></tr></table></figure>
 <p>和前面说过的退出状态一样，return 也是 0 表示函数执行成功，其他表示执行失败。这里举的例子是通过查看 Nginx 的进程来来确认 Nginx 是否运行。</p>
 <p>首先是用<code>$$</code>来接收这个 shell 脚本的 Pid，因为脚本名字中带有 Nginx 就需要将其利用 Pid 过滤掉。还记得之前讲的的退出状态么，如果 ps 命令找到了 nginx 进程退出状态就会是 0，表示成功。最后就通过<code>return</code>来返回 nginx 是否正常运行。</p>
 <p>之后可以用后台挂起的形式运行这个脚本，将其作为 nginx 的守护进程：<code>nohup sh nginx.sh &amp;</code>，使用<code>tail -f nohup.out</code>来查看监听结果。</p>
 <h2 id="局部变量和全局变量"><a href="#局部变量和全局变量" class="headerlink" title="局部变量和全局变量"></a>局部变量和全局变量</h2><p>讲到函数就还有一个作用域的问题需要讨论，shell 中的局部变量、全局变量和一般编程语言没什么区别。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">var1="Hello world"</span><br><span class="line">function test</span><br><span class="line">&#123;</span><br><span class="line">    local var2=87</span><br><span class="line">&#125;</span><br><span class="line">test</span><br><span class="line">echo $var1</span><br><span class="line">echo $var2</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">var1="Hello world"</span><br><span class="line">function test</span><br><span class="line">&#123;</span><br><span class="line">    local var2=87</span><br><span class="line">&#125;</span><br><span class="line">test</span><br><span class="line">echo $var1</span><br><span class="line">echo $var2</span><br></pre></td></tr></table></figure>
 <p>这里给到一个脚本自行体会一下即可。</p>
 <h2 id="函数库"><a href="#函数库" class="headerlink" title="函数库"></a>函数库</h2><p>基础篇的最后一部分就用来介绍一下 shell 中的函数库。函数库是每一门编程语言中非常重要的一部分，比如说 C++ 中的标准库，Java 中的 JDK，正式这些优秀的库存在才让编程变得更加高效。</p>
 <p>shell 也是可以封装自己的库的，比如我现在下一个你要加加减乘除封装成一个函数库，作为之前 calcu 脚本的升级版，该函数库实现以下几个函数：</p>
@@ -406,14 +514,14 @@
 <li>除法函数 divide </li>
 <li>打印系统运行情况的函数 sys_load，该函数显示内存运行情况， </li>
 </ol>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function add</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 + $2`"</span><br><span class="line">&#125;</span><br><span class="line">function reduce</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 - $2`"</span><br><span class="line">&#125;</span><br><span class="line">function multiple</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 \* $2`"</span><br><span class="line">&#125;</span><br><span class="line">function divide</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 / $2`"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sys_load</span><br><span class="line">&#123;</span><br><span class="line">    echo "Memory Info"</span><br><span class="line">    echo</span><br><span class="line">    free -m</span><br><span class="line">    echo</span><br><span class="line">    </span><br><span class="line">    echo "Disk Usage"</span><br><span class="line">    echo</span><br><span class="line">    df -h</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function add</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 + $2`"</span><br><span class="line">&#125;</span><br><span class="line">function reduce</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 - $2`"</span><br><span class="line">&#125;</span><br><span class="line">function multiple</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 \* $2`"</span><br><span class="line">&#125;</span><br><span class="line">function divide</span><br><span class="line">&#123;</span><br><span class="line">    echo "`expr $1 / $2`"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sys_load</span><br><span class="line">&#123;</span><br><span class="line">    echo "Memory Info"</span><br><span class="line">    echo</span><br><span class="line">    free -m</span><br><span class="line">    echo</span><br><span class="line">    </span><br><span class="line">    echo "Disk Usage"</span><br><span class="line">    echo</span><br><span class="line">    df -h</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们将上面文件封装成一个函数库 lib/base_function。</p>
 <ul>
 <li>经常使用的重复代码封装成函数文件 </li>
 <li>一般不直接执行，而是由其他脚本调用 </li>
 </ul>
 <p>接着用一个 shell 脚本 calculate.sh 调用函数库中的函数</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/bash</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"></span></span><br><span class="line">. /root/lesson/3.5/lib/base_function</span><br><span class="line">add 12 23</span><br><span class="line">reduce 90 30</span><br><span class="line">multiple 12 12</span><br><span class="line">divide 12 2</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">. /root/lesson/3.5/lib/base_function</span><br><span class="line">add 12 23</span><br><span class="line">reduce 90 30</span><br><span class="line">multiple 12 12</span><br><span class="line">divide 12 2</span><br></pre></td></tr></table></figure>
 <p>编写函数库文件的建议 </p>
 <ul>
 <li>库文件名的后缀是任意的，但一般使用 .lib </li>
@@ -425,1902 +533,661 @@
 <p><a href="https://github.com/qinjx/30min_guides/blob/master/shell.md" target="_blank" rel="noopener">Shell脚本编程30分钟入门</a></p>
 <p><a href="https://github.com/alebcay/awesome-shell" target="_blank" rel="noopener">Awesome Shell</a></p>
 
-        </div>
+      </div>
+      
+        <br>
         
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/linux/">linux</a>, <a class="has-link-grey -link" href="/tags/shell/">shell</a>
-                </div>
-            </div>
-        </div>
+
+
+  <section class="meta" id="footer-meta">
+    <div class="new-meta-box">
+      
         
-        
-        
-    </div>
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-31T12:54:22+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年8月31日</p>
+  </a>
 </div>
 
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/1e186084.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">chrome食用指南</span>
-            </a>
-        </div>
+      
         
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>linux</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/shell/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>shell</p></a></div>
+
+
         
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/87698413.html">
-                <span class="level-item">Linux进程</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
+      
         
-    </div>
-</div>
-
-
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/92782b0b.html&title=快，学会shell | 深页&summary=
+题图：https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/
+本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/92782b0b.html&title=快，学会shell | 深页&summary=
+题图：https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/
+本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/92782b0b.html&title=快，学会shell | 深页&summary=
+题图：https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/
+本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
         
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered">
-                <div>
-                    
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="水宇杰">
-                    
-                    
-                    <p class="is-size-4 is-block">
-                        水宇杰
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        从知道到做到
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Hangzhou</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        117
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        16
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        55
-                    </p>
-                </div>
-            </div>
-        </nav>
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="http://github.com/YujieShui" target="_blank">
-                关注我</a>
-        </div>
-        
-        
+      
     </div>
-</div>
-    
-        
-<div class="card widget" id="toc">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                目录
-            </h3>
-            <ul class="menu-list"><li>
-        <a class="is-flex" href="#入门篇">
-        <span class="has-mr-6">1</span>
-        <span>入门篇</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#变量">
-        <span class="has-mr-6">1.1</span>
-        <span>变量</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#变量匹配">
-        <span class="has-mr-6">1.1.1</span>
-        <span>变量匹配</span>
-        </a></li><li>
-        <a class="is-flex" href="#特殊变量的含义">
-        <span class="has-mr-6">1.1.2</span>
-        <span>特殊变量的含义</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#字符串">
-        <span class="has-mr-6">1.2</span>
-        <span>字符串</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#单引号和双引号的区别">
-        <span class="has-mr-6">1.2.1</span>
-        <span>单引号和双引号的区别</span>
-        </a></li><li>
-        <a class="is-flex" href="#拼接字符串">
-        <span class="has-mr-6">1.2.2</span>
-        <span>拼接字符串</span>
-        </a></li><li>
-        <a class="is-flex" href="#计算字符串的长度">
-        <span class="has-mr-6">1.2.3</span>
-        <span>计算字符串的长度</span>
-        </a></li><li>
-        <a class="is-flex" href="#获取子串在字符串中的索引">
-        <span class="has-mr-6">1.2.4</span>
-        <span>获取子串在字符串中的索引</span>
-        </a></li><li>
-        <a class="is-flex" href="#抽取子串">
-        <span class="has-mr-6">1.2.5</span>
-        <span>抽取子串</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#命令替换">
-        <span class="has-mr-6">1.3</span>
-        <span>命令替换</span>
-        </a></li><li>
-        <a class="is-flex" href="#数学运算">
-        <span class="has-mr-6">1.4</span>
-        <span>数学运算</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#基础篇">
-        <span class="has-mr-6">2</span>
-        <span>基础篇</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#流控制">
-        <span class="has-mr-6">2.1</span>
-        <span>流控制</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#IF-控制语句">
-        <span class="has-mr-6">2.1.1</span>
-        <span>IF 控制语句</span>
-        </a></li><li>
-        <a class="is-flex" href="#WHILE-和-UNTIL-循环">
-        <span class="has-mr-6">2.1.2</span>
-        <span>WHILE 和 UNTIL 循环</span>
-        </a></li><li>
-        <a class="is-flex" href="#case-分支">
-        <span class="has-mr-6">2.1.3</span>
-        <span>case 分支</span>
-        </a></li><li>
-        <a class="is-flex" href="#for-循环">
-        <span class="has-mr-6">2.1.4</span>
-        <span>for 循环</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#函数">
-        <span class="has-mr-6">2.2</span>
-        <span>函数</span>
-        </a></li><li>
-        <a class="is-flex" href="#局部变量和全局变量">
-        <span class="has-mr-6">2.3</span>
-        <span>局部变量和全局变量</span>
-        </a></li><li>
-        <a class="is-flex" href="#函数库">
-        <span class="has-mr-6">2.4</span>
-        <span>函数库</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#参考资料">
-        <span class="has-mr-6">3</span>
-        <span>参考资料</span>
-        </a></li></ul>
-        </div>
-    </div>
-</div>
-
-    
-        
-
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Hexo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
+  </section>
 
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/C-C/">
-            <span class="level-start">
-                <span class="level-item">C/C++</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">26</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/DeepLearning/">
-            <span class="level-start">
-                <span class="level-item">DeepLearning</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">17</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Docker-K8s/">
-            <span class="level-start">
-                <span class="level-item">Docker&K8s</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">25</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Java/JVM/">
-            <span class="level-start">
-                <span class="level-item">JVM</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/Java并发编程/">
-            <span class="level-start">
-                <span class="level-item">Java并发编程</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Linux/">
-            <span class="level-start">
-                <span class="level-item">Linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">10</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/OpenCV/">
-            <span class="level-start">
-                <span class="level-item">OpenCV</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Python/">
-            <span class="level-start">
-                <span class="level-item">Python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/computer-science/">
-            <span class="level-start">
-                <span class="level-item">computer science</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
-            <span class="level-start">
-                <span class="level-item">计算机网络</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/computer-science/设计模式/">
-            <span class="level-start">
-                <span class="level-item">设计模式</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/分布式/">
-            <span class="level-start">
-                <span class="level-item">分布式</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/善用佳软/">
-            <span class="level-start">
-                <span class="level-item">善用佳软</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">9</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/图像处理/">
-            <span class="level-start">
-                <span class="level-item">图像处理</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/数据库/">
-            <span class="level-start">
-                <span class="level-item">数据库</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.83px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.67px;">c</a> <a href="/tags/c/" style="font-size: 19.17px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.67px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.83px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.83px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.33px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.83px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14.17px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.83px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.83px;">mysql</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.67px;">stl</a> <a href="/tags/tcp-ip/" style="font-size: 10.83px;">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 12.5px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.5px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.83px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.83px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.83px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.5px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 14.17px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.5px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
-    </div>
-</div>
-
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-            
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:57:39.000Z">2019-09-21</time></div>
-                    <a href="/post/bb0e0670.html" class="has-link-black-ter is-size-6">深度学习环境的搭建</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:26:10.000Z">2019-09-21</time></div>
-                    <a href="/post/b75ba217.html" class="has-link-black-ter is-size-6">深度学习模型评估</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:26:22.000Z">2019-09-20</time></div>
-                    <a href="/post/8e94d850.html" class="has-link-black-ter is-size-6">计算机视觉中的数据增强</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:11:54.000Z">2019-09-20</time></div>
-                    <a href="/post/9dd18af0.html" class="has-link-black-ter is-size-6">数据集-ImageNet</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T13:37:14.000Z">2019-09-20</time></div>
-                    <a href="/post/3f932fee.html" class="has-link-black-ter is-size-6">深度学习优化篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">28</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">26</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/MQ/">
-                        <span class="tag">MQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RabbitMQ/">
-                        <span class="tag">RabbitMQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RocketMQ/">
-                        <span class="tag">RocketMQ</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/anaconda/">
-                        <span class="tag">anaconda</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c++</span>
-                        <span class="tag is-grey">22</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/caffe/">
-                        <span class="tag">caffe</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/darknet/">
-                        <span class="tag">darknet</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dataset/">
-                        <span class="tag">dataset</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/deeplearning/">
-                        <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">17</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dns/">
-                        <span class="tag">dns</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/docker/">
-                        <span class="tag">docker</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ffmpeg/">
-                        <span class="tag">ffmpeg</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/git/">
-                        <span class="tag">git</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/idea/">
-                        <span class="tag">idea</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/imagenet/">
-                        <span class="tag">imagenet</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/java/">
-                        <span class="tag">java</span>
-                        <span class="tag is-grey">23</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/jvm/">
-                        <span class="tag">jvm</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/k8s/">
-                        <span class="tag">k8s</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">13</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mac/">
-                        <span class="tag">mac</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/machinelearning/">
-                        <span class="tag">machinelearning</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/markdown/">
-                        <span class="tag">markdown</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/maven/">
-                        <span class="tag">maven</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mybatis/">
-                        <span class="tag">mybatis</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/network/">
-                        <span class="tag">network</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/numpy/">
-                        <span class="tag">numpy</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/opencv/">
-                        <span class="tag">opencv</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/protobuf/">
-                        <span class="tag">protobuf</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/shell/">
-                        <span class="tag">shell</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/springboot/">
-                        <span class="tag">springboot</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ssh/">
-                        <span class="tag">ssh</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stl/">
-                        <span class="tag">stl</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tcp-ip/">
-                        <span class="tag">tcp/ip</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tensorflow/">
-                        <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ubuntu/">
-                        <span class="tag">ubuntu</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/zookeeper/">
-                        <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/分布式/">
-                        <span class="tag">分布式</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图像处理/">
-                        <span class="tag">图像处理</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图片素材/">
-                        <span class="tag">图片素材</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/学习资料/">
-                        <span class="tag">学习资料</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/工具/">
-                        <span class="tag">工具</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发工具类/">
-                        <span class="tag">并发工具类</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发编程/">
-                        <span class="tag">并发编程</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据增强/">
-                        <span class="tag">数据增强</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/模型评估/">
-                        <span class="tag">模型评估</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/正则表达式/">
-                        <span class="tag">正则表达式</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/消息队列/">
-                        <span class="tag">消息队列</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/管程/">
-                        <span class="tag">管程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/网站/">
-                        <span class="tag">网站</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/设计模式/">
-                        <span class="tag">设计模式</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/通信协议/">
-                        <span class="tag">通信协议</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/音频处理/">
-                        <span class="tag">音频处理</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-        
-        </div>
-    
-</div>
-
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:57:39.000Z">2019-09-21</time></div>
-                    <a href="/post/bb0e0670.html" class="has-link-black-ter is-size-6">深度学习环境的搭建</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:26:10.000Z">2019-09-21</time></div>
-                    <a href="/post/b75ba217.html" class="has-link-black-ter is-size-6">深度学习模型评估</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:26:22.000Z">2019-09-20</time></div>
-                    <a href="/post/8e94d850.html" class="has-link-black-ter is-size-6">计算机视觉中的数据增强</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:11:54.000Z">2019-09-20</time></div>
-                    <a href="/post/9dd18af0.html" class="has-link-black-ter is-size-6">数据集-ImageNet</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T13:37:14.000Z">2019-09-20</time></div>
-                    <a href="/post/3f932fee.html" class="has-link-black-ter is-size-6">深度学习优化篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">28</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">26</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/MQ/">
-                        <span class="tag">MQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RabbitMQ/">
-                        <span class="tag">RabbitMQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RocketMQ/">
-                        <span class="tag">RocketMQ</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/anaconda/">
-                        <span class="tag">anaconda</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c++</span>
-                        <span class="tag is-grey">22</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/caffe/">
-                        <span class="tag">caffe</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/darknet/">
-                        <span class="tag">darknet</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dataset/">
-                        <span class="tag">dataset</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/deeplearning/">
-                        <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">17</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dns/">
-                        <span class="tag">dns</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/docker/">
-                        <span class="tag">docker</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ffmpeg/">
-                        <span class="tag">ffmpeg</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/git/">
-                        <span class="tag">git</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/idea/">
-                        <span class="tag">idea</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/imagenet/">
-                        <span class="tag">imagenet</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/java/">
-                        <span class="tag">java</span>
-                        <span class="tag is-grey">23</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/jvm/">
-                        <span class="tag">jvm</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/k8s/">
-                        <span class="tag">k8s</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">13</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mac/">
-                        <span class="tag">mac</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/machinelearning/">
-                        <span class="tag">machinelearning</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/markdown/">
-                        <span class="tag">markdown</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/maven/">
-                        <span class="tag">maven</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mybatis/">
-                        <span class="tag">mybatis</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/network/">
-                        <span class="tag">network</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/numpy/">
-                        <span class="tag">numpy</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/opencv/">
-                        <span class="tag">opencv</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/protobuf/">
-                        <span class="tag">protobuf</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/shell/">
-                        <span class="tag">shell</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/springboot/">
-                        <span class="tag">springboot</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ssh/">
-                        <span class="tag">ssh</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stl/">
-                        <span class="tag">stl</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tcp-ip/">
-                        <span class="tag">tcp/ip</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tensorflow/">
-                        <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ubuntu/">
-                        <span class="tag">ubuntu</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/zookeeper/">
-                        <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/分布式/">
-                        <span class="tag">分布式</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图像处理/">
-                        <span class="tag">图像处理</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图片素材/">
-                        <span class="tag">图片素材</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/学习资料/">
-                        <span class="tag">学习资料</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/工具/">
-                        <span class="tag">工具</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发工具类/">
-                        <span class="tag">并发工具类</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发编程/">
-                        <span class="tag">并发编程</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据增强/">
-                        <span class="tag">数据增强</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/模型评估/">
-                        <span class="tag">模型评估</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/正则表达式/">
-                        <span class="tag">正则表达式</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/消息队列/">
-                        <span class="tag">消息队列</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/管程/">
-                        <span class="tag">管程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/网站/">
-                        <span class="tag">网站</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/设计模式/">
-                        <span class="tag">设计模式</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/通信协议/">
-                        <span class="tag">通信协议</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/音频处理/">
-                        <span class="tag">音频处理</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/post/1e186084.html" rel="prev" title="chrome食用指南">
+                                
+                                    chrome食用指南
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/网站/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 网站</a> <a class="tag" href="/tags/工具/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 工具</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/post/87698413.html" rel="prev" title="Linux进程">
+                                  
+                                      Linux进程
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/linux/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> linux</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
     </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.svg" alt="快，学会shell" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2019 深页&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '快，学会shell',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
             
-            </div>
-        </div>
+              
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#入门篇"><span class="toc-text">入门篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量匹配"><span class="toc-text">变量匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特殊变量的含义"><span class="toc-text">特殊变量的含义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单引号和双引号的区别"><span class="toc-text">单引号和双引号的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拼接字符串"><span class="toc-text">拼接字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算字符串的长度"><span class="toc-text">计算字符串的长度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取子串在字符串中的索引"><span class="toc-text">获取子串在字符串中的索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽取子串"><span class="toc-text">抽取子串</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令替换"><span class="toc-text">命令替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数学运算"><span class="toc-text">数学运算</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基础篇"><span class="toc-text">基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#流控制"><span class="toc-text">流控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IF-控制语句"><span class="toc-text">IF 控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断表达式"><span class="toc-text">判断表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件表达式"><span class="toc-text">文件表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串表达式"><span class="toc-text">字符串表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#整数表达式"><span class="toc-text">整数表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WHILE-和-UNTIL-循环"><span class="toc-text">WHILE 和 UNTIL 循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#case-分支"><span class="toc-text">case 分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-循环"><span class="toc-text">for 循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#局部变量和全局变量"><span class="toc-text">局部变量和全局变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数库"><span class="toc-text">函数库</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/categories/" href="/blog/categories/" rel="nofollow" id="blogcategories">
+          
+            <i class="fas fa-folder fa-fw" aria-hidden="true"></i>
+          
+          文章分类
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/archives/" href="/blog/archives/" rel="nofollow" id="blogarchives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/blog/categories/" title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/C-C/" href="/categories/C-C/"><div class="name">C/C++</div><div class="badge">(26)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/DeepLearning/" href="/categories/DeepLearning/"><div class="name">DeepLearning</div><div class="badge">(17)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Docker-K8s/" href="/categories/Docker-K8s/"><div class="name">Docker&K8s</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(25)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/JVM/" href="/categories/Java/JVM/"><div class="name">JVM</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/Java并发编程/" href="/categories/Java/Java并发编程/"><div class="name">Java并发编程</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Linux/" href="/categories/Linux/"><div class="name">Linux</div><div class="badge">(10)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/OpenCV/" href="/categories/OpenCV/"><div class="name">OpenCV</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Python/" href="/categories/Python/"><div class="name">Python</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/computer-science/" href="/categories/computer-science/"><div class="name">computer science</div><div class="badge">(9)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/computer-science/计算机网络/" href="/categories/computer-science/计算机网络/"><div class="name">计算机网络</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/computer-science/设计模式/" href="/categories/computer-science/设计模式/"><div class="name">设计模式</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/善用佳软/" href="/categories/善用佳软/"><div class="name">善用佳软</div><div class="badge">(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/图像处理/" href="/categories/图像处理/"><div class="name">图像处理</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.91px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/c/" style="font-size: 20.36px; color: #6e6e6e">c</a> <a href="/tags/c/" style="font-size: 23.09px; color: #5b5b5b">c++</a> <a href="/tags/caffe/" style="font-size: 15.82px; color: #8d8d8d">caffe</a> <a href="/tags/darknet/" style="font-size: 14.91px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.91px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.18px; color: #616161">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.91px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 17.64px; color: #808080">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.27px; color: #686868">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 14.91px; color: #939393">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.82px; color: #8d8d8d">mysql</a> <a href="/tags/network/" style="font-size: 17.64px; color: #808080">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 18.55px; color: #7a7a7a">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.82px; color: #8d8d8d">python</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/springboot/" style="font-size: 16.73px; color: #868686">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.36px; color: #6e6e6e">stl</a> <a href="/tags/tcp-ip/" style="font-size: 15.82px; color: #8d8d8d">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.73px; color: #868686">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.82px; color: #8d8d8d">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 16.73px; color: #868686">zookeeper</a> <a href="/tags/分布式/" style="font-size: 14.91px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.82px; color: #8d8d8d">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.91px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.45px; color: #747474">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 16.73px; color: #868686">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 17.64px; color: #808080">网站</a> <a href="/tags/设计模式/" style="font-size: 16.73px; color: #868686">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:shuiyujie.cn@gmail.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/YujieShui" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
 </footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh-CN");</script>
+<script>setLoadingBarProgress(80);</script>
 
 
-    
-    
-    
-    <script src="/js/animation.js"></script>
-    
-
-    
-    
-    
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-    <script src="/js/gallery.js" defer></script>
-    
-
-    
-    
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-    
-    
-
-<a id="back-to-top" title="回到顶端" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-    <script src="/js/clipboard.js" defer></script>
-    
-
-    
-    
-    
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+      <script>setLoadingBarProgress(60);</script>
     </div>
-</div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["http://image.shuiyujie.com/sunset-2191645.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["http://image.shuiyujie.com/sunset-2191645.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
 </script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
 </body>
 </html>

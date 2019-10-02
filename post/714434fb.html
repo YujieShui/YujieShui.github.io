@@ -1,165 +1,273 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-<title>【Java并发编程】Java 中如何创建线程？ - 深页</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>【Java并发编程】Java 中如何创建线程？ | 深页</title>
+  
+  
 
+  
+  <link rel="alternate" href="/atom.xml" title="深页">
+  
 
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
 
-    <meta name="description" content="继承Thread实现线程创建 实现Runnable接口 实现Callable接口，结合 FutureTask使用 利用该线程池ExecutorService、Callable、Future来实现">
-<meta name="keywords" content="java,并发编程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【Java并发编程】Java 中如何创建线程？">
-<meta property="og:url" content="http://shuiyujie.com/post/714434fb.html">
-<meta property="og:site_name" content="深页">
-<meta property="og:description" content="继承Thread实现线程创建 实现Runnable接口 实现Callable接口，结合 FutureTask使用 利用该线程池ExecutorService、Callable、Future来实现">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://image.shuiyujie.com/64354575_p0_master1200.jpg">
-<meta property="og:updated_time" content="2019-09-11T14:59:29.157Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Java并发编程】Java 中如何创建线程？">
-<meta name="twitter:description" content="继承Thread实现线程创建 实现Runnable接口 实现Callable接口，结合 FutureTask使用 利用该线程池ExecutorService、Callable、Future来实现">
-<meta name="twitter:image" content="http://image.shuiyujie.com/64354575_p0_master1200.jpg">
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
 
+  
 
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+  
 
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
 
-
-<link rel="icon" href="/images/favicon.svg">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
-
-
-    
-    
-    
-    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-    
-
-    
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-    
-
-    
-    
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-
-    
-    
-    
-    
-
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-<link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-
-    
-    
-    
-
-    
-    
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
+  
+  
 </head>
-<body class="is-3-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">弄浪的鱼</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          深页
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;首页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/categories/" rel="nofollow" id="blogcategories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/tags/" rel="nofollow" id="blogtags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/714434fb.html">
+        【Java并发编程】Java 中如何创建线程？
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
             
-                <img src="/images/logo.svg" alt="【Java并发编程】Java 中如何创建线程？" height="28">
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-09-05</p>
+  </a>
+</div>
+
+          
+        
+          
             
-            </a>
-        </div>
-        <div class="navbar-menu">
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Java/Java并发编程/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Java&nbsp;/&nbsp;Java并发编程</p>
+    </a>
+  </div>
+
+
+          
+        
+          
             
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="搜索" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
     </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    
-    <div class="card-content article ">
+  
+
+
+          
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-09-05T14:21:53.000Z">2019-09-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Java/Java并发编程/">Java并发编程</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 613 个字)
-                </span>
-                
-                
-            </div>
-        </div>
+          
+            
+
+          
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                【Java并发编程】Java 中如何创建线程？
-            
-        </h1>
-        <div class="content">
-            <p><img src="http://image.shuiyujie.com/64354575_p0_master1200.jpg" alt="Java创建线程"></p>
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p><img src="http://image.shuiyujie.com/64354575_p0_master1200.jpg" alt="Java创建线程"></p>
 <ol>
 <li>继承Thread实现线程创建</li>
 <li>实现Runnable接口</li>
@@ -167,1842 +275,681 @@
 <li>利用该线程池ExecutorService、Callable、Future来实现</li>
 </ol>
 <a id="more"></a>
-<h1 id="继承-Thread-类"><a href="#继承-Thread-类" class="headerlink" title="继承  Thread 类"></a>继承  Thread 类</h1><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> start, end;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AddThread</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(name);</span><br><span class="line">        <span class="hljs-keyword">this</span>.start = start;</span><br><span class="line">        <span class="hljs-keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Thread-"</span> + getName() + <span class="hljs-string">" 开始执行!"</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt;= end; i ++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="hljs-string">"Thread-"</span> + getName() + <span class="hljs-string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>, mid = <span class="hljs-number">5</span>, end = <span class="hljs-number">10</span>;</span><br><span class="line"></span><br><span class="line">        AddThread thread1 = <span class="hljs-keyword">new</span> AddThread(<span class="hljs-string">"线程1"</span>, start, mid);</span><br><span class="line">        AddThread thread2 = <span class="hljs-keyword">new</span> AddThread(<span class="hljs-string">"线程2"</span>, mid + <span class="hljs-number">1</span>, end);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 确保两个线程执行完毕</span></span><br><span class="line">        thread1.join();</span><br><span class="line">        thread2.join();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> sum = thread1.sum + thread2.sum;</span><br><span class="line">        System.out.println(<span class="hljs-string">"sum: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="继承-Thread-类"><a href="#继承-Thread-类" class="headerlink" title="继承  Thread 类"></a>继承  Thread 类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start, end;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AddThread</span><span class="params">(String name, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Thread-"</span> + getName() + <span class="string">" 开始执行!"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i ++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"Thread-"</span> + getName() + <span class="string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, mid = <span class="number">5</span>, end = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        AddThread thread1 = <span class="keyword">new</span> AddThread(<span class="string">"线程1"</span>, start, mid);</span><br><span class="line">        AddThread thread2 = <span class="keyword">new</span> AddThread(<span class="string">"线程2"</span>, mid + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 确保两个线程执行完毕</span></span><br><span class="line">        thread1.join();</span><br><span class="line">        thread2.join();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum = thread1.sum + thread2.sum;</span><br><span class="line">        System.out.println(<span class="string">"sum: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Thread-线程1 开始执行!</span><br><span class="line">Thread-线程1 执行完毕! sum=15</span><br><span class="line">Thread-线程2 开始执行!</span><br><span class="line">Thread-线程2 执行完毕! sum=40</span><br><span class="line">sum: 55</span><br></pre></td></tr></table></figure>
-<h1 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h1><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddRun</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> start, end;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AddRun</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.start = start;</span><br><span class="line">        <span class="hljs-keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">" 开始执行!"</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>, mid = <span class="hljs-number">5</span>, end = <span class="hljs-number">10</span>;</span><br><span class="line">        AddRun run1 = <span class="hljs-keyword">new</span> AddRun(start, mid);</span><br><span class="line">        AddRun run2 = <span class="hljs-keyword">new</span> AddRun(mid + <span class="hljs-number">1</span>, end);</span><br><span class="line">        Thread thread1 = <span class="hljs-keyword">new</span> Thread(run1, <span class="hljs-string">"线程1"</span>);</span><br><span class="line">        Thread thread2 = <span class="hljs-keyword">new</span> Thread(run2, <span class="hljs-string">"线程2"</span>);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        thread1.join();</span><br><span class="line">        thread2.join();</span><br><span class="line">        <span class="hljs-keyword">int</span> sum = run1.sum + run2.sum;</span><br><span class="line">        System.out.println(<span class="hljs-string">"sum: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="实现Callable接口，结合FutureTask创建线程"><a href="#实现Callable接口，结合FutureTask创建线程" class="headerlink" title="实现Callable接口，结合FutureTask创建线程"></a>实现Callable接口，结合FutureTask创建线程</h1><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddCall</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> start, end;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AddCall</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.start = start;</span><br><span class="line">        <span class="hljs-keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">" 开始执行!"</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">        <span class="hljs-keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span></span><br><span class="line"><span class="hljs-function">        <span class="hljs-keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>, mid = <span class="hljs-number">5</span>, end = <span class="hljs-number">10</span>;</span><br><span class="line">        FutureTask&lt;Integer&gt; future1 = <span class="hljs-keyword">new</span> FutureTask&lt;Integer&gt;(<span class="hljs-keyword">new</span> AddCall(start, mid));</span><br><span class="line">        FutureTask&lt;Integer&gt; future2 = <span class="hljs-keyword">new</span> FutureTask&lt;Integer&gt;(<span class="hljs-keyword">new</span> AddCall(mid + <span class="hljs-number">1</span>, end));</span><br><span class="line"></span><br><span class="line">        Thread thread1 = <span class="hljs-keyword">new</span> Thread(future1, <span class="hljs-string">"线程1"</span>);</span><br><span class="line">        Thread thread2 = <span class="hljs-keyword">new</span> Thread(future2, <span class="hljs-string">"线程2"</span>);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> sum1 = future1.get();</span><br><span class="line">        <span class="hljs-keyword">int</span> sum2 = future2.get();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="hljs-string">"sum = "</span> + (sum1 + sum2));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="线程池方式创建"><a href="#线程池方式创建" class="headerlink" title="线程池方式创建"></a>线程池方式创建</h1><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddPool</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">Integer</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> start, end;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AddPool</span><span class="hljs-params">(<span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.start = start;</span><br><span class="line">        <span class="hljs-keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">" 开始执行!"</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="hljs-string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">        <span class="hljs-keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] arg)</span> </span></span><br><span class="line"><span class="hljs-function">        <span class="hljs-keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">int</span> start=<span class="hljs-number">0</span>, mid=<span class="hljs-number">500</span>, end=<span class="hljs-number">1000</span>;</span><br><span class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="hljs-number">2</span>);</span><br><span class="line">        Future&lt;Integer&gt; future1 = executorService.submit(<span class="hljs-keyword">new</span> AddPool(start, mid));</span><br><span class="line">        Future&lt;Integer&gt; future2 = executorService.submit(<span class="hljs-keyword">new</span> AddPool(mid+<span class="hljs-number">1</span>, end));</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> sum = future1.get() + future2.get();</span><br><span class="line">        System.out.println(<span class="hljs-string">"sum: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Thread-线程1 开始执行!</span><br><span class="line">Thread-线程1 执行完毕! sum=15</span><br><span class="line">Thread-线程2 开始执行!</span><br><span class="line">Thread-线程2 执行完毕! sum=40</span><br><span class="line">sum: 55</span><br></pre></td></tr></table></figure>
+<h1 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddRun</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start, end;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AddRun</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" 开始执行!"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, mid = <span class="number">5</span>, end = <span class="number">10</span>;</span><br><span class="line">        AddRun run1 = <span class="keyword">new</span> AddRun(start, mid);</span><br><span class="line">        AddRun run2 = <span class="keyword">new</span> AddRun(mid + <span class="number">1</span>, end);</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(run1, <span class="string">"线程1"</span>);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(run2, <span class="string">"线程2"</span>);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        thread1.join();</span><br><span class="line">        thread2.join();</span><br><span class="line">        <span class="keyword">int</span> sum = run1.sum + run2.sum;</span><br><span class="line">        System.out.println(<span class="string">"sum: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="实现Callable接口，结合FutureTask创建线程"><a href="#实现Callable接口，结合FutureTask创建线程" class="headerlink" title="实现Callable接口，结合FutureTask创建线程"></a>实现Callable接口，结合FutureTask创建线程</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddCall</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start, end;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AddCall</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" 开始执行!"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, mid = <span class="number">5</span>, end = <span class="number">10</span>;</span><br><span class="line">        FutureTask&lt;Integer&gt; future1 = <span class="keyword">new</span> FutureTask&lt;Integer&gt;(<span class="keyword">new</span> AddCall(start, mid));</span><br><span class="line">        FutureTask&lt;Integer&gt; future2 = <span class="keyword">new</span> FutureTask&lt;Integer&gt;(<span class="keyword">new</span> AddCall(mid + <span class="number">1</span>, end));</span><br><span class="line"></span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(future1, <span class="string">"线程1"</span>);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(future2, <span class="string">"线程2"</span>);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum1 = future1.get();</span><br><span class="line">        <span class="keyword">int</span> sum2 = future2.get();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"sum = "</span> + (sum1 + sum2));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="线程池方式创建"><a href="#线程池方式创建" class="headerlink" title="线程池方式创建"></a>线程池方式创建</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddPool</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start, end;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AddPool</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" 开始执行!"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" 执行完毕! sum="</span> + sum);</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span> </span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> start=<span class="number">0</span>, mid=<span class="number">500</span>, end=<span class="number">1000</span>;</span><br><span class="line">        ExecutorService executorService = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line">        Future&lt;Integer&gt; future1 = executorService.submit(<span class="keyword">new</span> AddPool(start, mid));</span><br><span class="line">        Future&lt;Integer&gt; future2 = executorService.submit(<span class="keyword">new</span> AddPool(mid+<span class="number">1</span>, end));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> sum = future1.get() + future2.get();</span><br><span class="line">        System.out.println(<span class="string">"sum: "</span> + sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://my.oschina.net/u/566591/blog/1576410" target="_blank" rel="noopener">Java并发学习之四种线程创建方式的实现与对比</a></p>
 
-        </div>
+      </div>
+      
+        <br>
         
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/java/">java</a>, <a class="has-link-grey -link" href="/tags/并发编程/">并发编程</a>
-                </div>
-            </div>
-        </div>
+
+
+  <section class="meta" id="footer-meta">
+    <div class="new-meta-box">
+      
         
-        
-        
-    </div>
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-11T22:59:29+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年9月11日</p>
+  </a>
 </div>
 
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/post/f7a60bf6.html">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">【Java并发编程】Java内存模型</span>
-            </a>
-        </div>
+      
         
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/java/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>java</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/并发编程/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>并发编程</p></a></div>
+
+
         
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/post/3a297e7b.html">
-                <span class="level-item">【TensorFlow2.0】实现ResNet</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
+      
         
-    </div>
-</div>
-
-
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/714434fb.html&title=【Java并发编程】Java 中如何创建线程？ | 深页&summary=
+
+继承Thread实现线程创建
+实现Runnable接口
+实现Callable接口，结合 FutureTask使用
+利用该线程池ExecutorService、Callable、Future来实现
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/714434fb.html&title=【Java并发编程】Java 中如何创建线程？ | 深页&summary=
+
+继承Thread实现线程创建
+实现Runnable接口
+实现Callable接口，结合 FutureTask使用
+利用该线程池ExecutorService、Callable、Future来实现
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/714434fb.html&title=【Java并发编程】Java 中如何创建线程？ | 深页&summary=
+
+继承Thread实现线程创建
+实现Runnable接口
+实现Callable接口，结合 FutureTask使用
+利用该线程池ExecutorService、Callable、Future来实现
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
         
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered">
-                <div>
-                    
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="水宇杰">
-                    
-                    
-                    <p class="is-size-4 is-block">
-                        水宇杰
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        从知道到做到
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Hangzhou</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        117
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        16
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        55
-                    </p>
-                </div>
-            </div>
-        </nav>
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="http://github.com/YujieShui" target="_blank">
-                关注我</a>
-        </div>
-        
-        
+      
     </div>
-</div>
-    
-        
-<div class="card widget" id="toc">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                目录
-            </h3>
-            <ul class="menu-list"><li>
-        <a class="is-flex" href="#继承-Thread-类">
-        <span class="has-mr-6">1</span>
-        <span>继承  Thread 类</span>
-        </a></li><li>
-        <a class="is-flex" href="#实现Runnable接口">
-        <span class="has-mr-6">2</span>
-        <span>实现Runnable接口</span>
-        </a></li><li>
-        <a class="is-flex" href="#实现Callable接口，结合FutureTask创建线程">
-        <span class="has-mr-6">3</span>
-        <span>实现Callable接口，结合FutureTask创建线程</span>
-        </a></li><li>
-        <a class="is-flex" href="#线程池方式创建">
-        <span class="has-mr-6">4</span>
-        <span>线程池方式创建</span>
-        </a></li><li>
-        <a class="is-flex" href="#参考资料">
-        <span class="has-mr-6">5</span>
-        <span>参考资料</span>
-        </a></li></ul>
-        </div>
-    </div>
-</div>
-
-    
-        
-
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Hexo</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
+  </section>
 
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/C-C/">
-            <span class="level-start">
-                <span class="level-item">C/C++</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">26</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/DeepLearning/">
-            <span class="level-start">
-                <span class="level-item">DeepLearning</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">17</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Docker-K8s/">
-            <span class="level-start">
-                <span class="level-item">Docker&K8s</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/">
-            <span class="level-start">
-                <span class="level-item">Java</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">25</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/Java/JVM/">
-            <span class="level-start">
-                <span class="level-item">JVM</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Java/Java并发编程/">
-            <span class="level-start">
-                <span class="level-item">Java并发编程</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Linux/">
-            <span class="level-start">
-                <span class="level-item">Linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">10</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/OpenCV/">
-            <span class="level-start">
-                <span class="level-item">OpenCV</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Python/">
-            <span class="level-start">
-                <span class="level-item">Python</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/computer-science/">
-            <span class="level-start">
-                <span class="level-item">computer science</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a><ul><li>
-        <a class="level is-marginless" href="/categories/computer-science/计算机网络/">
-            <span class="level-start">
-                <span class="level-item">计算机网络</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">5</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/computer-science/设计模式/">
-            <span class="level-start">
-                <span class="level-item">设计模式</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/分布式/">
-            <span class="level-start">
-                <span class="level-item">分布式</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/善用佳软/">
-            <span class="level-start">
-                <span class="level-item">善用佳软</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">9</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/图像处理/">
-            <span class="level-start">
-                <span class="level-item">图像处理</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/数据库/">
-            <span class="level-start">
-                <span class="level-item">数据库</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 10.83px;">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 10px;">anaconda</a> <a href="/tags/c/" style="font-size: 16.67px;">c</a> <a href="/tags/c/" style="font-size: 19.17px;">c++</a> <a href="/tags/caffe/" style="font-size: 11.67px;">caffe</a> <a href="/tags/darknet/" style="font-size: 10.83px;">darknet</a> <a href="/tags/dataset/" style="font-size: 10.83px;">dataset</a> <a href="/tags/deeplearning/" style="font-size: 18.33px;">deeplearning</a> <a href="/tags/dns/" style="font-size: 10px;">dns</a> <a href="/tags/docker/" style="font-size: 10.83px;">docker</a> <a href="/tags/ffmpeg/" style="font-size: 10px;">ffmpeg</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/imagenet/" style="font-size: 10px;">imagenet</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jvm/" style="font-size: 14.17px;">jvm</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/machinelearning/" style="font-size: 10px;">machinelearning</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10.83px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10.83px;">mysql</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/opencv/" style="font-size: 15px;">opencv</a> <a href="/tags/protobuf/" style="font-size: 10px;">protobuf</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/springboot/" style="font-size: 12.5px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/stl/" style="font-size: 16.67px;">stl</a> <a href="/tags/tcp-ip/" style="font-size: 10.83px;">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 12.5px;">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 12.5px;">zookeeper</a> <a href="/tags/分布式/" style="font-size: 10.83px;">分布式</a> <a href="/tags/图像处理/" style="font-size: 11.67px;">图像处理</a> <a href="/tags/图片素材/" style="font-size: 10px;">图片素材</a> <a href="/tags/学习资料/" style="font-size: 10px;">学习资料</a> <a href="/tags/工具/" style="font-size: 10.83px;">工具</a> <a href="/tags/并发工具类/" style="font-size: 10px;">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 15.83px;">并发编程</a> <a href="/tags/数据增强/" style="font-size: 10px;">数据增强</a> <a href="/tags/模型评估/" style="font-size: 10px;">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 12.5px;">消息队列</a> <a href="/tags/管程/" style="font-size: 10px;">管程</a> <a href="/tags/网站/" style="font-size: 14.17px;">网站</a> <a href="/tags/设计模式/" style="font-size: 12.5px;">设计模式</a> <a href="/tags/通信协议/" style="font-size: 10px;">通信协议</a> <a href="/tags/音频处理/" style="font-size: 10px;">音频处理</a>
-    </div>
-</div>
-
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-            
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:57:39.000Z">2019-09-21</time></div>
-                    <a href="/post/bb0e0670.html" class="has-link-black-ter is-size-6">深度学习环境的搭建</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:26:10.000Z">2019-09-21</time></div>
-                    <a href="/post/b75ba217.html" class="has-link-black-ter is-size-6">深度学习模型评估</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:26:22.000Z">2019-09-20</time></div>
-                    <a href="/post/8e94d850.html" class="has-link-black-ter is-size-6">计算机视觉中的数据增强</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:11:54.000Z">2019-09-20</time></div>
-                    <a href="/post/9dd18af0.html" class="has-link-black-ter is-size-6">数据集-ImageNet</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T13:37:14.000Z">2019-09-20</time></div>
-                    <a href="/post/3f932fee.html" class="has-link-black-ter is-size-6">深度学习优化篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">28</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">26</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/MQ/">
-                        <span class="tag">MQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RabbitMQ/">
-                        <span class="tag">RabbitMQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RocketMQ/">
-                        <span class="tag">RocketMQ</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/anaconda/">
-                        <span class="tag">anaconda</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c++</span>
-                        <span class="tag is-grey">22</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/caffe/">
-                        <span class="tag">caffe</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/darknet/">
-                        <span class="tag">darknet</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dataset/">
-                        <span class="tag">dataset</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/deeplearning/">
-                        <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">17</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dns/">
-                        <span class="tag">dns</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/docker/">
-                        <span class="tag">docker</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ffmpeg/">
-                        <span class="tag">ffmpeg</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/git/">
-                        <span class="tag">git</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/idea/">
-                        <span class="tag">idea</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/imagenet/">
-                        <span class="tag">imagenet</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/java/">
-                        <span class="tag">java</span>
-                        <span class="tag is-grey">23</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/jvm/">
-                        <span class="tag">jvm</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/k8s/">
-                        <span class="tag">k8s</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">13</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mac/">
-                        <span class="tag">mac</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/machinelearning/">
-                        <span class="tag">machinelearning</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/markdown/">
-                        <span class="tag">markdown</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/maven/">
-                        <span class="tag">maven</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mybatis/">
-                        <span class="tag">mybatis</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/network/">
-                        <span class="tag">network</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/numpy/">
-                        <span class="tag">numpy</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/opencv/">
-                        <span class="tag">opencv</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/protobuf/">
-                        <span class="tag">protobuf</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/shell/">
-                        <span class="tag">shell</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/springboot/">
-                        <span class="tag">springboot</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ssh/">
-                        <span class="tag">ssh</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stl/">
-                        <span class="tag">stl</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tcp-ip/">
-                        <span class="tag">tcp/ip</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tensorflow/">
-                        <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ubuntu/">
-                        <span class="tag">ubuntu</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/zookeeper/">
-                        <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/分布式/">
-                        <span class="tag">分布式</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图像处理/">
-                        <span class="tag">图像处理</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图片素材/">
-                        <span class="tag">图片素材</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/学习资料/">
-                        <span class="tag">学习资料</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/工具/">
-                        <span class="tag">工具</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发工具类/">
-                        <span class="tag">并发工具类</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发编程/">
-                        <span class="tag">并发编程</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据增强/">
-                        <span class="tag">数据增强</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/模型评估/">
-                        <span class="tag">模型评估</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/正则表达式/">
-                        <span class="tag">正则表达式</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/消息队列/">
-                        <span class="tag">消息队列</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/管程/">
-                        <span class="tag">管程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/网站/">
-                        <span class="tag">网站</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/设计模式/">
-                        <span class="tag">设计模式</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/通信协议/">
-                        <span class="tag">通信协议</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/音频处理/">
-                        <span class="tag">音频处理</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-        
-        </div>
-    
-</div>
-
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:57:39.000Z">2019-09-21</time></div>
-                    <a href="/post/bb0e0670.html" class="has-link-black-ter is-size-6">深度学习环境的搭建</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T16:26:10.000Z">2019-09-21</time></div>
-                    <a href="/post/b75ba217.html" class="has-link-black-ter is-size-6">深度学习模型评估</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:26:22.000Z">2019-09-20</time></div>
-                    <a href="/post/8e94d850.html" class="has-link-black-ter is-size-6">计算机视觉中的数据增强</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T14:11:54.000Z">2019-09-20</time></div>
-                    <a href="/post/9dd18af0.html" class="has-link-black-ter is-size-6">数据集-ImageNet</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T13:37:14.000Z">2019-09-20</time></div>
-                    <a href="/post/3f932fee.html" class="has-link-black-ter is-size-6">深度学习优化篇</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/DeepLearning/">DeepLearning</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">28</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">26</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/MQ/">
-                        <span class="tag">MQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RabbitMQ/">
-                        <span class="tag">RabbitMQ</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/RocketMQ/">
-                        <span class="tag">RocketMQ</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/anaconda/">
-                        <span class="tag">anaconda</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c++</span>
-                        <span class="tag is-grey">22</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/caffe/">
-                        <span class="tag">caffe</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/darknet/">
-                        <span class="tag">darknet</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dataset/">
-                        <span class="tag">dataset</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/deeplearning/">
-                        <span class="tag">deeplearning</span>
-                        <span class="tag is-grey">17</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/dns/">
-                        <span class="tag">dns</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/docker/">
-                        <span class="tag">docker</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ffmpeg/">
-                        <span class="tag">ffmpeg</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/git/">
-                        <span class="tag">git</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/idea/">
-                        <span class="tag">idea</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/imagenet/">
-                        <span class="tag">imagenet</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/java/">
-                        <span class="tag">java</span>
-                        <span class="tag is-grey">23</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/jvm/">
-                        <span class="tag">jvm</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/k8s/">
-                        <span class="tag">k8s</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">13</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mac/">
-                        <span class="tag">mac</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/machinelearning/">
-                        <span class="tag">machinelearning</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/markdown/">
-                        <span class="tag">markdown</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/maven/">
-                        <span class="tag">maven</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mybatis/">
-                        <span class="tag">mybatis</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/network/">
-                        <span class="tag">network</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/numpy/">
-                        <span class="tag">numpy</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/opencv/">
-                        <span class="tag">opencv</span>
-                        <span class="tag is-grey">7</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/protobuf/">
-                        <span class="tag">protobuf</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/shell/">
-                        <span class="tag">shell</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/springboot/">
-                        <span class="tag">springboot</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ssh/">
-                        <span class="tag">ssh</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/stl/">
-                        <span class="tag">stl</span>
-                        <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tcp-ip/">
-                        <span class="tag">tcp/ip</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tensorflow/">
-                        <span class="tag">tensorflow</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ubuntu/">
-                        <span class="tag">ubuntu</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/zookeeper/">
-                        <span class="tag">zookeeper</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/分布式/">
-                        <span class="tag">分布式</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图像处理/">
-                        <span class="tag">图像处理</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/图片素材/">
-                        <span class="tag">图片素材</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/学习资料/">
-                        <span class="tag">学习资料</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/工具/">
-                        <span class="tag">工具</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发工具类/">
-                        <span class="tag">并发工具类</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/并发编程/">
-                        <span class="tag">并发编程</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数据增强/">
-                        <span class="tag">数据增强</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/模型评估/">
-                        <span class="tag">模型评估</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/正则表达式/">
-                        <span class="tag">正则表达式</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/消息队列/">
-                        <span class="tag">消息队列</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/管程/">
-                        <span class="tag">管程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/网站/">
-                        <span class="tag">网站</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/设计模式/">
-                        <span class="tag">设计模式</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/通信协议/">
-                        <span class="tag">通信协议</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/音频处理/">
-                        <span class="tag">音频处理</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/post/f7a60bf6.html" rel="prev" title="【Java并发编程】Java内存模型">
+                                
+                                    【Java并发编程】Java内存模型
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/java/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> java</a> <a class="tag" href="/tags/并发编程/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 并发编程</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/post/3a297e7b.html" rel="prev" title="【TensorFlow2.0】实现ResNet">
+                                  
+                                      【TensorFlow2.0】实现ResNet
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/deeplearning/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> deeplearning</a> <a class="tag" href="/tags/tensorflow/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> tensorflow</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
     </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.svg" alt="【Java并发编程】Java 中如何创建线程？" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2019 深页&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
-                </p>
-            </div>
-            <div class="level-end">
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '【Java并发编程】Java 中如何创建线程？',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
             
-            </div>
-        </div>
+              
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#继承-Thread-类"><span class="toc-text">继承  Thread 类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现Runnable接口"><span class="toc-text">实现Runnable接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现Callable接口，结合FutureTask创建线程"><span class="toc-text">实现Callable接口，结合FutureTask创建线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线程池方式创建"><span class="toc-text">线程池方式创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/categories/" href="/blog/categories/" rel="nofollow" id="blogcategories">
+          
+            <i class="fas fa-folder fa-fw" aria-hidden="true"></i>
+          
+          文章分类
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/archives/" href="/blog/archives/" rel="nofollow" id="blogarchives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/blog/categories/" title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/C-C/" href="/categories/C-C/"><div class="name">C/C++</div><div class="badge">(26)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/DeepLearning/" href="/categories/DeepLearning/"><div class="name">DeepLearning</div><div class="badge">(17)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Docker-K8s/" href="/categories/Docker-K8s/"><div class="name">Docker&K8s</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(25)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/JVM/" href="/categories/Java/JVM/"><div class="name">JVM</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/Java并发编程/" href="/categories/Java/Java并发编程/"><div class="name">Java并发编程</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Linux/" href="/categories/Linux/"><div class="name">Linux</div><div class="badge">(10)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/OpenCV/" href="/categories/OpenCV/"><div class="name">OpenCV</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Python/" href="/categories/Python/"><div class="name">Python</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/computer-science/" href="/categories/computer-science/"><div class="name">computer science</div><div class="badge">(9)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/computer-science/计算机网络/" href="/categories/computer-science/计算机网络/"><div class="name">计算机网络</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/computer-science/设计模式/" href="/categories/computer-science/设计模式/"><div class="name">设计模式</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/善用佳软/" href="/categories/善用佳软/"><div class="name">善用佳软</div><div class="badge">(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/图像处理/" href="/categories/图像处理/"><div class="name">图像处理</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(3)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.91px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/c/" style="font-size: 20.36px; color: #6e6e6e">c</a> <a href="/tags/c/" style="font-size: 23.09px; color: #5b5b5b">c++</a> <a href="/tags/caffe/" style="font-size: 15.82px; color: #8d8d8d">caffe</a> <a href="/tags/darknet/" style="font-size: 14.91px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.91px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.18px; color: #616161">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.91px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 17.64px; color: #808080">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.27px; color: #686868">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 14.91px; color: #939393">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 15.82px; color: #8d8d8d">mysql</a> <a href="/tags/network/" style="font-size: 17.64px; color: #808080">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 18.55px; color: #7a7a7a">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.82px; color: #8d8d8d">python</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/springboot/" style="font-size: 16.73px; color: #868686">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.36px; color: #6e6e6e">stl</a> <a href="/tags/tcp-ip/" style="font-size: 15.82px; color: #8d8d8d">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.73px; color: #868686">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.82px; color: #8d8d8d">ubuntu</a> <a href="/tags/zookeeper/" style="font-size: 16.73px; color: #868686">zookeeper</a> <a href="/tags/分布式/" style="font-size: 14.91px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.82px; color: #8d8d8d">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.91px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.45px; color: #747474">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 16.73px; color: #868686">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 17.64px; color: #808080">网站</a> <a href="/tags/设计模式/" style="font-size: 16.73px; color: #868686">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:shuiyujie.cn@gmail.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/YujieShui" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
 </footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh-CN");</script>
+<script>setLoadingBarProgress(80);</script>
 
 
-    
-    
-    
-    <script src="/js/animation.js"></script>
-    
-
-    
-    
-    
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-    <script src="/js/gallery.js" defer></script>
-    
-
-    
-    
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-    
-    
-
-<a id="back-to-top" title="回到顶端" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-    <script src="/js/clipboard.js" defer></script>
-    
-
-    
-    
-    
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+      <script>setLoadingBarProgress(60);</script>
     </div>
-</div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["http://image.shuiyujie.com/sunset-2191645.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["http://image.shuiyujie.com/sunset-2191645.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
 </script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
 </body>
 </html>
