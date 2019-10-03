@@ -267,9 +267,11 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。</p>
+        <p>事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。</p>
 <p>比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。</p>
-<ul>
+<p>本文主要介绍事务的概念、事务的四大特性（ACID）、事务的隔离级别以及如何设置和使用事务。</p>
+<a id="more"></a>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
 <li>一个最小的不可再分的工作单元</li>
 <li>通常一个事务对应的是一个完整的业务</li>
 <li>一个完整的业务需要批量的 DML 语句共同完成</li>
@@ -366,9 +368,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="设置服务器缺省隔离级别"><a href="#设置服务器缺省隔离级别" class="headerlink" title="设置服务器缺省隔离级别"></a>设置服务器缺省隔离级别</h2><h3 id="通过修改配置文件设置"><a href="#通过修改配置文件设置" class="headerlink" title="通过修改配置文件设置"></a>通过修改配置文件设置</h3><p>可以再 my.ini 文件中使用 transaction-isolation 选项来设置服务器的缺省事务隔离级别</p>
+<h1 id="脏读、不可重复读、幻读"><a href="#脏读、不可重复读、幻读" class="headerlink" title="脏读、不可重复读、幻读"></a>脏读、不可重复读、幻读</h1><ul>
+<li><strong>脏读：</strong>：表示一个事务能够读取另一个事务中还未提交的数据，即事务 A 未提交，事务 B 能读到 A 未提交的数据。</li>
+<li><strong>不可重复读 ：</strong>是指在一个事务内，多次读同一数据。这个解释可重复读更容易理解一点，可重复读只的是事务 A 此时读取到的状态，和事务 B 提交事务修改数据之后的状态一样。</li>
+<li><strong>幻读：</strong>：指同一个事务内多次查询返回的结果集不一样。比如同一个事务 A 第一次查询时候有 n 条记录，但是第二次同等条件下查询却有 n+1 条记录，这就好像产生了幻觉。发生幻读的原因也是另外一个事务新增或者删除或者修改了第一个事务结果集里面的数据，同一个记录的数据内容被修改了，所有数据行的记录就变多或者变少了。</li>
+</ul>
+<h1 id="设置服务器缺省隔离级别"><a href="#设置服务器缺省隔离级别" class="headerlink" title="设置服务器缺省隔离级别"></a>设置服务器缺省隔离级别</h1><h2 id="通过修改配置文件设置"><a href="#通过修改配置文件设置" class="headerlink" title="通过修改配置文件设置"></a>通过修改配置文件设置</h2><p>可以再 my.ini 文件中使用 transaction-isolation 选项来设置服务器的缺省事务隔离级别</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">– READ-UNCOMMITTED</span><br><span class="line">– READ-COMMITTED</span><br><span class="line">– REPEATABLE-READ</span><br><span class="line">– SERIALIZABLE</span><br><span class="line"></span><br><span class="line">• 例如：</span><br><span class="line">[mysqld]</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br></pre></td></tr></table></figure>
-<h3 id="通过命令动态设置隔离级别"><a href="#通过命令动态设置隔离级别" class="headerlink" title="通过命令动态设置隔离级别"></a>通过命令动态设置隔离级别</h3><ul>
+<h2 id="通过命令动态设置隔离级别"><a href="#通过命令动态设置隔离级别" class="headerlink" title="通过命令动态设置隔离级别"></a>通过命令动态设置隔离级别</h2><ul>
 <li><p>隔离级别也可以在运行的服务器中动态设置，应使用<code>SET TRANSACTION ISOLATION LEVEL</code>语句</p>
 </li>
 <li><p>其语法模式为：</p>
@@ -387,7 +394,7 @@
 <li><p>例如： <code>SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;</code></p>
 </li>
 </ul>
-<h3 id="隔离级别的作用范围"><a href="#隔离级别的作用范围" class="headerlink" title="隔离级别的作用范围"></a>隔离级别的作用范围</h3><ul>
+<h2 id="隔离级别的作用范围"><a href="#隔离级别的作用范围" class="headerlink" title="隔离级别的作用范围"></a>隔离级别的作用范围</h2><ul>
 <li>事务隔离级别的作用范围分为两种： <ul>
 <li>全局级：对所有的会话有效 </li>
 <li>会话级：只对当前的会话有效 </li>
@@ -400,7 +407,7 @@
 <li>设置全局级隔离级别为READ COMMITTED ：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br></pre></td></tr></table></figure>
-<h3 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h3><ul>
+<h1 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h1><ul>
 <li><p>服务器变量tx_isolation（包括会话级和全局级两个变量）中保存着当前的会话隔离级别。  </p>
 </li>
 <li><p>为了查看当前隔离级别，可访问tx_isolation变量： </p>
@@ -421,7 +428,7 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-03T15:29:19+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-03T22:25:33+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年10月3日</p>
@@ -444,7 +451,9 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/ca802349.html&title=MySQL中的事务 | 深页&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/ca802349.html&title=MySQL中的事务 | 深页&summary=事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。
+比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。
+本文主要介绍事务的概念、事务的四大特性（ACID）、事务的隔离级别以及如何设置和使用事务。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -452,7 +461,9 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/ca802349.html&title=MySQL中的事务 | 深页&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/ca802349.html&title=MySQL中的事务 | 深页&summary=事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。
+比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。
+本文主要介绍事务的概念、事务的四大特性（ACID）、事务的隔离级别以及如何设置和使用事务。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -460,7 +471,9 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/ca802349.html&title=MySQL中的事务 | 深页&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/ca802349.html&title=MySQL中的事务 | 深页&summary=事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。
+比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。
+本文主要介绍事务的概念、事务的四大特性（ACID）、事务的隔离级别以及如何设置和使用事务。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
@@ -590,7 +603,7 @@
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务四大特性（ACID）"><span class="toc-text">事务四大特性（ACID）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的提交和回滚"><span class="toc-text">事务的提交和回滚</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置服务器缺省隔离级别"><span class="toc-text">设置服务器缺省隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过修改配置文件设置"><span class="toc-text">通过修改配置文件设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过命令动态设置隔离级别"><span class="toc-text">通过命令动态设置隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隔离级别的作用范围"><span class="toc-text">隔离级别的作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看隔离级别"><span class="toc-text">查看隔离级别</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务四大特性（ACID）"><span class="toc-text">事务四大特性（ACID）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的提交和回滚"><span class="toc-text">事务的提交和回滚</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脏读、不可重复读、幻读"><span class="toc-text">脏读、不可重复读、幻读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置服务器缺省隔离级别"><span class="toc-text">设置服务器缺省隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过修改配置文件设置"><span class="toc-text">通过修改配置文件设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过命令动态设置隔离级别"><span class="toc-text">通过命令动态设置隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隔离级别的作用范围"><span class="toc-text">隔离级别的作用范围</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查看隔离级别"><span class="toc-text">查看隔离级别</span></a></li></ol>
     </div>
   </section>
 

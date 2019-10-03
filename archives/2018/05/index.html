@@ -368,7 +368,9 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      
+      <p>事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。</p>
+<p>比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。</p>
+<p>本文主要介绍事务的概念、事务的四大特性（ACID）、事务的隔离级别以及如何设置和使用事务。</p>
       
         <div class="readmore">
           <a href="/post/ca802349.html" class="flat-box">
