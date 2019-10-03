@@ -215,7 +215,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-10-02</p>
+    <p>2018-05-29</p>
   </a>
 </div>
 
@@ -223,6 +223,14 @@
         
           
             
+  
+  <div class="new-meta-item category">
+    <a href="/categories/数据库/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>数据库</p>
+    </a>
+  </div>
+
 
           
         
@@ -259,20 +267,27 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
+        <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。</p>
+<p>比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。</p>
+<ul>
 <li>一个最小的不可再分的工作单元</li>
-<li>通常一个事务对应的是一个完整的业务【例如：银行账户转账业务】</li>
+<li>通常一个事务对应的是一个完整的业务</li>
 <li>一个完整的业务需要批量的 DML 语句共同完成</li>
-<li>事务只和 DML 语句有关系，或者说 DML 语句才有事务【例如：A向B转账，A账户余额要 update..】</li>
+<li>事务只和 DML 语句有关系，或者说 DML 语句才有事务</li>
 </ul>
-<p>这里举个例子，只有两条 update 语句都执行完才算完成一次转账操作。</p>
-<p>银行账户转账这个业务是一个事务，完成一次转账操作需要两个 DML 语句，分别更新两个用户的账户。</p>
-<p>两条 update 语句必须同时成功或者同时失败，最小单元，不可再分</p>
-<p>当第一条 DML 语句执行完成之后，并不能修改底层数据库中文件数据</p>
-<h1 id="事务四大特性（ACID）"><a href="#事务四大特性（ACID）" class="headerlink" title="事务四大特性（ACID）"></a>事务四大特性（ACID）</h1><p><strong>原子性（Atomicity）</strong>:事务是最小的工作单元，不可再分</p>
-<p><strong>一致性（Consistency）</strong>:事务要求所有的 DML 语句操作的时候，必须保证同时成功或者同时失败</p>
-<p><strong>隔离性（Isolation）</strong>:事务A和事务B之间具有隔离</p>
-<p><strong>持久性（Durability）</strong>:是事务结束的保证，事务终结的标志</p>
+<p>在事务进行过程中，在结束之前，DML 语句是不会更改底层数据库文件中的数据的。只有在事务成功结束的时候，才会修改底层硬盘中的数据。</p>
+<p><strong>事务开启的标志是什么？事务结束的标志是什么？</strong></p>
+<ul>
+<li>开启的标志：<ul>
+<li>任何一条 DML 语句（insert update delete）执行，标志事务的启动</li>
+</ul>
+</li>
+<li>结束的标志：<ul>
+<li>提交：成功的结束，将所有的 DML 语句操作历史记录和底层硬盘文件中的数据一次同步</li>
+<li>回滚：失败的结束，将所有的 DML 语句操作历史记录全部清空</li>
+</ul>
+</li>
+</ul>
 <p>关于一些术语</p>
 <ul>
 <li>开启事务：Start Transaction</li>
@@ -285,23 +300,117 @@
 <li>commit 提交</li>
 <li>rollback 回滚</li>
 </ul>
-<p>事务开启的标志是什么？事务结束的标志是什么？</p>
+<blockquote>
+<p>DML （Data Manipulation Language 数据操作语言）</p>
 <ul>
-<li>开启的标志：<ul>
-<li>任何一条 DML 语句（insert update delete）执行，标志事务的启动</li>
+<li>insert 将记录插入到数据库 </li>
+<li>update 修改数据库的记录 </li>
+<li>delete 删除数据库的记录</li>
+<li>commit  提交数据</li>
+<li>savepoint  设置回滚点</li>
+<li>rollback   回滚</li>
+</ul>
+<p>当执行DML命令如果没有提交，将不会被其他会话看到。除非在DML命令之后执行了DDL命令或DCL命令，或用户退出会话，或终止实例，此时系统会自动发出commit命令，使未提交的DML命令提交。    </p>
+</blockquote>
+<h1 id="事务四大特性（ACID）"><a href="#事务四大特性（ACID）" class="headerlink" title="事务四大特性（ACID）"></a>事务四大特性（ACID）</h1><p><strong>原子性（Atomicity）</strong>:事务是最小的工作单元，不可再分</p>
+<p><strong>一致性（Consistency）</strong>:事务要求所有的 DML 语句操作的时候，必须保证同时成功或者同时失败</p>
+<p><strong>隔离性（Isolation）</strong>:事务A和事务B之间具有隔离</p>
+<p><strong>持久性（Durability）</strong>:是事务结束的保证，事务终结的标志</p>
+<h1 id="事务的提交和回滚"><a href="#事务的提交和回滚" class="headerlink" title="事务的提交和回滚"></a>事务的提交和回滚</h1><p>在 MySQL 数据库管理系统中，默认情况下，事务是自动提交的。也就是说，只要执行一条 DML 语句，开启了事务，并且提交了事务</p>
+<p>这种在动提交机制是可以关闭的：</p>
+<p>关闭方式一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 手动开启事务</span><br><span class="line">start transaction;</span><br><span class="line"># 执行 DML 语句</span><br><span class="line">insert into t_user(name) values(&apos;zhangsan&apos;);</span><br><span class="line"># 【事务成功的结束】手动提交事务</span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 手动开启事务</span><br><span class="line">start transaction;</span><br><span class="line"># 执行 DML 语句</span><br><span class="line">insert into t_user(name) values(&apos;zhangsan&apos;);</span><br><span class="line"># 【事务失败的结束】手动回滚事务</span><br><span class="line">rollback;</span><br></pre></td></tr></table></figure>
+<p>关闭方式二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 只对当前会话有效</span><br><span class="line">SET AUTOCOMMIT = OFF;</span><br><span class="line">SET AUTOCOMMIT = ON;</span><br><span class="line"># 或者</span><br><span class="line">SET SESSION AUTOCOMMIT = OFF;</span><br><span class="line">SET SESSION AUTOCOMMIT = ON;</span><br><span class="line"></span><br><span class="line"># 查看变量状态</span><br><span class="line">show variables like %auto%;</span><br></pre></td></tr></table></figure>
+<h1 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h1><p>事务的四大特性之一：隔离性（isolation），即事务 A 和事务 B 之间具有一定的隔离级别。</p>
+<p>脏读、不可重复读、幻读</p>
+<ol>
+<li>读未提交 READ_UNCOMMITTED: 事务 A 未提交的数据，事务 B 可以读取到，可能会导致脏读、幻读或不可重复读；这种隔离级别是最低级别，这种隔离级别一般在理论上存在，数据库默认的隔离级别一般都高于这个级别。</li>
+<li>读已提交 READ_COMMITTED: 事务 A 提交了数据，事务 B 才能读取到。换句话说，对方事务提交之后的数据，我当前事务才能读取到。这种隔离级别可以避免脏读，但是这种隔离级别会导致“不可重复读”。</li>
+<li>可重复读 REPEATABLE_READ: 事务 A 提交之后的数据，事务 B 读取不到，事务 B 是可以重复读取数据的。可以阻止脏读和不可重复读，但幻读仍有可能发生；MySQL 默认的隔离级别就是可重复读。</li>
+<li>串行化 SERIALIZABLE: 最高的隔离级别，完全服从 ACID 的隔离级别。事务 A 在操作数据表中数据时，事务 B 需要排队等待。该级别可以防止脏读、不可重复读以及幻读。但是由于无法并发，将严重影响程序的性能。通常情况下也不会用到该级别。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读未提交</td>
+<td>✔︎</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td>✘</td>
+<td>✔︎</td>
+<td>✔︎</td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>✘</td>
+<td>✘</td>
+<td>对 InnoDB 不可能</td>
+</tr>
+<tr>
+<td>串行化</td>
+<td>✘</td>
+<td>✘</td>
+<td>✘</td>
+</tr>
+</tbody>
+</table>
+<h2 id="设置服务器缺省隔离级别"><a href="#设置服务器缺省隔离级别" class="headerlink" title="设置服务器缺省隔离级别"></a>设置服务器缺省隔离级别</h2><h3 id="通过修改配置文件设置"><a href="#通过修改配置文件设置" class="headerlink" title="通过修改配置文件设置"></a>通过修改配置文件设置</h3><p>可以再 my.ini 文件中使用 transaction-isolation 选项来设置服务器的缺省事务隔离级别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">– READ-UNCOMMITTED</span><br><span class="line">– READ-COMMITTED</span><br><span class="line">– REPEATABLE-READ</span><br><span class="line">– SERIALIZABLE</span><br><span class="line"></span><br><span class="line">• 例如：</span><br><span class="line">[mysqld]</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br></pre></td></tr></table></figure>
+<h3 id="通过命令动态设置隔离级别"><a href="#通过命令动态设置隔离级别" class="headerlink" title="通过命令动态设置隔离级别"></a>通过命令动态设置隔离级别</h3><ul>
+<li><p>隔离级别也可以在运行的服务器中动态设置，应使用<code>SET TRANSACTION ISOLATION LEVEL</code>语句</p>
+</li>
+<li><p>其语法模式为：</p>
+</li>
+</ul>
+<p><code>SET [GLOBAL | SESSION] TRANSACTION ISOLATION LEVEL &lt;isolation-level&gt;</code></p>
+<p>其中的<code>&lt;isolation-level&gt;</code>可以是：</p>
+<ul>
+<li><ul>
+<li>READ UNCOMMITTED</li>
+<li>READ COMMITTED</li>
+<li>REPEATABLE READ</li>
+<li>SERIALIZABLE</li>
 </ul>
 </li>
-<li>结束的标志：<ul>
-<li>提交：成功的结束，将所有的 DML 语句操作历史记录和底层硬盘文件中的数据一次同步</li>
-<li>回滚：失败的结束，将所有的 DML 语句操作历史记录全部清空</li>
+<li><p>例如： <code>SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;</code></p>
+</li>
+</ul>
+<h3 id="隔离级别的作用范围"><a href="#隔离级别的作用范围" class="headerlink" title="隔离级别的作用范围"></a>隔离级别的作用范围</h3><ul>
+<li>事务隔离级别的作用范围分为两种： <ul>
+<li>全局级：对所有的会话有效 </li>
+<li>会话级：只对当前的会话有效 </li>
 </ul>
 </li>
 </ul>
-<p>重点：</p>
+<p>例如，设置会话级隔离级别为 READ COMMITTED ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br><span class="line">SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br></pre></td></tr></table></figure>
 <ul>
-<li>在事务进行过程中，在结束之前，DML 语句是不会更改底层数据库文件中的数据的。只有在事务成功结束的时候，才会修改底层硬盘中的数据</li>
+<li>设置全局级隔离级别为READ COMMITTED ：</li>
 </ul>
-<h1 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br></pre></td></tr></table></figure>
+<h3 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h3><ul>
+<li><p>服务器变量tx_isolation（包括会话级和全局级两个变量）中保存着当前的会话隔离级别。  </p>
+</li>
+<li><p>为了查看当前隔离级别，可访问tx_isolation变量： </p>
+</li>
+</ul>
+<p>查看会话级的当前隔离级别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT @@tx_isolation;</span><br><span class="line">SELECT @@session.tx_isolation;</span><br></pre></td></tr></table></figure>
+<p>查看全局级的当前隔离级别： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT @@global.tx_isolation;</span><br></pre></td></tr></table></figure>
+
       </div>
       
         <br>
@@ -312,10 +421,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-02T23:23:17+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-03T15:29:19+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月2日</p>
+    <p>更新于 2019年10月3日</p>
   </a>
 </div>
 
@@ -323,6 +432,9 @@
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/mysql/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>mysql</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/事务/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>事务</p></a></div>
+
 
         
       
@@ -370,21 +482,40 @@
       
           <div class="prev-next">
               
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/post/f413b470.html" rel="prev" title="数据库三范式">
+                                
+                                    数据库三范式
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/post/a22e1643.html" rel="prev" title="上手Spring Cloud">
+                              <a href="/post/1c3a568a.html" rel="prev" title="MySQL中的存储引擎">
                                   
-                                      上手Spring Cloud
+                                      MySQL中的存储引擎
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/spring-cloud/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> spring cloud</a>
+                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a> <a class="tag" href="/tags/存储引擎/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 存储引擎</a>
                               </h6>
                           
                       </span>
@@ -459,7 +590,7 @@
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务四大特性（ACID）"><span class="toc-text">事务四大特性（ACID）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务四大特性（ACID）"><span class="toc-text">事务四大特性（ACID）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的提交和回滚"><span class="toc-text">事务的提交和回滚</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务的隔离级别"><span class="toc-text">事务的隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置服务器缺省隔离级别"><span class="toc-text">设置服务器缺省隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过修改配置文件设置"><span class="toc-text">通过修改配置文件设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过命令动态设置隔离级别"><span class="toc-text">通过命令动态设置隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隔离级别的作用范围"><span class="toc-text">隔离级别的作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看隔离级别"><span class="toc-text">查看隔离级别</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -579,9 +710,9 @@
         
           <li><a class="flat-box" title="/categories/Python/" href="/categories/Python/"><div class="name">Python</div><div class="badge">(3)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/computer-science/" href="/categories/computer-science/"><div class="name">computer science</div><div class="badge">(10)</div></a></li>
+          <li><a class="flat-box" title="/categories/computer-science/" href="/categories/computer-science/"><div class="name">computer science</div><div class="badge">(9)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/computer-science/计算机网络/" href="/categories/computer-science/计算机网络/"><div class="name">计算机网络</div><div class="badge">(7)</div></a></li>
+          <li><a class="flat-box child" title="/categories/computer-science/计算机网络/" href="/categories/computer-science/计算机网络/"><div class="name">计算机网络</div><div class="badge">(6)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/computer-science/设计模式/" href="/categories/computer-science/设计模式/"><div class="name">设计模式</div><div class="badge">(3)</div></a></li>
         
@@ -591,7 +722,7 @@
         
           <li><a class="flat-box" title="/categories/图像处理/" href="/categories/图像处理/"><div class="name">图像处理</div><div class="badge">(3)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(4)</div></a></li>
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(5)</div></a></li>
         
       </ul>
     </div>
@@ -633,7 +764,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.91px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.36px; color: #6e6e6e">c</a> <a href="/tags/c/" style="font-size: 23.09px; color: #5b5b5b">c++</a> <a href="/tags/caffe/" style="font-size: 15.82px; color: #8d8d8d">caffe</a> <a href="/tags/darknet/" style="font-size: 14.91px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.91px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.18px; color: #616161">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.91px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 17.64px; color: #808080">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.27px; color: #686868">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 14.91px; color: #939393">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.73px; color: #868686">mysql</a> <a href="/tags/network/" style="font-size: 17.64px; color: #808080">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 18.55px; color: #7a7a7a">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.82px; color: #8d8d8d">python</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/springboot/" style="font-size: 16.73px; color: #868686">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.36px; color: #6e6e6e">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14.91px; color: #939393">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.73px; color: #868686">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.82px; color: #8d8d8d">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 16.73px; color: #868686">zookeeper</a> <a href="/tags/分布式/" style="font-size: 14.91px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.82px; color: #8d8d8d">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.91px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.45px; color: #747474">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 16.73px; color: #868686">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 17.64px; color: #808080">网站</a> <a href="/tags/设计模式/" style="font-size: 16.73px; color: #868686">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 23.17px; color: #5b5b5b">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 18.17px; color: #7d7d7d">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 14.83px; color: #939393">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 16.5px; color: #888">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 16.5px; color: #888">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 16.5px; color: #888">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
     </div>
   </section>
 

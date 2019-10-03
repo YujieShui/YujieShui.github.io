@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>认识 Docker | 深页</title>
+  <title>MySQL中的存储引擎 | 深页</title>
   
   
 
@@ -183,8 +183,8 @@
         
   
     <h1 class="title">
-      <a href="/post/2a772a2b.html">
-        认识 Docker
+      <a href="/post/1c3a568a.html">
+        MySQL中的存储引擎
       </a>
     </h1>
   
@@ -215,7 +215,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2018-02-21</p>
+    <p>2018-05-29</p>
   </a>
 </div>
 
@@ -225,9 +225,9 @@
             
   
   <div class="new-meta-item category">
-    <a href="/categories/Linux/" rel="nofollow">
+    <a href="/categories/数据库/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Linux</p>
+      <p>数据库</p>
     </a>
   </div>
 
@@ -267,67 +267,65 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>Docker 是一种虚拟化容器技术。他主要解决了配置环境问题。软件部署环节的第一步就是配置环境，使软件能够在机器上流畅地运行。常常听到的一句话是：“我的电脑上能运行啊。”可是换到生产环境就不行了，又需要重新配置环境。最好的解决方式是能够将原始环境的配置一模一样地复制一份，大家就能够时刻保持在相同的环境下运行软件。</p>
+        <p>MySQL中常用的三种存储引擎分别是： MyISAM存储引擎、innoDB存储引擎、MEMORY存储引擎。本文将对这三种存储引擎作出重点介绍，最后比较它们的使用场景。</p>
 <a id="more"></a>
-<h1 id="认识-Docker"><a href="#认识-Docker" class="headerlink" title="认识 Docker"></a>认识 Docker</h1><p>Docker 是一种虚拟化容器技术。当我听到虚拟化容器最先想到的是虚拟机，docker 和虚拟机又有很大差别。</p>
-<p>虚拟机可以在一种操作系统里面运行另一种操作系统，看上去跟真实系统一模一样，而对于底层系统来说，虚拟机就是一个普通文件可以随时删除。通过虚拟机我们可以在硬件上运行多个不同的操作系统，但是他有几个缺点：</p>
-<ol>
-<li>资源占用多:虚拟机会独占一部分内存和硬盘空间。它运行的时候，其他程序就不能使用这些资源了;</li>
-<li>冗余步骤多:虚拟机是完整的操作系统，一些系统级别的操作步骤，往往无法跳过，比如用户登录;</li>
-<li>启动慢：启动操作系统需要多久，启动虚拟机就需要多久。</li>
-</ol>
-<p>Docker 最初基于 Linux 中的一种容器轻量级虚拟化技术：Linux 容器（Linux Containers，缩写为 LXC）。LXC 则基于 Linux 内核调用 CGroups 和 Namespaces，同时提供用户态 API 接口。用户则可以通过 LXC 提供的资源限制和隔离功能，创建一套完整并且相互隔离的虚拟应用运行环境。</p>
-<p>Linux 容器不是模拟一个完整的操作系统，而是对进程进行隔离。或者说，在正常进程的外面套了一个保护层。对于容器里面的进程来说，它接触到的各种资源都是虚拟的，从而实现与底层系统的隔离。所以 Docker 是进程级别的管理，相对于虚拟机他就有以下几个优点：</p>
-<ol>
-<li>启动快:容器里面的应用，直接就是底层系统的一个进程，而不是虚拟机内部的进程。</li>
-<li>资源占用少:容器只占用需要的资源，不占用那些没有用到的资源；虚拟机由于是完整的操作系统，不可避免要占用所有资源。另外，多个容器可以共享资源，虚拟机都是独享资源。</li>
-<li>体积小:容器只要包含用到的组件即可，而虚拟机是整个操作系统的打包，所以容器文件比虚拟机文件要小很多。</li>
-</ol>
-<hr>
-<h1 id="Docker-的历史"><a href="#Docker-的历史" class="headerlink" title="Docker 的历史"></a>Docker 的历史</h1><p>Docker 最初是 dotCloud 公司创始人 Solomon Hykes 在法国期间发起的一个公司内部项目， 它是基于 dotCloud 公司多年云服务技术的一次革新，并于 2013 年 3 月以 Apache 2.0 授权 协议开源，主要项目代码在 GitHub 上进行维护。Docker 项目后来还加入了 Linux 基金会， 并成立推动 开放容器联盟（OCI）。</p>
-<p>Docker 自开源后受到广泛的关注和讨论，至今其 GitHub 项目已经超过 4 万 6 千个星标和一 万多个 fork。甚至由于 Docker 项目的火爆，在 2013 年底，dotCloud 公司决定改名为 Docker。Docker 最初是在 Ubuntu 12.04 上开发实现的；Red Hat 则从 RHEL 6.5 开始对 Docker 进行支持；Google 也在其 PaaS 产品中广泛应用 Docker。</p>
-<p>Docker 使用 Google 公司推出的 Go 语言 进行开发实现，基于 Linux 内核的 cgroup，namespace，以及 AUFS 类的 Union FS 等技术，对进程进行封装隔离，属于操作系统层面的虚拟化技术。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容 器。最初实现是基于 LXC，从 0.7 版本以后开始去除 LXC，转而使用自行开发的 libcontainer，从 1.11 开始，则进一步演进为使用 runC 和 containerd。</p>
-<hr>
-<h1 id="Docker-的作用"><a href="#Docker-的作用" class="headerlink" title="Docker 的作用"></a>Docker 的作用</h1><p>Docker 带来了行业的变革。首先是解决了云平台之间标准规范不统一，无法相互兼容对接的问题，有了 Docker 屏蔽了硬件层的差异，提供了统一的用户应用层；其次推进了软件开发的流程，各个部门采用相同的数据镜像之后可以将精力进一步集中在产品本身；也简化了软件运行生命周期中软件的日志管理和监控管理，因为 Docker 拥有统一的数据规范和接口规范，不需要对每一款产品进行定制化开发。</p>
-<p>具体来说 Docker 的作用归纳为以下几点：</p>
-<ol>
-<li><p>简化配置。将运行环境和配置放在代码中然后部署，同一个Docker的配置可以在不同的环境中使用，这样就降低了硬件要求和应用环境之间耦合度；</p>
+<h1 id="存储引擎的使用"><a href="#存储引擎的使用" class="headerlink" title="存储引擎的使用"></a>存储引擎的使用</h1><ul>
+<li>数据库中的各表（在创建表时）指定的存储引擎来处理</li>
+<li>服务器可用的引擎依赖于以下因素<ul>
+<li>MySQL 版本</li>
+<li>服务器在开发时如何被配置</li>
+<li>启动选项</li>
+</ul>
 </li>
-<li><p>提供一次性的环境。通过作用一可以做到本地测试他人的软件、持续集成的时候提供单元测试和构建的环境；</p>
+</ul>
+<p>怎么看表用的什么存储引擎。</p>
+<h1 id="MyISAM-存储引擎"><a href="#MyISAM-存储引擎" class="headerlink" title="MyISAM 存储引擎"></a>MyISAM 存储引擎</h1><ul>
+<li>MyISAM 存储引擎是 MySQL 最常用的引擎</li>
+<li>它管理的表具有以下特征<ul>
+<li>使用三个文件表示表<ul>
+<li>格式文件 —— 存储表结构的定义（mytable.frm）</li>
+<li>数据文件 —— 存储表行的结果（mytable.MYD）</li>
+<li>索引文件 —— 存储表上的索引（mytable.MYI）</li>
+</ul>
 </li>
-<li><p>代码流水线管理（Code Pipeline）。通过作用一，Docker给应用提供了一个从开发到上线均一致的环境，让代码的流水线变得简单不少；</p>
+<li>灵活的 AUTO_INCREMENT 字段处理</li>
+<li>可被转换为压缩、只读表来节省空间</li>
+</ul>
 </li>
-<li><p>快速部署。在虚拟机之前，引入新的硬件资源需要消耗几天的时间。虚拟化技术（Virtualization）将这个时间缩短到了分钟级别。Docker通过为进程创建一个容器而无需启动一个操作系统，将这个过程缩短到了秒级；</p>
+</ul>
+<h1 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h1><ul>
+<li>InnoDB 存储引擎是 MySQL 默认的存储引擎</li>
+<li>它管理的表具有以下特征<ul>
+<li>每个 InnoDB 表在数据库目录中以 .frm 格式文件表示</li>
+<li>InnoDB 表空间 tablespace 被用于存储表的内容</li>
+<li>提供一组用来记录事务性活动的日志文件</li>
+<li>用 COMMIT、SAVEPOINT 及 ROLLBACK 支持事务处理</li>
+<li>提供全 ACID 兼容</li>
+<li>在 MySQL 服务器崩溃后提供自动恢复</li>
+<li>多版本（MVCC）和行级锁定</li>
+<li>支持外键及引用的完整性，包括级联删除和更新</li>
+</ul>
 </li>
-<li><p>调试能力。Docker提供了很多的工具，包括可以为容器设置检查点、设置版本和查看两个容器之间的差别，这些特性可以帮助调试Bug；</p>
+</ul>
+<h1 id="MEMOEY-存储引擎"><a href="#MEMOEY-存储引擎" class="headerlink" title="MEMOEY 存储引擎"></a>MEMOEY 存储引擎</h1><ul>
+<li>使用MEMORY存储引擎的表，其数据存储在内存中，且行的长度固定，这两个特点使得MEMORY存储引擎非常快</li>
+<li><p>MEMORY 存储引擎具有有以下特征</p>
+<ul>
+<li>在数据库目录内，每个表均以.frm格式的文件表示。</li>
+<li>表数据及索引被存储在内存中。</li>
+<li>表级锁机制。</li>
+<li>不能包含TEXT或BLOB字段。</li>
+</ul>
 </li>
-<li><p>隔离应用，组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构；</p>
+<li><p>MEMORY存储引擎以前被称为HEAP引擎</p>
 </li>
-<li><p>提供弹性的云服务。因为 Docker 容器可以随开随关，很适合动态扩容和缩容。</p>
-</li>
-</ol>
-<hr>
-<h1 id="Docker-三个基本概念"><a href="#Docker-三个基本概念" class="headerlink" title="Docker 三个基本概念"></a>Docker 三个基本概念</h1><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><p>相比于传统的虚拟化中的 ISO 镜像，Docker 镜像要轻量化很多，<strong>它只是一个可定制的 rootfs。</strong>用户可以使用其他人创建的镜像，也可以通过 docker commit 这样的命令自己来创建镜像。</p>
-<p>Docker 镜像是通过 Dockerfile 来创建，除了提供容器运行时所需的程序、库、资源、配置等文 件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。</p>
-<p>镜像基于联合文件系统的一种层式结构。<strong>镜像构建时，会一层层构建，前一层是后一层的基础。</strong>每一层构建完就不会再发生改变，后 一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除 前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看 到这个文件，但是实际上该文件会一直跟随镜像。因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。</p>
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>Docker 可以帮助我们构建和部署容器，只需要把应用程序或者服务打包放进容器即可，他们可以是 Web 服务器、数据库或者应用程序服务器等，docker 都用同样的方式将内容装载进容器中。我们就可以针对容器进行创建、启动、停止、删除、暂停等操作。</p>
-<p>容器和镜像可以这样区别。<strong>镜像是 docker 生命周期中的构建和打包阶段，而容器则是启动和执行阶段。</strong>每个容器都包含一个软件镜像，而容器可以共享底层的只读镜像，通过写入自己特有的内容后添加新的镜像层，新增的镜像层和下层镜像一起又可以作为基础镜像被更上层的镜像使用。</p>
-<p>容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。因此容器可以拥有自己的 root 文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来就好像是在一 个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安 全。也因为这种隔离的特性，很多人初学 Docker 时常常会混淆容器和虚拟机。</p>
-<p>按照 Docker 最佳实践的要求，容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。</p>
-<p>数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。</p>
-<h2 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h2><p>Docker Registry 用于存储和分发用户构建的镜像，可以分成公有私有两种。将镜像存储在仓库之中，就可以在其他服务器上使用这些镜像。</p>
-<p>一个 Docker Registry 中可以包含多个仓库（ （ Tag ）；每个标签对应一个镜像。Repository）；每个仓库可以包含多个标签通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版 本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。</p>
-<h2 id="国外的仓库镜像"><a href="#国外的仓库镜像" class="headerlink" title="国外的仓库镜像"></a>国外的仓库镜像</h2><p><a href="https://hub.docker.com/" target="_blank" rel="noopener">官方、默认、高质量镜像</a></p>
-<p><a href="https://quay.io/repository/" target="_blank" rel="noopener">CoreOS 的 Quay.io</a></p>
-<p><a href="https://cloud.google.com/container-registry/" target="_blank" rel="noopener">Google 的镜像，Kubernetes 的镜像即此</a></p>
-<h2 id="国内的仓库镜像"><a href="#国内的仓库镜像" class="headerlink" title="国内的仓库镜像"></a>国内的仓库镜像</h2><p><a href="https://cr.console.aliyun.com/#/accelerator" target="_blank" rel="noopener">阿里云加速器</a></p>
-<p><a href="https://www.daocloud.io/mirror#accelerator-doc" target="_blank" rel="noopener">DaoCloud 加速器</a></p>
-<p><a href="https://hub.tenxcloud.com/" target="_blank" rel="noopener">时速云镜像仓库</a></p>
-<p><a href="https://c.163.com/#/m/library/" target="_blank" rel="noopener">网易镜像仓库</a></p>
-<p><a href="https://hub.daocloud.io/" target="_blank" rel="noopener">DaoCloud 镜像市场</a></p>
-<p><a href="https://cr.console.aliyun.com/#/imageList" target="_blank" rel="noopener">阿里云镜像库</a></p>
-<hr>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://book.douban.com/subject/26772853/" target="_blank" rel="noopener">《Docker全攻略》</a><br><a href="https://book.douban.com/subject/26780404/" target="_blank" rel="noopener">《第一本Docker书》</a><br><a href="https://yeasy.gitbooks.io/docker_practice/" target="_blank" rel="noopener">《Docker技术入门与实战》</a><br><a href="https://book.douban.com/subject/26701218/" target="_blank" rel="noopener">《Docker进阶与实战》</a><br><a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">Docker 入门教程</a><br><a href="http://dockone.io/article/126" target="_blank" rel="noopener">八个Docker的真实应用场景</a></p>
+</ul>
+<h1 id="选择合适的存储引擎"><a href="#选择合适的存储引擎" class="headerlink" title="选择合适的存储引擎"></a>选择合适的存储引擎</h1><p>当创建表时，应根据表的应用场景选择合适的存储引擎</p>
+<ul>
+<li>MyISAM 表最适合于大量的数据读而少量数据更新的混合操作。MyISAM 表的另一种适用情形是使用压缩的只读表。</li>
+<li>如果查询中包含较的数据更新操作，应使用 InnoDB。其行级锁机制和多版本的支持为数据读取和更新的混合操作提供了良好的并发机制。</li>
+<li>使用 MEMORY 存储引擎存储非永久需要的数据，或者是能够从基于磁盘的表中重新生成的数据。</li>
+</ul>
 
       </div>
       
@@ -339,10 +337,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-05-14T21:52:32+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-02T23:29:12+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年5月14日</p>
+    <p>更新于 2019年10月2日</p>
   </a>
 </div>
 
@@ -351,7 +349,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>linux</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/docker/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>docker</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/mysql/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>mysql</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/存储引擎/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>存储引擎</p></a></div>
 
 
         
@@ -362,7 +360,7 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/2a772a2b.html&title=认识 Docker | 深页&summary=Docker 是一种虚拟化容器技术。他主要解决了配置环境问题。软件部署环节的第一步就是配置环境，使软件能够在机器上流畅地运行。常常听到的一句话是：“我的电脑上能运行啊。”可是换到生产环境就不行了，又需要重新配置环境。最好的解决方式是能够将原始环境的配置一模一样地复制一份，大家就能够时刻保持在相同的环境下运行软件。">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/1c3a568a.html&title=MySQL中的存储引擎 | 深页&summary=MySQL中常用的三种存储引擎分别是： MyISAM存储引擎、innoDB存储引擎、MEMORY存储引擎。本文将对这三种存储引擎作出重点介绍，最后比较它们的使用场景。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -370,7 +368,7 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/2a772a2b.html&title=认识 Docker | 深页&summary=Docker 是一种虚拟化容器技术。他主要解决了配置环境问题。软件部署环节的第一步就是配置环境，使软件能够在机器上流畅地运行。常常听到的一句话是：“我的电脑上能运行啊。”可是换到生产环境就不行了，又需要重新配置环境。最好的解决方式是能够将原始环境的配置一模一样地复制一份，大家就能够时刻保持在相同的环境下运行软件。">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/1c3a568a.html&title=MySQL中的存储引擎 | 深页&summary=MySQL中常用的三种存储引擎分别是： MyISAM存储引擎、innoDB存储引擎、MEMORY存储引擎。本文将对这三种存储引擎作出重点介绍，最后比较它们的使用场景。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -378,7 +376,7 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/2a772a2b.html&title=认识 Docker | 深页&summary=Docker 是一种虚拟化容器技术。他主要解决了配置环境问题。软件部署环节的第一步就是配置环境，使软件能够在机器上流畅地运行。常常听到的一句话是：“我的电脑上能运行啊。”可是换到生产环境就不行了，又需要重新配置环境。最好的解决方式是能够将原始环境的配置一模一样地复制一份，大家就能够时刻保持在相同的环境下运行软件。">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/1c3a568a.html&title=MySQL中的存储引擎 | 深页&summary=MySQL中常用的三种存储引擎分别是： MyISAM存储引擎、innoDB存储引擎、MEMORY存储引擎。本文将对这三种存储引擎作出重点介绍，最后比较它们的使用场景。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
@@ -404,16 +402,16 @@
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/post/df0ea61.html" rel="prev" title="Mysql不同发行版的区别">
+                              <a href="/post/ca802349.html" rel="prev" title="MySQL中的事务">
                                 
-                                    Mysql不同发行版的区别
+                                    MySQL中的事务
                                 
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
+                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a> <a class="tag" href="/tags/事务/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 事务</a>
                               </h6>
                           
                       </span>
@@ -424,16 +422,16 @@
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/post/29003c34.html" rel="prev" title="RabbitMQ 安装和使用">
+                              <a href="/post/813d855e.html" rel="prev" title="Mysql版本升级">
                                   
-                                      RabbitMQ 安装和使用
+                                      Mysql版本升级
                                   
                               </a>
                           </h4>
                           
                               
                               <h6 class="tags">
-                                  <a class="tag" href="/tags/消息队列/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 消息队列</a> <a class="tag" href="/tags/RabbitMQ/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> RabbitMQ</a>
+                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
                               </h6>
                           
                       </span>
@@ -463,7 +461,7 @@
 
   <script>
     window.subData = {
-      title: '认识 Docker',
+      title: 'MySQL中的存储引擎',
       tools: true
     }
   </script>
@@ -508,7 +506,7 @@
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#认识-Docker"><span class="toc-text">认识 Docker</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-的历史"><span class="toc-text">Docker 的历史</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-的作用"><span class="toc-text">Docker 的作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-三个基本概念"><span class="toc-text">Docker 三个基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#镜像"><span class="toc-text">镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器"><span class="toc-text">容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库"><span class="toc-text">仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#国外的仓库镜像"><span class="toc-text">国外的仓库镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#国内的仓库镜像"><span class="toc-text">国内的仓库镜像</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#存储引擎的使用"><span class="toc-text">存储引擎的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MyISAM-存储引擎"><span class="toc-text">MyISAM 存储引擎</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MEMOEY-存储引擎"><span class="toc-text">MEMOEY 存储引擎</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选择合适的存储引擎"><span class="toc-text">选择合适的存储引擎</span></a></li></ol>
     </div>
   </section>
 

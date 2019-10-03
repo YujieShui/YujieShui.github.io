@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>MySQL中的事务</title>
-      <link href="/post/ca802349.html"/>
-      <url>/post/ca802349.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul><li>一个最小的不可再分的工作单元</li><li>通常一个事务对应的是一个完整的业务【例如：银行账户转账业务】</li><li>一个完整的业务需要批量的 DML 语句共同完成</li><li>事务只和 DML 语句有关系，或者说 DML 语句才有事务【例如：A向B转账，A账户余额要 update..】</li></ul><p>这里举个例子，只有两条 update 语句都执行完才算完成一次转账操作。</p><p>银行账户转账这个业务是一个事务，完成一次转账操作需要两个 DML 语句，分别更新两个用户的账户。</p><p>两条 update 语句必须同时成功或者同时失败，最小单元，不可再分</p><p>当第一条 DML 语句执行完成之后，并不能修改底层数据库中文件数据</p><h1 id="事务四大特性（ACID）"><a href="#事务四大特性（ACID）" class="headerlink" title="事务四大特性（ACID）"></a>事务四大特性（ACID）</h1><p><strong>原子性（Atomicity）</strong>:事务是最小的工作单元，不可再分</p><p><strong>一致性（Consistency）</strong>:事务要求所有的 DML 语句操作的时候，必须保证同时成功或者同时失败</p><p><strong>隔离性（Isolation）</strong>:事务A和事务B之间具有隔离</p><p><strong>持久性（Durability）</strong>:是事务结束的保证，事务终结的标志</p><p>关于一些术语</p><ul><li>开启事务：Start Transaction</li><li>事务结束：End Transaction</li><li>提交事务：Commit Transaction</li><li>回滚事务：Rollback Transaction</li></ul><p>和事务有短的两条重要的 SQL 语句【TCL】：</p><ul><li>commit 提交</li><li>rollback 回滚</li></ul><p>事务开启的标志是什么？事务结束的标志是什么？</p><ul><li>开启的标志：<ul><li>任何一条 DML 语句（insert update delete）执行，标志事务的启动</li></ul></li><li>结束的标志：<ul><li>提交：成功的结束，将所有的 DML 语句操作历史记录和底层硬盘文件中的数据一次同步</li><li>回滚：失败的结束，将所有的 DML 语句操作历史记录全部清空</li></ul></li></ul><p>重点：</p><ul><li>在事务进行过程中，在结束之前，DML 语句是不会更改底层数据库文件中的数据的。只有在事务成功结束的时候，才会修改底层硬盘中的数据</li></ul><h1 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h1>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>上手Spring Cloud</title>
       <link href="/post/a22e1643.html"/>
       <url>/post/a22e1643.html</url>
@@ -36,35 +23,6 @@
         <tags>
             
             <tag> spring cloud </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>TCP协议和UDP协议</title>
-      <link href="/post/57bfe272.html"/>
-      <url>/post/57bfe272.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="传输层协议"><a href="#传输层协议" class="headerlink" title="传输层协议"></a>传输层协议</h1><p>传输层的作用是<strong>分段</strong>及<strong>封装</strong>应用层送来的数据，提供<strong>端到端</strong>的传输服务，在发送主机与接收主机之间构建逻辑通信。传输层包括两个协议 <strong>TCP 协议</strong>、<strong>UDP 协议</strong>。</p><h2 id="分段、封装、端到端"><a href="#分段、封装、端到端" class="headerlink" title="分段、封装、端到端"></a>分段、封装、端到端</h2><p><strong>分段</strong>的主要目的就是提高传输效率。应用层到传输层的数据是一个个字节，每一个字节都会有一个编号，这个标号就叫做<strong>字节号</strong>。如果传输层接收到一个个字节，然后再一个个传输到网络层，这样的效率没有将多个字节组合起来效率高。这里可以想象我们在运西瓜，一个个送西瓜没有把西瓜装成一车运送的效率高。所以传输层会将字节组成和报文段，报文段也有编号，在这里这些编号叫做<strong>序号</strong>。</p><p><strong>封装</strong>即表示加上相应的头部信息，将数据封装起来。</p><p><img src="http://image.shuiyujie.com/2019-10-02-19-10-19.png" alt="传输层协议"></p><p>如上图所示，我们在应用层有两个应用进程 AP1 和 AP2。假设它们是 Telnet 和 Http 服务，那么它们的端口就是 23 端口和 80 端口。与之对应的 AP3 和 AP4 同样也使用 23 端口和 80 端口。</p><p>此时，传输层就会通过端口建立<strong>端到端</strong>的连接，使对应的应用程序进行通信。这里需要注意的是，此处的端到端连接，并不是指在传输层直接建立链路，而是指传输层通过端口建立了逻辑上的连接。</p><p>总结：<strong>由应用程序产生应用进程，应用进程产生进程端口号，由端口号提供相关的服务。</strong></p><h2 id="两台主机进程间通信条件"><a href="#两台主机进程间通信条件" class="headerlink" title="两台主机进程间通信条件"></a>两台主机进程间通信条件</h2><ul><li>本地主机（IP地址定义）</li><li>本地进程（端口定义）</li><li>远程主机（IP地址定义）</li><li>远程进程（端口定义）</li></ul><h2 id="端口范围"><a href="#端口范围" class="headerlink" title="端口范围"></a>端口范围</h2><ul><li>熟知端口(著名端口)：0-1023，由ICANN指派和控制</li><li>注册端口：1024-49151,IANA不指派也不控制，但须注册</li><li>动态端口(短暂端口)：49152-65535，IANA不指派也不控制，无须注册</li></ul><h2 id="传输层的分用和复用"><a href="#传输层的分用和复用" class="headerlink" title="传输层的分用和复用"></a>传输层的分用和复用</h2><p><img src="http://image.shuiyujie.com/2019-10-02-19-28-53.png" alt="传输层的分用和复用"></p><h2 id="传输层协议和网络层协议的主要区别"><a href="#传输层协议和网络层协议的主要区别" class="headerlink" title="传输层协议和网络层协议的主要区别"></a>传输层协议和网络层协议的主要区别</h2><p><img src="http://image.shuiyujie.com/2019-10-02-19-29-24.png" alt="运输层协议和网络层协议的主要区别"></p><p>两台主机之间要进行通信，在应用层的应用程序会启动应用进程，应用进程会开放相应的端口。两台主机通过因特网进行互联，其中网络层 IP 协议的作用是提高<strong>主机之间的逻辑通信</strong>，而传输层的 TCP 协议和 UDP 协议则提供<strong>进程之间的逻辑通信</strong>。</p><h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><ul><li><p>面向连接：通讯双方交换数据之前必须建立连接</p></li><li><p>可靠的：多种确保可靠性的机制</p></li><li>字节流服务：8bit（1Byte）为最小单位构成的字节流</li></ul><p>套接字地址</p><ul><li>TCP 使用“连接”(而不仅仅是“端口”)作为最基本的抽象，同时将 TCP 连接的端点称为插口(socket)，或套接字、套接口。</li><li>插口和端口、IP 地址的关系是：ip地址+端口=套接字</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> computer science </category>
-          
-          <category> 计算机网络 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> tcp </tag>
-            
-            <tag> udp </tag>
             
         </tags>
       
@@ -2229,9 +2187,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
             
             <tag> opencv </tag>
             
@@ -2258,9 +2216,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       
@@ -2568,6 +2526,35 @@
     
     
     <entry>
+      <title>TCP协议和UDP协议</title>
+      <link href="/post/57bfe272.html"/>
+      <url>/post/57bfe272.html</url>
+      
+        <content type="html"><![CDATA[<p>传输层的作用是<strong>分段</strong>及<strong>封装</strong>应用层送来的数据，提供<strong>端到端</strong>的传输服务，在发送主机与接收主机之间构建逻辑通信。传输层包括两个协议 <strong>TCP 协议</strong>、<strong>UDP 协议</strong>。</p><a id="more"></a><h1 id="传输层协议"><a href="#传输层协议" class="headerlink" title="传输层协议"></a>传输层协议</h1><h2 id="分段、封装、端到端"><a href="#分段、封装、端到端" class="headerlink" title="分段、封装、端到端"></a>分段、封装、端到端</h2><p><strong>分段</strong>的主要目的就是提高传输效率。应用层到传输层的数据是一个个字节，每一个字节都会有一个编号，这个标号就叫做<strong>字节号</strong>。如果传输层接收到一个个字节，然后再一个个传输到网络层，这样的效率没有将多个字节组合起来效率高。这里可以想象我们在运西瓜，一个个送西瓜没有把西瓜装成一车运送的效率高。所以传输层会将字节组成和报文段，报文段也有编号，在这里这些编号叫做<strong>序号</strong>。</p><p><strong>封装</strong>即表示加上相应的头部信息，将数据封装起来。</p><p><img src="http://image.shuiyujie.com/2019-10-02-19-10-19.png" alt="传输层协议"></p><p>如上图所示，我们在应用层有两个应用进程 AP1 和 AP2。假设它们是 Telnet 和 Http 服务，那么它们的端口就是 23 端口和 80 端口。与之对应的 AP3 和 AP4 同样也使用 23 端口和 80 端口。</p><p>此时，传输层就会通过端口建立<strong>端到端</strong>的连接，使对应的应用程序进行通信。这里需要注意的是，此处的端到端连接，并不是指在传输层直接建立链路，而是指传输层通过端口建立了逻辑上的连接。</p><p>总结：<strong>由应用程序产生应用进程，应用进程产生进程端口号，由端口号提供相关的服务。</strong></p><h2 id="两台主机进程间通信条件"><a href="#两台主机进程间通信条件" class="headerlink" title="两台主机进程间通信条件"></a>两台主机进程间通信条件</h2><ul><li>本地主机（IP地址定义）</li><li>本地进程（端口定义）</li><li>远程主机（IP地址定义）</li><li>远程进程（端口定义）</li></ul><h2 id="端口范围"><a href="#端口范围" class="headerlink" title="端口范围"></a>端口范围</h2><ul><li>熟知端口(著名端口)：0-1023，由ICANN指派和控制</li><li>注册端口：1024-49151,IANA不指派也不控制，但须注册</li><li>动态端口(短暂端口)：49152-65535，IANA不指派也不控制，无须注册</li></ul><h2 id="传输层的分用和复用"><a href="#传输层的分用和复用" class="headerlink" title="传输层的分用和复用"></a>传输层的分用和复用</h2><p><img src="http://image.shuiyujie.com/2019-10-02-19-28-53.png" alt="传输层的分用和复用"></p><h2 id="传输层协议和网络层协议的主要区别"><a href="#传输层协议和网络层协议的主要区别" class="headerlink" title="传输层协议和网络层协议的主要区别"></a>传输层协议和网络层协议的主要区别</h2><p><img src="http://image.shuiyujie.com/2019-10-02-19-29-24.png" alt="运输层协议和网络层协议的主要区别"></p><p>两台主机之间要进行通信，在应用层的应用程序会启动应用进程，应用进程会开放相应的端口。两台主机通过因特网进行互联，其中网络层 IP 协议的作用是提高<strong>主机之间的逻辑通信</strong>，而传输层的 TCP 协议和 UDP 协议则提供<strong>进程之间的逻辑通信</strong>。</p><h1 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h1><p>传输控制协议 TCP 简介：</p><ul><li>面向连接的、可靠的、基于字节流的传输层通信协议</li><li>将应用层的数据流分割成报文段并发送给目标节点的 TCP 层</li><li>数据包都有序号，对方收到则发送 ACK 确认，未收到则重传</li><li>使用校验和来检验数据在传输过程中是否有误</li></ul><blockquote><p>核心问题</p><ul><li>TCP 包头很复杂，但是主要关注五个问题，顺序问题，丢包问题，连接维护，流量控制，拥塞控制；</li><li>连接的建立是经过三次握手，断开的时候四次挥手，一定要掌握的我画的那个状态图。</li></ul></blockquote><h2 id="TCP-协议基本概念"><a href="#TCP-协议基本概念" class="headerlink" title="TCP 协议基本概念"></a>TCP 协议基本概念</h2><p><img src="http://image.shuiyujie.com/2019-10-03-15-46-08.png" alt="套接字" style="zoom: 50%;"></p><p><strong>套接字地址</strong></p><ul><li>TCP 使用“连接”(而不仅仅是“端口”)作为最基本的抽象，同时将 TCP 连接的端点称为插口(socket)，或套接字、套接口。</li><li>插口和端口、IP 地址的关系是：ip地址+端口=套接字</li></ul><p><img src="http://image.shuiyujie.com/2019-10-03-15-49-39.png" alt="TCP段" style="zoom:50%;"></p><p>在传出层向网络层发送数据时要以分组为单位，而不是以字节流来发送的。TCP 协议把若干字节构成一个分组，我们可以把这样的分组称为报文段（Segment），这种报文段并不一定都一样长，可以几个字节，也可以是几千个字节。</p><ul><li><p><strong>缓存</strong>：数据流向的每一个方向上都有两种缓存，发送缓存和接收缓存。</p></li><li><p><strong>字节号</strong>：应用层向传输层发送的是一个个字节，在传输层会对这些字节进行编号，对字节的编号被称为<strong>字节号</strong>。字节号的范围为 0~$$(2^{32}-1)$$，它不是从 0 开始进行编号的，而是随机从某个编号开始顺序往下进行编号。</p></li><li><p><strong>序号</strong>：传输层向网络层发送的是一个个报文段，一个或者多个字节组合起来形成<strong>报文段</strong>，给报文段的编号就叫做序号。每个报文段的序号就是这个报文段中第一个字节数据的字节号。</p></li></ul><h2 id="TCP-协议报文段格式详解"><a href="#TCP-协议报文段格式详解" class="headerlink" title="TCP 协议报文段格式详解"></a>TCP 协议报文段格式详解</h2><p><img src="http://image.shuiyujie.com/2019-10-03-15-51-55.png" alt="TCP协议报文段"></p><ul><li>源端口和目的端口字段——各占 2 字节。端口是传输层与应用层的服务接口。传输层的复用和分用功能都要通过端口才能实现。</li><li>序号字段——占 4 字节。TCP 连接中传送的数据流中的每一个字节都编上一个序 号。序号字段的值则指的是本报文段所发送的数据的第一个字节的序号。</li><li>确认号字段——占 4 字节，是期望收到对方的下一个报文段的数据的第一个字节的序号。</li><li>首部长度——占 4 bit，它指出 TCP 首部共有多少个 4 字节，首部长度可以在 20~60 字节之间 。因此，这个字段值可以在5（5X4=20）至15（15X5=60）之间。</li><li>保留字段——占 6 bit，保留为今后使用，但目前应置为 0。</li><li>紧急比特 URG —— 当 <code>URG=1</code> 时，表明紧急指针字段有效。它告诉系统此报 文段中有紧急数据，应尽快传送(相当于高优先级的数据)。</li><li>确认比特 ACK —— 只有当<code>ACK=1</code> 时确认号字段才有效。当 <code>ACK=0</code>时，确认号无效。</li><li>推送比特 PSH —— 接收 TCP 收到 <code>PSH=1</code> 的报文段，就尽快地交付给接收应用进程，而不再等到整个缓存都填满了后再向上交付。</li><li>复位比特 RST —— 当 <code>RST=1</code> 时，表明 TCP 连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。</li><li>同步比特 SYN —— 同步比特 <code>SYN=1</code>，就表示这是一个连接请求或连接接受报文。</li><li>终止比特 FIN —— 用来释放一个连接。当<code>FIN=1</code> 时，表明此报文段的发 送端的数据已发送完毕，并要求释放运输连接。</li><li>窗口字段 —— 占 2 字节。窗口字段用来控制对方发送的数据量，单位为字节。TCP 连接的一端根据设置的缓存空间大小确定自己的接收窗口大小，然后通知对方以确定对方的发送窗口的上限。</li><li>检验和 —— 占 2 字节。检验和字段检验的范围包括首部和数据这两部分。在计 算检验和时，要在 TCP 报文段的前面加上 12 字节的伪首部。</li><li>紧急指针字段 —— 占 16 bit。紧急指针指出在本报文段中的紧急数据的最后一个 字节的序号。</li><li>选项字段 —— 长度可变 。 TCP 只规定了一种选项 ， 即 最大报文段长度 MSS (Maximum Segment Size)。MSS 告诉对方 TCP：“我的缓存所能接收的报文段 的数据字段的最大长度是 MSS 个字节。”</li><li>填充字段 —— 这是为了使整个首部长度是 4 字节的整数倍</li></ul><h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p><img src="http://image.shuiyujie.com/2019-10-03-19-46-12.png" alt="三次握手" style="zoom:50%;"></p><ul><li>第一次握手：客户端发起一个连接请求，传输 SYN 表示希望建立连接，传输随机产生报文段序号的<code>SEQ=x</code></li><li><p>第二次握手：服务器端收到客户端发起的连接请求，传输 SYN+ACK 表示确认连接，并且传输服务器端的报文段 <code>SEQ=y</code>，同时用 <code>ACK=x+1</code>表明希望客户端下一次传过来的报文序号为 x+1。</p></li><li><p>第三次握手：客户端收到服务器端的确认请求，根据服务器端的要求传输 <code>SEQ=x+1</code> 的报文，并且发送 <code>ACK=y+1</code> 确认服务器端的确认请求。</p></li></ul><blockquote><p>第一次握手：SYN, SEQ=x</p><p>第二次握手：SYN+ACK,SEQ=y,ACK=x+1</p><p>第三次握手：ACK,SEQ=x+1,ACK=y+1</p><p>三次握手建立连接的要点就是，我们通过 TCP 报文段中的 SYN 和 ACK 标志位来确认连接。同时需要注意报文的顺序问题，SEQ 在最开始是随机产生的，但是在建立连接的过程中要按照次序发送。</p></blockquote><h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p><img src="http://image.shuiyujie.com/2019-10-03-20-20-38.png" alt="四次挥手" style="zoom:50%;"></p><ul><li>第一次挥手：A 的 TCP 报文中 <code>FIN=1</code>，表示我这里的工作完成了，要和你断开连接。同时，带着自己的报文序号 <code>SEQ=x</code></li><li>第二次挥手：B 收到 A 的断开连接的请求，用 <code>ACK=x+1</code>表示我知道你要断开了，带上自己的报文 <code>SEQ=y</code>。此时连接处于半断开状态，也就是说 A 和 B 单方面表示要断开了，但是 B 这边可能还有一些事情要处理，没有正式通知 A 它这边已经准备好断开了。</li><li>第三次挥手：这是时候 B 的事情处理完了，它告诉 A 我这边一切 ok 了，我也准备断开了。所以 B 和 A 断开连接的请求一样，发送 <code>FIN=1</code> 同时发送 SEQ 和 ACK</li><li>第四次挥手：此时按说 A 收到 B 也说可以断开，彻底断开就完了。但是事情还没有结束。因为 A 如果不告诉 B 我已经收到你的断开请求，B 无法确认 A 是不是知道可以彻底断开了，B 就会一直发送请求，知道 A 进行回复。所以 A 要发送确认 B 断开请求的请求，即 <code>ACK=y+1,SEQ=x+1</code>。</li></ul><p>这次挥手结束我们会发现 A 处于 <code>TIME_WAIT</code> 状态，这是什么原因呢？其实也很简单，A 发送确认请求之后无法确认这个请求会到达 B，所以就多等 2MSL 的时间，这段时间如果收到 B 的 FIN 请求，则还有机会再进行确认。如果 A 直接进行 CLOSED 状态，很有可能 B 收不到这个确认请求。</p><h1 id="UDP-协议"><a href="#UDP-协议" class="headerlink" title="UDP 协议"></a>UDP 协议</h1><p>UDP 是无连接、不可靠的协议。UDP 协议的责任是创建进程到进程间的通信（由端口号完成），以及有限的差错控制，出现差错悄悄丢弃报文分组。</p><p><img src="http://image.shuiyujie.com/2019-10-03-19-05-28.png" alt="UDP" style="zoom:33%;"></p><h1 id="TCP-协议与-UDP-协议的对比"><a href="#TCP-协议与-UDP-协议的对比" class="headerlink" title="TCP 协议与 UDP 协议的对比"></a>TCP 协议与 UDP 协议的对比</h1><table><thead><tr><th>TCP</th><th><strong>UDP</strong></th></tr></thead><tbody><tr><td><strong>TCP 提供可靠交付。通过 TCP 连接传输的数据，无差错、不丢失、不重复、并且按序到达。</strong></td><td><strong>UDP 继承了 IP 包的特性，不保证不丢失，不保证按顺序到达。</strong></td></tr><tr><td><strong>TCP 是面向字节流的</strong>。发送的时候发的是一个流，没头没尾。</td><td>UDP 继承了 IP 的特性，基于数据报的，一个一个地发，一个一个地收。</td></tr><tr><td><strong>TCP 是可以有拥塞控制的</strong>。它意识到包丢弃了或者网络的环境不好了，就会根据情况调整自己的行为，看看是不是发快了，要不要发慢点。</td><td>UDP 就不会，应用让我发，我就发，管它洪水滔天</td></tr><tr><td><strong>TCP 其实是一个有状态服务</strong>，是有脑子的，里面精确地记着发送了没有，接收到没有，发送到哪个了，应该接收哪个了，错一点儿都不行。</td><td>UDP 则是无状态服务。** 通俗地说是没脑子的，天真无邪的，发出去就发出去了。</td></tr></tbody></table><p>TCP 协议和 UDP 协议都是传输层的通信协议。</p><ul><li><strong>协议特点</strong>：TCP 协议是面向连接的、可靠的、基于字节流的的传输层通信协议。UDP 是无连接、不可靠、基于数据报文段的通信协议；</li><li><strong>应用场景</strong>：TCP 相对于 UDP 来说首部开销更大，传输速率较慢，但是可靠性更高。所以，TCP 协议适用于对通信数据可靠性要求高的场景，比如说文件传输、邮件传输等；UDP 协议适合通信速度高的场景，比如说域名转换、视频直播等。</li></ul><h1 id="TCP-和-UDP-分别对应的常见应用层协议"><a href="#TCP-和-UDP-分别对应的常见应用层协议" class="headerlink" title="TCP 和 UDP 分别对应的常见应用层协议"></a>TCP 和 UDP 分别对应的常见应用层协议</h1><h2 id="TCP-对应的应用层协议"><a href="#TCP-对应的应用层协议" class="headerlink" title="TCP 对应的应用层协议"></a>TCP 对应的应用层协议</h2><ul><li>FTP：定义了文件传输协议，使用 21 端口。常说某某计算机开了 FTP 服务便是启动了文件传输服务。下载文件，上传主页，都要用到 FTP 服务。</li><li>Telnet：它是一种用于远程登陆的端口，用户可以以自己的身份远程连接到计算机上，通过这种端口可以提供一种基于 DOS 模式下的通信服务。如以前的 BBS 是-纯字符界面的，支持 BBS 的服务器将 23 端口打开，对外提供服务。</li><li>SMTP：定义了简单邮件传送协议，现在很多邮件服务器都用的是这个协议，用于发送邮件。如常见的免费邮件服务中用的就是这个邮件服务端口，所以在电子邮件设置-中常看到有这么 SMTP 端口设置这个栏，服务器开放的是 25 号端口。</li><li>POP3：它是和 SMTP 对应，POP3 用于接收邮件。通常情况下，POP3 协议所用的是 110 端口。也是说，只要你有相应的使用 POP3 协议的程序（例如 Fo-xmail 或 Outlook），就可以不以 Web 方式登陆进邮箱界面，直接用邮件程序就可以收到邮件（如是163 邮箱就没有必要先进入网易网站，再进入自己的邮-箱来收信）。</li><li>HTTP：从 Web 服务器传输超文本到本地浏览器的传送协议。</li></ul><h2 id="UDP-对应的应用层协议"><a href="#UDP-对应的应用层协议" class="headerlink" title="UDP 对应的应用层协议"></a>UDP 对应的应用层协议</h2><ul><li>DNS：用于域名解析服务，将域名地址转换为 IP 地址。DNS 用的是 53 号端口。</li><li>SNMP：简单网络管理协议，使用 161 号端口，是用来管理网络设备的。由于网络设备很多，无连接的服务就体现出其优势。</li><li>TFTP(Trival File Transfer Protocal)：简单文件传输协议，该协议在熟知端口 69 上使用 UDP 服务。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> computer science </category>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tcp </tag>
+            
+            <tag> udp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ARP协议与RARP协议</title>
       <link href="/post/c82e686d.html"/>
       <url>/post/c82e686d.html</url>
@@ -2602,35 +2589,6 @@
       <url>/post/4a388439.html</url>
       
         <content type="html"><![CDATA[<p>网络层协议主要包含：IP协议、ARP（地址解析协议）、RARP（反向地址解析协议）和 ICMP（互联网控制消息协议）。今天将会讲解 IP 协议的功能，IP 数据报的解析以及 IP 分片。</p><a id="more"></a><h1 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h1><p>IP协议功能</p><ul><li>寻址和路由</li><li>传递服务<ul><li>不可靠，可靠性由上层协议提供</li><li>无连接</li></ul></li><li>数据报分段和重组</li></ul><p>寻址和路由：比如要从北京往南京发一封邮件，找到南京这个地方就叫寻址；北京到南京有好多条路线，选择走哪条路就叫路由。</p><p>传递服务：IP 协议是不可靠的，其可靠性由上层协议来保证，比如用 TCP 协议来保证。IP 协议就是尽最大努力来做事，不保证一定能做到。</p><p>数据报的分段是充足：从北京往南京发货物，货物比较大，一车装不下。那就要拆成好几个部分发送。到达目的地再把各个部件组合起来。</p><p><img src="http://image.shuiyujie.com/2019-10-01-16-18-50.png" alt="IP协议"></p><p>IP 数据报由首部和数据部分组成。</p><table><thead><tr><th>字段</th><th>比特</th><th>作用</th></tr></thead><tbody><tr><td>版本</td><td>4 bit</td><td>IP协议的版本，一般为 4，即 IPv4</td></tr><tr><td>首部长度</td><td>4 bit</td><td>1111 可表示的最大值为 15 单位， 1个单位4个字节，所以首部长度的最大值是60字节</td></tr><tr><td>服务类型</td><td>8 bit</td><td>用来获得更好的服务，以前一直没有被人们使用</td></tr><tr><td>总长度</td><td>16 bit</td><td>首部长度 + 数据长度，单位为字节，<br>因此数据报的最大长度为 2^16-1=65535 字节。<br>总长度 &lt;= 最大传送单元 MTU</td></tr><tr><td>标识</td><td>16 bit</td><td>一个计数器，用来产生数据报的标识，同一段数据即使分片其标识任然是相同的</td></tr><tr><td>标志</td><td>3 bit</td><td>第1位，无意义<br>当 DF = 0 时，表示允许分片<br>当 MF = 1 时，表示后面“还有分片”。MF = 0 表示最后一个分片。</td></tr><tr><td>片偏移</td><td>13 bit</td><td>较长的分组在分片后，某片在原分组中的相对位置。片偏移以 8 个字节为偏移单位。</td></tr><tr><td>生存时间</td><td>8 bit</td><td>TTL (Time To Live)表示数据报在网络中的生存时间，一般以以「跳数」为单位</td></tr><tr><td>协议</td><td>8 bit</td><td>字段指出此数据报携带的数据使用何种协议。以便目的主机的 IP 层将数据部分上交给哪个处理过程。</td></tr><tr><td>首部检验和</td><td>16 bit</td><td>字段只检验数据报的首部不包括数据部分。这里不采用 CRC 检验码而采用简单的计算方法。</td></tr><tr><td>源地址</td><td>4 bit</td><td>发送数据的机器的 IP 地址</td></tr><tr><td>目的地址</td><td>4 bit</td><td>接收数据的机器的 IP 地址</td></tr></tbody></table><p><em>注：其中标识、标志和片偏移和 <a href="https://shuiyujie.com/post/4a388439.html">IP分片</a>相关。</em></p><p>设置 TTL 可以避免发生环路，避免网络资源的浪费。最开始 TTL 的计时单位是秒，现在一般使用跳数来表示，每经过一个路由器，这个值就会减少1，减到0的时候就会将这个报文丢弃。</p><p>IP 数据报首部的可变部分</p><ul><li>IP 首部的可变部分就是一个选项字段，用来支持排错、测量以及安全 等措施，内容很丰富</li><li>选项字段的长度可变，从 1 个比特到 32个比特不等，取决于所选择 的项目</li><li>增加首部的可变部分是为了增加 IP 数据报的功能，但这同时也使得 IP 数据报的首部长度成为可变的。这就增加了每一个路由器处理数据报的开销</li><li>实际上这些选项很少被使用</li></ul><h1 id="IP-分片"><a href="#IP-分片" class="headerlink" title="IP 分片"></a>IP 分片</h1><p><img src="http://image.shuiyujie.com/2019-10-01-17-17-04.png" alt="IP分片"></p><p>IP 数据报由首部和数据部分组成。数据部分存储我们要传输的数据，数据体积如果太大，就需要将其拆分开来，分成多次传输。这就是 <strong>IP 分片</strong>。</p><p>在 TCP/IP 分层中，数据链路层用 MTU（Maximum Transmission Unit，最大传输单元）来限制所能传输的数据包大小，MTU是指一次传送的数据最大长度，不包括数据链路层数据帧的帧头，如以太网的MTU为1500字节，实际上数据帧的最大长度为1512字节，其中以太网数据帧的帧头为12字节。</p><p>当发送的 IP 数据报的大小超过了 MTU 时，IP 层就需要对数据进行分片，否则数据将无法发送成功。</p><blockquote><p>比如说我们用火车从北京向南京送一批苹果，这批苹果就相当于是 IP 数据报中的数据部分。</p><p>但是火车的承载容量有限，火车最多能装多少就相当于 MTU。</p><p>一车装不下，我们把这一批苹果分装到不同的火车上，这就相当于 IP 分片。</p></blockquote><!-- more --><p>比如说上图中的数据大小为 3800 字节，将其分成三个数据包片：0~1399、1400~2799、2800~3799。</p><p>我们分片之后，我们还需要将其按照序号组装起来，如何组装就要通过 IP 数据报的首部来进行标记了。</p><p><img src="http://image.shuiyujie.com/2019-10-01-16-18-50.png" alt="IP协议"></p><p>在 IP 首部中有 4 个字节是和 IP 分片相关的：</p><ol><li>标识(identification) : 占 16 bit，其本质是一个计数器，用来产生数据报的标识，同一个数据报的各个分片的标识是一样的。</li><li>标志(flag)：占 3 bit，其中有1位用来表示是否有更多的分片，如果是最后一个分片，该标志位为0，否则为1<ol><li>R：目前只有后两个比特有意义。</li><li>DF：Don’t Fragment,“不分片”位，<code>DF=1</code>表示不分片；</li><li>MF：More Fragment,“更多的片”，除了最后一片外，其它每个组成数据报的片都要把比特置1</li></ol></li><li>片偏移：占13 bit，某片在原分组中的相对位置。片偏移以 8 个字节为偏移单位，所以要除以8</li></ol><p><strong>参考：</strong></p><p><a href="https://www.cnblogs.com/diegodu/p/4647644.html" target="_blank" rel="noopener">IP分片浅析</a></p><p><a href="https://blog.csdn.net/yusiguyuan/article/details/22782943" target="_blank" rel="noopener">TCP层的分段和IP层的分片之间的关系 &amp; MTU和MSS之间的关系</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> computer science </category>
-          
-          <category> 计算机网络 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> network </tag>
-            
-            <tag> tcp/ip </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>TCP、IP协议</title>
-      <link href="/post/f305b41d.html"/>
-      <url>/post/f305b41d.html</url>
-      
-        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/2019-10-02-19-11-05.png" alt="协议"></p><ul><li><p>IP</p></li><li><p>ARP</p></li><li><p>RARP</p></li><li><p>ICMP</p></li></ul><p>  传输层</p><ul><li>TCP</li></ul>]]></content>
       
       
       <categories>
@@ -2765,9 +2723,36 @@
     
     
     <entry>
+      <title>MySQL中的事务</title>
+      <link href="/post/ca802349.html"/>
+      <url>/post/ca802349.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务是不可再分的工作单元，一个事务对应一个完整的业务，一个业务由一条或者多条 DML 语句构成。</p><p>比如说张三向李四转账，这是一个业务。转账的操作需要扣除张三的余额，增加李四的余额，这就是两条 update 语句，共同构成了转账这个业务。只执行一条 update 语句代表事务执行失败，需要回滚；两条都执行成功，一个事务才算执行成功，就会把数据写到 MySQL 底层数据文件中。</p><ul><li>一个最小的不可再分的工作单元</li><li>通常一个事务对应的是一个完整的业务</li><li>一个完整的业务需要批量的 DML 语句共同完成</li><li>事务只和 DML 语句有关系，或者说 DML 语句才有事务</li></ul><p>在事务进行过程中，在结束之前，DML 语句是不会更改底层数据库文件中的数据的。只有在事务成功结束的时候，才会修改底层硬盘中的数据。</p><p><strong>事务开启的标志是什么？事务结束的标志是什么？</strong></p><ul><li>开启的标志：<ul><li>任何一条 DML 语句（insert update delete）执行，标志事务的启动</li></ul></li><li>结束的标志：<ul><li>提交：成功的结束，将所有的 DML 语句操作历史记录和底层硬盘文件中的数据一次同步</li><li>回滚：失败的结束，将所有的 DML 语句操作历史记录全部清空</li></ul></li></ul><p>关于一些术语</p><ul><li>开启事务：Start Transaction</li><li>事务结束：End Transaction</li><li>提交事务：Commit Transaction</li><li>回滚事务：Rollback Transaction</li></ul><p>和事务有短的两条重要的 SQL 语句【TCL】：</p><ul><li>commit 提交</li><li>rollback 回滚</li></ul><blockquote><p>DML （Data Manipulation Language 数据操作语言）</p><ul><li>insert 将记录插入到数据库 </li><li>update 修改数据库的记录 </li><li>delete 删除数据库的记录</li><li>commit  提交数据</li><li>savepoint  设置回滚点</li><li>rollback   回滚</li></ul><p>当执行DML命令如果没有提交，将不会被其他会话看到。除非在DML命令之后执行了DDL命令或DCL命令，或用户退出会话，或终止实例，此时系统会自动发出commit命令，使未提交的DML命令提交。    </p></blockquote><h1 id="事务四大特性（ACID）"><a href="#事务四大特性（ACID）" class="headerlink" title="事务四大特性（ACID）"></a>事务四大特性（ACID）</h1><p><strong>原子性（Atomicity）</strong>:事务是最小的工作单元，不可再分</p><p><strong>一致性（Consistency）</strong>:事务要求所有的 DML 语句操作的时候，必须保证同时成功或者同时失败</p><p><strong>隔离性（Isolation）</strong>:事务A和事务B之间具有隔离</p><p><strong>持久性（Durability）</strong>:是事务结束的保证，事务终结的标志</p><h1 id="事务的提交和回滚"><a href="#事务的提交和回滚" class="headerlink" title="事务的提交和回滚"></a>事务的提交和回滚</h1><p>在 MySQL 数据库管理系统中，默认情况下，事务是自动提交的。也就是说，只要执行一条 DML 语句，开启了事务，并且提交了事务</p><p>这种在动提交机制是可以关闭的：</p><p>关闭方式一：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 手动开启事务</span><br><span class="line">start transaction;</span><br><span class="line"># 执行 DML 语句</span><br><span class="line">insert into t_user(name) values(&apos;zhangsan&apos;);</span><br><span class="line"># 【事务成功的结束】手动提交事务</span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 手动开启事务</span><br><span class="line">start transaction;</span><br><span class="line"># 执行 DML 语句</span><br><span class="line">insert into t_user(name) values(&apos;zhangsan&apos;);</span><br><span class="line"># 【事务失败的结束】手动回滚事务</span><br><span class="line">rollback;</span><br></pre></td></tr></table></figure><p>关闭方式二：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 只对当前会话有效</span><br><span class="line">SET AUTOCOMMIT = OFF;</span><br><span class="line">SET AUTOCOMMIT = ON;</span><br><span class="line"># 或者</span><br><span class="line">SET SESSION AUTOCOMMIT = OFF;</span><br><span class="line">SET SESSION AUTOCOMMIT = ON;</span><br><span class="line"></span><br><span class="line"># 查看变量状态</span><br><span class="line">show variables like %auto%;</span><br></pre></td></tr></table></figure><h1 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h1><p>事务的四大特性之一：隔离性（isolation），即事务 A 和事务 B 之间具有一定的隔离级别。</p><p>脏读、不可重复读、幻读</p><ol><li>读未提交 READ_UNCOMMITTED: 事务 A 未提交的数据，事务 B 可以读取到，可能会导致脏读、幻读或不可重复读；这种隔离级别是最低级别，这种隔离级别一般在理论上存在，数据库默认的隔离级别一般都高于这个级别。</li><li>读已提交 READ_COMMITTED: 事务 A 提交了数据，事务 B 才能读取到。换句话说，对方事务提交之后的数据，我当前事务才能读取到。这种隔离级别可以避免脏读，但是这种隔离级别会导致“不可重复读”。</li><li>可重复读 REPEATABLE_READ: 事务 A 提交之后的数据，事务 B 读取不到，事务 B 是可以重复读取数据的。可以阻止脏读和不可重复读，但幻读仍有可能发生；MySQL 默认的隔离级别就是可重复读。</li><li>串行化 SERIALIZABLE: 最高的隔离级别，完全服从 ACID 的隔离级别。事务 A 在操作数据表中数据时，事务 B 需要排队等待。该级别可以防止脏读、不可重复读以及幻读。但是由于无法并发，将严重影响程序的性能。通常情况下也不会用到该级别。</li></ol><table><thead><tr><th>隔离级别</th><th>脏读</th><th>不可重复读</th><th>幻读</th></tr></thead><tbody><tr><td>读未提交</td><td>✔︎</td><td>✔︎</td><td>✔︎</td></tr><tr><td>读已提交</td><td>✘</td><td>✔︎</td><td>✔︎</td></tr><tr><td>可重复读</td><td>✘</td><td>✘</td><td>对 InnoDB 不可能</td></tr><tr><td>串行化</td><td>✘</td><td>✘</td><td>✘</td></tr></tbody></table><h2 id="设置服务器缺省隔离级别"><a href="#设置服务器缺省隔离级别" class="headerlink" title="设置服务器缺省隔离级别"></a>设置服务器缺省隔离级别</h2><h3 id="通过修改配置文件设置"><a href="#通过修改配置文件设置" class="headerlink" title="通过修改配置文件设置"></a>通过修改配置文件设置</h3><p>可以再 my.ini 文件中使用 transaction-isolation 选项来设置服务器的缺省事务隔离级别</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">– READ-UNCOMMITTED</span><br><span class="line">– READ-COMMITTED</span><br><span class="line">– REPEATABLE-READ</span><br><span class="line">– SERIALIZABLE</span><br><span class="line"></span><br><span class="line">• 例如：</span><br><span class="line">[mysqld]</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br></pre></td></tr></table></figure><h3 id="通过命令动态设置隔离级别"><a href="#通过命令动态设置隔离级别" class="headerlink" title="通过命令动态设置隔离级别"></a>通过命令动态设置隔离级别</h3><ul><li><p>隔离级别也可以在运行的服务器中动态设置，应使用<code>SET TRANSACTION ISOLATION LEVEL</code>语句</p></li><li><p>其语法模式为：</p></li></ul><p><code>SET [GLOBAL | SESSION] TRANSACTION ISOLATION LEVEL &lt;isolation-level&gt;</code></p><p>其中的<code>&lt;isolation-level&gt;</code>可以是：</p><ul><li><ul><li>READ UNCOMMITTED</li><li>READ COMMITTED</li><li>REPEATABLE READ</li><li>SERIALIZABLE</li></ul></li><li><p>例如： <code>SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;</code></p></li></ul><h3 id="隔离级别的作用范围"><a href="#隔离级别的作用范围" class="headerlink" title="隔离级别的作用范围"></a>隔离级别的作用范围</h3><ul><li>事务隔离级别的作用范围分为两种： <ul><li>全局级：对所有的会话有效 </li><li>会话级：只对当前的会话有效 </li></ul></li></ul><p>例如，设置会话级隔离级别为 READ COMMITTED ：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br><span class="line">SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br></pre></td></tr></table></figure><ul><li>设置全局级隔离级别为READ COMMITTED ：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED；</span><br></pre></td></tr></table></figure><h3 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h3><ul><li><p>服务器变量tx_isolation（包括会话级和全局级两个变量）中保存着当前的会话隔离级别。  </p></li><li><p>为了查看当前隔离级别，可访问tx_isolation变量： </p></li></ul><p>查看会话级的当前隔离级别：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT @@tx_isolation;</span><br><span class="line">SELECT @@session.tx_isolation;</span><br></pre></td></tr></table></figure><p>查看全局级的当前隔离级别： </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT @@global.tx_isolation;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> 事务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MySQL中的存储引擎</title>
-      <link href="/post/undefined.html"/>
-      <url>/post/undefined.html</url>
+      <link href="/post/1c3a568a.html"/>
+      <url>/post/1c3a568a.html</url>
       
         <content type="html"><![CDATA[<p>MySQL中常用的三种存储引擎分别是： MyISAM存储引擎、innoDB存储引擎、MEMORY存储引擎。本文将对这三种存储引擎作出重点介绍，最后比较它们的使用场景。</p><a id="more"></a><h1 id="存储引擎的使用"><a href="#存储引擎的使用" class="headerlink" title="存储引擎的使用"></a>存储引擎的使用</h1><ul><li>数据库中的各表（在创建表时）指定的存储引擎来处理</li><li>服务器可用的引擎依赖于以下因素<ul><li>MySQL 版本</li><li>服务器在开发时如何被配置</li><li>启动选项</li></ul></li></ul><p>怎么看表用的什么存储引擎。</p><h1 id="MyISAM-存储引擎"><a href="#MyISAM-存储引擎" class="headerlink" title="MyISAM 存储引擎"></a>MyISAM 存储引擎</h1><ul><li>MyISAM 存储引擎是 MySQL 最常用的引擎</li><li>它管理的表具有以下特征<ul><li>使用三个文件表示表<ul><li>格式文件 —— 存储表结构的定义（mytable.frm）</li><li>数据文件 —— 存储表行的结果（mytable.MYD）</li><li>索引文件 —— 存储表上的索引（mytable.MYI）</li></ul></li><li>灵活的 AUTO_INCREMENT 字段处理</li><li>可被转换为压缩、只读表来节省空间</li></ul></li></ul><h1 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h1><ul><li>InnoDB 存储引擎是 MySQL 默认的存储引擎</li><li>它管理的表具有以下特征<ul><li>每个 InnoDB 表在数据库目录中以 .frm 格式文件表示</li><li>InnoDB 表空间 tablespace 被用于存储表的内容</li><li>提供一组用来记录事务性活动的日志文件</li><li>用 COMMIT、SAVEPOINT 及 ROLLBACK 支持事务处理</li><li>提供全 ACID 兼容</li><li>在 MySQL 服务器崩溃后提供自动恢复</li><li>多版本（MVCC）和行级锁定</li><li>支持外键及引用的完整性，包括级联删除和更新</li></ul></li></ul><h1 id="MEMOEY-存储引擎"><a href="#MEMOEY-存储引擎" class="headerlink" title="MEMOEY 存储引擎"></a>MEMOEY 存储引擎</h1><ul><li>使用MEMORY存储引擎的表，其数据存储在内存中，且行的长度固定，这两个特点使得MEMORY存储引擎非常快</li><li><p>MEMORY 存储引擎具有有以下特征</p><ul><li>在数据库目录内，每个表均以.frm格式的文件表示。</li><li>表数据及索引被存储在内存中。</li><li>表级锁机制。</li><li>不能包含TEXT或BLOB字段。</li></ul></li><li><p>MEMORY存储引擎以前被称为HEAP引擎</p></li></ul><h1 id="选择合适的存储引擎"><a href="#选择合适的存储引擎" class="headerlink" title="选择合适的存储引擎"></a>选择合适的存储引擎</h1><p>当创建表时，应根据表的应用场景选择合适的存储引擎</p><ul><li>MyISAM 表最适合于大量的数据读而少量数据更新的混合操作。MyISAM 表的另一种适用情形是使用压缩的只读表。</li><li>如果查询中包含较的数据更新操作，应使用 InnoDB。其行级锁机制和多版本的支持为数据读取和更新的混合操作提供了良好的并发机制。</li><li>使用 MEMORY 存储引擎存储非永久需要的数据，或者是能够从基于磁盘的表中重新生成的数据。</li></ul>]]></content>
       
