@@ -47,9 +47,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> deeplearning </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       
@@ -1478,31 +1478,6 @@
     
     
     <entry>
-      <title>OpenCV-Mat表达式</title>
-      <link href="/post/1208a55a.html"/>
-      <url>/post/1208a55a.html</url>
-      
-        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> OpenCV </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> opencv </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>图像处理——图像降噪</title>
       <link href="/post/d966aba8.html"/>
       <url>/post/d966aba8.html</url>
@@ -1522,6 +1497,31 @@
             <tag> opencv </tag>
             
             <tag> 图像处理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OpenCV-Mat表达式</title>
+      <link href="/post/1208a55a.html"/>
+      <url>/post/1208a55a.html</url>
+      
+        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> OpenCV </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
             
         </tags>
       
@@ -2187,9 +2187,9 @@
       
         <tags>
             
-            <tag> ubuntu </tag>
-            
             <tag> linux </tag>
+            
+            <tag> ubuntu </tag>
             
             <tag> opencv </tag>
             
@@ -2216,9 +2216,9 @@
       
         <tags>
             
-            <tag> ubuntu </tag>
-            
             <tag> linux </tag>
+            
+            <tag> ubuntu </tag>
             
         </tags>
       
@@ -2518,6 +2518,33 @@
             <tag> linux </tag>
             
             <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Http状态码</title>
+      <link href="/post/140645a5.html"/>
+      <url>/post/140645a5.html</url>
+      
+        <content type="html"><![CDATA[<table><thead><tr><th></th><th>类别</th><th>原因短语</th></tr></thead><tbody><tr><td>1xx</td><td>Informational（信息性状态码）</td><td>接收的请求正在处理</td></tr><tr><td>2xx</td><td>Success（成功状态码）</td><td>请求正常处理完毕</td></tr><tr><td>3xx</td><td>Redirection（重定向状态码）</td><td>需要进行附加操作以完成请求</td></tr><tr><td>4xx</td><td>Client Error（客户端错误状态码）</td><td>服务器无法处理请求</td></tr><tr><td>5xx</td><td>Server Error（服务器错误状态码）</td><td>服务器处理请求出错</td></tr></tbody></table><a id="more"></a><ul><li><strong>1XX 信息</strong><ul><li>100 Continue ：表明到目前为止都很正常，客户端可以继续发送请求或者忽略这个响应。</li></ul></li><li><strong>2XX 成功</strong><ul><li>200 OK</li><li>204 No Content ：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。</li><li>206 Partial Content ：表示客户端进行了范围请求，响应报文包含由 Content-Range 指定范围的实体内容。</li></ul></li><li><strong>3XX 重定向</strong><ul><li>301 Moved Permanently ：永久性重定向；</li><li>302 Found ：临时性重定向；</li><li>303 See Other ：和 302 有着相同的功能，但是 303 明确要求客户端应该采用 GET 方法获取资源。</li><li>304 Not Modified ：如果请求报文首部包含一些条件，例如：If-Match，If-Modified-Since，If-None-Match，If-Range，If-Unmodified-Since，如果不满足条件，则服务器会返回 304 状态码。</li><li>307 Temporary Redirect ：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。</li></ul></li><li><strong>4XX 客户端错误</strong><ul><li>400 Bad Request ：请求报文中存在语法错误。</li><li>401 Unauthorized ：该状态码表示发送的请求需要有认证信息（BASIC 认证、DIGEST 认证）。如果之前已进行过一次请求，则表示用户认证失败。</li><li>403 Forbidden ：请求被拒绝。</li><li>404 Not Found</li></ul></li><li><strong>5XX 服务器错误</strong><ul><li>500 Internal Server Error ：服务器正在执行请求时发生错误；</li><li>503 Service Unavailable ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> computer science </category>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> http </tag>
             
         </tags>
       
