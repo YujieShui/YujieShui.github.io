@@ -466,9 +466,9 @@
       
         <tags>
             
-            <tag> 图像处理 </tag>
-            
             <tag> ffmpeg </tag>
+            
+            <tag> 图像处理 </tag>
             
             <tag> 音频处理 </tag>
             
@@ -1990,81 +1990,6 @@
     
     
     <entry>
-      <title>zookeepre源码编译</title>
-      <link href="/post/5ddebf1a.html"/>
-      <url>/post/5ddebf1a.html</url>
-      
-        <content type="html"><![CDATA[<p>我们首先 fork 一份 zookeeper 在 github 上的项目，地址为：<a href="https://github.com/apache/zookeeper。再将" target="_blank" rel="noopener">https://github.com/apache/zookeeper。再将</a> fork 之后的项目 clone 到本地。</p><p>我们不使用最新版本的代码，而是使用 3.4.11 这个版本的，所以我们根据 tag，checkout 一个分支出来：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b zookeeper3.4.11 release-3.4.11</span><br></pre></td></tr></table></figure><p>由于 zookeeper 是用 ant 构建的，所以要安装 ant。我使用的是 macOS，直接用 homebrew 安装比较方便：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install ant</span><br></pre></td></tr></table></figure><p>之后用 ant 构建一个 eclipse 项目</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ant eclipse</span><br></pre></td></tr></table></figure><p>最后，将导入项目。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 分布式 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> zookeeper </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>zookeeper的基本概念</title>
-      <link href="/post/e7973620.html"/>
-      <url>/post/e7973620.html</url>
-      
-        <content type="html"><![CDATA[<p>本文介绍 zookeeper 的一些基本概念。</p><a id="more"></a><h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><ul><li>分层结构</li><li>树形结构中的每个节点叫做Znode</li><li>每个Znode都有数据ͧ(byte[]类型ͨ)，也可以有子节点</li><li><p>节点路径</p><ul><li>斜线分隔:/Zoo/Duck</li><li>没有相对路径</li></ul></li><li><p>通过数据结构stat来孓储数据的变化 ACL的变化和时间戳 </p></li><li>数据发生变化时，版本号会递增</li><li>可以对Znode中的数据进行读写操作</li></ul><h1 id="数据节点-Znode"><a href="#数据节点-Znode" class="headerlink" title="数据节点(Znode)"></a>数据节点(Znode)</h1><ul><li>不是机器的意思</li><li>Zk树形结构中的数据节点，用于存储数据</li><li>持久节点：一旦创建,除非主动调用删除操作,否则一直存储在zk上</li><li>临时节点：与客户端的会话绑定，一旦客户端绘画是小，这个客户端创建的所有临时节点都会被移除</li><li>SEQUENTIAL Znode：创建临时节点时，如果设置属性 SEQUENTIAL，则会自动在节点名后面追加一个整型数字</li></ul><h1 id="持久节点"><a href="#持久节点" class="headerlink" title="持久节点"></a>持久节点</h1><p>启动一个 zkCli 创建一个持久节点，即使创建节点的会话关闭，该节点也不会被删除。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 10] create /node nodedata</span><br><span class="line">Created /node</span><br><span class="line">[zk: localhost:2181(CONNECTED) 11] ls /</span><br><span class="line">[node, zookeeper]</span><br></pre></td></tr></table></figure><h2 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h2><p>启动一个 zkCli 之后创建临时节点</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 3] create -e /node1 node1data</span><br><span class="line">Created /node1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /</span><br><span class="line">[zookeeper, node1]</span><br></pre></td></tr></table></figure><p>将创建临时节点的会话关闭之后，临时节点将会消失。(可以再起一个 zkCli 验证)</p><h2 id="顺序节点"><a href="#顺序节点" class="headerlink" title="顺序节点"></a>顺序节点</h2><p>创建数据节点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 12] create -s /node/seq 321</span><br><span class="line">Created /node/seq0000000000</span><br><span class="line">[zk: localhost:2181(CONNECTED) 13] create -s /node/seq 322</span><br><span class="line">Created /node/seq0000000001</span><br><span class="line">[zk: localhost:2181(CONNECTED) 15] ls /node</span><br><span class="line">[seq0000000000, seq0000000001]</span><br></pre></td></tr></table></figure><h1 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h1><ul><li>Leader: 为客户端提供读和写服务</li><li>Follower: 提供读服务，所有写服务都需要转交给Leader角色，参与选举</li><li>Observer: 提供读服，不参与选举过程，一般是为了增强zk集群的读请求并发能力</li></ul><h1 id="会发-Session"><a href="#会发-Session" class="headerlink" title="会发(Session)"></a>会发(Session)</h1><ul><li>Zk的客户与zk的服务端之间的连接</li><li>通过心跳检测保持客户端连接的存活</li><li>接收来自服务端的watch事件通知</li><li>可以设置超时时间</li></ul><h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><ul><li>Version: 当前 Znode 的版本</li><li>Cversion：当前 Znode 的子节点的版本</li><li>Aversion：当前 Znode 的 ANL(访问控制)版本</li></ul><h1 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h1><ul><li>作用于 Znode 节点上</li><li>多种事件通知：数据更新，子节点状态等</li></ul><h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><ul><li>Access Control Lists</li><li>类似于linux/unix的权限控制</li><li><strong>CREATE</strong>：创建子节点的权限</li><li>READ:获取节点数据和子节点列表的权限</li><li>WRITE：更新节点数据的权限</li><li><strong>DELETE</strong>：删除子节点的权限</li><li>ADMIN：设置节点ACL的权限</li></ul><p><em>CREATE和DELETE是针对子节点的权限控制。</em></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 分布式 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> zookeeper </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>zookeeper概述</title>
-      <link href="/post/6e7f6d53.html"/>
-      <url>/post/6e7f6d53.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="Q-zookeeper-解决了什么问题？"><a href="#Q-zookeeper-解决了什么问题？" class="headerlink" title="Q: zookeeper 解决了什么问题？"></a>Q: zookeeper 解决了什么问题？</h1><p><img src="http://image.shuiyujie.com/2019-09-20-07-37-54.png" alt="分布式系统的问题"></p><p>相对于开发在一台计算机上运行的单个程序，<strong>如何让一个应用中多个独立的程序协同工作</strong>是一件非常困难的事情。开发这样的应用，很容易让很多开发人员陷入如何使多个程序协同工作的逻辑中，最后导致没有时间更好地思考和实现他们自己的应用程序逻辑；又或者开发人员对协同逻辑关注不够，只是用很少的时间开发了一个简单脆弱的主协调器，导致不可靠的单一失效点。</p><a id="more"></a><h1 id="Q-zookeeper-是怎么解决应用中多个独立程序协同工作的问题的？"><a href="#Q-zookeeper-是怎么解决应用中多个独立程序协同工作的问题的？" class="headerlink" title="Q: zookeeper 是怎么解决应用中多个独立程序协同工作的问题的？"></a>Q: zookeeper 是怎么解决应用中多个独立程序协同工作的问题的？</h1><p><img src="http://image.shuiyujie.com/2019-09-20-07-39-34.png" alt="协调者"></p><p>ZooKeeper从文件系统API得到启发，提供一组简单的API，使得开发人员可以实现通用的协作任务，包括<strong>选举主节点、管理组内成员关系、管理元数据等</strong>。ZooKeeper包括一个应用开发库（主要提供Java和C两种语言的API）和一个用Java实现的服务组件。ZooKeeper的服务组件运行在一组专用服务器之上，保证了高容错性和可扩展性。</p><p>当你决定使用ZooKeeper来设计应用时，最好将应用数据和协同数据独立开。比如，网络邮箱服务的用户对自己邮箱中的内容感兴趣，但是并不关心由哪台服务器来处理特定邮箱的请求。在这个例子中，邮箱内容就是应用数据，而从邮箱到某一台邮箱服务器之间的映射关系就是<strong>协同数据（或称元数据）</strong>。整个ZooKeeper服务所管理的就是后者</p><h1 id="Q-zookeeper的应用场景？"><a href="#Q-zookeeper的应用场景？" class="headerlink" title="Q: zookeeper的应用场景？"></a>Q: zookeeper的应用场景？</h1><ul><li><p>Apache HBase：HBase是一个通常与Hadoop一起使用的数据存储仓库。在HBase中，ZooKeeper用于选举一个集群内的主节点，以便跟踪可用的服务器，并保存集群的元数据。</p></li><li><p>Apache Kafka：Kafka是一个基于发布-订阅（pub-sub）模型的消息系统。其中ZooKeeper用于检测崩溃，实现主题（topic）的发现，并保持主题的生产和消费状态。</p></li><li>Apache Solr：Solr是一个企业级的搜索平台。Solr的分布式版本命名为SolrCloud，它使用ZooKeeper来存储集群的元数据，并协作更新这些元数据。</li><li>Yahoo！Fetching Service：Yahoo！Fetching Service是爬虫实现的一部分，通过缓存内容的方式高效地获取网页信息，同时确保满足网页服务器的管理规则（比如robots.txt文件）。该服务采用ZooKeeper实现主节点选举、崩溃检测和元数据存储。</li><li>Facebook Messages：Facebook推出的这个应用（<a href="http://on.fb.me/1a7uViK）集成了email、短信、Facebook聊天和Facebook收件箱等通信通道。该应用将ZooKeeper作为控制器，用来实现数据分片、故障恢复和服务发现等功能。" target="_blank" rel="noopener">http://on.fb.me/1a7uViK）集成了email、短信、Facebook聊天和Facebook收件箱等通信通道。该应用将ZooKeeper作为控制器，用来实现数据分片、故障恢复和服务发现等功能。</a></li></ul><h1 id="Q-zookeeper不适用的场景？"><a href="#Q-zookeeper不适用的场景？" class="headerlink" title="Q: zookeeper不适用的场景？"></a><strong>Q: zookeeper不适用的场景？</strong></h1><p>整个ZooKeeper的服务器集群管理着应用协作的关键数据。ZooKeeper不适合用作海量数据存储。对于需要存储海量的应用数据的情况，我们有很多备选方案，比如说数据库和分布式文件系统等。因为不同的应用有不同的需求，如对一致性和持久性的不同需求，所以在设计应用时，最佳实践还是应该将应用数据和协同数据独立开。</p><h1 id="Q-使用-zookeeper-时需要注意的问题？"><a href="#Q-使用-zookeeper-时需要注意的问题？" class="headerlink" title="Q: 使用 zookeeper 时需要注意的问题？"></a><strong>Q: 使用 zookeeper 时需要注意的问题？</strong></h1><ul><li>消息延迟：消息传输可能会发生任意延迟，比如，因为网络拥堵。这种任意延迟可能会导致不可预期的后果。比如，根据基准时钟，进程P先发送了一个消息，之后另一个进程Q发送了消息，但是进程Q的消息也许会先完成传送。</li><li>处理器性能：操作系统的调度和超载也可能导致消息处理的任意延迟。当一个进程向另一个进程发送消息时，整个消息的延时时间约等于发送端消耗的时间、传输时间、接收端的处理时间的总和。如果发送或接收过程需要调度时间进行处理，消息延时会更高。</li><li>时钟偏移：使用时间概念的系统并不少见，比如，确定某一时间系统中发生了哪些事件。处理器时钟并不可靠，它们之间也会发生任意的偏移。因此，依赖处理器时钟也许会导致错误的决策。</li></ul><h1 id="Q-ZooKeeper的成功和注意事项"><a href="#Q-ZooKeeper的成功和注意事项" class="headerlink" title="Q: ZooKeeper的成功和注意事项"></a><strong>Q: ZooKeeper的成功和注意事项</strong></h1><p>不得不指出，完美的解决方案是不存在的，我们重申ZooKeeper无法解决分布式应用开发者面对的所有问题，而是为开发者提供了一个优雅的框架来处理这些问题。多年以来，ZooKeeper在分布式计算领域进行了大量的工作。Paxos算法<a href="evernotecid://E52A53DA-6D02-407A-9C28-91264ED3E6A7/appyinxiangcom/663849/ENNote/p4132#" target="_blank" rel="noopener">[1]</a>和虚拟同步技术（virtual synchrony）<a href="evernotecid://E52A53DA-6D02-407A-9C28-91264ED3E6A7/appyinxiangcom/663849/ENNote/p4132#" target="_blank" rel="noopener">[2]</a>给ZooKeeper的设计带来了很大影响，通过这些技术可以无缝地处理所发生的某些变化或情况，并提供给开发者一个框架，来应对无法自动处理的某些情况。</p><p>ZooKeeper最初由雅虎研究院开发，用于处理大量的大型分布式应用。我们注意到，这些应用在分布式协作方面的处理方式并不妥当，这些系统的部署存在单点故障问题或很脆弱，另一方面，开发者在分布式协作方面花费了大量的时间和精力，导致开发者没有足够的资源来关注应用本身的功能逻辑。我们还注意到，这些应用都在基本协作方面有相同的需求。因此，我们开始着手设计一套通用的解决方案，通过某些关键点让我们可以一次实现就能应用于大多数不同的应用中。ZooKeeper已经被证实更加通用，其受欢迎程度超越了我们的想象。</p><p>多年来，我们发现人们可以很容易地部署ZooKeeper集群，轻松通过这个集群开发应用，但实际上，在使用ZooKeeper时，有些情况ZooKeeper自身无法进行决策而是需要开发者自己做出决策，有些开发者并不完全了解这些。编写本书的其中一个目的就是让开发者了解如何更有效地使用ZooKeeper，以及为什么需要这样做。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 分布式 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> zookeeper </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>C语言学习笔记-静态库、动态库的制作和使用</title>
       <link href="/post/62b06016.html"/>
       <url>/post/62b06016.html</url>
@@ -3134,6 +3059,33 @@
     
     
     <entry>
+      <title>Reids与Memcached的区别</title>
+      <link href="/post/877d1a33.html"/>
+      <url>/post/877d1a33.html</url>
+      
+        <content type="html"><![CDATA[<h4 id="Redis-支持复杂的数据结构"><a href="#Redis-支持复杂的数据结构" class="headerlink" title="Redis 支持复杂的数据结构"></a>Redis 支持复杂的数据结构</h4><p>redis 相比 memcached 来说，拥有<a href="https://github.com/shishan100/Java-Interview-Advanced/blob/master/docs/high-concurrency/redis-data-types.md" target="_blank" rel="noopener">更多的数据结构</a>，能支持更丰富的数据操作。如果需要缓存能够支持更复杂的结构和操作， redis 会是不错的选择。</p><h4 id="Redis-原生支持集群模式"><a href="#Redis-原生支持集群模式" class="headerlink" title="Redis 原生支持集群模式"></a>Redis 原生支持集群模式</h4><p>在 redis3.x 版本中，便能支持 cluster 模式，而 memcached 没有原生的集群模式，需要依靠客户端来实现往集群中分片写入数据。</p><h4 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h4><p>由于 redis 只使用<strong>单核</strong>，而 memcached 可以使用<strong>多核</strong>，所以平均每一个核上 redis 在存储小数据时比 memcached 性能更高。而在 100k 以上的数据中，memcached 性能要高于 redis。虽然 redis 最近也在存储大数据的性能上进行优化，但是比起 memcached，还是稍有逊色。</p><a id="more"></a>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分布式 </category>
+          
+          <category> Redis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>maven实战</title>
       <link href="/post/cfedc026.html"/>
       <url>/post/cfedc026.html</url>
@@ -3278,6 +3230,62 @@
           
           <category> 分布式 </category>
           
+          <category> zookeeper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> zookeeper </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>zookeeper的基本概念</title>
+      <link href="/post/e7973620.html"/>
+      <url>/post/e7973620.html</url>
+      
+        <content type="html"><![CDATA[<p>本文介绍 zookeeper 的一些基本概念。</p><a id="more"></a><h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><ul><li>分层结构</li><li>树形结构中的每个节点叫做Znode</li><li>每个Znode都有数据ͧ(byte[]类型ͨ)，也可以有子节点</li><li><p>节点路径</p><ul><li>斜线分隔:/Zoo/Duck</li><li>没有相对路径</li></ul></li><li><p>通过数据结构stat来孓储数据的变化 ACL的变化和时间戳 </p></li><li>数据发生变化时，版本号会递增</li><li>可以对Znode中的数据进行读写操作</li></ul><h1 id="数据节点-Znode"><a href="#数据节点-Znode" class="headerlink" title="数据节点(Znode)"></a>数据节点(Znode)</h1><ul><li>不是机器的意思</li><li>Zk树形结构中的数据节点，用于存储数据</li><li>持久节点：一旦创建,除非主动调用删除操作,否则一直存储在zk上</li><li>临时节点：与客户端的会话绑定，一旦客户端绘画是小，这个客户端创建的所有临时节点都会被移除</li><li>SEQUENTIAL Znode：创建临时节点时，如果设置属性 SEQUENTIAL，则会自动在节点名后面追加一个整型数字</li></ul><h1 id="持久节点"><a href="#持久节点" class="headerlink" title="持久节点"></a>持久节点</h1><p>启动一个 zkCli 创建一个持久节点，即使创建节点的会话关闭，该节点也不会被删除。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 10] create /node nodedata</span><br><span class="line">Created /node</span><br><span class="line">[zk: localhost:2181(CONNECTED) 11] ls /</span><br><span class="line">[node, zookeeper]</span><br></pre></td></tr></table></figure><h2 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h2><p>启动一个 zkCli 之后创建临时节点</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 3] create -e /node1 node1data</span><br><span class="line">Created /node1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /</span><br><span class="line">[zookeeper, node1]</span><br></pre></td></tr></table></figure><p>将创建临时节点的会话关闭之后，临时节点将会消失。(可以再起一个 zkCli 验证)</p><h2 id="顺序节点"><a href="#顺序节点" class="headerlink" title="顺序节点"></a>顺序节点</h2><p>创建数据节点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 12] create -s /node/seq 321</span><br><span class="line">Created /node/seq0000000000</span><br><span class="line">[zk: localhost:2181(CONNECTED) 13] create -s /node/seq 322</span><br><span class="line">Created /node/seq0000000001</span><br><span class="line">[zk: localhost:2181(CONNECTED) 15] ls /node</span><br><span class="line">[seq0000000000, seq0000000001]</span><br></pre></td></tr></table></figure><h1 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h1><ul><li>Leader: 为客户端提供读和写服务</li><li>Follower: 提供读服务，所有写服务都需要转交给Leader角色，参与选举</li><li>Observer: 提供读服，不参与选举过程，一般是为了增强zk集群的读请求并发能力</li></ul><h1 id="会发-Session"><a href="#会发-Session" class="headerlink" title="会发(Session)"></a>会发(Session)</h1><ul><li>Zk的客户与zk的服务端之间的连接</li><li>通过心跳检测保持客户端连接的存活</li><li>接收来自服务端的watch事件通知</li><li>可以设置超时时间</li></ul><h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><ul><li>Version: 当前 Znode 的版本</li><li>Cversion：当前 Znode 的子节点的版本</li><li>Aversion：当前 Znode 的 ANL(访问控制)版本</li></ul><h1 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h1><ul><li>作用于 Znode 节点上</li><li>多种事件通知：数据更新，子节点状态等</li></ul><h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><ul><li>Access Control Lists</li><li>类似于linux/unix的权限控制</li><li><strong>CREATE</strong>：创建子节点的权限</li><li>READ:获取节点数据和子节点列表的权限</li><li>WRITE：更新节点数据的权限</li><li><strong>DELETE</strong>：删除子节点的权限</li><li>ADMIN：设置节点ACL的权限</li></ul><p><em>CREATE和DELETE是针对子节点的权限控制。</em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分布式 </category>
+          
+          <category> zookeeper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> zookeeper </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>zookeepre源码编译</title>
+      <link href="/post/5ddebf1a.html"/>
+      <url>/post/5ddebf1a.html</url>
+      
+        <content type="html"><![CDATA[<p>我们首先 fork 一份 zookeeper 在 github 上的项目，地址为：<a href="https://github.com/apache/zookeeper。再将" target="_blank" rel="noopener">https://github.com/apache/zookeeper。再将</a> fork 之后的项目 clone 到本地。</p><p>我们不使用最新版本的代码，而是使用 3.4.11 这个版本的，所以我们根据 tag，checkout 一个分支出来：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b zookeeper3.4.11 release-3.4.11</span><br></pre></td></tr></table></figure><p>由于 zookeeper 是用 ant 构建的，所以要安装 ant。我使用的是 macOS，直接用 homebrew 安装比较方便：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br><span class="line">brew install ant</span><br></pre></td></tr></table></figure><p>之后用 ant 构建一个 eclipse 项目</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ant eclipse</span><br></pre></td></tr></table></figure><p>最后，将导入项目。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分布式 </category>
+          
+          <category> zookeeper </category>
+          
       </categories>
       
       
@@ -3334,6 +3342,33 @@
         <tags>
             
             <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>zookeeper概述</title>
+      <link href="/post/6e7f6d53.html"/>
+      <url>/post/6e7f6d53.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Q-zookeeper-解决了什么问题？"><a href="#Q-zookeeper-解决了什么问题？" class="headerlink" title="Q: zookeeper 解决了什么问题？"></a>Q: zookeeper 解决了什么问题？</h1><p><img src="http://image.shuiyujie.com/2019-09-20-07-37-54.png" alt="分布式系统的问题"></p><p>相对于开发在一台计算机上运行的单个程序，<strong>如何让一个应用中多个独立的程序协同工作</strong>是一件非常困难的事情。开发这样的应用，很容易让很多开发人员陷入如何使多个程序协同工作的逻辑中，最后导致没有时间更好地思考和实现他们自己的应用程序逻辑；又或者开发人员对协同逻辑关注不够，只是用很少的时间开发了一个简单脆弱的主协调器，导致不可靠的单一失效点。</p><a id="more"></a><h1 id="Q-zookeeper-是怎么解决应用中多个独立程序协同工作的问题的？"><a href="#Q-zookeeper-是怎么解决应用中多个独立程序协同工作的问题的？" class="headerlink" title="Q: zookeeper 是怎么解决应用中多个独立程序协同工作的问题的？"></a>Q: zookeeper 是怎么解决应用中多个独立程序协同工作的问题的？</h1><p><img src="http://image.shuiyujie.com/2019-09-20-07-39-34.png" alt="协调者"></p><p>ZooKeeper从文件系统API得到启发，提供一组简单的API，使得开发人员可以实现通用的协作任务，包括<strong>选举主节点、管理组内成员关系、管理元数据等</strong>。ZooKeeper包括一个应用开发库（主要提供Java和C两种语言的API）和一个用Java实现的服务组件。ZooKeeper的服务组件运行在一组专用服务器之上，保证了高容错性和可扩展性。</p><p>当你决定使用ZooKeeper来设计应用时，最好将应用数据和协同数据独立开。比如，网络邮箱服务的用户对自己邮箱中的内容感兴趣，但是并不关心由哪台服务器来处理特定邮箱的请求。在这个例子中，邮箱内容就是应用数据，而从邮箱到某一台邮箱服务器之间的映射关系就是<strong>协同数据（或称元数据）</strong>。整个ZooKeeper服务所管理的就是后者</p><h1 id="Q-zookeeper的应用场景？"><a href="#Q-zookeeper的应用场景？" class="headerlink" title="Q: zookeeper的应用场景？"></a>Q: zookeeper的应用场景？</h1><ul><li><p>Apache HBase：HBase是一个通常与Hadoop一起使用的数据存储仓库。在HBase中，ZooKeeper用于选举一个集群内的主节点，以便跟踪可用的服务器，并保存集群的元数据。</p></li><li><p>Apache Kafka：Kafka是一个基于发布-订阅（pub-sub）模型的消息系统。其中ZooKeeper用于检测崩溃，实现主题（topic）的发现，并保持主题的生产和消费状态。</p></li><li>Apache Solr：Solr是一个企业级的搜索平台。Solr的分布式版本命名为SolrCloud，它使用ZooKeeper来存储集群的元数据，并协作更新这些元数据。</li><li>Yahoo！Fetching Service：Yahoo！Fetching Service是爬虫实现的一部分，通过缓存内容的方式高效地获取网页信息，同时确保满足网页服务器的管理规则（比如robots.txt文件）。该服务采用ZooKeeper实现主节点选举、崩溃检测和元数据存储。</li><li>Facebook Messages：Facebook推出的这个应用（<a href="http://on.fb.me/1a7uViK）集成了email、短信、Facebook聊天和Facebook收件箱等通信通道。该应用将ZooKeeper作为控制器，用来实现数据分片、故障恢复和服务发现等功能。" target="_blank" rel="noopener">http://on.fb.me/1a7uViK）集成了email、短信、Facebook聊天和Facebook收件箱等通信通道。该应用将ZooKeeper作为控制器，用来实现数据分片、故障恢复和服务发现等功能。</a></li></ul><h1 id="Q-zookeeper不适用的场景？"><a href="#Q-zookeeper不适用的场景？" class="headerlink" title="Q: zookeeper不适用的场景？"></a><strong>Q: zookeeper不适用的场景？</strong></h1><p>整个ZooKeeper的服务器集群管理着应用协作的关键数据。ZooKeeper不适合用作海量数据存储。对于需要存储海量的应用数据的情况，我们有很多备选方案，比如说数据库和分布式文件系统等。因为不同的应用有不同的需求，如对一致性和持久性的不同需求，所以在设计应用时，最佳实践还是应该将应用数据和协同数据独立开。</p><h1 id="Q-使用-zookeeper-时需要注意的问题？"><a href="#Q-使用-zookeeper-时需要注意的问题？" class="headerlink" title="Q: 使用 zookeeper 时需要注意的问题？"></a><strong>Q: 使用 zookeeper 时需要注意的问题？</strong></h1><ul><li>消息延迟：消息传输可能会发生任意延迟，比如，因为网络拥堵。这种任意延迟可能会导致不可预期的后果。比如，根据基准时钟，进程P先发送了一个消息，之后另一个进程Q发送了消息，但是进程Q的消息也许会先完成传送。</li><li>处理器性能：操作系统的调度和超载也可能导致消息处理的任意延迟。当一个进程向另一个进程发送消息时，整个消息的延时时间约等于发送端消耗的时间、传输时间、接收端的处理时间的总和。如果发送或接收过程需要调度时间进行处理，消息延时会更高。</li><li>时钟偏移：使用时间概念的系统并不少见，比如，确定某一时间系统中发生了哪些事件。处理器时钟并不可靠，它们之间也会发生任意的偏移。因此，依赖处理器时钟也许会导致错误的决策。</li></ul><h1 id="Q-ZooKeeper的成功和注意事项"><a href="#Q-ZooKeeper的成功和注意事项" class="headerlink" title="Q: ZooKeeper的成功和注意事项"></a><strong>Q: ZooKeeper的成功和注意事项</strong></h1><p>不得不指出，完美的解决方案是不存在的，我们重申ZooKeeper无法解决分布式应用开发者面对的所有问题，而是为开发者提供了一个优雅的框架来处理这些问题。多年以来，ZooKeeper在分布式计算领域进行了大量的工作。Paxos算法<a href="evernotecid://E52A53DA-6D02-407A-9C28-91264ED3E6A7/appyinxiangcom/663849/ENNote/p4132#" target="_blank" rel="noopener">[1]</a>和虚拟同步技术（virtual synchrony）<a href="evernotecid://E52A53DA-6D02-407A-9C28-91264ED3E6A7/appyinxiangcom/663849/ENNote/p4132#" target="_blank" rel="noopener">[2]</a>给ZooKeeper的设计带来了很大影响，通过这些技术可以无缝地处理所发生的某些变化或情况，并提供给开发者一个框架，来应对无法自动处理的某些情况。</p><p>ZooKeeper最初由雅虎研究院开发，用于处理大量的大型分布式应用。我们注意到，这些应用在分布式协作方面的处理方式并不妥当，这些系统的部署存在单点故障问题或很脆弱，另一方面，开发者在分布式协作方面花费了大量的时间和精力，导致开发者没有足够的资源来关注应用本身的功能逻辑。我们还注意到，这些应用都在基本协作方面有相同的需求。因此，我们开始着手设计一套通用的解决方案，通过某些关键点让我们可以一次实现就能应用于大多数不同的应用中。ZooKeeper已经被证实更加通用，其受欢迎程度超越了我们的想象。</p><p>多年来，我们发现人们可以很容易地部署ZooKeeper集群，轻松通过这个集群开发应用，但实际上，在使用ZooKeeper时，有些情况ZooKeeper自身无法进行决策而是需要开发者自己做出决策，有些开发者并不完全了解这些。编写本书的其中一个目的就是让开发者了解如何更有效地使用ZooKeeper，以及为什么需要这样做。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分布式 </category>
+          
+          <category> zookeeper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> zookeeper </tag>
             
         </tags>
       
