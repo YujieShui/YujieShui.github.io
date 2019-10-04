@@ -466,9 +466,9 @@
       
         <tags>
             
-            <tag> ffmpeg </tag>
-            
             <tag> 图像处理 </tag>
+            
+            <tag> ffmpeg </tag>
             
             <tag> 音频处理 </tag>
             
@@ -2125,7 +2125,7 @@
       <link href="/post/59dbbfed.html"/>
       <url>/post/59dbbfed.html</url>
       
-        <content type="html"><![CDATA[<table><thead><tr><th>特性</th><th>ActiveMQ</th><th>RabbitMQ</th><th>RocketMQ</th><th>Kafka</th></tr></thead><tbody><tr><td>单机吞吐量</td><td>万级，比 RocketMQ、Kafka 低一个数量级</td><td>同 ActiveMQ</td><td>10 万级，支撑高吞吐</td><td>10 万级，高吞吐，一般配合大数据类的系统来进行实时数据计算、日志采集等场景</td></tr><tr><td>topic 数量对吞吐量的影响</td><td></td><td></td><td>topic 可以达到几百/几千的级别，吞吐量会有较小幅度的下降，这是 RocketMQ 的一大优势，在同等机器下，可以支撑大量的 topic</td><td>topic 从几十到几百个时候，吞吐量会大幅度下降，在同等机器下，Kafka 尽量保证 topic 数量不要过多，如果要支撑大规模的 topic，需要增加更多的机器资源</td></tr><tr><td>时效性</td><td>ms 级</td><td>微秒级，这是 RabbitMQ 的一大特点，延迟最低</td><td>ms 级</td><td>延迟在 ms 级以内</td></tr><tr><td>可用性</td><td>高，基于主从架构实现高可用</td><td>同 ActiveMQ</td><td>非常高，分布式架构</td><td>非常高，分布式，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用</td></tr><tr><td>消息可靠性</td><td>有较低的概率丢失数据</td><td>基本不丢</td><td>经过参数优化配置，可以做到 0 丢失</td><td>同 RocketMQ</td></tr><tr><td>功能支持</td><td>MQ 领域的功能极其完备</td><td>基于 erlang 开发，并发能力很强，性能极好，延时很低</td><td>MQ 功能较为完善，还是分布式的，扩展性好</td><td>功能较为简单，主要支持简单的 MQ 功能，在大数据领域的实时计算以及日志采集被大规模使用</td></tr></tbody></table><p>当时我们选择 MQ 的时候主要对比了 4 种常用的 MQ，分别是 Kafka、ActiveMQ、RabbitMQ 和 RocketMQ。</p><ul><li>首先淘汰的 ActiveMQ，最早的时候很多人用 RabbitMQ，但是现在它的单机吞吐量只有万级，社区也没怎么维护了，有种日落西山的意味。</li><li>Kafka 主要特点是基于 Pull 的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输，更加适合大数据量的数据收集服务，我们的当时的系统能到吞吐量能到万级撑死了，也就没选 Kafka。</li><li>RabbitMQ 虽然它是用 erlang 语言开发，不适合我们进行二次开发，但是它的单机吞吐量也有十万，社区比较活跃，功能也比较完备，比较适合我们公司数据量不是很大的场景。</li><li>RocketMQ 其实也挺好的，阿里开源的消息队列，经过双十一的考验。不过我们的 Leader 觉得 RocketMQ 的社区没有 RabbitMQ 的稳，RabbitMQ 功能也足够完备。</li></ul><p>最终就选择了 RabbitMQ 作为我们使用的消息中间件。</p>]]></content>
+        <content type="html"><![CDATA[<p>我们选择 MQ 的时候主要对比了 4 种常用的 MQ，分别是 Kafka、ActiveMQ、RabbitMQ 和 RocketMQ。</p><ul><li>首先淘汰的 ActiveMQ，最早的时候很多人用 RabbitMQ，但是现在它的单机吞吐量只有万级，社区也没怎么维护了，有种日落西山的意味。</li><li>Kafka 主要特点是基于 Pull 的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输，更加适合大数据量的数据收集服务，我们的当时的系统能到吞吐量能到万级撑死了，也就没选 Kafka。</li><li>RabbitMQ 虽然它是用 erlang 语言开发，不适合我们进行二次开发，但是它的单机吞吐量也有十万，社区比较活跃，功能也比较完备，比较适合我们公司数据量不是很大的场景。</li><li>RocketMQ 其实也挺好的，阿里开源的消息队列，经过双十一的考验。不过我们的 Leader 觉得 RocketMQ 的社区没有 RabbitMQ 的稳，RabbitMQ 功能也足够完备。</li></ul><p>最终就选择了 RabbitMQ 作为我们使用的消息中间件。</p><a id="more"></a><table><thead><tr><th>特性</th><th>ActiveMQ</th><th>RabbitMQ</th><th>RocketMQ</th><th>Kafka</th></tr></thead><tbody><tr><td>单机吞吐量</td><td>万级，比 RocketMQ、Kafka 低一个数量级</td><td>同 ActiveMQ</td><td>10 万级，支撑高吞吐</td><td>10 万级，高吞吐，一般配合大数据类的系统来进行实时数据计算、日志采集等场景</td></tr><tr><td>topic 数量对吞吐量的影响</td><td></td><td></td><td>topic 可以达到几百/几千的级别，吞吐量会有较小幅度的下降，这是 RocketMQ 的一大优势，在同等机器下，可以支撑大量的 topic</td><td>topic 从几十到几百个时候，吞吐量会大幅度下降，在同等机器下，Kafka 尽量保证 topic 数量不要过多，如果要支撑大规模的 topic，需要增加更多的机器资源</td></tr><tr><td>时效性</td><td>ms 级</td><td>微秒级，这是 RabbitMQ 的一大特点，延迟最低</td><td>ms 级</td><td>延迟在 ms 级以内</td></tr><tr><td>可用性</td><td>高，基于主从架构实现高可用</td><td>同 ActiveMQ</td><td>非常高，分布式架构</td><td>非常高，分布式，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用</td></tr><tr><td>消息可靠性</td><td>有较低的概率丢失数据</td><td>基本不丢</td><td>经过参数优化配置，可以做到 0 丢失</td><td>同 RocketMQ</td></tr><tr><td>功能支持</td><td>MQ 领域的功能极其完备</td><td>基于 erlang 开发，并发能力很强，性能极好，延时很低</td><td>MQ 功能较为完善，还是分布式的，扩展性好</td><td>功能较为简单，主要支持简单的 MQ 功能，在大数据领域的实时计算以及日志采集被大规模使用</td></tr></tbody></table>]]></content>
       
       
       <categories>

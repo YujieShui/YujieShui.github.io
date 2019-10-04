@@ -384,7 +384,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      
+      <p>我们选择 MQ 的时候主要对比了 4 种常用的 MQ，分别是 Kafka、ActiveMQ、RabbitMQ 和 RocketMQ。</p>
+<ul>
+<li>首先淘汰的 ActiveMQ，最早的时候很多人用 RabbitMQ，但是现在它的单机吞吐量只有万级，社区也没怎么维护了，有种日落西山的意味。</li>
+<li>Kafka 主要特点是基于 Pull 的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输，更加适合大数据量的数据收集服务，我们的当时的系统能到吞吐量能到万级撑死了，也就没选 Kafka。</li>
+<li>RabbitMQ 虽然它是用 erlang 语言开发，不适合我们进行二次开发，但是它的单机吞吐量也有十万，社区比较活跃，功能也比较完备，比较适合我们公司数据量不是很大的场景。</li>
+<li>RocketMQ 其实也挺好的，阿里开源的消息队列，经过双十一的考验。不过我们的 Leader 觉得 RocketMQ 的社区没有 RabbitMQ 的稳，RabbitMQ 功能也足够完备。</li>
+</ul>
+<p>最终就选择了 RabbitMQ 作为我们使用的消息中间件。</p>
       
         <div class="readmore">
           <a href="/post/59dbbfed.html" class="flat-box">
