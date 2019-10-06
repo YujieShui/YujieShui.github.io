@@ -212,6 +212,380 @@
       
         
   <h2 class="title">
+    <a href="/post/af5cb7fa.html">
+      为什么要使用Spring
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-10-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <div class="readmore">
+          <a href="/post/af5cb7fa.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/post/65703737.html">
+      Spring事务
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-10-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <div class="readmore">
+          <a href="/post/65703737.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/post/870e30c.html">
+      Spring常用的注入方式
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-10-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>Spring 有这样三种编程方式，可以混用</p>
+<ul>
+<li><p>schemal-based——-xml</p>
+</li>
+<li><p>annotation-based—–annotation</p>
+</li>
+<li><p>java-based—-java Configuration</p>
+</li>
+</ul>
+<p>这里要理解的关键是：交由 Spring 来维护类之间的关系，并且进行注入。这样一来还可以由 Spring 来进行注解的管理。</p>
+<p>无论是注解还是 xml，在做的事情都是在维护类之间的关系，维护了这些关系才可以使用 Spring 来注入</p>
+<p><a href="https://shimo.im/docs/uKMbBVwL3dUusKHV/read" target="_blank" rel="noopener">https://shimo.im/docs/uKMbBVwL3dUusKHV/read</a></p>
+<hr>
+<p>先来理解一下 IOC 的思想：</p>
+<p><img src="/Users/shui/Library/Application Support/typora-user-images/image-20191005111159719.png" alt="image-20191005111159719" style="zoom:50%;"></p>
+<p><img src="/Users/shui/Library/Application Support/typora-user-images/image-20191005111233976.png" alt="image-20191005111233976" style="zoom:50%;"></p>
+<p>控制反转（Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称<strong>DI</strong>），还有一种方式叫“依赖查找”（Dependency <strong>Lookup</strong>）</p>
+<p>IOC是Inversion of Control的缩写，多数书籍翻译成“控制反转”。</p>
+<p>表示借助于「第三方」实现具有依赖关系的对象之间的解耦。</p>
+<p>具体来说是什么意思呢？就是原来的对象 A、B、C、D 之间是紧密耦合的，Spring 的 IOC 思想就是将 A、B、C、D 这四个对象都交给 Spring 容器进行管理。</p>
+<p>此时，对象之间的引用方式就产生了变化。</p>
+<p>我们再来看看，控制反转(IOC)到底为什么要起这么个名字？我们来对比一下：</p>
+<p>​    软件系统在没有引入IOC容器之前，如图1所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点的时候，自己必须主动去创建对象B或者使用已经创建的对象B。无论是创建还是使用对象B，控制权都在自己手上。</p>
+<p>​    软件系统在引入IOC容器之后，这种情形就完全改变了，如图3所示，由于IOC容器的加入，对象A与对象B之间失去了直接联系，所以，当对象A运行到需要对象B的时候，IOC容器会主动创建一个对象B注入到对象A需要的地方。</p>
+<p>​    通过前后的对比，我们不难看出来：对象A获得依赖对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”这个名称的由来。</p>
+<p><strong>“获得依赖对象的过程被反转了”</strong></p>
+<p>控制被反转之后，获得依赖对象的过程由自身管理变为了由IOC容器主动注入。于是，他给“控制反转”取了一个更合适的名字叫做“依赖注入（Dependency Injection）”。他的这个答案，实际上给出了实现IOC的方法：注入。所谓依赖注入，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。</p>
+      
+        <div class="readmore">
+          <a href="/post/870e30c.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/post/43a71ae4.html">
+      MySQL索引
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-10-04</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <div class="readmore">
+          <a href="/post/43a71ae4.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/post/df9154fb.html">
       Dubbo底层架构原理
     </a>
@@ -354,9 +728,9 @@
             
   
   <div class="new-meta-item category">
-    <a href="/categories/Java/Spring-Cloud/" rel="nofollow">
+    <a href="/categories/Java/Spring/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Java&nbsp;/&nbsp;Spring Cloud</p>
+      <p>Java&nbsp;/&nbsp;Spring</p>
     </a>
   </div>
 
@@ -838,423 +1212,6 @@
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/post/3f932fee.html">
-      深度学习优化篇
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-20</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/DeepLearning/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>DeepLearning</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p><img src="https://image.shuiyujie.com/36baea38fd0b45ee.png" alt="深度学习优化篇"></p>
-<p>模型要想训得好，参数优化不可少。</p>
-      
-        <div class="readmore">
-          <a href="/post/3f932fee.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/deeplearning/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> deeplearning</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/post/dd983220.html">
-      卷积神经网络基础
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-20</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/DeepLearning/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>DeepLearning</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p><img src="http://image.shuiyujie.com/2019-09-20-21-26-22.png" alt="卷积神经网络:https://cs231n.github.io/convolutional-networks/"></p>
-<p>聊一聊神经网络的前生今世。</p>
-      
-        <div class="readmore">
-          <a href="/post/dd983220.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/deeplearning/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> deeplearning</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/post/b64b0362.html">
-      如何自建数据集
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-17</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/DeepLearning/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>DeepLearning</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p><img src="https://image.shuiyujie.com/2019-06-04-22-23-29.png" alt="自建数据集"></p>
-<p>(1) 学会使用爬虫爬取图像和视频,从视频中提取图片。</p>
-<p>(2) 对获得的图片数据进行整理,包括重命名,格式统一,去重。</p>
-      
-        <div class="readmore">
-          <a href="/post/b64b0362.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/deeplearning/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> deeplearning</a>
-        
-          <a href="/tags/dataset/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> dataset</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/post/790a1fa3.html">
-      【Java并发编程】线程本地存储模式ThreadLocal
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-16</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/Java/Java并发编程/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Java&nbsp;/&nbsp;Java并发编程</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>我们知道多个线程同时读写同一<strong>共享变量</strong>会导致并发问题。</p>
-<p>一种解决方案是使用 Immutability 模式，如果共享变量在初始化之后就不会改变，只能读取，那么无论多少个线程同时读这个共享变量都不会出现并发问题。比如说 Java 中的 Long、Integer、Short、Byte 等基本数据类型的包装类的实现。</p>
-<p>另一种解决方案是突破共享变量，<strong>没有共享变量就不会有并发问题</strong>。那么如何避免共享呢？思路其实很简单，就是每个线程拥有自己的变量，彼此不共享，就不会有共享问题。</p>
-<p>具体来说有两种方法：<strong>线程封闭</strong>和线程本地存储(<strong>ThreadLocal</strong>)。</p>
-      
-        <div class="readmore">
-          <a href="/post/790a1fa3.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> java</a>
-        
-          <a href="/tags/设计模式/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 设计模式</a>
-        
-          <a href="/tags/并发编程/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 并发编程</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1264,7 +1221,7 @@
         <div class="prev-next">
           
           <p class="current">
-            1 / 9
+            1 / 10
           </p>
           
             <a class="next" rel="next" href="/archives/2019/page/2/">
@@ -1411,13 +1368,13 @@
         
           <li><a class="flat-box" title="/categories/Docker-K8s/" href="/categories/Docker-K8s/"><div class="name">Docker&K8s</div><div class="badge">(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(26)</div></a></li>
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(28)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Java/JVM/" href="/categories/Java/JVM/"><div class="name">JVM</div><div class="badge">(6)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Java/Java并发编程/" href="/categories/Java/Java并发编程/"><div class="name">Java并发编程</div><div class="badge">(8)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Java/Spring-Cloud/" href="/categories/Java/Spring-Cloud/"><div class="name">Spring Cloud</div><div class="badge">(1)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Java/Spring/" href="/categories/Java/Spring/"><div class="name">Spring</div><div class="badge">(6)</div></a></li>
         
           <li><a class="flat-box" title="/categories/Linux/" href="/categories/Linux/"><div class="name">Linux</div><div class="badge">(10)</div></a></li>
         
@@ -1487,7 +1444,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 23.17px; color: #5b5b5b">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #999">dubbo</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 18.17px; color: #7d7d7d">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 14.83px; color: #939393">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 16.5px; color: #888">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 17.33px; color: #828282">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 16.5px; color: #888">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #999">dubbo</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.17px; color: #5b5b5b">java</a> <a href="/tags/jvm/" style="font-size: 18.17px; color: #7d7d7d">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.67px; color: #8e8e8e">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 16.5px; color: #888">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 17.33px; color: #828282">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 16.5px; color: #888">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
     </div>
   </section>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>MySQL中的存储引擎 | 深页</title>
+  <title>深页</title>
   
   
 
@@ -45,29 +45,7 @@
 <body>
   
   
-  <div class="cover-wrapper">
-    <cover class="cover psot half">
-      
-        
-  <h1 class="title">弄浪的鱼</h1>
-
-
-  <div class="m_search">
-    <form name="searchform" class="form u-search-form">
-      <input type="text" class="input u-search-input" placeholder>
-      <i class="icon fas fa-search fa-fw"></i>
-    </form>
-  </div>
-
-<div class="menu navgation">
-  <ul class="h-list">
-    
-  </ul>
-</div>
-
-      
-    </cover>
-    <header class="l_header pure">
+  <header class="l_header pure">
   <div id="loading-bar-wrapper">
     <div id="loading-bar" class="pure"></div>
   </div>
@@ -163,16 +141,20 @@
 	</aside>
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       <div class="l_main">
   
-
-  <article id="psot" class="post white-box article-type-psot" itemscope itemprop="blogPost">
+  <section class="post-list">
     
+    
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
 
 
   <section class="meta">
@@ -181,13 +163,11 @@
     <div class="meta" id="header-meta">
       
         
-  
-    <h1 class="title">
-      <a href="/post/undefined.html">
-        MySQL中的存储引擎
-      </a>
-    </h1>
-  
+  <h2 class="title">
+    <a href="/post/6e7f6d53.html">
+      zookeeper概述
+    </a>
+  </h2>
 
 
       
@@ -215,7 +195,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2018-05-29</p>
+    <p>2017-11-13</p>
   </a>
 </div>
 
@@ -225,29 +205,11 @@
             
   
   <div class="new-meta-item category">
-    <a href="/categories/数据库/" rel="nofollow">
+    <a href="/categories/分布式/zookeeper/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>数据库</p>
+      <p>分布式&nbsp;/&nbsp;zookeeper</p>
     </a>
   </div>
-
-
-          
-        
-          
-            
-  
-    <div class="new-meta-item browse busuanzi">
-      <a class="notlink">
-        <i class="fas fa-eye" aria-hidden="true"></i>
-        <p>
-          <span id="busuanzi_value_page_pv">
-            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
-          </span>
-        </p>
-      </a>
-    </div>
-  
 
 
           
@@ -265,133 +227,162 @@
   </section>
 
 
-    <section class="article typo">
-      <div class="article-entry" itemprop="articleBody">
-        <p>MySQL中常用的三种存储引擎分别是： MyISAM存储引擎、innoDB存储引擎、MEMORY存储引擎。本文将对这三种存储引擎作出重点介绍，最后比较它们的使用场景。</p>
-<a id="more"></a>
-<h1 id="存储引擎的使用"><a href="#存储引擎的使用" class="headerlink" title="存储引擎的使用"></a>存储引擎的使用</h1><ul>
-<li>数据库中的各表（在创建表时）指定的存储引擎来处理</li>
-<li>服务器可用的引擎依赖于以下因素<ul>
-<li>MySQL 版本</li>
-<li>服务器在开发时如何被配置</li>
-<li>启动选项</li>
-</ul>
-</li>
-</ul>
-<p>怎么看表用的什么存储引擎。</p>
-<h1 id="MyISAM-存储引擎"><a href="#MyISAM-存储引擎" class="headerlink" title="MyISAM 存储引擎"></a>MyISAM 存储引擎</h1><ul>
-<li>MyISAM 存储引擎是 MySQL 最常用的引擎</li>
-<li>它管理的表具有以下特征<ul>
-<li>使用三个文件表示表<ul>
-<li>格式文件 —— 存储表结构的定义（mytable.frm）</li>
-<li>数据文件 —— 存储表行的结果（mytable.MYD）</li>
-<li>索引文件 —— 存储表上的索引（mytable.MYI）</li>
-</ul>
-</li>
-<li>灵活的 AUTO_INCREMENT 字段处理</li>
-<li>可被转换为压缩、只读表来节省空间</li>
-</ul>
-</li>
-</ul>
-<h1 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h1><ul>
-<li>InnoDB 存储引擎是 MySQL 默认的存储引擎</li>
-<li>它管理的表具有以下特征<ul>
-<li>每个 InnoDB 表在数据库目录中以 .frm 格式文件表示</li>
-<li>InnoDB 表空间 tablespace 被用于存储表的内容</li>
-<li>提供一组用来记录事务性活动的日志文件</li>
-<li>用 COMMIT、SAVEPOINT 及 ROLLBACK 支持事务处理</li>
-<li>提供全 ACID 兼容</li>
-<li>在 MySQL 服务器崩溃后提供自动恢复</li>
-<li>多版本（MVCC）和行级锁定</li>
-<li>支持外键及引用的完整性，包括级联删除和更新</li>
-</ul>
-</li>
-</ul>
-<h1 id="MEMOEY-存储引擎"><a href="#MEMOEY-存储引擎" class="headerlink" title="MEMOEY 存储引擎"></a>MEMOEY 存储引擎</h1><ul>
-<li>使用MEMORY存储引擎的表，其数据存储在内存中，且行的长度固定，这两个特点使得MEMORY存储引擎非常快</li>
-<li><p>MEMORY 存储引擎具有有以下特征</p>
-<ul>
-<li>在数据库目录内，每个表均以.frm格式的文件表示。</li>
-<li>表数据及索引被存储在内存中。</li>
-<li>表级锁机制。</li>
-<li>不能包含TEXT或BLOB字段。</li>
-</ul>
-</li>
-<li><p>MEMORY存储引擎以前被称为HEAP引擎</p>
-</li>
-</ul>
-<h1 id="选择合适的存储引擎"><a href="#选择合适的存储引擎" class="headerlink" title="选择合适的存储引擎"></a>选择合适的存储引擎</h1><p>当创建表时，应根据表的应用场景选择合适的存储引擎</p>
-<ul>
-<li>MyISAM 表最适合于大量的数据读而少量数据更新的混合操作。MyISAM 表的另一种适用情形是使用压缩的只读表。</li>
-<li>如果查询中包含较的数据更新操作，应使用 InnoDB。其行级锁机制和多版本的支持为数据读取和更新的混合操作提供了良好的并发机制。</li>
-<li>使用 MEMORY 存储引擎存储非永久需要的数据，或者是能够从基于磁盘的表中重新生成的数据。</li>
-</ul>
-
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h1 id="Q-zookeeper-解决了什么问题？"><a href="#Q-zookeeper-解决了什么问题？" class="headerlink" title="Q: zookeeper 解决了什么问题？"></a>Q: zookeeper 解决了什么问题？</h1><p><img src="http://image.shuiyujie.com/2019-09-20-07-37-54.png" alt="分布式系统的问题"></p>
+<p>相对于开发在一台计算机上运行的单个程序，<strong>如何让一个应用中多个独立的程序协同工作</strong>是一件非常困难的事情。开发这样的应用，很容易让很多开发人员陷入如何使多个程序协同工作的逻辑中，最后导致没有时间更好地思考和实现他们自己的应用程序逻辑；又或者开发人员对协同逻辑关注不够，只是用很少的时间开发了一个简单脆弱的主协调器，导致不可靠的单一失效点。</p>
+      
+        <div class="readmore">
+          <a href="/post/6e7f6d53.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/zookeeper/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> zookeeper</a>
+        
       </div>
-      
-      
-          <div class="prev-next">
-              
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/post/f413b470.html" rel="prev" title="数据库三范式">
-                                
-                                    数据库三范式
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
-              
-                  <section class="next">
-                      <span class="art-item-right" aria-hidden="true">
-                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
-                          <h4>
-                              <a href="/post/813d855e.html" rel="prev" title="Mysql版本升级">
-                                  
-                                      Mysql版本升级
-                                  
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/mysql/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mysql</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
+    
+  </section>
+</article>
+
           </div>
+        
       
-    </section>
-  </article>
-
-
-
-  <!-- 显示推荐文章和评论 -->
-
-
-
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
   
 
 
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/post/1d66a96c.html">
+      Ubuntu配置JDK
+    </a>
+  </h2>
 
 
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
 
 
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2017-09-03</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Java/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Java</p>
+    </a>
+  </div>
 
 
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <div class="readmore">
+          <a href="/post/1d66a96c.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> linux</a>
+        
+          <a href="/tags/java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> java</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+    
+  </section>
+  
+    
+      <br>
+      <div class="prev-next">
+        <div class="prev-next">
+          
+            <a class="prev" rel="prev" href="/page/13/">
+              <section class="post prev">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+              </section>
+            </a>
+          
+          <p class="current">
+            14 / 14
+          </p>
+          
+        </div>
+      </div>
+
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
+
+  
 
 
 </div>
@@ -420,11 +411,6 @@
       
         
           
-          
-            
-              
-
-            
           
         
           
@@ -525,13 +511,13 @@
         
           <li><a class="flat-box" title="/categories/Docker-K8s/" href="/categories/Docker-K8s/"><div class="name">Docker&K8s</div><div class="badge">(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(26)</div></a></li>
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(28)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Java/JVM/" href="/categories/Java/JVM/"><div class="name">JVM</div><div class="badge">(6)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Java/Java并发编程/" href="/categories/Java/Java并发编程/"><div class="name">Java并发编程</div><div class="badge">(8)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Java/Spring-Cloud/" href="/categories/Java/Spring-Cloud/"><div class="name">Spring Cloud</div><div class="badge">(1)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Java/Spring/" href="/categories/Java/Spring/"><div class="name">Spring</div><div class="badge">(6)</div></a></li>
         
           <li><a class="flat-box" title="/categories/Linux/" href="/categories/Linux/"><div class="name">Linux</div><div class="badge">(10)</div></a></li>
         
@@ -545,13 +531,21 @@
         
           <li><a class="flat-box child" title="/categories/computer-science/设计模式/" href="/categories/computer-science/设计模式/"><div class="name">设计模式</div><div class="badge">(3)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(8)</div></a></li>
+          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(11)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/Dubbo/" href="/categories/分布式/Dubbo/"><div class="name">Dubbo</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/Redis/" href="/categories/分布式/Redis/"><div class="name">Redis</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/zookeeper/" href="/categories/分布式/zookeeper/"><div class="name">zookeeper</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/消息队列/" href="/categories/分布式/消息队列/"><div class="name">消息队列</div><div class="badge">(5)</div></a></li>
         
           <li><a class="flat-box" title="/categories/善用佳软/" href="/categories/善用佳软/"><div class="name">善用佳软</div><div class="badge">(9)</div></a></li>
         
           <li><a class="flat-box" title="/categories/图像处理/" href="/categories/图像处理/"><div class="name">图像处理</div><div class="badge">(3)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(4)</div></a></li>
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(5)</div></a></li>
         
       </ul>
     </div>
@@ -593,46 +587,12 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.91px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.36px; color: #6e6e6e">c</a> <a href="/tags/c/" style="font-size: 23.09px; color: #5b5b5b">c++</a> <a href="/tags/caffe/" style="font-size: 15.82px; color: #8d8d8d">caffe</a> <a href="/tags/darknet/" style="font-size: 14.91px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.91px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.18px; color: #616161">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.91px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 24px; color: #555">java</a> <a href="/tags/jvm/" style="font-size: 17.64px; color: #808080">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.27px; color: #686868">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 14.91px; color: #939393">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 16.73px; color: #868686">mysql</a> <a href="/tags/network/" style="font-size: 17.64px; color: #808080">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 18.55px; color: #7a7a7a">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.82px; color: #8d8d8d">python</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/springboot/" style="font-size: 16.73px; color: #868686">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.36px; color: #6e6e6e">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14.91px; color: #939393">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.73px; color: #868686">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.82px; color: #8d8d8d">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 16.73px; color: #868686">zookeeper</a> <a href="/tags/分布式/" style="font-size: 14.91px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.82px; color: #8d8d8d">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.91px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.45px; color: #747474">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 16.73px; color: #868686">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 17.64px; color: #808080">网站</a> <a href="/tags/设计模式/" style="font-size: 16.73px; color: #868686">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RabbitMQ/" style="font-size: 14px; color: #999">RabbitMQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #999">dubbo</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.17px; color: #5b5b5b">java</a> <a href="/tags/jvm/" style="font-size: 18.17px; color: #7d7d7d">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.67px; color: #8e8e8e">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/redis/" style="font-size: 14px; color: #999">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 14px; color: #999">spring</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 16.5px; color: #888">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 17.33px; color: #828282">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 16.5px; color: #888">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
     </div>
   </section>
 
 
             
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-      
-        
-          
-          
-        
-          
-          
-        
-          
-          
-        
-          
           
         
           
