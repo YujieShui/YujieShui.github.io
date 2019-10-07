@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Linux目录结构 | 深页</title>
+  <title>Spring Bean 的生命周期 | 深页</title>
   
   
 
@@ -183,8 +183,8 @@
         
   
     <h1 class="title">
-      <a href="/post/5e2eb880.html">
-        Linux目录结构
+      <a href="/post/6433d4b8.html">
+        Spring Bean 的生命周期
       </a>
     </h1>
   
@@ -215,7 +215,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-06-28</p>
+    <p>2019-10-07</p>
   </a>
 </div>
 
@@ -223,14 +223,6 @@
         
           
             
-  
-  <div class="new-meta-item category">
-    <a href="/categories/Linux/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Linux</p>
-    </a>
-  </div>
-
 
           
         
@@ -267,31 +259,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p><img src="http://image.shuiyujie.com/linux_directory.jpeg" alt="Linux目录结构"></p>
-<a id="more"></a>
-<ol>
-<li>/bin - 基本命令的二进制文件。</li>
-<li>/boot - 引导加载程序的静态文件。</li>
-<li>/dev - 设备文件。</li>
-<li><strong>/etc</strong> - 配置文件。</li>
-<li>/home - 普通用户主目录的父目录。</li>
-<li>/lib - 共享库文件。</li>
-<li>/lib64 - 共享64位库文件。</li>
-<li>/lost+found - 存放未链接文件。</li>
-<li>/media - 自动识别设备的挂载目录。</li>
-<li>/mnt - 临时挂载文件系统的挂载点。</li>
-<li>/opt - 可选插件软件包安装位置。</li>
-<li>/proc - 内核和进程信息。</li>
-<li><strong>/root</strong> - 超级管理员用户主目录。</li>
-<li>/run - 存放系统运行时需要的东西。</li>
-<li>/sbin - 超级用户的二进制文件。</li>
-<li>/sys - 设备的伪文件系统。</li>
-<li>/tmp - 临时文件夹。</li>
-<li><strong>/usr</strong> - 用户应用目录。</li>
-<li>/var - 变量数据目录。</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">"/" : 根目录Linux文件系统的入口.也是最高级，最重要的的目录.除衍生出其它目录，还和系统的开机，还原，系统修复有的，一般要求不要把任务应用程序直接放在根目录下，如果满了，可能就登录不了了（需要注意是否日志输出在根目录下）</span><br><span class="line">"/bin":基本系统所需要的命令,主要是单用户模式下，还能执行的命令。主要有cat，mv,mkdir,cp,bash ,ls</span><br><span class="line">"/boot":内核和加载内核所需要的文件.grub系统引导管理器也在这个目录下,存在/boot/grub/</span><br><span class="line">"/dev":在linux系统下，任何设备及接口设备，都是以文件的形式存在，设备文件存储目录.像终端.磁盘等.比较重要的有/dev/null （crontab经常把不想输出输到这里）;/dev/zero;/dev/tty;/dev/lp*;/dev/hd*;/dev/sd*</span><br><span class="line">"/etc":系统的主要配置文件都放在这个目录下，一般来说，这个普通人是看不到这些文件的;这里最好也不要放可执行文件。常见的目录有如下：/etc/inittab ;/etc/init.d/;/etc/modprobe.conf ;/etc/X11/ ;/etc/fstab/ ;/etc/sysconfig/ ;</span><br><span class="line">/etc/init.d/开机启动脚本放在这里;/etc/xinetd.d/ super daemon启动脚本放在这里</span><br><span class="line">/etc/sysconfig/network/scripts/网管配置放在下面下</span><br><span class="line">"/home":普通用户的目录默认存储目录.主文件夹有两种代号：</span><br><span class="line">~ 代表这个用户的主目录</span><br><span class="line">~dmtsai:代表 dmtsai的主文件夹</span><br><span class="line">"/lib":库文件和内核模块存放目录.主要是开机用到，以及在/bin/;/sbin目录下命 令会调用的库函数。/lib/modules会放内核相关的模块。</span><br><span class="line">"/lib64":和/lib类似，主要是64的库函数</span><br><span class="line">/usr 是存放可以分享与不可以动的内容，不是user的缩写，而是UNIX Software Resource 的缩写，就是UNIX操作系统的软件资源</span><br><span class="line">主要子目录有：</span><br><span class="line">/usr/X**/ X Windows数据存在于此</span><br><span class="line">/usr/bin/ 绝大部分用户可用命令在此</span><br><span class="line">/usr/include/ C/C++等的头文件与包含文件在些。如果以源码的*.tar.gz安装软件时，可能会引用下面的文件</span><br><span class="line">/usr/lib/ 包含应用程序函数库及目标文件，以及不被一般用户惯用的执行文件或脚 本</span><br><span class="line">/usr/lib64/ 与/usr/lib/相似，会对64位的</span><br><span class="line">/usr/local/ 本机自己安装的的软件，建议安装到这里，下面也有bin,etc,include,lib子目录，这些子目录功能大家可以想到</span><br><span class="line">/usr/sbin/ 非系统正常运行所需要的命令，最常见的就是网络服务器软件的daemon</span><br><span class="line">/usr/share/ 放共享文件的地方，基本是文本文件，可读的。子目录有</span><br><span class="line">/usr/share/man 在线帮助文件</span><br><span class="line">/usr/share/doc 软件杂项的说明文件</span><br><span class="line">/usr/share/zoneinfo 软件杂项的说明文件</span><br><span class="line">/usr/src 软件源码放在这里</span><br><span class="line">"/media":即插即用设备的挂载点自动存放在这个目录下.像U盘,cdrom/dvd自动挂载后,就会在这个目录下.常见有/media/floppy,/media/cdrom</span><br><span class="line">"/mnt":临时文件系统的挂载点目录.以前和/media一样，但有专门/media后，专门做临时挂载</span><br><span class="line">"/opt":第三方软件的存放目录.什么叫第三方呢？像KDE，就是第三方的，只是集成到linux里，当然你可以放自己的东西到下面。</span><br><span class="line">"/root":Linux超级权限用户root的跟目录.单独存放，也方便在进入单用户模式的操作。</span><br><span class="line">"/sbin":基本的系统维护命令,只能由超级用户使用.这些命令为开机、修复、还原系统过程所需要的。常见的命令有fdisk,fsck,ifconfig,init,mkfs</span><br><span class="line">"/srv":存放一些服务器启动之后需要提取的数据.主要存放网络服务后的一些数据，如www,ftp</span><br><span class="line">"/tmp":临时文件目录,这个目录任何人可以访问，有可能需要定期清理。</span><br><span class="line">"/usr":存放用户使用系统命令和应用程序等信息.像命令.帮助文件等.</span><br><span class="line">"/var":存放经常变动的数据,像日志.邮件等.这个目录下的数据，需要定期清理，最好写个脚本，放在crontab里。常见的子目录：</span><br><span class="line">/var/cache/ 执行中的缓存文件</span><br><span class="line">/var/lib/ 软件本身执行的过程中，用到的数据。比如Mysql数据一般放在/var/lib/mysql/;而rpm数据则放在 /var/lib/rpm/</span><br><span class="line">/var/lock/ 资源被锁时，放在此。有些资源只能一个程序使用，比如刻录机。</span><br><span class="line">/var/log/ 系统日志存在地，有可能需要定时清理</span><br><span class="line">/var/mail/ 系统邮件，看情况需要定时清理</span><br><span class="line">/var/run/ 某些程序或服务启动后，PID放在下现</span><br><span class="line">/var/spool/放置队列数据， 看情况需要定时清理</span><br><span class="line">/lost+found 是ext2/ext3文件系统才产生的，目的是当文件系统产生错误里，将一些丢失的片段防在这个目录下。</span><br><span class="line">/proc 是一个虚拟文件系统。放置内存中的数据，当有一个进程启动时，就有一个文件夹。比较重要的/proc/meminfo,/proc/cpuinfo可以通过这两文件查看内存和CPU情况，当然还有 /proc/dma, /proc/interrupts, /proc/ioports,/proc/net/*等</span><br><span class="line">/sys 和/proc相似，也是虚拟文件系统，主要记录内核相关，比如内核模块，内核检测的硬件信息。</span><br></pre></td></tr></table></figure>
-
+        
       </div>
       
         <br>
@@ -302,10 +270,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-19T22:59:23+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-07T18:43:48+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年9月19日</p>
+    <p>更新于 2019年10月7日</p>
   </a>
 </div>
 
@@ -313,9 +281,6 @@
       
         
           
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>linux</p></a></div>
-
 
         
       
@@ -325,7 +290,7 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/5e2eb880.html&title=Linux目录结构 | 深页&summary=">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/6433d4b8.html&title=Spring Bean 的生命周期 | 深页&summary=">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -333,7 +298,7 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/5e2eb880.html&title=Linux目录结构 | 深页&summary=">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/6433d4b8.html&title=Spring Bean 的生命周期 | 深页&summary=">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -341,7 +306,7 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/5e2eb880.html&title=Linux目录结构 | 深页&summary=">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/6433d4b8.html&title=Spring Bean 的生命周期 | 深页&summary=">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
@@ -363,41 +328,17 @@
       
           <div class="prev-next">
               
-                  <section class="prev">
-                      <span class="art-item-left">
-                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                          <h4>
-                              <a href="/post/87698413.html" rel="prev" title="Linux进程">
-                                
-                                    Linux进程
-                                
-                              </a>
-                          </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/linux/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> linux</a>
-                              </h6>
-                          
-                      </span>
-                  </section>
-              
               
                   <section class="next">
                       <span class="art-item-right" aria-hidden="true">
                           <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                           <h4>
-                              <a href="/post/ccb5aaa3.html" rel="prev" title="备忘-Mac使用小技巧">
+                              <a href="/post/65703737.html" rel="prev" title="Spring事务">
                                   
-                                      备忘-Mac使用小技巧
+                                      Spring事务
                                   
                               </a>
                           </h4>
-                          
-                              
-                              <h6 class="tags">
-                                  <a class="tag" href="/tags/mac/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mac</a>
-                              </h6>
                           
                       </span>
                   </section>
@@ -426,7 +367,7 @@
 
   <script>
     window.subData = {
-      title: 'Linux目录结构',
+      title: 'Spring Bean 的生命周期',
       tools: true
     }
   </script>
