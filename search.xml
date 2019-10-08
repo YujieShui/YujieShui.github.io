@@ -4,6 +4,75 @@
   
     
     <entry>
+      <title>JVM中的垃圾回收算法</title>
+      <link href="/post/e2ebbcff.html"/>
+      <url>/post/e2ebbcff.html</url>
+      
+        <content type="html"><![CDATA[<p>我们知道当堆中内存满了的时候，JVM就会使用可达性分析算法，检查对象是否有被 GC Root 引用。如果一个对象没有被任何 GC Root 引用，那就说明它是一个无效的对象，就会被垃圾回收器回收。此外，即使是被一个 GC Root 引用，但如果是弱引用，那这个对象任然有被回收的风险。</p><p>现在我们知道了什么情况下一个对象会被回收，那 <strong>JVM 是怎么回收一个对象的呢？</strong></p><a id="more"></a><p>前面说了没有被 GC Root 引用的对象将会被回收。现在我们模拟新生代满了，然后标记出没有被 GC Roots 引用的对象，并进行回收：</p><p><img src="http://image.shuiyujie.com/2019-10-08-22-42-16.png" alt="普通回收" style="zoom:50%;"></p><p>假如说我们将无效的对象直接回收，那么内存中就会出现上图所示这样一个个空缺，这些空缺叫做「内存碎片」。<strong>出现过多的内存碎片会产生什么问题么？</strong></p><p>可以想象我们总的剩余的内存很多，但是都是一块块不连续的空间。这时候进来一个新的对象，即使总的剩余内存足够多，但是这个对象可能无法找到一块足够大的连续内存。总的来说就是<strong>内存碎片越多，内存的利用率就越低</strong>。</p><h1 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h1><p>复制算法就是为了解决内存碎片问题，它将新生代分成两块区域。使用其中一块内存来存放对象，当它满了之后，任然回收其中无效的对象。不过在回收无效对象之后，它会把一块内存中所有存活的对象，紧挨着拷贝到另一个块内存中。如下图所示：</p><p><img src="http://image.shuiyujie.com/2019-10-08-22-49-20.png" alt="复制算法" style="zoom:50%;"></p><p>不过我们可以思考一下这样使用复制算法有什么弊端？弊端其实也是很明显的，就是只能使用一半的内存，解决了内存碎片问题，空间利用率还是没有上去。</p><h1 id="优化的复制算法"><a href="#优化的复制算法" class="headerlink" title="优化的复制算法"></a>优化的复制算法</h1><p>优化的复制算法将新生代按照 8:1:1 分成 Eden区和两个 Survivor 区。当 Eden 区满的时候就会触发 Minor GC，回收 Eden 区及其中一个 Survivor 区中的对象，并将回收之后存活的对象都复制到另一个 Survivor 区。</p><p><img src="http://image.shuiyujie.com/2019-10-08-23-14-25.png" alt="优化的赋值算法" style="zoom:50%;"></p><p>由于新生代中最终能存活下来的对象在少数，也就是说在一次垃圾回收一直大部分的对象都会消失，所以一个不是很大的 Survivor 区就足够容纳幸存的对象了。Eden 区又比之前普通的复制算法可以利用的区域大不少，大大提高了新生代的内存利用率。</p><h1 id="标记清理算法"><a href="#标记清理算法" class="headerlink" title="标记清理算法"></a>标记清理算法</h1><p>前面介绍了新生代常用的垃圾回收算法，复制算法。再来看看老年代常用的垃圾回收算法，标记清理算法。</p><p>老年代一般选择的垃圾回收器是 CMS，采用标记清理算法。简单来说，标记清理算法分成两步：<strong>标记出哪些对象是垃圾对象，再一次性把这些对象清理掉。</strong></p><p>举例来说，当程序触发了<strong>Full GC</strong> 回收老年代的垃圾对象。</p><ul><li>先通过追踪 GC Roots 的方法，看老年代中的各个对象是不是被 GC Roots 引用，如果被引用就是存活对象，否则就是垃圾对象。这些垃圾对象就会被<strong>标记</strong>出来。</li><li>然后再一次性清理被标记出来的<strong>垃圾对象</strong>。</li></ul><p>但是由于 Full GC 的时间比 Minor GC 的时间差不多长 10 倍，如果和 Minor GC 一样，Full GC 采用先 Stop the World 再用标记清理算法回收垃圾，就会导致系统卡死时间过长，很多响应无法处理。</p><p>所以 CMS 让系统一边工作，一边进行垃圾回收。CMS 垃圾回收的过程一共分为 4 个阶段：</p><ol><li><strong>初始标记</strong>。<code>Stop the World</code> 停止所有工作线程，仅标记 GC Roots 直接引用的对象。这一步速度很快。</li><li><strong>并发标记</strong>。此时允许系统线程创建对象，继续运行。垃圾回收线程则会追踪老年代中的对象是否从根源上被 GC Roots 引用。这一步是最耗时的，但是和系统程序并发运行，不会对系统运行造成影响。</li><li><strong>重新标记</strong>。<code>Stop the World</code> 重新标记在第二阶段里新创建的对象，以及原本被引用现在失去引用的对象。由于只对第二阶段有变动的对象进行标记，速度也比较快。</li><li><strong>并发清理</strong>。系统随意运行，同时清理之前被标记为垃圾的对象。这个阶段很耗时，但是由于和系统程序并发运行，并不影响系统程序的运行。</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> jvm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM中的垃圾回收器</title>
+      <link href="/post/dfa1c99.html"/>
+      <url>/post/dfa1c99.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="Serial垃圾回收器"><a href="#Serial垃圾回收器" class="headerlink" title="Serial垃圾回收器"></a>Serial垃圾回收器</h1><p><img src="http://image.shuiyujie.com/2019-09-14-10-14-52.png" alt="单线程执行垃圾回收算法"></p><p>Serial 垃圾回收器用于新生代的垃圾回收。无论服务器是几核的，都只用单线程执行垃圾回收算法。</p><h1 id="CMS-垃圾回收器"><a href="#CMS-垃圾回收器" class="headerlink" title="CMS 垃圾回收器"></a>CMS 垃圾回收器</h1><h1 id="Serial-Old-垃圾回收器"><a href="#Serial-Old-垃圾回收器" class="headerlink" title="Serial Old 垃圾回收器"></a>Serial Old 垃圾回收器</h1><p>在并发清理期间，系统程序可能将某些对象分配在新生代，然后触发了一次 Minor GC，一些对象进入了老年代，但是短时间内又没有人引用它们。这些对象就被称为<strong>浮动垃圾</strong>。</p><p>浮动垃圾意味着虽然他们是垃圾，但是 CMS 在并发清理阶段只会清理这一次 Full GC 被标记出来的垃圾，这些浮动垃圾只有等到下一次 GC 的时候才会回收它们。</p><p>为了保证在 CMS 并发清理期间，还有一定的内存空间让一些对象可以进入老年代，一般会预留一些空间。CMS垃圾回收的触发时机，其中有一个就是当老年代内存占用达到一定比例了，就自动执行GC。 <code>-XX:CMSInitiatingOccupancyFaction</code> 参数可以用来设置老年代占用多少比例的时候触发CMS垃圾回收，JDK 1.6里面默认的值是92%。</p><p>也就是说，老年代占用了92%空间了，就自动进行CMS垃圾回收，预留8%的空间给并发回收期间，系统程序把一些新对象放入老年代中。</p><p><strong>那么如果CMS垃圾回收期间，系统程序要放入老年代的对象大于了可用内存空间，此时会如何？</strong></p><p>这个时候，会发生 Concurrent Mode Failure，就是说并发垃圾回收失败了，我一边回收，你一边把对象放入老年代，内存都不够了。</p><p>此时就会自动用<strong>Serial Old垃圾回收器</strong>替代CMS，就是直接强行把系统程序 Stop the World，重新进行长时间的GC Roots追踪，标记出来全部垃圾对象，不允许新的对象产生。然后一次性把垃圾对象都回收掉，完事儿了再恢复系统线程。</p><p>所以在生产实践中，这个自动触发CMS垃圾回收的比例需要合理优化一下，避免“Concurrent Mode Failure”问题</p><h1 id="G1-垃圾回收器"><a href="#G1-垃圾回收器" class="headerlink" title="G1 垃圾回收器"></a>G1 垃圾回收器</h1><p>ParNew 和 CMS 两个垃圾回收器分别来回收新生代和老年代的垃圾对象，有一个最大的痛点就是 <strong>Stop the World</strong>。后面对于垃圾回收器的优化都是朝着减少 Stop the World 的目标去的。</p><p>在这基础上 <strong>G1 垃圾回收器</strong>应用而生，它可以提供比 ParNew + CMS 组合更好的垃圾回收性能。</p><p>主要设计思想：G1 将内存拆分成一个个小的 <strong>Regin</strong>，新生代和老生代各自对应一些 Regin，回收的时候间可能挑选停顿时间最短，回收对象最多的 Regin，尽量控制<strong>垃圾回收导致的系统停顿时间</strong>小于我们的预设值。</p><h2 id="Regin"><a href="#Regin" class="headerlink" title="Regin"></a>Regin</h2><p>G1 垃圾回收器只有逻辑上的新生代和老年代的概念，它会将 Java 堆内存划分成一个个相同大小的 Regin，如下图所示：</p><p><img src="http://image.shuiyujie.com/2019-09-14-16-08-34.png" alt="G1 垃圾回收器"></p><p>G1 垃圾回收器中的 Regin 是不区分新生代和老年的，刚开始 Regin 可能不属于任何一个年代，每一个 Regin 这一刻保存新生代对象，下一刻可能就保存老年代对象了。所以也就没有给新生代或者老年代分配多少内存这一说。</p><h2 id="预期停顿时间"><a href="#预期停顿时间" class="headerlink" title="预期停顿时间"></a>预期停顿时间</h2><p>G1另一个特点是可以让我们<strong>设置一个垃圾回收的预期停顿时间</strong>。我们可以指定一段时间内我们希望垃圾回收导致的系统停顿时间不能超过多久，后面的事情就由 G1 全权负责了。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM分代模型</title>
+      <link href="/post/7c59c32c.html"/>
+      <url>/post/7c59c32c.html</url>
+      
+        <content type="html"><![CDATA[<p>重新回过头来看一些 JVM，思考一个问题：分出一个永久代我可以理解，<strong>为什么又要把堆分成新生代和老年代呢？</strong>私以为划分成新生代和老年代是因为它们里面对象的性质不同，要用不同的垃圾回收算法来回收效率才高，是为垃圾回收器服务才分出新生代和老年代的。</p><p>本文说明新生代、老年代和永久代中对象的特性，以及何时它们何时触发 GC。</p><a id="more"></a><p><img src="http://image.shuiyujie.com/2019-10-08-21-54-58.png" alt="JVM分代模型" style="zoom:50%;"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">堆的大小可以用这几个参数来设置：</span><br><span class="line"></span><br><span class="line">1. “-XX:InitialHeapSize”和“-XX:MaxHeapSize” 就是初始堆大小和最大堆大小</span><br><span class="line">2. “-XX:NewSize”和“-XX:MaxNewSize” 是初始新生代大小和最大新生代大小</span><br><span class="line">3. “-XX:PretenureSizeThreshold=10485760” 指定了大对象阈值是10MB。</span><br></pre></td></tr></table></figure><h1 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h1><p>大部分对象存活的周期很短，就会放在新生代中。ParNew垃圾收集器会使用复制算法，回收新生代中的对象。复制算法中会将新生代分成 Eden 区和两个 Survivor 区，当 Eden 区满的时候就会触发垃圾回收算法。</p><h1 id="老年代"><a href="#老年代" class="headerlink" title="老年代"></a>老年代</h1><p>少部分对象存活周期比较长，或者因为一些特殊原因会进入到老年代。<strong>那么什么样的情况下，对象会进入老年代呢？</strong></p><ol><li><p>一个实例对象在新生代中，成功躲过 15 次垃圾，就说明他已经15岁了。成为老人的它就能进入到老年代了。</p><blockquote><p>具体几岁算是一个老人可以通过 <code>-XX:MaxTenuringThreshold</code> 参数进行设置。 </p></blockquote></li><li><p>动态年龄判断，当前放对象的 Survivor 区域里，一批对象的总大小大于了这块 Survivor区域内存大小的50%，那么此时大于等于这批对象年龄的对象，就可以直接进入老年代。</p></li><li><p>大对象直接进入老年代，可以通过 <code>-XX:PretenureSizeThreshold</code> 参数进行设置</p></li><li><p>Minor GC 之后发现剩余对象太多，无法放到另一个 Survivor 区，这些对象会直接进入老年代</p></li></ol><p><strong>老年代什么时候会触发 Old GC 呢？</strong>其实总结起来有 2 种情况：</p><ol><li>老年代未开启分配担保，老年代对象大小小于新生代中对象大小；老年代开启分配担保，但是老年代对象大小小于历次 Minor GC 之后进入老年代对象的大小。以上情况会进行 Old GC。</li><li>经过 Minor GC 之前的检查，正式进行 Minor GC 后，Survivor 放不下剩余对象，老年代也放不下剩余对象，就会进行 Old GC。</li></ol><p>如果 Old GC 之后老年代还是放不下剩余对象，就会 OOM。</p><blockquote><p>具体关于老年代未开启分配机制，以及触发 Minor GC 和 Old GC 流程的内容，可以看《<a href="https://shuiyujie.com/post/98255841.html">图解GC的过程</a>》</p></blockquote><h1 id="永久代"><a href="#永久代" class="headerlink" title="永久代"></a>永久代</h1><p>JVM 里的永久代其实就是方法区，可以认为永久代就是放一些类信息的。</p><p>永久代一般不会发生 GC，具体情况还不是很清楚，以后会补充。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> jvm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图解GC的过程</title>
       <link href="/post/98255841.html"/>
       <url>/post/98255841.html</url>
@@ -155,9 +224,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> deeplearning </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       
@@ -375,38 +444,9 @@
       
         <tags>
             
-            <tag> jvm </tag>
-            
             <tag> java </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>JVM-垃圾回收算法与垃圾回收器</title>
-      <link href="/post/e2ebbcff.html"/>
-      <url>/post/e2ebbcff.html</url>
-      
-        <content type="html"><![CDATA[<p>本文记录一些垃圾回收算法和垃圾回收器。</p><a id="more"></a><h1 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h1><h1 id="Serial垃圾回收器"><a href="#Serial垃圾回收器" class="headerlink" title="Serial垃圾回收器"></a>Serial垃圾回收器</h1><p><img src="http://image.shuiyujie.com/2019-09-14-10-14-52.png" alt="单线程执行垃圾回收算法"></p><p>Serial 垃圾回收器用于新生代的垃圾回收。无论服务器是几核的，都只用单线程执行垃圾回收算法。</p><h1 id="ParNew-垃圾回收器"><a href="#ParNew-垃圾回收器" class="headerlink" title="ParNew 垃圾回收器"></a>ParNew 垃圾回收器</h1><p><img src="http://image.shuiyujie.com/2019-09-14-10-15-37.png" alt="多线程执行垃圾回收算法"></p><p>ParNew 垃圾回收器用于新生代的垃圾回收。ParNew 垃圾回收器可以使用多个垃圾回收线程来执行垃圾回收算法。在启动系统时，可以使用 <code>-XX:+UseParNewGC</code> 参数来指定使用 ParNew 垃圾回收器。</p><p>ParNew 垃圾回收器默认使用的线程数量与机器的核数相同，比如我们线上机器假设用的是4核CPU，那默认就会使用 4 个线程。</p><p>线程数也可以通过 <code>-XX:ParallelGCThreads</code> 手动指定，但是不建议修改。</p><h1 id="选择单线程还是选择多线程？"><a href="#选择单线程还是选择多线程？" class="headerlink" title="选择单线程还是选择多线程？"></a>选择单线程还是选择多线程？</h1><ul><li>到底是用单线程垃圾回收好，还是多线程垃圾回收好？</li><li>到底是Serial垃圾回收器好还是ParNew垃圾回收器好？</li></ul><p>启动系统的时候是可以区分服务器模式和客户端模式的，如果你启动系统的时候加入 <code>-server</code> 就是服务器模式，如果加入 <code>-cilent</code> 就是客户端模式。</p><p>如果部署的是网站系统、业务系统等大型系统，一般都是多核 CPU。此时使用多线程，使用 ParNew 垃圾回收器更好。</p><p>如果是 Windows 客户端程序，如果是单核 CPU 使用 ParNew 垃圾回收器就会在一个 CPU 上启动多个垃圾回收线程，会有上下文切换的开销，反而不如单线程 Serial 垃圾回收器效率高。</p><h1 id="标记清理算法"><a href="#标记清理算法" class="headerlink" title="标记清理算法"></a>标记清理算法</h1><p>老年代一般选择的垃圾回收器是 CMS，采用标记清理算法。简单来说，标记清理算法分成两步：标记出哪些对象是垃圾对象，再一次性把这些对象清理掉。</p><p>举例来说，当程序触发了<strong>Full GC</strong> 回收老年代的垃圾对象。</p><ul><li>先通过追踪 GC Roots 的方法，看老年代中的各个对象是不是被 GC Roots 引用，如果被引用就是存活对象，否则就是垃圾对象。这些垃圾对象就会被<strong>标记</strong>出来。</li><li>然后再一次性清理被标记出来的<strong>垃圾对象</strong>。</li></ul><p>但是由于 Full GC 的时间比 Minor GC 的时间差不多长 10 倍，如果和 Minor GC 一样，Full GC 采用先 Stop the World 再用标记清理算法回收垃圾，就会导致系统卡死时间过长，很多响应无法处理。</p><p>所以 CMS 让系统一边工作，一边进行垃圾回收。CMS 垃圾回收的过程一共分为 4 个阶段：</p><ol><li><strong>初始标记</strong>。Stop the World 停止所有工作线程，仅标记 GC Roots 直接引用的对象。这一步速度很快。</li><li><strong>并发标记</strong>。此时允许系统线程创建对象，继续运行。垃圾回收线程则会追踪老年代中的对象是否从根源上被 GC Roots 引用。这一步是最耗时的，但是和系统程序并发运行，不会对系统运行造成影响。</li><li><strong>重新标记</strong>。Stop the World 重新标记在第二阶段里新创建的对象，以及原本被引用现在失去引用的对象。由于支队第二阶段有变动的对象进行标记，速度也比较快。</li><li><strong>并发清理</strong>。系统随意运行，同时清理之前被标记为垃圾的对象。这个阶段很耗时，但是由于和系统程序并发运行，并不影响系统程序的运行。</li></ol><h1 id="CMS-垃圾回收器"><a href="#CMS-垃圾回收器" class="headerlink" title="CMS 垃圾回收器"></a>CMS 垃圾回收器</h1><h1 id="Serial-Old-垃圾回收器"><a href="#Serial-Old-垃圾回收器" class="headerlink" title="Serial Old 垃圾回收器"></a>Serial Old 垃圾回收器</h1><p>在并发清理期间，系统程序可能将某些对象分配在新生代，然后触发了一次 Minor GC，一些对象进入了老年代，但是短时间内又没有人引用它们。这些对象就被称为<strong>浮动垃圾</strong>。</p><p>浮动垃圾意味着虽然他们是垃圾，但是 CMS 在并发清理阶段只会清理这一次 Full GC 被标记出来的垃圾，这些浮动垃圾只有等到下一次 GC 的时候才会回收它们。</p><p>为了保证在 CMS 并发清理期间，还有一定的内存空间让一些对象可以进入老年代，一般会预留一些空间。CMS垃圾回收的触发时机，其中有一个就是当老年代内存占用达到一定比例了，就自动执行GC。 <code>-XX:CMSInitiatingOccupancyFaction</code> 参数可以用来设置老年代占用多少比例的时候触发CMS垃圾回收，JDK 1.6里面默认的值是92%。</p><p>也就是说，老年代占用了92%空间了，就自动进行CMS垃圾回收，预留8%的空间给并发回收期间，系统程序把一些新对象放入老年代中。</p><p><strong>那么如果CMS垃圾回收期间，系统程序要放入老年代的对象大于了可用内存空间，此时会如何？</strong></p><p>这个时候，会发生 Concurrent Mode Failure，就是说并发垃圾回收失败了，我一边回收，你一边把对象放入老年代，内存都不够了。</p><p>此时就会自动用<strong>Serial Old垃圾回收器</strong>替代CMS，就是直接强行把系统程序 Stop the World，重新进行长时间的GC Roots追踪，标记出来全部垃圾对象，不允许新的对象产生。然后一次性把垃圾对象都回收掉，完事儿了再恢复系统线程。</p><p>所以在生产实践中，这个自动触发CMS垃圾回收的比例需要合理优化一下，避免“Concurrent Mode Failure”问题</p><h1 id="G1-垃圾回收器"><a href="#G1-垃圾回收器" class="headerlink" title="G1 垃圾回收器"></a>G1 垃圾回收器</h1><p>ParNew 和 CMS 两个垃圾回收器分别来回收新生代和老年代的垃圾对象，有一个最大的痛点就是 <strong>Stop the World</strong>。后面对于垃圾回收器的优化都是朝着减少 Stop the World 的目标去的。</p><p>在这基础上 <strong>G1 垃圾回收器</strong>应用而生，它可以提供比 ParNew + CMS 组合更好的垃圾回收性能。</p><p>主要设计思想：G1 将内存拆分成一个个小的 <strong>Regin</strong>，新生代和老生代各自对应一些 Regin，回收的时候间可能挑选停顿时间最短，回收对象最多的 Regin，尽量控制<strong>垃圾回收导致的系统停顿时间</strong>小于我们的预设值。</p><h2 id="Regin"><a href="#Regin" class="headerlink" title="Regin"></a>Regin</h2><p>G1 垃圾回收器只有逻辑上的新生代和老年代的概念，它会将 Java 堆内存划分成一个个相同大小的 Regin，如下图所示：</p><p><img src="http://image.shuiyujie.com/2019-09-14-16-08-34.png" alt="G1 垃圾回收器"></p><p>G1 垃圾回收器中的 Regin 是不区分新生代和老年的，刚开始 Regin 可能不属于任何一个年代，每一个 Regin 这一刻保存新生代对象，下一刻可能就保存老年代对象了。所以也就没有给新生代或者老年代分配多少内存这一说。</p><h2 id="预期停顿时间"><a href="#预期停顿时间" class="headerlink" title="预期停顿时间"></a>预期停顿时间</h2><p>G1另一个特点是可以让我们<strong>设置一个垃圾回收的预期停顿时间</strong>。我们可以指定一段时间内我们希望垃圾回收导致的系统停顿时间不能超过多久，后面的事情就由 G1 全权负责了。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-          <category> JVM </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
             <tag> jvm </tag>
-            
-            <tag> java </tag>
             
         </tags>
       
@@ -433,9 +473,9 @@
       
         <tags>
             
-            <tag> jvm </tag>
-            
             <tag> java </tag>
+            
+            <tag> jvm </tag>
             
         </tags>
       
@@ -462,9 +502,9 @@
       
         <tags>
             
-            <tag> jvm </tag>
-            
             <tag> java </tag>
+            
+            <tag> jvm </tag>
             
         </tags>
       
@@ -491,9 +531,9 @@
       
         <tags>
             
-            <tag> jvm </tag>
-            
             <tag> java </tag>
+            
+            <tag> jvm </tag>
             
         </tags>
       
@@ -520,9 +560,9 @@
       
         <tags>
             
-            <tag> jvm </tag>
-            
             <tag> java </tag>
+            
+            <tag> jvm </tag>
             
         </tags>
       
@@ -2469,9 +2509,9 @@
       
         <tags>
             
-            <tag> maven </tag>
-            
             <tag> ubuntu </tag>
+            
+            <tag> maven </tag>
             
         </tags>
       
@@ -3603,9 +3643,9 @@
       
         <tags>
             
-            <tag> java </tag>
-            
             <tag> linux </tag>
+            
+            <tag> java </tag>
             
         </tags>
       
