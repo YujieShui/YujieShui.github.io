@@ -33,19 +33,6 @@
     
     
     <entry>
-      <title>JVM中的垃圾回收器</title>
-      <link href="/post/dfa1c99.html"/>
-      <url>/post/dfa1c99.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="Serial垃圾回收器"><a href="#Serial垃圾回收器" class="headerlink" title="Serial垃圾回收器"></a>Serial垃圾回收器</h1><p><img src="http://image.shuiyujie.com/2019-09-14-10-14-52.png" alt="单线程执行垃圾回收算法"></p><p>Serial 垃圾回收器用于新生代的垃圾回收。无论服务器是几核的，都只用单线程执行垃圾回收算法。</p><h1 id="CMS-垃圾回收器"><a href="#CMS-垃圾回收器" class="headerlink" title="CMS 垃圾回收器"></a>CMS 垃圾回收器</h1><h1 id="Serial-Old-垃圾回收器"><a href="#Serial-Old-垃圾回收器" class="headerlink" title="Serial Old 垃圾回收器"></a>Serial Old 垃圾回收器</h1><p>在并发清理期间，系统程序可能将某些对象分配在新生代，然后触发了一次 Minor GC，一些对象进入了老年代，但是短时间内又没有人引用它们。这些对象就被称为<strong>浮动垃圾</strong>。</p><p>浮动垃圾意味着虽然他们是垃圾，但是 CMS 在并发清理阶段只会清理这一次 Full GC 被标记出来的垃圾，这些浮动垃圾只有等到下一次 GC 的时候才会回收它们。</p><p>为了保证在 CMS 并发清理期间，还有一定的内存空间让一些对象可以进入老年代，一般会预留一些空间。CMS垃圾回收的触发时机，其中有一个就是当老年代内存占用达到一定比例了，就自动执行GC。 <code>-XX:CMSInitiatingOccupancyFaction</code> 参数可以用来设置老年代占用多少比例的时候触发CMS垃圾回收，JDK 1.6里面默认的值是92%。</p><p>也就是说，老年代占用了92%空间了，就自动进行CMS垃圾回收，预留8%的空间给并发回收期间，系统程序把一些新对象放入老年代中。</p><p><strong>那么如果CMS垃圾回收期间，系统程序要放入老年代的对象大于了可用内存空间，此时会如何？</strong></p><p>这个时候，会发生 Concurrent Mode Failure，就是说并发垃圾回收失败了，我一边回收，你一边把对象放入老年代，内存都不够了。</p><p>此时就会自动用<strong>Serial Old垃圾回收器</strong>替代CMS，就是直接强行把系统程序 Stop the World，重新进行长时间的GC Roots追踪，标记出来全部垃圾对象，不允许新的对象产生。然后一次性把垃圾对象都回收掉，完事儿了再恢复系统线程。</p><p>所以在生产实践中，这个自动触发CMS垃圾回收的比例需要合理优化一下，避免“Concurrent Mode Failure”问题</p><h1 id="G1-垃圾回收器"><a href="#G1-垃圾回收器" class="headerlink" title="G1 垃圾回收器"></a>G1 垃圾回收器</h1><p>ParNew 和 CMS 两个垃圾回收器分别来回收新生代和老年代的垃圾对象，有一个最大的痛点就是 <strong>Stop the World</strong>。后面对于垃圾回收器的优化都是朝着减少 Stop the World 的目标去的。</p><p>在这基础上 <strong>G1 垃圾回收器</strong>应用而生，它可以提供比 ParNew + CMS 组合更好的垃圾回收性能。</p><p>主要设计思想：G1 将内存拆分成一个个小的 <strong>Regin</strong>，新生代和老生代各自对应一些 Regin，回收的时候间可能挑选停顿时间最短，回收对象最多的 Regin，尽量控制<strong>垃圾回收导致的系统停顿时间</strong>小于我们的预设值。</p><h2 id="Regin"><a href="#Regin" class="headerlink" title="Regin"></a>Regin</h2><p>G1 垃圾回收器只有逻辑上的新生代和老年代的概念，它会将 Java 堆内存划分成一个个相同大小的 Regin，如下图所示：</p><p><img src="http://image.shuiyujie.com/2019-09-14-16-08-34.png" alt="G1 垃圾回收器"></p><p>G1 垃圾回收器中的 Regin 是不区分新生代和老年的，刚开始 Regin 可能不属于任何一个年代，每一个 Regin 这一刻保存新生代对象，下一刻可能就保存老年代对象了。所以也就没有给新生代或者老年代分配多少内存这一说。</p><h2 id="预期停顿时间"><a href="#预期停顿时间" class="headerlink" title="预期停顿时间"></a>预期停顿时间</h2><p>G1另一个特点是可以让我们<strong>设置一个垃圾回收的预期停顿时间</strong>。我们可以指定一段时间内我们希望垃圾回收导致的系统停顿时间不能超过多久，后面的事情就由 G1 全权负责了。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>JVM分代模型</title>
       <link href="/post/7c59c32c.html"/>
       <url>/post/7c59c32c.html</url>
@@ -587,9 +574,9 @@
       
         <tags>
             
-            <tag> ffmpeg </tag>
-            
             <tag> 图像处理 </tag>
+            
+            <tag> ffmpeg </tag>
             
             <tag> 音频处理 </tag>
             
@@ -2509,9 +2496,9 @@
       
         <tags>
             
-            <tag> ubuntu </tag>
-            
             <tag> maven </tag>
+            
+            <tag> ubuntu </tag>
             
         </tags>
       
@@ -3643,9 +3630,9 @@
       
         <tags>
             
-            <tag> linux </tag>
-            
             <tag> java </tag>
+            
+            <tag> linux </tag>
             
         </tags>
       
