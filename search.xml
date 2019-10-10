@@ -4,6 +4,61 @@
   
     
     <entry>
+      <title>图解GC的过程</title>
+      <link href="/post/98255841.html"/>
+      <url>/post/98255841.html</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/gc.png" alt="GC的过程"></p><p>本文想要聊一聊 GC 流程这样一个话题。具体来说就是 Minor GC 的过程是怎么样的？Full GC 的过程又是怎么样的？这一切都要从「压死骆驼的最后一根稻草」说起。</p><p><strong>后面的文字请配合流程图来食用。</strong></p><a id="more"></a><h1 id="挤满新生代的最后一个对象"><a href="#挤满新生代的最后一个对象" class="headerlink" title="挤满新生代的最后一个对象"></a>挤满新生代的最后一个对象</h1><p>我们应当知道，新创建的对象一般会被分配在新生代中。常用的新生代的垃圾回收器是 ParNew 垃圾回收器，它按照 8:1:1 将新生代分成 Eden 区，以及两个 Survivor 区。</p><p>某一时刻，我们创建的对象将 Eden 区全部挤满，这个对象就是「挤满新生代的最后一个对象」。此时，Minor GC 就触发了。</p><h1 id="正式-Minor-GC-前的检查"><a href="#正式-Minor-GC-前的检查" class="headerlink" title="正式 Minor GC 前的检查"></a>正式 Minor GC 前的检查</h1><p>在正式 Minor GC 前，JVM 会先检查新生代中对象，是比老年代中剩余空间大还是小。<strong>为什么要做这样的检查呢？</strong>原因很简单，假如 Minor GC 之后 Survivor 区放不下剩余对象，这些对象就要进入到老年代，所以要提前检查老年代是不是够用。这样就有两种情况：</p><ol><li>老年代剩余空间大于新生代中的对象大小，那就直接 Minor GC，GC 完 survivor 不够放，老年代也绝对够放</li><li>老年代剩余空间小于新生代中的对象大小，这个时候就要查看是否启用了「老年代空间分配担保规则」，具体来说就是看<code>-XX:-HandlePromotionFailure</code>参数是否设置了（一般都会设置）</li></ol><p>老年代空间分配担保规则是这样的。如果老年代中剩余空间大小，大于历次 Minor GC 之后剩余对象的大小，那就允许进行 Minor GC。因为从概率上来说，以前的放的下，这次的也应该放的下。那就有两种情况：</p><ol><li>老年代中剩余空间大小，大于历次 Minor GC 之后剩余对象的大小，进行 Minor GC</li><li>老年代中剩余空间大小，小于历次 Minor GC 之后剩余对象的大小，进行 Full GC，把老年代空出来再检查</li></ol><h1 id="Minor-GC-后的处境"><a href="#Minor-GC-后的处境" class="headerlink" title="Minor GC 后的处境"></a>Minor GC 后的处境</h1><p>前面说了，开启<strong>老年代空间分配担保规则</strong>只能说是大概率上来说，Minor GC 剩余后的对象够放到老年代，所以当然也会有万一，Minor GC 后会有这样三种情况：</p><ol><li>Minor GC 之后的对象足够放到 Survivor 区，皆大欢喜，GC 结束</li><li>Minor GC 之后的对象不够放到 Survivor 区，接着进入到老年代，老年代能放下，那也可以，GC 结束</li><li>Minor GC 之后的对象不够放到 Survivor 区，老年代也放不下，那就只能 Full GC</li></ol><h1 id="实在不行只能-OOM"><a href="#实在不行只能-OOM" class="headerlink" title="实在不行只能 OOM"></a>实在不行只能 OOM</h1><p>前面都是成功 GC 的例子，还有 3 中情况，会导致 GC 失败，报 OOM：</p><ol><li>紧接上一节 Full GC 之后，老年代任然放不下剩余对象，就只能 OOM</li><li>未开启老年代分配担保机制，且一次 Full GC 后，老年代任然放不下剩余对象，也只能 OOM</li><li>开启老年代分配担保机制，但是担保不通过，一次 Full GC 后，老年代任然放不下剩余对象，也是能 OOM</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> jvm </tag>
+            
+            <tag> gc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Redis Clustor原生安装</title>
+      <link href="/post/789f9523.html"/>
+      <url>/post/789f9523.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM中哪些区域会发生OOM?</title>
+      <link href="/post/5dbafb8.html"/>
+      <url>/post/5dbafb8.html</url>
+      
+        <content type="html"><![CDATA[<p>JVM在哪些区域会发生OOM？各个区域是如何产生OOM的？哪些场景下会出现OOM，我们应该如何规避，出现之后又该怎么解决？</p><a id="more"></a><p>一旦你的系统代码不停的往JVM内存里塞入大量的东西，JVM实在是放不下之后，JVM就会告诉你，OutOfMemory，内存溢出了，我实在放不下那么多东西了，我就直接瘫痪不能工作了。</p><p>通常而言，内存溢出这个问题可能对你的系统是毁灭性的打击，他代表你的JVM内存不足以支撑你的代码的运行</p><p>所以一旦发生这个情况，就会导致你的系统直接停止运转，甚至会导致你的JVM进程直接崩溃掉，进程都没了！</p><p>这个时候对于线上看起来的场景就是，用户突然发现很奇怪，为什么点击APP、点击网页，都没反应了呢？</p><p>然后大量的投诉和反馈给到客服，客服直接转移投诉给到运营，运营会直接反馈给技术人员。</p><p>这个时候技术人员往往得知这个消息会直接目瞪口呆，最害怕的事情发生了，自己负责的线上系统居然挂掉了，今年的年终奖。。。也许是泡汤了，弄不好还得提前出去找工作去了。。。</p><p>内存区域满了还要往里塞就会发生内存溢出。会发生内存溢出的区域包括 <strong>MetaSpace</strong>、<strong>虚拟机栈内存</strong>和<strong>堆内存</strong>。</p><p>这里需要完善一下，各个区域是如何发生内存溢出的。</p><p>一、哪些区域会发生 OOM？</p><p>072 讲，那个图开始</p><p><strong>接下来三天，我们就分别来分析一下Metaspace、Java虚拟机栈和堆内存这几块内存区域到底在什么情况下会发生内存溢出。</strong></p><p>二、073 Metaspace区域是如何因为类太多而发生内存溢出的？</p><p>Metaspace区域发生内存溢出的原理，同时给出了大家两种常见的触发Metaspace内存溢出的场景</p><p>三、074 无限制的调用方法是如何让线程的栈内存溢出的？</p><p>栈内存溢出的根本原理和可能触发的一个场景，就是方法递归调用</p><p>但是一般来说，其实只要注意一下代码的编写，避免出现无限制的方法递归，就一般可以避免栈内存的溢出。</p><p>四、075 对象太多了！堆内存实在是放不下，只能内存溢出！</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JVM中的垃圾回收算法</title>
       <link href="/post/e2ebbcff.html"/>
       <url>/post/e2ebbcff.html</url>
@@ -60,11 +115,11 @@
     
     
     <entry>
-      <title>图解GC的过程</title>
-      <link href="/post/98255841.html"/>
-      <url>/post/98255841.html</url>
+      <title>什么是内存溢出？在哪些区域会发生内存溢出？</title>
+      <link href="/post/8bc388ce.html"/>
+      <url>/post/8bc388ce.html</url>
       
-        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/gc.png" alt="GC的过程"></p><p>本文想要聊一聊 GC 流程这样一个话题。具体来说就是 Minor GC 的过程是怎么样的？Full GC 的过程又是怎么样的？这一切都要从「压死骆驼的最后一根稻草」说起。</p><p><strong>后面的文字请配合流程图来食用。</strong></p><a id="more"></a><h1 id="挤满新生代的最后一个对象"><a href="#挤满新生代的最后一个对象" class="headerlink" title="挤满新生代的最后一个对象"></a>挤满新生代的最后一个对象</h1><p>我们应当知道，新创建的对象一般会被分配在新生代中。常用的新生代的垃圾回收器是 ParNew 垃圾回收器，它按照 8:1:1 将新生代分成 Eden 区，以及两个 Survivor 区。</p><p>某一时刻，我们创建的对象将 Eden 区全部挤满，这个对象就是「挤满新生代的最后一个对象」。此时，Minor GC 就触发了。</p><h1 id="正式-Minor-GC-前的检查"><a href="#正式-Minor-GC-前的检查" class="headerlink" title="正式 Minor GC 前的检查"></a>正式 Minor GC 前的检查</h1><p>在正式 Minor GC 前，JVM 会先检查新生代中对象，是比老年代中剩余空间大还是小。<strong>为什么要做这样的检查呢？</strong>原因很简单，假如 Minor GC 之后 Survivor 区放不下剩余对象，这些对象就要进入到老年代，所以要提前检查老年代是不是够用。这样就有两种情况：</p><ol><li>老年代剩余空间大于新生代中的对象大小，那就直接 Minor GC，GC 完 survivor 不够放，老年代也绝对够放</li><li>老年代剩余空间小于新生代中的对象大小，这个时候就要查看是否启用了「老年代空间分配担保规则」，具体来说就是看<code>-XX:-HandlePromotionFailure</code>参数是否设置了（一般都会设置）</li></ol><p>老年代空间分配担保规则是这样的。如果老年代中剩余空间大小，大于历次 Minor GC 之后剩余对象的大小，那就允许进行 Minor GC。因为从概率上来说，以前的放的下，这次的也应该放的下。那就有两种情况：</p><ol><li>老年代中剩余空间大小，大于历次 Minor GC 之后剩余对象的大小，进行 Minor GC</li><li>老年代中剩余空间大小，小于历次 Minor GC 之后剩余对象的大小，进行 Full GC，把老年代空出来再检查</li></ol><h1 id="Minor-GC-后的处境"><a href="#Minor-GC-后的处境" class="headerlink" title="Minor GC 后的处境"></a>Minor GC 后的处境</h1><p>前面说了，开启<strong>老年代空间分配担保规则</strong>只能说是大概率上来说，Minor GC 剩余后的对象够放到老年代，所以当然也会有万一，Minor GC 后会有这样三种情况：</p><ol><li>Minor GC 之后的对象足够放到 Survivor 区，皆大欢喜，GC 结束</li><li>Minor GC 之后的对象不够放到 Survivor 区，接着进入到老年代，老年代能放下，那也可以，GC 结束</li><li>Minor GC 之后的对象不够放到 Survivor 区，老年代也放不下，那就只能 Full GC</li></ol><h1 id="实在不行只能-OOM"><a href="#实在不行只能-OOM" class="headerlink" title="实在不行只能 OOM"></a>实在不行只能 OOM</h1><p>前面都是成功 GC 的例子，还有 3 中情况，会导致 GC 失败，报 OOM：</p><ol><li>紧接上一节 Full GC 之后，老年代任然放不下剩余对象，就只能 OOM</li><li>未开启老年代分配担保机制，且一次 Full GC 后，老年代任然放不下剩余对象，也只能 OOM</li><li>开启老年代分配担保机制，但是担保不通过，一次 Full GC 后，老年代任然放不下剩余对象，也是能 OOM</li></ol>]]></content>
+        <content type="html"><![CDATA[<p><strong>什么是内存溢出？在哪些区域会发生内存溢出？</strong>回答这个问题，我们需要先看一看Java代码是怎么运行的。现在计入说我们写了一个 <code>HelloWorld.class</code>：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        String message = <span class="string">"Hello World"</span>;</span><br><span class="line">        System.out.println(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们来分析一下这段代码的运行情况：</p><a id="more"></a><ol><li>源文件 <code>HelloWorld.java</code> 将会被编译成可执行文件 <code>HelloWorld.class</code></li><li>类加载加载可执行文件到 Metaspace，Metaspace 保存类的基本信息，如果加载太多就会 OOM</li><li>Java是多线程的，运行代码的时候会启动一个线程。<code>main()</code>是Java程序的入口，首先会启动一个 main 线程。每个线程都有 Java 虚拟机栈，每执行一个方法都会有一个栈帧入栈，栈帧中包含参数、局部变量、返回值地址等信息。如果代码层次太深，不断有方法入栈却没有出栈，Java虚拟机栈就会 OOM。</li><li>栈中的局部变量如果是一个对象，那就会在初始化的时候在堆中创建对象。堆中创建的对象过多就会触发 GC，GC 的速度赶不上新建对象的速度也会发生 OOM。</li></ol><p>从 Java 代码的运行过程来看，有三个区域会发生 OOM，它们分别是：Metaspace、Java 虚拟机栈、堆内存。</p><h1 id="Metaspace-是如何溢出的？"><a href="#Metaspace-是如何溢出的？" class="headerlink" title="Metaspace 是如何溢出的？"></a>Metaspace 是如何溢出的？</h1><p>Metaspace 中会加载类，保存各种类信息，它的大小可以通过 <code>-XX:MetaspaceSize=512m</code> 和 <code>-XX:MaxMetaspaceSize=512m</code> 来设置。</p><p>当我们不断地创建类，不断地创建类，把 Metaspace 的内存都给占满了。这个时候就会触发 Full GC，Full GC 一般会顺带着进行 Minor GC 回收年轻带，也会进行 Old GC 回收老年代。</p><p>如果 Full GC 回收 Metespace 中的空间之后，任然无法存放新建的对象，此时 OOM 就会发生了。</p><p>不过 Metaspace 一般很少发生 OOM，如果发生了一般是出于下面两个原因：</p><ol><li>上线系统的时候对 Metaspace 区域直接用默认的参数，即根本不设置其大小。默认的Metaspace区域可能才几十MB，对于稍微大型的系统，他自己有很多类，还依赖了很多外部的jar包，几十MB的Metaspace很容易就不够了。</li><li>写代码的时候用到了类似与 cglib 的动态代理技术，代码写得不好就会导致创建太多的类。</li></ol><h1 id="线程中的栈是如何溢出的？"><a href="#线程中的栈是如何溢出的？" class="headerlink" title="线程中的栈是如何溢出的？"></a>线程中的栈是如何溢出的？</h1><p>虚拟机中的栈内存也是有限的，我们调用方法的时候会创建一个栈帧，紧接着方法入栈。如果一个线程一直调用方法入栈，栈内存终归是要满的，此时线程的栈中就会发生 OOM。</p><p>发生这种情况一般就是代码除了问题，比如写了个递归调用，和 Metaspace 的内存溢出一样，也很少发生。</p><h1 id="堆内存是如何溢出的？"><a href="#堆内存是如何溢出的？" class="headerlink" title="堆内存是如何溢出的？"></a>堆内存是如何溢出的？</h1><p>最常见的就是堆内存溢出的问题了。堆内存有限的情况下，不断创建对象并触发 GC，但是 GC 过后任然有大量大象存活，此时还要放入大量新的对象，这就会导致堆内存溢出问题。</p><p>一般来说对内存溢出有这样两个场景：</p><ol><li>高并发场景下，请求量太大，创建了大量新的对象，且这些都是有用的、存活的。堆中无法放入更多对象就会导致堆内存溢出</li><li>内存泄漏问题，长生命周期的对象引用了大量短生命周期的对象，没有及时取消对它们的引用，导致 GC 无法回收这些理应被回收的对象，就导致了堆内存溢出</li></ol>]]></content>
       
       
       <categories>
@@ -79,8 +134,6 @@
         <tags>
             
             <tag> jvm </tag>
-            
-            <tag> gc </tag>
             
         </tags>
       
@@ -574,9 +627,9 @@
       
         <tags>
             
-            <tag> 图像处理 </tag>
-            
             <tag> ffmpeg </tag>
+            
+            <tag> 图像处理 </tag>
             
             <tag> 音频处理 </tag>
             
@@ -1613,6 +1666,31 @@
     
     
     <entry>
+      <title>OpenCV-Mat表达式</title>
+      <link href="/post/1208a55a.html"/>
+      <url>/post/1208a55a.html</url>
+      
+        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> OpenCV </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图像处理——图像降噪</title>
       <link href="/post/d966aba8.html"/>
       <url>/post/d966aba8.html</url>
@@ -1632,31 +1710,6 @@
             <tag> opencv </tag>
             
             <tag> 图像处理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>OpenCV-Mat表达式</title>
-      <link href="/post/1208a55a.html"/>
-      <url>/post/1208a55a.html</url>
-      
-        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> OpenCV </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> opencv </tag>
             
         </tags>
       
