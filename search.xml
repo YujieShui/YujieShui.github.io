@@ -33,19 +33,6 @@
     
     
     <entry>
-      <title>Redis Clustor原生安装</title>
-      <link href="/post/789f9523.html"/>
-      <url>/post/789f9523.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>JVM中哪些区域会发生OOM?</title>
       <link href="/post/5dbafb8.html"/>
       <url>/post/5dbafb8.html</url>
@@ -3328,7 +3315,7 @@
       <link href="/post/ef7b6f1b.html"/>
       <url>/post/ef7b6f1b.html</url>
       
-        <content type="html"><![CDATA[<p>我们要使用缓存的时候，不可避免地要面对缓存雪崩、缓存穿透、缓存穿透的问题。如果做缓存没有考虑到这些问题，那是不合格的系统。推而广之可以说，引入任何一项技术，只考虑它的优点而没有考虑到它带来的弊端，那就是在挖坑。</p><a id="more"></a><h1 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h1><p>我们现在有一个系统。高峰期每秒有5000个请求发到系统 A 上。系统A用缓存抗住4000个请求，其中有1000个请求会打到 MySQL 上。</p><p><img src="http://image.shuiyujie.com/2019-10-10-23-13-26.png" alt="缓存雪崩" style="zoom:50%;"></p><p>突然缓存挂掉了，这就导致原本缓存抗的4000个请求一下子都打在数据库上。如果我们用的是 MySQL 数据库，每秒5000个请求过来，MySQL 一下子就挂了。接着 DBA 重启 MySQL，还是 5000 个请求一下子打过来，MySQL 又挂了。数据库一挂，整个系统就挂了。这就是缓存雪崩。</p><p>缓存雪崩指的是由于缓存断掉之后，引起一些列的连锁反应，就像雪崩一样，一批服务都挂掉了。</p><p><strong>缓存雪崩要怎么解决？</strong></p><ul><li>事前：redis 做好高可用，主从架构、redis cluster，避免全线奔溃</li><li>事中：本地 ehcache 存储 + hystrix 限流&amp;降级，避免 MySQL 被打死</li><li>事后：redis 持久化，重启之后立即磁盘加载数据，快速恢复缓存</li></ul><p><img src="http://image.shuiyujie.com/2019-10-10-23-16-11.png" alt="缓存雪崩解决方案"></p><h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><p>现在任然是高峰期每秒5000次请求，其中有4000次是黑客发过来。比如说我们缓存的是商品订单的id，现在黑客发过来的4000个请求id都为负数。</p><p>我们是没有负数的id的，所以请求过来无法命中缓存，这样一来黑客的4000个请求就完全<strong>穿透缓存</strong>，直接打到了 MySQL 上，MySQL 就这样挂了。</p><p><img src="http://image.shuiyujie.com/2019-10-10-23-17-22.png" alt="缓存击穿" style="zoom:50%;"></p><p>解决方案：缓存中没有查到就存一个空值到缓存中，比如 set -999 UNKNOW。</p><h1 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h1><p>缓存击穿，就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。</p><p>解决方式也很简单，可以将热点数据设置为<strong>永远不过期</strong>；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</p>]]></content>
+        <content type="html"><![CDATA[<p>我们要使用缓存的时候，不可避免地要面对<strong>缓存雪崩、缓存穿透、缓存穿透</strong>的问题。如果做缓存没有考虑到这些问题，那是不合格的系统。推而广之可以说，引入任何一项技术，只考虑它的优点而没有考虑到它带来的弊端，那就是在挖坑。</p><a id="more"></a><h1 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h1><p>我们现在有一个系统。高峰期每秒有5000个请求发到系统 A 上。系统A用缓存抗住4000个请求，其中有1000个请求会打到 MySQL 上。</p><p><img src="http://image.shuiyujie.com/2019-10-10-23-13-26.png" alt="缓存雪崩" style="zoom:50%;"></p><p>突然缓存挂掉了，这就导致原本缓存抗的4000个请求一下子都打在数据库上。如果我们用的是 MySQL 数据库，每秒5000个请求过来，MySQL 一下子就挂了。接着 DBA 重启 MySQL，还是 5000 个请求一下子打过来，MySQL 又挂了。数据库一挂，整个系统就挂了。这就是缓存雪崩。</p><p>缓存雪崩指的是由于缓存断掉之后，引起一些列的连锁反应，就像雪崩一样，一批服务都挂掉了。</p><p><strong>缓存雪崩要怎么解决？</strong></p><ul><li>事前：redis 做好高可用，主从架构、redis cluster，避免全线奔溃</li><li>事中：本地 ehcache 存储 + hystrix 限流&amp;降级，避免 MySQL 被打死</li><li>事后：redis 持久化，重启之后立即磁盘加载数据，快速恢复缓存</li></ul><p><img src="http://image.shuiyujie.com/2019-10-10-23-16-11.png" alt="缓存雪崩解决方案"></p><h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><p>现在任然是高峰期每秒5000次请求，其中有4000次是黑客发过来。比如说我们缓存的是商品订单的id，现在黑客发过来的4000个请求id都为负数。</p><p>我们是没有负数的id的，所以请求过来无法命中缓存，这样一来黑客的4000个请求就完全<strong>穿透缓存</strong>，直接打到了 MySQL 上，MySQL 就这样挂了。</p><p><img src="http://image.shuiyujie.com/2019-10-10-23-17-22.png" alt="缓存击穿" style="zoom:50%;"></p><p>解决方案：</p><ol><li>缓存空对象：缓存中没有查到就存一个空值到缓存中，比如 <code>set -999 UNKNOW</code>。</li><li>布隆过滤器：提前生成一个布隆过滤器，无法通过过滤器的直接返回空。</li></ol><h1 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h1><p>缓存击穿，就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。</p><p>解决方式也很简单，可以将热点数据设置为<strong>永远不过期</strong>；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</p><table><thead><tr><th>方案</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>互斥锁</td><td>1. 思路简单<br>2. 保证一致性</td><td>1. 代码复杂度增加<br>2. 存在死锁风险</td></tr><tr><td>永远不过期</td><td>基本杜绝热点key重建问题</td><td>1. 不保证一致性<br>2. 逻辑时间增加维护成本和内存成本</td></tr></tbody></table>]]></content>
       
       
       <categories>

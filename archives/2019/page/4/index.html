@@ -188,124 +188,6 @@
       
         
   <h2 class="title">
-    <a href="/post/3e6f77c3.html">
-      【Java并发编程】Lock&Condition
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-09</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/Java/Java并发编程/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Java&nbsp;/&nbsp;Java并发编程</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>在并发编程中有两个核心问题:一个是<strong>互斥</strong>,即同一时刻只允许一个线程访问共享资源;另一个是<strong>同步</strong>,即线程之间如何通信和协作。解决这两个问题的方法前人已经替我们总结出来理论模型,分别是<strong>管程模型</strong>和<strong>信号量模型</strong>.</p>
-<p><img src="http://image.shuiyujie.com/2019-09-09-22-20-56.png" alt="MESA管程模型"></p>
-<p>Java中实现管程有两种方式</p>
-<ol>
-<li>一是使用<code>synchronized</code>关键字给代码块添加隐式锁实现互斥,同时使用<code>notify()</code>和<code>notifyAll()</code>实现<strong>同步</strong></li>
-<li>二是使用 Java SDK 并发包下的  Lock 和 Condition 两个接口,来实现管程.<ol>
-<li>Lock 的特性包括:能够响应中断、支持超时和非阻塞地获取锁</li>
-<li>Condition 实现了管程模型里面的条件变量。</li>
-</ol>
-</li>
-</ol>
-<p><em>注：Java 参考了 MESA 模型，语言内置的管程（synchronized）对 MESA 模型进行了精简。MESA 模型中，条件变量可以有多个，Java 语言内置的管程里只有一个条件变量。Java 并发包下的 Lock&amp;Condition则则支持多个条件变量。</em></p>
-      
-        <div class="readmore">
-          <a href="/post/3e6f77c3.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> java</a>
-        
-          <a href="/tags/并发编程/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 并发编程</a>
-        
-          <a href="/tags/管程/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 管程</a>
-        
-          <a href="/tags/并发工具类/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 并发工具类</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
     <a href="/post/541ca933.html">
       【Java并发编程】Java线程的生命周期
     </a>
@@ -1248,6 +1130,111 @@
           <a href="/tags/网站/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 网站</a>
         
           <a href="/tags/工具/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 工具</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/post/92782b0b.html">
+      快，学会shell
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-07-21</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Linux/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p><img src="http://image.shuiyujie.com/hacker-2300772_1920.jpg" alt="学习shell编程"></p>
+<p><em>题图：<a href="https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/" target="_blank" rel="noopener">https://pixabay.com/illustrations/hacker-cyber-crime-internet-2300772/</a></em></p>
+<p>本文分成入门篇和基础篇。基础篇包括变量、字符串处理、数学运算三部分。基础篇包括流控制、函数和函数库三部分。主要是基于例子进行讲解，其中有 4 个复杂一点的脚本，看懂了也就入门了。</p>
+      
+        <div class="readmore">
+          <a href="/post/92782b0b.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> linux</a>
+        
+          <a href="/tags/shell/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> shell</a>
         
       </div>
     
