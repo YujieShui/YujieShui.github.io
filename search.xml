@@ -1653,6 +1653,31 @@
     
     
     <entry>
+      <title>OpenCV-Mat表达式</title>
+      <link href="/post/1208a55a.html"/>
+      <url>/post/1208a55a.html</url>
+      
+        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> OpenCV </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图像处理——图像降噪</title>
       <link href="/post/d966aba8.html"/>
       <url>/post/d966aba8.html</url>
@@ -1672,31 +1697,6 @@
             <tag> opencv </tag>
             
             <tag> 图像处理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>OpenCV-Mat表达式</title>
-      <link href="/post/1208a55a.html"/>
-      <url>/post/1208a55a.html</url>
-      
-        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> OpenCV </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> opencv </tag>
             
         </tags>
       
@@ -3316,6 +3316,33 @@
       <url>/post/ef7b6f1b.html</url>
       
         <content type="html"><![CDATA[<p>我们要使用缓存的时候，不可避免地要面对<strong>缓存雪崩、缓存穿透、缓存穿透</strong>的问题。如果做缓存没有考虑到这些问题，那是不合格的系统。推而广之可以说，引入任何一项技术，只考虑它的优点而没有考虑到它带来的弊端，那就是在挖坑。</p><a id="more"></a><h1 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h1><p>我们现在有一个系统。高峰期每秒有5000个请求发到系统 A 上。系统A用缓存抗住4000个请求，其中有1000个请求会打到 MySQL 上。</p><p><img src="http://image.shuiyujie.com/2019-10-10-23-13-26.png" alt="缓存雪崩" style="zoom:50%;"></p><p>突然缓存挂掉了，这就导致原本缓存抗的4000个请求一下子都打在数据库上。如果我们用的是 MySQL 数据库，每秒5000个请求过来，MySQL 一下子就挂了。接着 DBA 重启 MySQL，还是 5000 个请求一下子打过来，MySQL 又挂了。数据库一挂，整个系统就挂了。这就是缓存雪崩。</p><p>缓存雪崩指的是由于缓存断掉之后，引起一些列的连锁反应，就像雪崩一样，一批服务都挂掉了。</p><p><strong>缓存雪崩要怎么解决？</strong></p><ul><li>事前：redis 做好高可用，主从架构、redis cluster，避免全线奔溃</li><li>事中：本地 ehcache 存储 + hystrix 限流&amp;降级，避免 MySQL 被打死</li><li>事后：redis 持久化，重启之后立即磁盘加载数据，快速恢复缓存</li></ul><p><img src="http://image.shuiyujie.com/2019-10-10-23-16-11.png" alt="缓存雪崩解决方案"></p><h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><p>现在任然是高峰期每秒5000次请求，其中有4000次是黑客发过来。比如说我们缓存的是商品订单的id，现在黑客发过来的4000个请求id都为负数。</p><p>我们是没有负数的id的，所以请求过来无法命中缓存，这样一来黑客的4000个请求就完全<strong>穿透缓存</strong>，直接打到了 MySQL 上，MySQL 就这样挂了。</p><p><img src="http://image.shuiyujie.com/2019-10-10-23-17-22.png" alt="缓存击穿" style="zoom:50%;"></p><p>解决方案：</p><ol><li>缓存空对象：缓存中没有查到就存一个空值到缓存中，比如 <code>set -999 UNKNOW</code>。</li><li>布隆过滤器：提前生成一个布隆过滤器，无法通过过滤器的直接返回空。</li></ol><h1 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h1><p>缓存击穿，就是说某个 key 非常热点，访问非常频繁，处于集中式高并发访问的情况，当这个 key 在失效的瞬间，大量的请求就击穿了缓存，直接请求数据库，就像是在一道屏障上凿开了一个洞。</p><p>解决方式也很简单，可以将热点数据设置为<strong>永远不过期</strong>；或者基于 redis or zookeeper 实现互斥锁，等待第一个请求构建完缓存之后，再释放锁，进而其它请求才能通过该 key 访问数据。</p><table><thead><tr><th>方案</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>互斥锁</td><td>1. 思路简单<br>2. 保证一致性</td><td>1. 代码复杂度增加<br>2. 存在死锁风险</td></tr><tr><td>永远不过期</td><td>基本杜绝热点key重建问题</td><td>1. 不保证一致性<br>2. 逻辑时间增加维护成本和内存成本</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分布式 </category>
+          
+          <category> Redis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据分布算法</title>
+      <link href="/post/1b091299.html"/>
+      <url>/post/1b091299.html</url>
+      
+        <content type="html"><![CDATA[<p>分布式数据处理系统第一个要解决的问题就是如何将数据进行拆分，利用多台计算机处理大规模数据。对于数据量很大的数据集，单机无法保存或者处理时，通过对数据集进行水平拆分，将不同的数据子集存放到不同的处理节点，这种对数据进行拆分的方式叫做<strong>分区（partition）</strong>。</p><p><img src="http://image.shuiyujie.com/2019-10-11-12-33-20.png" alt="分区" style="zoom: 50%;"></p><p>其中常用的哈希算法有节点取余哈希算法，一致性哈希算法，以及虚拟槽分区算法。Redis Cluster 中用的正式虚拟槽分区算法。</p><a id="more"></a><h1 id="节点取余哈希算法"><a href="#节点取余哈希算法" class="headerlink" title="节点取余哈希算法"></a>节点取余哈希算法</h1><p>键值为 key 节点数量为 N ，利用公式 $$hash(key)%N$$计算出一个位于$$ [0, N - 1]$$ 区间的值，将这个 key 存放在对应的节点中。</p><p>节点取余哈希算法的优点在于简单，缺点在于节点伸缩时，数据节点关系会发生变化，导致数据迁移。举例来说就是原来有 3 个节点，用 3 取余，现在扩容到 4 个节点，用 4 取余，算出来的结果是不一样的。为了减小迁移率，建议翻倍扩容。</p><p><img src="http://image.shuiyujie.com/2019-10-11-13-37-16.png" alt="节点取余哈希算法" style="zoom:50%;"></p><p>此外，使用节点取余哈希算法，一旦某一个 master 节点宕机，所有请求过来，都会基于最新的剩余 master 节点数去取模，尝试去取数据。这会导致<strong>大部分的请求过来，全部无法拿到有效的缓存</strong>，导致大量的流量涌入数据库。</p><h1 id="一致性哈希算法"><a href="#一致性哈希算法" class="headerlink" title="一致性哈希算法"></a>一致性哈希算法</h1><p>在一致性哈希中，我们把所有的数据包括节点数据都放在一个哈希环上，我们除了需要计算要存储的数据的 key 的hash之外，还要计算节点的 hash。然后在存储时，选择一个跟 key 的 hash 最接近的节点（顺时针找到第一个大于等于该哈希值的节点），存储进去。</p><p><img src="http://image.shuiyujie.com/2019-10-11-13-44-54.png" alt="一致性哈希算法" style="zoom:50%;"></p><p>一致性哈希解决了由于集群变动而导致的数据迁移率高的问题。即如果一个节点挂了，受影响的数据仅仅是此节点到环空间前一个节点（沿着逆时针方向行走遇到的第一个节点）之间的数据，其它不受影响。增加一个节点也同理。</p><p>但是又引入了另一个复杂的问题，就是每个节点的负载不相同，因为每个节点的hash是根据IP计算出来的。一致性哈希算法在节点太少时，容易因为节点分布不均匀而造成<strong>缓存热点</strong>的问题。</p><p>为了解决这种热点问题，一致性 hash 算法引入了虚拟节点机制，即对每一个节点计算多个 hash，每个计算结果位置都放置一个虚拟节点。这样就实现了数据的均匀分布，负载均衡。</p><h1 id="虚拟槽分区算法（redis-slot）"><a href="#虚拟槽分区算法（redis-slot）" class="headerlink" title="虚拟槽分区算法（redis slot）"></a>虚拟槽分区算法（redis slot）</h1><p>虚拟槽分区就是为了解决一致性哈希分区的不足而被创造的。</p><p><img src="http://image.shuiyujie.com/2019-10-11-13-50-57.png" alt="虚拟槽" style="zoom:50%;"></p><p><strong>预设虚拟槽</strong>：redis cluster 有固定的 <code>16384</code> 个 hash slot，对每个 <code>key</code> 计算 <code>CRC16</code> 值，然后对 <code>16384</code> 取模，可以获取 key 对应的 hash slot。</p><p><strong>服务端管理节点</strong>：如上图所示，redis cluster 中每个 master 都会持有部分 slot，如果增加一个 master 其他 master 就移动部分 hash slot 到新增节点上；如果挂掉一个节点，则该节点原来的 hash slot 会交给其他节点管理。</p><p>移动 hash slot 的成本是非常低的。客户端的 api，可以对指定的数据，让他们走同一个 hash slot，通过 <code>hash tag</code> 来实现。同时，任何一台机器宕机，不会影响其他机器的。因为 key 找的是 hash slot，不是机器。</p><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://iswade.github.io/articles/partition/" target="_blank" rel="noopener">数据分区</a></p>]]></content>
       
       
       <categories>
