@@ -4,6 +4,59 @@
   
     
     <entry>
+      <title>Spring MVC执行流程</title>
+      <link href="/post/8cca277c.html"/>
+      <url>/post/8cca277c.html</url>
+      
+        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/2019-10-18-22-41-08.png" alt="Spring MVC执行流程"></p><p>简单来说：客户端发送请求 -&gt; 前端控制器 DispatcherServlet 接受客户端请求 -&gt; 找到处理器映射 HandlerMapping 解析请求对应的 Handler -&gt; HandlerAdapter 会根据 Handler 来调用真正的处理器来处理请求，并处理相应的业务逻辑 -&gt; 处理器返回一个模型视图 ModelAndView -&gt; 视图解析器进行解析 -&gt; 返回一个视图对象 -&gt; 前端控制器 DispatcherServlet 渲染数据（Model）-&gt; 将得到视图对象返回给用户。</p><a id="more"></a><p>1、DispatcherServlet：前端控制器</p><p>用户请求到达前端控制器，它就相当于 MVC 模式中的 C，DispatcherServlet 是整个流程控制的中心，由它调用其它组件处理用户的请求，dispatcherServlet 的存在<strong>降低了组件之间的耦合性</strong>。</p><p>2、HandlerMapping：处理器映射器</p><p>HandlerMapping 负责根据用户请求找到 Handler 即处理器，SpringMVC 提供了不同的映射器实现不同的映射方式，例如：配置文件方式，实现接口方式，注解方式等。</p><p>3、Handler：处理器</p><p>Handler 是继 DispatcherServlet 前端控制器的后端控制器，在 DispatcherServlet 的控制下Handler 对具体的用户请求进行处理。</p><p>由于 Handler 涉及到具体的用户业务请求，所以一般情况需要程序员根据业务需求开发Handler。</p><p>4、HandlAdapter：处理器适配器</p><p>通过 HandlerAdapter 对处理器进行执行，这是<strong>适配器模式</strong>的应用，通过扩展适配器可以对更多类型的处理器进行执行。</p><p>5、View Resolver：视图解析器</p><p>View Resolve r负责将处理结果生成 View 视图，View Resolver 首先根据逻辑视图名解析成物理视图名即具体的页面地址，再生成 View 视图对象，最后对 View 进行渲染将处理结果通过页面展示给用户。</p><p>6、View：视图</p><p>SpringMVC 框架提供了很多的 View 视图类型的支持，包括：jstlView、freemarkerView、pdfView 等。我们最常用的视图就是jsp。</p><p><a href="https://zhuanlan.zhihu.com/p/42602265" target="_blank" rel="noopener">第二十三章：深入了解SpringMVC执行流程</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> Spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring mvc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java中的内部类</title>
+      <link href="/post/eab6ab72.html"/>
+      <url>/post/eab6ab72.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL读写分离原理</title>
+      <link href="/post/ce64ad4b.html"/>
+      <url>/post/ce64ad4b.html</url>
+      
+        <content type="html"><![CDATA[<ul><li>业务上的层级拆分：关联查询如何进行跨库的查询？</li><li><img src="/Users/shui/Library/Application Support/typora-user-images/image-20191013154750579.png" alt="image-20191013154750579"></li></ul><p><img src="/Users/shui/Library/Application Support/typora-user-images/image-20191013155018982.png" alt="image-20191013155018982"></p><ul><li>主从复制，数据不一致问题<ul><li>第三方插件，半同步</li></ul></li></ul><ul><li>一主一从，并不能提高程序的性能，但是能容灾，mater 挂了，slave 顶上。不需要考虑数据一致性问题，因为 slave 只是用来做备份的</li></ul><blockquote><p>作者：Gary Chen</p><p>读写分离指的是，通过增加一些节点，扩展读的能力。这些节点可以是主节点的全部内容的副本或者部分内容的副本，也可以是缓存产品。读写分离一般配合负载均衡产品使用。</p><p>对于读多写少（非更新查询为主）的负载，特别适合做读写分离。你需要留意的是，保证用户感知到自己所做的变更生效即可，用户很多情况下并不需要知道其他用户的改变。如果用户对于数据的一致性要求在某个时刻高，那么这部分数据，建议不要使用读写分离，MySQL的复制可能出现延时，无法满足业务需要。你可以采取变通的方式，比如，在用户修改了内容后，临时强制用户访问主节点，以获取一致性的数据，在过一段时间后，再让用户访问副本的数据，一般在此时，副本的数据已经同步到最新状态了。</p><p>读写分离往往和负载均衡技术配合使用。负载均衡软硬件产品有F5、Haproxy以及一些自己设计的MySQL Proxy代理等，负载均衡可以更高效的利用硬件，你可以设置权重，分配更多的流量给性能更好的机器，负载均衡产品一般还有故障检测、自动冗余切换功能，这可以大大提高你的可用性。</p><p>读写分离技术的一个难点在于延时的影响，你需要有一个手段确保你没有读取到太旧的数据，写操作和一些不能容忍延时的查询，需要指向主库。对于数据延时敏感度不高的数据，你需要定义延时的阈值，通过自动或者手工的方式处理延时数据对于用户体体验的影响。</p><p>你可以通过监控SHOW SLAVE STATUS里的输出Seconds_behind_master的方式判断是否有延时，但这种方式不太可靠。监控复制滞后（replication lag）的更稳健的方式是通过心跳表的方式。</p><p>我们很难确保MySQL的延时，因为网络波动、复制异常、性能问题都可能导致复制中断，而往往需要人工来进行干预，毕竟有能力开发专用的Proxy代理的公司很少，所以，不建议使用读写分离，采用读写分离是基于一个前提，主库已经出现读瓶颈，如果出现读瓶颈，使用缓存一般是更有效、更成熟的解决方案。</p><p>由于没有好的读写分离的方案，如果你一定要使用读写分离，推荐应用程序自身实现读写分离，把读的流量指向负载均衡产品或者Proxy代理。</p><p>读写分离，又往往和拆分数据有关联。部分数据更适合读写分离，部分数据更适合拆分。对于一致性要求很高的数据，往往很难以去拆分，使用读写分离保证适当的用户体验更可取。 如果一定要拆分，很可能导致架构、运维异常复杂。 在做数据架构的时候，要清楚数据的用户，细分各种数据，针对各种数据，进行各种处理，确保异常情况下的可用、可恢复，而不是简单的考虑 读写分离、水平扩展、垂直扩展这些更简单的分解。</p><p><a href="https://zhuanlan.zhihu.com/p/24698266" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24698266</a></p></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图解GC的过程</title>
       <link href="/post/98255841.html"/>
       <url>/post/98255841.html</url>
@@ -159,9 +212,9 @@
       
         <tags>
             
-            <tag> deeplearning </tag>
-            
             <tag> linux </tag>
+            
+            <tag> deeplearning </tag>
             
         </tags>
       
@@ -522,9 +575,9 @@
       
         <tags>
             
-            <tag> 图像处理 </tag>
-            
             <tag> ffmpeg </tag>
+            
+            <tag> 图像处理 </tag>
             
             <tag> 音频处理 </tag>
             
@@ -618,7 +671,7 @@
       <link href="/post/c5829ae7.html"/>
       <url>/post/c5829ae7.html</url>
       
-        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/books-2596809_1920.jpg" alt="题图:https://pixabay.com/photos/books-library-room-school-study-2596809/"></p><p>3分钟找书指南v1.0</p><a id="more"></a><p><a href="https://www.jiumodiary.com/" target="_blank" rel="noopener">Jiumo Search 鸠摩搜书 - 文档搜索引擎</a></p><p><a href="http://mebook.cc/" target="_blank" rel="noopener">http://mebook.cc/</a></p><p><a href="http://www.hejizhan.com/html/search/" target="_blank" rel="noopener">万千合集站</a></p><p><a href="http://cn.epubee.com/books/" target="_blank" rel="noopener">ePUBee电子书库，最大的电子书库，在线电子书管理</a></p><p><a href="https://bookfere.com/" target="_blank" rel="noopener">书伴-Kindle</a></p><p><a href="https://lorefree.com/" target="_blank" rel="noopener">Lore Free-去中心化知识共享社区</a></p><p><a href="http://www.iamtxt.com/" target="_blank" rel="noopener">http://www.iamtxt.com/</a></p><p><a href="https://sobooks.cc/" target="_blank" rel="noopener">SoBooks - kindle</a></p><p><a href="http://www.chaoxing.com/" target="_blank" rel="noopener">超星发现</a></p><p><a href="[https://openstax.org](https://openstax.org/">OpenStax|免费大学教科书数据库</a>)</p><p><a href="http://www.nlc.cn/" target="_blank" rel="noopener">中国国家图书馆</a></p><p><a href="http://www.ireadweek.com/" target="_blank" rel="noopener">周读</a></p><p><a href="https://ebook.huzerui.com/#/" target="_blank" rel="noopener">熊猫搜书</a></p><p><a href="https://www.inien.com/w/#/Index" target="_blank" rel="noopener">亿年书海 - 电子书 wiki 网</a></p><p><a href="https://ctext.org/zh" target="_blank" rel="noopener">中國哲學書電子化計劃</a></p><p><a href="https://www.shuge.org/?from=inf&amp;wvr=5&amp;loc=infblog" target="_blank" rel="noopener">书格</a></p><p><a href="https://www.gujiguan.com/" target="_blank" rel="noopener">古籍館-中國最大的古籍圖書館</a></p>]]></content>
+        <content type="html"><![CDATA[<p><img src="http://image.shuiyujie.com/books-2596809_1920.jpg" alt="题图:https://pixabay.com/photos/books-library-room-school-study-2596809/"></p><p>3分钟找书指南v1.0</p><a id="more"></a><p><a href="https://www.jiumodiary.com/" target="_blank" rel="noopener">Jiumo Search 鸠摩搜书 - 文档搜索引擎</a></p><p><a href="http://mebook.cc/" target="_blank" rel="noopener">http://mebook.cc/</a></p><p><a href="http://www.hejizhan.com/html/search/" target="_blank" rel="noopener">万千合集站</a></p><p><a href="http://cn.epubee.com/books/" target="_blank" rel="noopener">ePUBee电子书库，最大的电子书库，在线电子书管理</a></p><p><a href="https://bookfere.com/" target="_blank" rel="noopener">书伴-Kindle</a></p><p><a href="https://lorefree.com/" target="_blank" rel="noopener">Lore Free-去中心化知识共享社区</a></p><p><a href="http://www.iamtxt.com/" target="_blank" rel="noopener">http://www.iamtxt.com/</a></p><p><a href="http://volmoe.com/" target="_blank" rel="noopener">Vol.moe-漫画网站</a></p><p><a href="https://sobooks.cc/" target="_blank" rel="noopener">SoBooks - kindle</a></p><p><a href="http://www.chaoxing.com/" target="_blank" rel="noopener">超星发现</a></p><p><a href="[https://openstax.org](https://openstax.org/">OpenStax|免费大学教科书数据库</a>)</p><p><a href="http://www.nlc.cn/" target="_blank" rel="noopener">中国国家图书馆</a></p><p><a href="http://www.ireadweek.com/" target="_blank" rel="noopener">周读</a></p><p><a href="https://ebook.huzerui.com/#/" target="_blank" rel="noopener">熊猫搜书</a></p><p><a href="https://www.inien.com/w/#/Index" target="_blank" rel="noopener">亿年书海 - 电子书 wiki 网</a></p><p><a href="https://ctext.org/zh" target="_blank" rel="noopener">中國哲學書電子化計劃</a></p><p><a href="https://www.shuge.org/?from=inf&amp;wvr=5&amp;loc=infblog" target="_blank" rel="noopener">书格</a></p><p><a href="https://www.gujiguan.com/" target="_blank" rel="noopener">古籍館-中國最大的古籍圖書館</a></p>]]></content>
       
       
       <categories>
@@ -1561,6 +1614,31 @@
     
     
     <entry>
+      <title>OpenCV-Mat表达式</title>
+      <link href="/post/1208a55a.html"/>
+      <url>/post/1208a55a.html</url>
+      
+        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> OpenCV </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图像处理——图像降噪</title>
       <link href="/post/d966aba8.html"/>
       <url>/post/d966aba8.html</url>
@@ -1580,31 +1658,6 @@
             <tag> opencv </tag>
             
             <tag> 图像处理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>OpenCV-Mat表达式</title>
-      <link href="/post/1208a55a.html"/>
-      <url>/post/1208a55a.html</url>
-      
-        <content type="html"><![CDATA[<p>利用 C++中的运算符重载，OpenCV 2 中引入了 Mat 运算表达式。这一新特 点使得使用 C++进行编程时，就如同写 Matlab 脚本，代码变得简洁易懂，也便于维护。</p><p>下面给出 Mat 表达式所支持的运算。下面的列表中使用 A 和 B 表示 Mat 类 型的对象，使用 s 表示 Scalar 对象，alpha 表示 double 值。</p><ul><li>加法，减法，取负：<code>A+B</code>，<code>A-B</code>，<code>A+s</code>，<code>A-s</code>，<code>s+A</code>，<code>s-A</code>，<code>-A</code> </li><li>缩放取值范围：<code>A*alpha</code></li><li>矩阵对应元素的乘法和除法： <code>A.mul(B)</code>，<code>A/B</code>，<code>alpha/A</code> </li><li>矩阵乘法：<code>A*B</code> （注意此处是矩阵乘法，而不是矩阵对应元素相乘）</li><li>矩阵转置：<code>A.t()</code></li><li>矩阵求逆和求伪逆：<code>A.inv()</code></li><li>矩阵比较运算：<code>A cmpop B</code>，<code>A cmpop alpha</code>，<code>alpha cmpop A</code>。此处 cmpop 可以是&gt;，&gt;=，==，!=，&lt;=，&lt;。如果条件成立，则结果矩阵（8U 类型矩阵）的对应元素被置为 255；否则置 0。 </li><li>矩阵位逻辑运算：<code>A logicop B</code>，<code>A logicop s</code>，<code>s logicop A</code>，<code>~A</code>，此处 logicop 可以是&amp;，|和^。</li><li>矩阵对应元素的最大值和最小值：<code>min(A, B)</code>，<code>min(A, alpha)</code>，<code>max(A, B)</code>， <code>max(A, alpha)</code>。</li><li>矩阵中元素的绝对值：<code>abs(A)</code></li><li>叉积和点积：<code>A.cross(B)</code>，<code>A.dot(B)</code></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> OpenCV </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> opencv </tag>
             
         </tags>
       
@@ -2444,9 +2497,9 @@
       
         <tags>
             
-            <tag> maven </tag>
-            
             <tag> ubuntu </tag>
+            
+            <tag> maven </tag>
             
         </tags>
       
