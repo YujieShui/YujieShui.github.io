@@ -188,6 +188,110 @@
       
         
   <h2 class="title">
+    <a href="/post/5dbc4dfe.html">
+      JVM-模拟YGC，查看GC日志
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-09-14</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Java/JVM/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Java&nbsp;/&nbsp;JVM</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>我们知道每次创建新的对象都会保存到<strong>新生代</strong>中。新生代会使用垃圾回收器比如说 ParNew 垃圾回收器，将新生代进一步分成 Eden 区和两个 Survivor 区。当新生代满了的时候就会触发 Young GC。</p>
+<p>本文会实战 Young GC 的场景，并且带大家查看 GC 日志。</p>
+      
+        <div class="readmore">
+          <a href="/post/5dbc4dfe.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> java</a>
+        
+          <a href="/tags/jvm/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> jvm</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/post/1410ce3d.html">
       JVM-如何设置JVM的参数
     </a>
@@ -691,9 +795,9 @@
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/图像处理/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 图像处理</a>
-        
           <a href="/tags/ffmpeg/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> ffmpeg</a>
+        
+          <a href="/tags/图像处理/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 图像处理</a>
         
           <a href="/tags/音频处理/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 音频处理</a>
         
@@ -1126,124 +1230,6 @@
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/post/3e6f77c3.html">
-      【Java并发编程】Lock&Condition
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-09</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/Java/Java并发编程/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>Java&nbsp;/&nbsp;Java并发编程</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>在并发编程中有两个核心问题:一个是<strong>互斥</strong>,即同一时刻只允许一个线程访问共享资源;另一个是<strong>同步</strong>,即线程之间如何通信和协作。解决这两个问题的方法前人已经替我们总结出来理论模型,分别是<strong>管程模型</strong>和<strong>信号量模型</strong>.</p>
-<p><img src="http://image.shuiyujie.com/2019-09-09-22-20-56.png" alt="MESA管程模型"></p>
-<p>Java中实现管程有两种方式</p>
-<ol>
-<li>一是使用<code>synchronized</code>关键字给代码块添加隐式锁实现互斥,同时使用<code>notify()</code>和<code>notifyAll()</code>实现<strong>同步</strong></li>
-<li>二是使用 Java SDK 并发包下的  Lock 和 Condition 两个接口,来实现管程.<ol>
-<li>Lock 的特性包括:能够响应中断、支持超时和非阻塞地获取锁</li>
-<li>Condition 实现了管程模型里面的条件变量。</li>
-</ol>
-</li>
-</ol>
-<p><em>注：Java 参考了 MESA 模型，语言内置的管程（synchronized）对 MESA 模型进行了精简。MESA 模型中，条件变量可以有多个，Java 语言内置的管程里只有一个条件变量。Java 并发包下的 Lock&amp;Condition则则支持多个条件变量。</em></p>
-      
-        <div class="readmore">
-          <a href="/post/3e6f77c3.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/java/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> java</a>
-        
-          <a href="/tags/并发编程/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 并发编程</a>
-        
-          <a href="/tags/管程/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 管程</a>
-        
-          <a href="/tags/并发工具类/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 并发工具类</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1406,13 +1392,17 @@
         
           <li><a class="flat-box" title="/categories/Docker-K8s/" href="/categories/Docker-K8s/"><div class="name">Docker&K8s</div><div class="badge">(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(35)</div></a></li>
+          <li><a class="flat-box" title="/categories/Framework/" href="/categories/Framework/"><div class="name">Framework</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Framework/Spring-Cloud/" href="/categories/Framework/Spring-Cloud/"><div class="name">Spring Cloud</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(36)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Java/JVM/" href="/categories/Java/JVM/"><div class="name">JVM</div><div class="badge">(9)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/Java/Java并发编程/" href="/categories/Java/Java并发编程/"><div class="name">Java并发编程</div><div class="badge">(8)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/Java/Spring/" href="/categories/Java/Spring/"><div class="name">Spring</div><div class="badge">(8)</div></a></li>
+          <li><a class="flat-box child" title="/categories/Java/Spring/" href="/categories/Java/Spring/"><div class="name">Spring</div><div class="badge">(9)</div></a></li>
         
           <li><a class="flat-box" title="/categories/Linux/" href="/categories/Linux/"><div class="name">Linux</div><div class="badge">(10)</div></a></li>
         
@@ -1480,7 +1470,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.77px; color: #949494">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.92px; color: #6a6a6a">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.54px; color: #8f8f8f">caffe</a> <a href="/tags/darknet/" style="font-size: 14.77px; color: #949494">darknet</a> <a href="/tags/dataset/" style="font-size: 14.77px; color: #949494">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.46px; color: #5f5f5f">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.77px; color: #949494">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/gc/" style="font-size: 14px; color: #999">gc</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.23px; color: #5a5a5a">java</a> <a href="/tags/jvm/" style="font-size: 20.15px; color: #6f6f6f">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.69px; color: #656565">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.54px; color: #8f8f8f">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.08px; color: #848484">mysql</a> <a href="/tags/network/" style="font-size: 17.08px; color: #848484">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 18.62px; color: #7a7a7a">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.54px; color: #8f8f8f">python</a> <a href="/tags/rabbitmq/" style="font-size: 14.77px; color: #949494">rabbitmq</a> <a href="/tags/redis/" style="font-size: 15.54px; color: #8f8f8f">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 14.77px; color: #949494">spring</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/spring-mvc/" style="font-size: 14px; color: #999">spring mvc</a> <a href="/tags/springboot/" style="font-size: 16.31px; color: #898989">springboot</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.92px; color: #6a6a6a">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.31px; color: #898989">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.54px; color: #8f8f8f">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 17.08px; color: #848484">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.77px; color: #949494">分布式</a> <a href="/tags/动态代理/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/反射/" style="font-size: 14px; color: #999">反射</a> <a href="/tags/图像处理/" style="font-size: 15.54px; color: #8f8f8f">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.77px; color: #949494">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.38px; color: #747474">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 17.85px; color: #7f7f7f">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 17.85px; color: #7f7f7f">网站</a> <a href="/tags/设计模式/" style="font-size: 17.08px; color: #848484">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.77px; color: #949494">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.92px; color: #6a6a6a">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.54px; color: #8f8f8f">caffe</a> <a href="/tags/darknet/" style="font-size: 14.77px; color: #949494">darknet</a> <a href="/tags/dataset/" style="font-size: 14.77px; color: #949494">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.46px; color: #5f5f5f">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.77px; color: #949494">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/gc/" style="font-size: 14px; color: #999">gc</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.23px; color: #5a5a5a">java</a> <a href="/tags/jvm/" style="font-size: 20.15px; color: #6f6f6f">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.69px; color: #656565">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.54px; color: #8f8f8f">maven</a> <a href="/tags/mybatis/" style="font-size: 14px; color: #999">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.08px; color: #848484">mysql</a> <a href="/tags/network/" style="font-size: 17.08px; color: #848484">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 18.62px; color: #7a7a7a">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.54px; color: #8f8f8f">python</a> <a href="/tags/rabbitmq/" style="font-size: 14.77px; color: #949494">rabbitmq</a> <a href="/tags/redis/" style="font-size: 15.54px; color: #8f8f8f">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 15.54px; color: #8f8f8f">spring</a> <a href="/tags/spring-cloud/" style="font-size: 14px; color: #999">spring cloud</a> <a href="/tags/spring-mvc/" style="font-size: 14px; color: #999">spring mvc</a> <a href="/tags/springboot/" style="font-size: 16.31px; color: #898989">springboot</a> <a href="/tags/springcloud/" style="font-size: 14px; color: #999">springcloud</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.92px; color: #6a6a6a">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.31px; color: #898989">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.54px; color: #8f8f8f">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 17.08px; color: #848484">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.77px; color: #949494">分布式</a> <a href="/tags/动态代理/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/反射/" style="font-size: 14px; color: #999">反射</a> <a href="/tags/图像处理/" style="font-size: 15.54px; color: #8f8f8f">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.77px; color: #949494">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.38px; color: #747474">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 17.85px; color: #7f7f7f">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 17.85px; color: #7f7f7f">网站</a> <a href="/tags/设计模式/" style="font-size: 17.08px; color: #848484">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
     </div>
   </section>
 
