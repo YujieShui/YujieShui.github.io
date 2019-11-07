@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: tcp | 深页</title>
+  <title>JVM老年代垃圾回收器CMS是如何工作的？ | 深页</title>
   
   
 
@@ -46,7 +46,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class="cover  half">
+    <cover class="cover post half">
       
         
   <h1 class="title">弄浪的鱼</h1>
@@ -168,25 +168,11 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      
-<div class="l_main">
+      <div class="l_main">
   
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
     
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
 
 
   <section class="meta">
@@ -195,11 +181,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/post/57bfe272.html">
-      TCP协议和UDP协议
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/post/2db0a967.html">
+        JVM老年代垃圾回收器CMS是如何工作的？
+      </a>
+    </h1>
+  
 
 
       
@@ -227,7 +215,7 @@
             <div class="new-meta-item date">
   <a class="notlink">
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2018-08-24</p>
+    <p>2019-11-06</p>
   </a>
 </div>
 
@@ -237,11 +225,29 @@
             
   
   <div class="new-meta-item category">
-    <a href="/categories/computer-science/计算机网络/" rel="nofollow">
+    <a href="/categories/Java/JVM/" rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>computer science&nbsp;/&nbsp;计算机网络</p>
+      <p>Java&nbsp;/&nbsp;JVM</p>
     </a>
   </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
 
 
           
@@ -259,46 +265,169 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>传输层的作用是<strong>分段</strong>及<strong>封装</strong>应用层送来的数据，提供<strong>端到端</strong>的传输服务，在发送主机与接收主机之间构建逻辑通信。传输层包括两个协议 <strong>TCP 协议</strong>、<strong>UDP 协议</strong>。</p>
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p><strong>为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？</strong>我们可以从了解老年代常用的垃圾回收器 CMS 的工作原理开始回答这个问题。</p>
+<p>与新生代采用的复制算法不同，CMS 采用的垃圾回收算法是标记整理算法。且老年代的垃圾回收更加复杂，总共分成 4 个阶段，它们分别是：初始标记、并发标记、重新标记、并发清理。</p>
+<p>我们从 CMS 的垃圾回收基本原理开始，了解 CMS 是如何工作的。</p>
+<a id="more"></a>
+<h1 id="CMS-垃圾回收的基本工作原理"><a href="#CMS-垃圾回收的基本工作原理" class="headerlink" title="CMS 垃圾回收的基本工作原理"></a>CMS 垃圾回收的基本工作原理</h1><p>老年代常用的垃圾回收器是 CMS，CMS 采用的垃圾回收算法是<strong>标记整理算法</strong>。描述起来也不难，就是在 Old GC 的时候，CMS 会追踪老年代中对象是否被 GC Root 引用，没有被 GC Roots 引用的对象就会被标记为垃圾对象，然后被清理掉。</p>
+<p><img src="http://image.shuiyujie.com/2019-11-06-21-04-06.png" alt="标记整理" style="zoom:67%;"></p>
+<p>总的来说，老年代会在两种情况下触发 Old GC：一是开启分配担保机制，根据历次 Minor GC 后进入老年代的对象大于当前老年代内存大小，判断 Minor GC 有风险，则会触发 Old GC；二是 Minor GC 后剩余对象太多，老年代放不下了也会触发 Old GC。</p>
+<p>此时老年代的 CMS 垃圾回收器就会用上图所示的标记整理算法回收那些垃圾对象，当然回收的过程并不是这样一步到位的，而是经过了 4 个阶段。</p>
+<h1 id="为什么-CMS-垃圾回收过程分成-4-个阶段？"><a href="#为什么-CMS-垃圾回收过程分成-4-个阶段？" class="headerlink" title="为什么 CMS 垃圾回收过程分成 4 个阶段？"></a>为什么 CMS 垃圾回收过程分成 4 个阶段？</h1><p>新生代使用的垃圾回收算法一般是复制算法。当新生代满了之后，JVM 会 「Stop the world」 并一次性完成对新生代对象的垃圾回收。那么 CMS 怎么不 「Stop the world」，再一次性完成垃圾回收呢？</p>
+<p>新生代的对象最终存活的很少，80% 以上都是垃圾对象，即使工作线程停止工作也只会卡顿一两秒。老年代中存活的对象多，标记和整理的过程会导致系统长时间卡顿，在此期间无法处理系统请求。</p>
+<p>所以 CMS 分成初始标记、并发标记、重新标记、并发清理这 4 个阶段，其中最好是的并发标记和并发清理阶段，采用 JVM 线程和工作线程同时运行的方式，在垃圾回收的同时不影响系统的运行。</p>
+<h1 id="初始标记阶段"><a href="#初始标记阶段" class="headerlink" title="初始标记阶段"></a>初始标记阶段</h1><p>CMS 进行垃圾回收的时候首先会进入<strong>初始标记</strong>阶段，这一阶段会「Stop the world」，标记出被 GC Roots 直接引用的对象。</p>
+<p>这里所说的被 GC Roots 直接引用的对象是怎么样的对象呢？我们看下面这样一段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> User user = <span class="keyword">new</span> User();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Position position = <span class="keyword">new</span> Position();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先我们应该 GC Roots 是<strong>类的静态变量</strong>，或者<strong>方法的局部变量</strong>。在这里我们很容易看出，user 属于类的静态变量，而 User 对象是被 user 直接引用的对象，所以 User 是被 GC Roots 直接引用的对象。</p>
+<p>position 是类的实例变量，它既不是类的静态变量也不是方法的局部变量，它不是 GC Roots，position 引用的 Position 对象就不是被 GC Roots 直接引用的对象。</p>
+<p><img src="http://image.shuiyujie.com/2019-11-07-08-04-39.png" alt="初始标记"></p>
+<p>初始标记的过程如上图所示，被 GC Roots 直接引用的 User 对象将会被标记出来，被间接引用的 Position 对象还未被标记。</p>
+<h1 id="并发标记阶段"><a href="#并发标记阶段" class="headerlink" title="并发标记阶段"></a>并发标记阶段</h1><p>初始标记阶段会「Stop the world」，暂停一切工作线程，但是对系统影响不大，因为初始标记阶段只会标记被 GC Roots 直接引用的对象，标记的过程是很快的。</p>
+<p><strong>并发标记</strong>阶段工作线程和垃圾回收线程将会<strong>同时工作</strong>，并尽可能对已有对象进行 <strong>GC Roots 追踪</strong>。同时工作即垃圾回收线程工作的同时，工作线程正常运行，会创建新的对象，也会让一些对象失去引用。</p>
+<p>GC Roots 追踪指的就是对 Position 这样的对象进行进一步的追踪，会发现它被 User 的实例变量 postion 引用了，而 position 则被 Order 对象的静态变量 user 引用了。在并发标记阶段，Position 对象就会被标记为被 GC Roots 间接引用，就不会被回收。</p>
+<p><img src="http://image.shuiyujie.com/2019-11-07-08-27-46.png" alt="并发标记"></p>
+<p>并发标记阶段要 GC Roots 追踪老年代中的所有对象，是最耗时的，不过此时垃圾回收线程与工作线程同时工作，不会对系统正常运行造成影响。</p>
+<h1 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a>重新标记阶段</h1><p>在并发标记阶段由于垃圾回收线程与工作线程同时运行，工作线程会产生新的对象，也会使新的对象失去引用。所以在进行清理之前，CMS 还会对这些新产生变化的对象进行标记。</p>
+<p>在<strong>重新标记</strong>阶段，系统将会再次「Stop the world」，工作线程将会停止工作，垃圾回收线程开始标记那些新存活的对象和新垃圾对象。</p>
+<p><img src="http://image.shuiyujie.com/2019-11-07-20-20-46.png" alt="重新标记"></p>
+<h1 id="并发清理"><a href="#并发清理" class="headerlink" title="并发清理"></a>并发清理</h1><p>并发清理阶段程序也能正常运行，垃圾回收线程则会清理被标记为垃圾的对象。</p>
+<p><img src="http://image.shuiyujie.com/2019-11-07-21-07-41.png" alt="并发清理"></p>
+<h1 id="为什么老年代的-Full-GC-要比新生代的-Minor-GC-慢很多倍，一般在-10-倍以上？"><a href="#为什么老年代的-Full-GC-要比新生代的-Minor-GC-慢很多倍，一般在-10-倍以上？" class="headerlink" title="为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？"></a>为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？</h1><p>最后就能回答<strong>为什么老年代的垃圾回收速度会比新生代的垃圾回收速度慢很多倍？到底慢在哪里？</strong>这个问题了。</p>
+<p>新生代的 Minor GC 执行速度很短，因为它只需要直接从 GC Roots 出发追踪哪些对象是存活的就行，新生代存活的对象是极少的，所以这个过程很快。完成对对象的标记之后，只需要将存活的对象一次性移动到 Survivor 区，一次性回收 Eden 和另一个 Survivor 区即可。</p>
+<p>老年代的 Old GC 则分成初始标记、并发标记、重新标记和并发清理这四个阶段。其中并发标记阶段需要追踪老年代中中所有存活的对象，老年代中存活的对象比新生代多得多，用的时间也就更多。</p>
+<p>在并发清理阶段也不是一次向回收一大片对象，一点点分散在各处的垃圾对象。清理完之后还需要整理一次内存碎片，将大量存活的对象移动到一起，此时还会「Stop the world」就更加慢了。</p>
+<p>最后，并发清理阶段会有新的对象进入老年代，此时如果老年代的内存不足会引发了“Concurrent Mode Failure”问题，就会使用“Serial Old”垃圾回收器，“Stop the World”之后慢慢重新来一遍回收的过程。</p>
+
+      </div>
       
-        <div class="readmore">
-          <a href="/post/57bfe272.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
+        <br>
+        
+
+
+  <section class="meta" id="footer-meta">
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-07T22:17:47+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年11月7日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/jvm/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>jvm</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/2db0a967.html&title=JVM老年代垃圾回收器CMS是如何工作的？ | 深页&summary=为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？我们可以从了解老年代常用的垃圾回收器 CMS 的工作原理开始回答这个问题。
+与新生代采用的复制算法不同，CMS 采用的垃圾回收算法是标记整理算法。且老年代的垃圾回收更加复杂，总共分成 4 个阶段，它们分别是：初始标记、并发标记、重新标记、并发清理。
+我们从 CMS 的垃圾回收基本原理开始，了解 CMS 是如何工作的。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/2db0a967.html&title=JVM老年代垃圾回收器CMS是如何工作的？ | 深页&summary=为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？我们可以从了解老年代常用的垃圾回收器 CMS 的工作原理开始回答这个问题。
+与新生代采用的复制算法不同，CMS 采用的垃圾回收算法是标记整理算法。且老年代的垃圾回收更加复杂，总共分成 4 个阶段，它们分别是：初始标记、并发标记、重新标记、并发清理。
+我们从 CMS 的垃圾回收基本原理开始，了解 CMS 是如何工作的。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/2db0a967.html&title=JVM老年代垃圾回收器CMS是如何工作的？ | 深页&summary=为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？我们可以从了解老年代常用的垃圾回收器 CMS 的工作原理开始回答这个问题。
+与新生代采用的复制算法不同，CMS 采用的垃圾回收算法是标记整理算法。且老年代的垃圾回收更加复杂，总共分成 4 个阶段，它们分别是：初始标记、并发标记、重新标记、并发清理。
+我们从 CMS 的垃圾回收基本原理开始，了解 CMS 是如何工作的。">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/tcp/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> tcp</a>
-        
-          <a href="/tags/udp/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> udp</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
-        
+
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/post/d6240bed.html" rel="prev" title="RestTemplate实现服务之间的调用">
+                                  
+                                      RestTemplate实现服务之间的调用
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/springcloud/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> springcloud</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-    
-  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'JVM老年代垃圾回收器CMS是如何工作的？',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class="l_side">
   
@@ -325,6 +454,25 @@
       
         
           
+          
+            
+              
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CMS-垃圾回收的基本工作原理"><span class="toc-text">CMS 垃圾回收的基本工作原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么-CMS-垃圾回收过程分成-4-个阶段？"><span class="toc-text">为什么 CMS 垃圾回收过程分成 4 个阶段？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#初始标记阶段"><span class="toc-text">初始标记阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发标记阶段"><span class="toc-text">并发标记阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#重新标记阶段"><span class="toc-text">重新标记阶段</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并发清理"><span class="toc-text">并发清理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么老年代的-Full-GC-要比新生代的-Minor-GC-慢很多倍，一般在-10-倍以上？"><span class="toc-text">为什么老年代的 Full GC 要比新生代的 Minor GC 慢很多倍，一般在 10 倍以上？</span></a></li></ol>
+    </div>
+  </section>
+
+
+            
           
         
           
@@ -509,6 +657,40 @@
 
 
             
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
           
         
           
