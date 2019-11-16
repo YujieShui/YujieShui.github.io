@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>zookeeper的基本概念 | 深页</title>
+  <title>zookeeper的特性 | 深页</title>
   
   
 
@@ -184,7 +184,7 @@
   
     <h1 class="title">
       <a href="/post/e7973620.html">
-        zookeeper的基本概念
+        zookeeper的特性
       </a>
     </h1>
   
@@ -269,65 +269,133 @@
       <div class="article-entry" itemprop="articleBody">
         <p>本文介绍 zookeeper 的一些基本概念。</p>
 <a id="more"></a>
-<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><ul>
-<li>分层结构</li>
-<li>树形结构中的每个节点叫做Znode</li>
-<li>每个Znode都有数据ͧ(byte[]类型ͨ)，也可以有子节点</li>
-<li><p>节点路径</p>
-<ul>
-<li>斜线分隔:/Zoo/Duck</li>
-<li>没有相对路径</li>
+<h1 id="会话-Session"><a href="#会话-Session" class="headerlink" title="会话(Session)"></a>会话(Session)</h1><ul>
+<li>客户端与服务端的一次会话连接，本质是 TCP 长连接；</li>
+<li>通过会话可以进行心跳检测和数据传输；</li>
+<li>接收来自服务端的 watch 事件通知</li>
+<li>可以设置超时时间</li>
 </ul>
-</li>
-<li><p>通过数据结构stat来孓储数据的变化 ACL的变化和时间戳 </p>
-</li>
+<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><p><img src="http://image.shuiyujie.com/2019-11-16-17-34-57.png" alt="zookeeper数据模型" style="zoom:67%;"></p>
+<p>zk 的目录结构和 Unix 系统类似，采用分层结构。树形结构中的每个节点被称为<strong>数据节点（znode）</strong>。每个 znode 都有数据类型，可以存储数据，也可以挂子节点。节点路径用斜线分隔:/Zoo/Duck，且没有相对路径。</p>
+<p>通过客户端可对znode进行增删改查的操作，还可以注册watcher监控znode的变化。</p>
+<ul>
+<li>通过数据结构stat来了解数据的变化 ACL的变化和时间戳 </li>
 <li>数据发生变化时，版本号会递增</li>
 <li>可以对Znode中的数据进行读写操作</li>
 </ul>
 <h1 id="数据节点-Znode"><a href="#数据节点-Znode" class="headerlink" title="数据节点(Znode)"></a>数据节点(Znode)</h1><ul>
-<li>不是机器的意思</li>
-<li>Zk树形结构中的数据节点，用于存储数据</li>
+<li>Zk 树形结构中的数据节点，用于存储数据</li>
 <li>持久节点：一旦创建,除非主动调用删除操作,否则一直存储在zk上</li>
-<li>临时节点：与客户端的会话绑定，一旦客户端绘画是小，这个客户端创建的所有临时节点都会被移除</li>
+<li>临时节点：与客户端的会话绑定，一旦客户端会话失效，这个客户端创建的所有临时节点都会被移除</li>
 <li>SEQUENTIAL Znode：创建临时节点时，如果设置属性 SEQUENTIAL，则会自动在节点名后面追加一个整型数字</li>
 </ul>
-<h1 id="持久节点"><a href="#持久节点" class="headerlink" title="持久节点"></a>持久节点</h1><p>启动一个 zkCli 创建一个持久节点，即使创建节点的会话关闭，该节点也不会被删除。</p>
+<p>对于持久节点和临时节点，同一个znode下，节点的名称是唯一的！</p>
+<h2 id="zk-节点类型"><a href="#zk-节点类型" class="headerlink" title="zk 节点类型"></a>zk 节点类型</h2><ul>
+<li>持久节点（PERSISTENT）</li>
+<li>持久顺序节点（PERSISTENT_SEQUENTIAL） </li>
+<li>临时节点（EPHEMERAL） </li>
+<li>临时顺序节点（EPHEMERAL_SEQUENTIAL）</li>
+</ul>
+<h3 id="持久节点"><a href="#持久节点" class="headerlink" title="持久节点"></a>持久节点</h3><p>启动一个 zkCli 创建一个持久节点，即使创建节点的会话关闭，该节点也不会被删除。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 10] create /node nodedata</span><br><span class="line">Created /node</span><br><span class="line">[zk: localhost:2181(CONNECTED) 11] ls /</span><br><span class="line">[node, zookeeper]</span><br></pre></td></tr></table></figure>
-<h2 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h2><p>启动一个 zkCli 之后创建临时节点</p>
+<h3 id="临时节点"><a href="#临时节点" class="headerlink" title="临时节点"></a>临时节点</h3><p>启动一个 zkCli 之后创建临时节点</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 3] create -e /node1 node1data</span><br><span class="line">Created /node1</span><br><span class="line">[zk: localhost:2181(CONNECTED) 4] ls /</span><br><span class="line">[zookeeper, node1]</span><br></pre></td></tr></table></figure>
 <p>将创建临时节点的会话关闭之后，临时节点将会消失。(可以再起一个 zkCli 验证)</p>
-<h2 id="顺序节点"><a href="#顺序节点" class="headerlink" title="顺序节点"></a>顺序节点</h2><p>创建数据节点</p>
+<h3 id="顺序节点"><a href="#顺序节点" class="headerlink" title="顺序节点"></a>顺序节点</h3><p>创建数据节点</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 12] create -s /node/seq 321</span><br><span class="line">Created /node/seq0000000000</span><br><span class="line">[zk: localhost:2181(CONNECTED) 13] create -s /node/seq 322</span><br><span class="line">Created /node/seq0000000001</span><br><span class="line">[zk: localhost:2181(CONNECTED) 15] ls /node</span><br><span class="line">[seq0000000000, seq0000000001]</span><br></pre></td></tr></table></figure>
-<h1 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h1><ul>
-<li>Leader: 为客户端提供读和写服务</li>
-<li>Follower: 提供读服务，所有写服务都需要转交给Leader角色，参与选举</li>
-<li>Observer: 提供读服，不参与选举过程，一般是为了增强zk集群的读请求并发能力</li>
+<h2 id="zk-节点状态属性"><a href="#zk-节点状态属性" class="headerlink" title="zk 节点状态属性"></a>zk 节点状态属性</h2><table>
+<thead>
+<tr>
+<th><strong>序号</strong></th>
+<th><strong>属性</strong></th>
+<th><strong>数据结构</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>czxid</strong></td>
+<td>long</td>
+<td>节点被创建的Zxid值</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>mzxid</strong></td>
+<td>long</td>
+<td>节点被修改的Zxid值</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>pzxid</strong></td>
+<td>long</td>
+<td>子节点最近一次被修改时的事务ID</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ctime</td>
+<td>long</td>
+<td>节点被创建的时间</td>
+</tr>
+<tr>
+<td>5</td>
+<td>mtime</td>
+<td>long</td>
+<td>节点最后一次被修改的时间</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>versoin</strong></td>
+<td>long</td>
+<td>节点被修改的版本号,</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>cversion</strong></td>
+<td>long</td>
+<td>节点的所拥有子节点被修改的版本号</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>aversion</strong></td>
+<td>long</td>
+<td>节点的ACL被修改的版本号</td>
+</tr>
+<tr>
+<td>9</td>
+<td>emphemeralOwner</td>
+<td>long</td>
+<td>如果此节点为临时节点，那么它的值为这个节点拥有者的会话ID；否则，它的值为0</td>
+</tr>
+<tr>
+<td>10</td>
+<td>dataLength</td>
+<td>int</td>
+<td>节点数据域的长度</td>
+</tr>
+<tr>
+<td>11</td>
+<td>numChildren</td>
+<td>int</td>
+<td>节点拥有的子节点个数</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>通过 1、2、3：事务ID可以识别出请求的全局顺序</li>
+<li>通过 6、7、8：基于CAS理论保证分布式数据原子性操作</li>
 </ul>
-<h1 id="会发-Session"><a href="#会发-Session" class="headerlink" title="会发(Session)"></a>会发(Session)</h1><ul>
-<li>Zk的客户与zk的服务端之间的连接</li>
-<li>通过心跳检测保持客户端连接的存活</li>
-<li>接收来自服务端的watch事件通知</li>
-<li>可以设置超时时间</li>
+<h1 id="ACL保障数据的安全"><a href="#ACL保障数据的安全" class="headerlink" title="ACL保障数据的安全"></a>ACL保障数据的安全</h1><p><strong>ACL 机制</strong>，表示为<code>scheme:id:permissions</code>，第一个字段表示采用哪一种机制，第二个id表示用户，permissions表示相关权限（如只读，读写，管理等）。zookeeper提供了如下几种机制（scheme）：</p>
+<ul>
+<li><p><strong>world</strong>: 它下面只有一个id, 叫 anyone, <code>world:anyone</code>代表任何人，zookeeper 中对所有人有权限的结点就是属于<code>world:anyone</code>的</p>
+</li>
+<li><p><strong>auth</strong>: 它不需要id, 只要是通过 authentication 的 user 都有权限（zookeeper支持通过kerberos来进行authencation, 也支持username/password 形式的 authentication)</p>
+</li>
+<li><p><strong>digest</strong>: 它对应的 id 为 <code>username:BASE64(SHA1(password))</code>，它需要先通过 <code>username:password</code> 形式的 authentication</p>
+</li>
+<li><p><strong>ip</strong>: 它对应的id为客户机的IP地址，设置的时候可以设置一个 ip 段，比如 <code>ip:192.168.1.0/16</code>, 表示匹配前16个 bit 的 IP 段</p>
+</li>
 </ul>
-<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><ul>
-<li>Version: 当前 Znode 的版本</li>
-<li>Cversion：当前 Znode 的子节点的版本</li>
-<li>Aversion：当前 Znode 的 ANL(访问控制)版本</li>
-</ul>
-<h1 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h1><ul>
-<li>作用于 Znode 节点上</li>
-<li>多种事件通知：数据更新，子节点状态等</li>
-</ul>
-<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><ul>
-<li>Access Control Lists</li>
-<li>类似于linux/unix的权限控制</li>
-<li><strong>CREATE</strong>：创建子节点的权限</li>
-<li>READ:获取节点数据和子节点列表的权限</li>
-<li>WRITE：更新节点数据的权限</li>
-<li><strong>DELETE</strong>：删除子节点的权限</li>
-<li>ADMIN：设置节点ACL的权限</li>
-</ul>
-<p><em>CREATE和DELETE是针对子节点的权限控制。</em></p>
 
       </div>
       
@@ -339,10 +407,10 @@
     <div class="new-meta-box">
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-04T20:39:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-16T17:53:42+08:00">
   <a class="notlink">
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月4日</p>
+    <p>更新于 2019年11月16日</p>
   </a>
 </div>
 
@@ -362,7 +430,7 @@
   <div class="-mob-share-list share-body">
     
       
-        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/e7973620.html&title=zookeeper的基本概念 | 深页&summary=本文介绍 zookeeper 的一些基本概念。">
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/e7973620.html&title=zookeeper的特性 | 深页&summary=本文介绍 zookeeper 的一些基本概念。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
           
@@ -370,7 +438,7 @@
       
     
       
-        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/e7973620.html&title=zookeeper的基本概念 | 深页&summary=本文介绍 zookeeper 的一些基本概念。">
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/e7973620.html&title=zookeeper的特性 | 深页&summary=本文介绍 zookeeper 的一些基本概念。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
           
@@ -378,7 +446,7 @@
       
     
       
-        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/e7973620.html&title=zookeeper的基本概念 | 深页&summary=本文介绍 zookeeper 的一些基本概念。">
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/e7973620.html&title=zookeeper的特性 | 深页&summary=本文介绍 zookeeper 的一些基本概念。">
           
             <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
           
@@ -463,7 +531,7 @@
 
   <script>
     window.subData = {
-      title: 'zookeeper的基本概念',
+      title: 'zookeeper的特性',
       tools: true
     }
   </script>
@@ -508,7 +576,7 @@
 </header>
 
     <div class="content pure">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据模型"><span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据节点-Znode"><span class="toc-text">数据节点(Znode)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#持久节点"><span class="toc-text">持久节点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#临时节点"><span class="toc-text">临时节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顺序节点"><span class="toc-text">顺序节点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集群角色"><span class="toc-text">集群角色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#会发-Session"><span class="toc-text">会发(Session)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#版本"><span class="toc-text">版本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Watcher"><span class="toc-text">Watcher</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ACL"><span class="toc-text">ACL</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#会话-Session"><span class="toc-text">会话(Session)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据模型"><span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据节点-Znode"><span class="toc-text">数据节点(Znode)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#zk-节点类型"><span class="toc-text">zk 节点类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久节点"><span class="toc-text">持久节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#临时节点"><span class="toc-text">临时节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序节点"><span class="toc-text">顺序节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zk-节点状态属性"><span class="toc-text">zk 节点状态属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ACL保障数据的安全"><span class="toc-text">ACL保障数据的安全</span></a></li></ol>
     </div>
   </section>
 
@@ -642,11 +710,11 @@
         
           <li><a class="flat-box child" title="/categories/computer-science/设计模式/" href="/categories/computer-science/设计模式/"><div class="name">设计模式</div><div class="badge">(4)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(14)</div></a></li>
+          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(15)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/分布式/Redis/" href="/categories/分布式/Redis/"><div class="name">Redis</div><div class="badge">(3)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/分布式/zookeeper/" href="/categories/分布式/zookeeper/"><div class="name">zookeeper</div><div class="badge">(5)</div></a></li>
+          <li><a class="flat-box child" title="/categories/分布式/zookeeper/" href="/categories/分布式/zookeeper/"><div class="name">zookeeper</div><div class="badge">(6)</div></a></li>
         
           <li><a class="flat-box child" title="/categories/分布式/消息队列/" href="/categories/分布式/消息队列/"><div class="name">消息队列</div><div class="badge">(6)</div></a></li>
         
@@ -696,7 +764,7 @@
 </header>
 
     <div class="content pure">
-      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/gc/" style="font-size: 14px; color: #999">gc</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.17px; color: #5b5b5b">java</a> <a href="/tags/jvm/" style="font-size: 20.67px; color: #6c6c6c">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.67px; color: #8e8e8e">maven</a> <a href="/tags/mybatis/" style="font-size: 15.67px; color: #8e8e8e">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/rabbitmq/" style="font-size: 14.83px; color: #939393">rabbitmq</a> <a href="/tags/redis/" style="font-size: 15.67px; color: #8e8e8e">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 15.67px; color: #8e8e8e">spring</a> <a href="/tags/spring-mvc/" style="font-size: 14px; color: #999">spring mvc</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/springcloud/" style="font-size: 15.67px; color: #8e8e8e">springcloud</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 17.33px; color: #828282">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/动态代理/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/反射/" style="font-size: 14px; color: #999">反射</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 18.17px; color: #7d7d7d">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 17.33px; color: #828282">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/gc/" style="font-size: 14px; color: #999">gc</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.17px; color: #5b5b5b">java</a> <a href="/tags/jvm/" style="font-size: 20.67px; color: #6c6c6c">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.67px; color: #8e8e8e">maven</a> <a href="/tags/mybatis/" style="font-size: 15.67px; color: #8e8e8e">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/rabbitmq/" style="font-size: 14.83px; color: #939393">rabbitmq</a> <a href="/tags/redis/" style="font-size: 15.67px; color: #8e8e8e">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 15.67px; color: #8e8e8e">spring</a> <a href="/tags/spring-mvc/" style="font-size: 14px; color: #999">spring mvc</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/springcloud/" style="font-size: 15.67px; color: #8e8e8e">springcloud</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 18.17px; color: #7d7d7d">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/动态代理/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/反射/" style="font-size: 14px; color: #999">反射</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 18.17px; color: #7d7d7d">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 17.33px; color: #828282">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
     </div>
   </section>
 
