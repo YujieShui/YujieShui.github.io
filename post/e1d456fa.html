@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Mybatis关联查询 | 深页</title>
+  
+  
+
+  
+  <link rel="alternate" href="/atom.xml" title="深页">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9.9/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class="cover post half">
+      
+        
+  <h1 class="title">弄浪的鱼</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder>
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class="menu navgation">
+  <ul class="h-list">
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class="wrapper">
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href="/">
+        
+          深页
+        
+      </a>
+			<div class="menu navgation">
+				<ul class="h-list">
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/" id="home">
+									<i class="fas fa-grin fa-fw"></i>&nbsp;首页
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/categories/" rel="nofollow" id="blogcategories">
+									<i class="fas fa-folder-open fa-fw"></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/tags/" rel="nofollow" id="blogtags">
+									<i class="fas fa-hashtag fa-fw"></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+									<i class="fas fa-archive fa-fw"></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索">
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class="switcher h-list">
+				
+					<li class="s-search"><a class="fas fa-search fa-fw" href="javascript:void(0)"></a></li>
+				
+				<li class="s-menu"><a class="fas fa-bars fa-fw" href="javascript:void(0)"></a></li>
+			</ul>
+		</div>
+
+		<div class="nav-sub container container--flex">
+			<a class="logo flat-box"></a>
+			<ul class="switcher h-list">
+				<li class="s-comment"><a class="flat-btn fas fa-comments fa-fw" href="javascript:void(0)"></a></li>
+        
+          <li class="s-toc"><a class="flat-btn fas fa-list fa-fw" href="javascript:void(0)"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/" id="home">
+								<i class="fas fa-clock fa-fw"></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/" rel="nofollow" id="blogarchives">
+								<i class="fas fa-archive fa-fw"></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class="l_main">
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/e1d456fa.html">
+        Mybatis关联查询
+      </a>
+    </h1>
+  
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-16</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/Framework/Mybatis/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>Framework&nbsp;/&nbsp;Mybatis</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class="notlink">
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>在数据库的增删改查操作中，用的最多的就是查询操作了，查询操作又可以分成一对一查询、一对多查询和多对多查询。一个人属于一个部门，查询人的时候要查出他的部门，这是一对一查询；一辆车有四个轱辘，查询车的时候要查出这四个轱辘，这是一对多查询；一个学生选了多门课，一门课也是被多个学生选的，学生与课程之间用一张关联表来联系，这是多对多查询。</p>
+<p>本文介绍 Mybatis 是如何处理这几种查询方式的，包括以下三个部分：</p>
+<ol>
+<li>Mybatis 一对一查询</li>
+<li>Mybatis 一对多查询</li>
+<li>Mybatis 多对多查询</li>
+<li>discriminator 鉴别器映射</li>
+</ol>
+<a id="more"></a>
+<h1 id="一对一查询"><a href="#一对一查询" class="headerlink" title="一对一查询"></a>一对一查询</h1><p>从代码上来看一对一查询就是在查询 User 对象的时候，查询出他的部门 postion。在 Mybatis 中可以使用 <code>association</code> 来表示一对一的映射关系，并且有<strong>嵌套结果</strong>和<strong>嵌套查询</strong>两种方式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TUser</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">private</span> TPosition position;</span><br></pre></td></tr></table></figure>
+<h2 id="嵌套结果"><a href="#嵌套结果" class="headerlink" title="嵌套结果"></a>嵌套结果</h2><p>TUser 表有一个 resultMap 名为 BaseResultMap，配置了 TUser 对象与数据库中字段的映射。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"user_name"</span> <span class="attr">property</span>=<span class="string">"userName"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"real_name"</span> <span class="attr">property</span>=<span class="string">"realName"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"sex"</span> <span class="attr">property</span>=<span class="string">"sex"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"mobile"</span> <span class="attr">property</span>=<span class="string">"mobile"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"email"</span> <span class="attr">property</span>=<span class="string">"email"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们现在要一对一查询 TUser 所在的部门 Postion，就新建一个 resultMap 叫做 userAndPosition1。它 <code>extends</code> 自 BaseResultMap，拥有其所有的变量。我们查询的是 TUser，同时一对一查询出 postion，所以 userAndPosition1 的类型是 TUser。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndPosition1"</span> <span class="attr">extends</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"position"</span> <span class="attr">javaType</span>=<span class="string">"TPosition"</span> <span class="attr">columnPrefix</span>=<span class="string">"post_"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"postName"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里 <code>association</code>帮助我们配置映射关系，它有这样几个常用属性：</p>
+<ul>
+<li>property 表示实体类中的属性名，也就是我们要关联查询的 postion</li>
+<li>javaType 表示这个属性对应的类型，postion 对应的类型是 TPostion</li>
+<li>resultMap 可以使用现有的 resultMap 而不重新配置映射关系，这里进行手动配置</li>
+<li>columnPrefix 是查询列的前缀，配置字段的时候就不需要加上前缀，只在查询语句中加入前缀即可</li>
+</ul>
+<p><em>关联表查询的时候加上前缀是很好的编程习惯，因为当关联的多张表中有字段重复的时候，前缀可以帮助我们区分这些字段。</em></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserPosition1"</span> <span class="attr">resultMap</span>=<span class="string">"userAndPosition1"</span>&gt;</span></span><br><span class="line">		select</span><br><span class="line">		    a.id, </span><br><span class="line">		    user_name,</span><br><span class="line">			real_name,</span><br><span class="line">			sex,</span><br><span class="line">			mobile,</span><br><span class="line">			email,</span><br><span class="line">			a.note,</span><br><span class="line">			b.id  post_id,</span><br><span class="line">			b.post_name,</span><br><span class="line">			b.note post_note</span><br><span class="line">		from t_user a,</span><br><span class="line">			t_position b</span><br><span class="line">		where a.position_id = b.id</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="嵌套查询"><a href="#嵌套查询" class="headerlink" title="嵌套查询"></a>嵌套查询</h2><p>嵌套结果是一次关联查询多张变，一次性返回结果。嵌套查询则是先完成<strong>主查询</strong>，再将朱查询中列的结果作为嵌套查询的参数，通过子查询获得关联的对象。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndPosition2"</span> <span class="attr">extends</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"position"</span> <span class="attr">fetchType</span>=<span class="string">"lazy"</span>  <span class="attr">column</span>=<span class="string">"position_id"</span> </span></span><br><span class="line"><span class="tag">			<span class="attr">select</span>=<span class="string">"com.enjoylearning.mybatis.mapper.</span></span></span><br><span class="line"><span class="tag"><span class="string">              TPositionMapper.selectByPrimaryKey"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>任然是使用 <code>association</code> 来表示关联关系：</p>
+<ul>
+<li>property 表示实体类中的属性名，也就是我们要关联查询的 postion</li>
+<li>column 是主查询中的列名，也是子查询的参数</li>
+<li>fetchType 是数据加载的方式，可选值为 lazy 和 eager，分别为延迟加载和积极加载 ，这个配置会覆盖全局的 lazyLoadingEnabled 配置；</li>
+<li>select 是查询语句的 id，指定 mapper 文件中的查询语句</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserPosition2"</span> <span class="attr">resultMap</span>=<span class="string">"userAndPosition2"</span>&gt;</span></span><br><span class="line">		select</span><br><span class="line">		a.id,</span><br><span class="line">		a.user_name,</span><br><span class="line">		a.real_name,</span><br><span class="line">		a.sex,</span><br><span class="line">		a.mobile,</span><br><span class="line">		a.position_id</span><br><span class="line">		from t_user a</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>「N+1 查询问题」:</strong>嵌套查询中，主查询会返回 1 个结果列表，子查询根据这个列表中的关联字段进行 N 次查询，如果主查询获取的结果很多就会执行成百上千次的 SQL 语句，这就是 「N+1查询问题」。</p>
+<p>同时进行成百上千次的查询落在数据库上，会影响系统的性能，这是我们不希望见到的。解决办法是在 association 中使用fetchType=lazy开启懒加载，但是全局 setting 禁用懒加载<code>&lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;</code>。懒加载即只有在使用到这个字段的时候才会执行 SQL，这样就可以减少 「N+1查询问题」。</p>
+<h1 id="一对多查询"><a href="#一对多查询" class="headerlink" title="一对多查询"></a>一对多查询</h1><p>一对一查询主要主要 <code>association</code> 标签实现，一对多查询则使用 <code>collection</code> 标签实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TUser</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 一对一查询，一个人一个职位</span></span><br><span class="line">    <span class="keyword">private</span> TPosition position;</span><br><span class="line">    <span class="comment">// 一对多查询，一个人多次工作经历</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;TJobHistory&gt; jobs ;</span><br></pre></td></tr></table></figure>
+<h2 id="嵌套结果-1"><a href="#嵌套结果-1" class="headerlink" title="嵌套结果"></a>嵌套结果</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndJobs1"</span> <span class="attr">extends</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"jobs"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">ofType</span>=<span class="string">"com.enjoylearning.mybatis.entity.TJobHistory"</span> &gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"comp_name"</span> <span class="attr">property</span>=<span class="string">"compName"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"years"</span> <span class="attr">property</span>=<span class="string">"years"</span> <span class="attr">jdbcType</span>=<span class="string">"INTEGER"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"title"</span> <span class="attr">property</span>=<span class="string">"title"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserJobs1"</span> <span class="attr">resultMap</span>=<span class="string">"userAndJobs1"</span>&gt;</span></span><br><span class="line">		select</span><br><span class="line">		a.id,</span><br><span class="line">		a.user_name,</span><br><span class="line">		a.real_name,</span><br><span class="line">		a.sex,</span><br><span class="line">		a.mobile,</span><br><span class="line">		b.comp_name,</span><br><span class="line">		b.years,</span><br><span class="line">		b.title</span><br><span class="line">		from t_user a,</span><br><span class="line">		t_job_history b</span><br><span class="line">		where a.id = b.user_id</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="嵌套查询-1"><a href="#嵌套查询-1" class="headerlink" title="嵌套查询"></a>嵌套查询</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndJobs2"</span> <span class="attr">extends</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"jobs"</span> <span class="attr">fetchType</span>=<span class="string">"lazy"</span> <span class="attr">column</span>=<span class="string">"id"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">select</span>=<span class="string">"com.enjoylearning.mybatis.mapper.TJobHistoryMapper.selectByUserId"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserJobs2"</span> <span class="attr">resultMap</span>=<span class="string">"userAndJobs2"</span>&gt;</span></span><br><span class="line">		select</span><br><span class="line">		a.id,</span><br><span class="line">		a.user_name,</span><br><span class="line">		a.real_name,</span><br><span class="line">		a.sex,</span><br><span class="line">		a.mobile</span><br><span class="line">		from t_user a</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="多对多查询"><a href="#多对多查询" class="headerlink" title="多对多查询"></a>多对多查询</h1><p>多对多由两个一对多关系组成的，需要一种中间表建立连接关系。比如说 t_user 和 t_role 之间是通过 t_user_role 这张表来关联的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TUser</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;TRole&gt; roles;</span><br></pre></td></tr></table></figure>
+<p>在一对多查询这一节中，t_user 与 t_job 通过用户的 id 可以直接关联起来。在多对多的场景中，用户和角色则需要通过中间表来关联，SQL 语句就变成了这样：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"TUser"</span> <span class="attr">id</span>=<span class="string">"userRoleInfo"</span> <span class="attr">extends</span>=<span class="string">"BaseResultMap"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"roles"</span> <span class="attr">ofType</span>=<span class="string">"TRole"</span> <span class="attr">columnPrefix</span>=<span class="string">"role_"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"Name"</span> <span class="attr">property</span>=<span class="string">"roleName"</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"note"</span> <span class="attr">property</span>=<span class="string">"note"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserRole"</span> <span class="attr">resultMap</span>=<span class="string">"userRoleInfo"</span>&gt;</span></span><br><span class="line">		select a.id, </span><br><span class="line">		      a.user_name,</span><br><span class="line">		      a.real_name,</span><br><span class="line">		      a.sex,</span><br><span class="line">		      a.mobile,</span><br><span class="line">		      a.note,</span><br><span class="line">		      b.role_id,</span><br><span class="line">		      c.role_name,</span><br><span class="line">		      c.note role_note</span><br><span class="line">		from t_user a,</span><br><span class="line">		     t_user_role b,</span><br><span class="line">		     t_role c</span><br><span class="line">		where a.id = b.user_id AND </span><br><span class="line">		      b.role_id = c.id</span><br><span class="line">     <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="discriminator-鉴别器映射"><a href="#discriminator-鉴别器映射" class="headerlink" title="discriminator 鉴别器映射"></a>discriminator 鉴别器映射</h1><p>通过应用场景来理解：比如说有一个订单表，表中有一个字段用来标记订单的种类，1是机票订单、2是酒店订单。使用鉴别器映射可以在标记字段不同的情况下，分别执行不同的 SQL 语句，查询出不同的结果。</p>
+<p>在特定的情况下使用不同的pojo进行关联， 鉴别器元素就是被设计来处理这个情况的。鉴别器非常容易理解,因为它的表现很像 Java 语言中的 switch 语句；</p>
+<ul>
+<li>discriminator 标签常用的两个属性如下：<ul>
+<li>column：该属性用于设置要进行鉴别比较值的列 。</li>
+<li>javaType：该属性用于指定列的类型，保证使用相同的 Java 类型来比较值。</li>
+</ul>
+</li>
+<li>discriminator 标签可以有1个或多个 case 标签， case 标签包含以下三个属性 。<ul>
+<li>value ： 该值为 discriminator 指定 column 用来匹配的值 。</li>
+<li>resultMap ： 当column的值和value的值匹配时，可以配置使用resultMap指定的映射，resultMap优先级高于 resultType 。</li>
+<li>resultType ： 当 column 的值和 value 的值匹配时，用于配置使用 resultType指定的映射。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndHealthReportMale"</span> <span class="attr">extends</span>=<span class="string">"userAndHealthReport"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"healthReports"</span> <span class="attr">column</span>=<span class="string">"id"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">select</span>= <span class="string">"com.enjoylearning.mybatis.mapper.THealthReportMaleMapper.selectByUserId"</span>&gt;</span><span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndHealthReportFemale"</span> <span class="attr">extends</span>=<span class="string">"userAndHealthReport"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"healthReports"</span> <span class="attr">column</span>=<span class="string">"id"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">select</span>= <span class="string">"com.enjoylearning.mybatis.mapper.THealthReportFemaleMapper.selectByUserId"</span>&gt;</span><span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"userAndHealthReport"</span> <span class="attr">extends</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"TUser"</span>&gt;</span></span><br><span class="line">				 </span><br><span class="line">		<span class="tag">&lt;<span class="name">discriminator</span> <span class="attr">column</span>=<span class="string">"sex"</span>  <span class="attr">javaType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">case</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">resultMap</span>=<span class="string">"userAndHealthReportMale"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">case</span> <span class="attr">value</span>=<span class="string">"2"</span> <span class="attr">resultMap</span>=<span class="string">"userAndHealthReportFemale"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">discriminator</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserHealthReport"</span> <span class="attr">resultMap</span>=<span class="string">"userAndHealthReport"</span>&gt;</span></span><br><span class="line">		select</span><br><span class="line">		<span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span> /&gt;</span></span><br><span class="line">		from t_user a</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+        <br>
+        
+
+
+  <section class="meta" id="footer-meta">
+    <div class="new-meta-box">
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-16T14:45:38+08:00">
+  <a class="notlink">
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年11月16日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/mybatis/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>mybatis</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer" href="http://connect.qq.com/widget/shareqq/index.html?url=http://shuiyujie.com/post/e1d456fa.html&title=Mybatis关联查询 | 深页&summary=在数据库的增删改查操作中，用的最多的就是查询操作了，查询操作又可以分成一对一查询、一对多查询和多对多查询。一个人属于一个部门，查询人的时候要查出他的部门，这是一对一查询；一辆车有四个轱辘，查询车的时候要查出这四个轱辘，这是一对多查询；一个学生选了多门课，一门课也是被多个学生选的，学生与课程之间用一张关联表来联系，这是多对多查询。
+本文介绍 Mybatis 是如何处理这几种查询方式的，包括以下三个部分：
+
+Mybatis 一对一查询
+Mybatis 一对多查询
+Mybatis 多对多查询
+discriminator 鉴别器映射
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://shuiyujie.com/post/e1d456fa.html&title=Mybatis关联查询 | 深页&summary=在数据库的增删改查操作中，用的最多的就是查询操作了，查询操作又可以分成一对一查询、一对多查询和多对多查询。一个人属于一个部门，查询人的时候要查出他的部门，这是一对一查询；一辆车有四个轱辘，查询车的时候要查出这四个轱辘，这是一对多查询；一个学生选了多门课，一门课也是被多个学生选的，学生与课程之间用一张关联表来联系，这是多对多查询。
+本文介绍 Mybatis 是如何处理这几种查询方式的，包括以下三个部分：
+
+Mybatis 一对一查询
+Mybatis 一对多查询
+Mybatis 多对多查询
+discriminator 鉴别器映射
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer" href="http://service.weibo.com/share/share.php?url=http://shuiyujie.com/post/e1d456fa.html&title=Mybatis关联查询 | 深页&summary=在数据库的增删改查操作中，用的最多的就是查询操作了，查询操作又可以分成一对一查询、一对多查询和多对多查询。一个人属于一个部门，查询人的时候要查出他的部门，这是一对一查询；一辆车有四个轱辘，查询车的时候要查出这四个轱辘，这是一对多查询；一个学生选了多门课，一门课也是被多个学生选的，学生与课程之间用一张关联表来联系，这是多对多查询。
+本文介绍 Mybatis 是如何处理这几种查询方式的，包括以下三个部分：
+
+Mybatis 一对一查询
+Mybatis 一对多查询
+Mybatis 多对多查询
+discriminator 鉴别器映射
+">
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/post/d24bbce6.html" rel="prev" title="Mybatis动态sql">
+                                  
+                                      Mybatis动态sql
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/mybatis/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> mybatis</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Mybatis关联查询',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class="l_side">
+  
+    
+    
+      
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+            
+              
+  <section class="widget toc-wrapper">
+    
+<header class="pure">
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class="content pure">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一对一查询"><span class="toc-text">一对一查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套结果"><span class="toc-text">嵌套结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套查询"><span class="toc-text">嵌套查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#一对多查询"><span class="toc-text">一对多查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套结果-1"><span class="toc-text">嵌套结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套查询-1"><span class="toc-text">嵌套查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多对多查询"><span class="toc-text">多对多查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#discriminator-鉴别器映射"><span class="toc-text">discriminator 鉴别器映射</span></a></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              <section class="widget grid">
+  
+<header class="pure">
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class="content pure">
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/" id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/categories/" href="/blog/categories/" rel="nofollow" id="blogcategories">
+          
+            <i class="fas fa-folder fa-fw" aria-hidden="true"></i>
+          
+          文章分类
+        </a></li>
+      
+        <li><a class="flat-box" title="/blog/archives/" href="/blog/archives/" rel="nofollow" id="blogarchives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class="widget category">
+    
+<header class="pure">
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/blog/categories/" title="blog/categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/C-C/" href="/categories/C-C/"><div class="name">C/C++</div><div class="badge">(26)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/DeepLearning/" href="/categories/DeepLearning/"><div class="name">DeepLearning</div><div class="badge">(17)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Docker-K8s/" href="/categories/Docker-K8s/"><div class="name">Docker&K8s</div><div class="badge">(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Framework/" href="/categories/Framework/"><div class="name">Framework</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Framework/Mybatis/" href="/categories/Framework/Mybatis/"><div class="name">Mybatis</div><div class="badge">(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Framework/Spring-Cloud/" href="/categories/Framework/Spring-Cloud/"><div class="name">Spring Cloud</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Java/" href="/categories/Java/"><div class="name">Java</div><div class="badge">(36)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/JVM/" href="/categories/Java/JVM/"><div class="name">JVM</div><div class="badge">(10)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/Java并发编程/" href="/categories/Java/Java并发编程/"><div class="name">Java并发编程</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/Java/Spring/" href="/categories/Java/Spring/"><div class="name">Spring</div><div class="badge">(8)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Linux/" href="/categories/Linux/"><div class="name">Linux</div><div class="badge">(10)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/OpenCV/" href="/categories/OpenCV/"><div class="name">OpenCV</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/Python/" href="/categories/Python/"><div class="name">Python</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/computer-science/" href="/categories/computer-science/"><div class="name">computer science</div><div class="badge">(11)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/computer-science/计算机网络/" href="/categories/computer-science/计算机网络/"><div class="name">计算机网络</div><div class="badge">(7)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/computer-science/设计模式/" href="/categories/computer-science/设计模式/"><div class="name">设计模式</div><div class="badge">(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/分布式/" href="/categories/分布式/"><div class="name">分布式</div><div class="badge">(14)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/Redis/" href="/categories/分布式/Redis/"><div class="name">Redis</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/zookeeper/" href="/categories/分布式/zookeeper/"><div class="name">zookeeper</div><div class="badge">(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/分布式/消息队列/" href="/categories/分布式/消息队列/"><div class="name">消息队列</div><div class="badge">(6)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/善用佳软/" href="/categories/善用佳软/"><div class="name">善用佳软</div><div class="badge">(9)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/图像处理/" href="/categories/图像处理/"><div class="name">图像处理</div><div class="badge">(3)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class="name">数据库</div><div class="badge">(5)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class="widget tagcloud">
+    
+<header class="pure">
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn" rel="nofollow" href="/blog/tags/" title="blog/tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class="content pure">
+      <a href="/tags/MQ/" style="font-size: 14px; color: #999">MQ</a> <a href="/tags/RocketMQ/" style="font-size: 14.83px; color: #939393">RocketMQ</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/arp/" style="font-size: 14px; color: #999">arp</a> <a href="/tags/c/" style="font-size: 20.67px; color: #6c6c6c">c</a> <a href="/tags/c/" style="font-size: 24px; color: #555">c++</a> <a href="/tags/caffe/" style="font-size: 15.67px; color: #8e8e8e">caffe</a> <a href="/tags/darknet/" style="font-size: 14.83px; color: #939393">darknet</a> <a href="/tags/dataset/" style="font-size: 14.83px; color: #939393">dataset</a> <a href="/tags/deeplearning/" style="font-size: 22.33px; color: #606060">deeplearning</a> <a href="/tags/dns/" style="font-size: 14px; color: #999">dns</a> <a href="/tags/docker/" style="font-size: 14.83px; color: #939393">docker</a> <a href="/tags/ffmpeg/" style="font-size: 14px; color: #999">ffmpeg</a> <a href="/tags/gc/" style="font-size: 14px; color: #999">gc</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/idea/" style="font-size: 14px; color: #999">idea</a> <a href="/tags/imagenet/" style="font-size: 14px; color: #999">imagenet</a> <a href="/tags/java/" style="font-size: 23.17px; color: #5b5b5b">java</a> <a href="/tags/jvm/" style="font-size: 20.67px; color: #6c6c6c">jvm</a> <a href="/tags/k8s/" style="font-size: 14px; color: #999">k8s</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/mac/" style="font-size: 14px; color: #999">mac</a> <a href="/tags/machinelearning/" style="font-size: 14px; color: #999">machinelearning</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/maven/" style="font-size: 15.67px; color: #8e8e8e">maven</a> <a href="/tags/mybatis/" style="font-size: 15.67px; color: #8e8e8e">mybatis</a> <a href="/tags/mysql/" style="font-size: 17.33px; color: #828282">mysql</a> <a href="/tags/network/" style="font-size: 17.33px; color: #828282">network</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/protobuf/" style="font-size: 14px; color: #999">protobuf</a> <a href="/tags/python/" style="font-size: 15.67px; color: #8e8e8e">python</a> <a href="/tags/rabbitmq/" style="font-size: 14.83px; color: #939393">rabbitmq</a> <a href="/tags/redis/" style="font-size: 15.67px; color: #8e8e8e">redis</a> <a href="/tags/shell/" style="font-size: 14px; color: #999">shell</a> <a href="/tags/spring/" style="font-size: 15.67px; color: #8e8e8e">spring</a> <a href="/tags/spring-mvc/" style="font-size: 14px; color: #999">spring mvc</a> <a href="/tags/springboot/" style="font-size: 16.5px; color: #888">springboot</a> <a href="/tags/springcloud/" style="font-size: 15.67px; color: #8e8e8e">springcloud</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/stl/" style="font-size: 20.67px; color: #6c6c6c">stl</a> <a href="/tags/tcp/" style="font-size: 14px; color: #999">tcp</a> <a href="/tags/tcp-ip/" style="font-size: 14px; color: #999">tcp/ip</a> <a href="/tags/tensorflow/" style="font-size: 16.5px; color: #888">tensorflow</a> <a href="/tags/ubuntu/" style="font-size: 15.67px; color: #8e8e8e">ubuntu</a> <a href="/tags/udp/" style="font-size: 14px; color: #999">udp</a> <a href="/tags/zookeeper/" style="font-size: 17.33px; color: #828282">zookeeper</a> <a href="/tags/事务/" style="font-size: 14px; color: #999">事务</a> <a href="/tags/分布式/" style="font-size: 14.83px; color: #939393">分布式</a> <a href="/tags/动态代理/" style="font-size: 14px; color: #999">动态代理</a> <a href="/tags/反射/" style="font-size: 14px; color: #999">反射</a> <a href="/tags/图像处理/" style="font-size: 15.67px; color: #8e8e8e">图像处理</a> <a href="/tags/图片素材/" style="font-size: 14px; color: #999">图片素材</a> <a href="/tags/存储引擎/" style="font-size: 14px; color: #999">存储引擎</a> <a href="/tags/学习资料/" style="font-size: 14px; color: #999">学习资料</a> <a href="/tags/工具/" style="font-size: 14.83px; color: #939393">工具</a> <a href="/tags/并发工具类/" style="font-size: 14px; color: #999">并发工具类</a> <a href="/tags/并发编程/" style="font-size: 19.83px; color: #717171">并发编程</a> <a href="/tags/数据增强/" style="font-size: 14px; color: #999">数据增强</a> <a href="/tags/模型评估/" style="font-size: 14px; color: #999">模型评估</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/消息队列/" style="font-size: 18.17px; color: #7d7d7d">消息队列</a> <a href="/tags/管程/" style="font-size: 14px; color: #999">管程</a> <a href="/tags/网站/" style="font-size: 18.17px; color: #7d7d7d">网站</a> <a href="/tags/设计模式/" style="font-size: 17.33px; color: #828282">设计模式</a> <a href="/tags/通信协议/" style="font-size: 14px; color: #999">通信协议</a> <a href="/tags/音频处理/" style="font-size: 14px; color: #999">音频处理</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/atom.xml" class="social fas fa-rss flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="mailto:shuiyujie.cn@gmail.com" class="social fas fa-envelope flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/YujieShui" class="social fab fa-github flat-btn" target="_blank" rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        if ('') {
+          $('').backstretch(
+          ["http://image.shuiyujie.com/sunset-2191645.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        } else {
+          $.backstretch(
+          ["http://image.shuiyujie.com/sunset-2191645.jpg"],
+          {
+            duration: "6000",
+            fade: "2500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
