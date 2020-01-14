@@ -164,6 +164,116 @@
       
         
   <h2 class="title">
+    <a href="/post/1d0f563b.html">
+      图像处理——边缘检测
+    </a>
+  </h2>
+
+
+      
+      <div class="new-meta-box">
+        
+          
+        
+          
+            
+  <div class="new-meta-item author">
+    
+      <a href="http://shuiyujie.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>深页</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class="notlink">
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-06-02</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class="new-meta-item category">
+    <a href="/categories/图像处理/" rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>图像处理</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p><img src="http://image.shuiyujie.com/2019-06-03-00-12-54.png" alt="边缘检测"></p>
+<p>边缘检测是为了识别物体的边缘，而边缘是由数字图像中亮度变化明显的点连接而成的，主要可以通过基于图像强度的一阶和二阶导数来寻找到这些点。</p>
+<p>边缘检测可以分成三个步骤：</p>
+<ol>
+<li>滤波。由于导数对噪声敏感，所以在边缘检测之前可以先试着<a href="https://shuiyujie.com/post/d966aba8.html">降低图片的噪声</a>，常用的是高斯滤波。</li>
+<li>增强。增强算法可以将图像灰度点邻域强度值有显著变化的点凸显出来，可以通过计算梯度幅值来确定。</li>
+<li>检测。根据梯度幅值就可以检测出物体的边缘，由于经过图像增强，有些店并不是要找的边缘值，我们还可以通过阈值化的方式来筛选。</li>
+</ol>
+      
+        <div class="readmore">
+          <a href="/post/1d0f563b.html" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/opencv/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> opencv</a>
+        
+          <a href="/tags/图像处理/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> 图像处理</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class="post-wrapper">
+            <article class="post reveal ">
+  
+
+
+  <section class="meta">
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/post/d966aba8.html">
       图像处理——图像降噪
     </a>
@@ -1078,111 +1188,6 @@
           </div>
         
       
-        
-          <div class="post-wrapper">
-            <article class="post reveal ">
-  
-
-
-  <section class="meta">
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/post/cd8fc6b5.html">
-      C++学习笔记-静态方法、静态函数、this指针
-    </a>
-  </h2>
-
-
-      
-      <div class="new-meta-box">
-        
-          
-        
-          
-            
-  <div class="new-meta-item author">
-    
-      <a href="http://shuiyujie.com" rel="nofollow">
-        
-          <i class="fas fa-user" aria-hidden="true"></i>
-        
-        <p>深页</p>
-      </a>
-    
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class="notlink">
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-05-18</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class="new-meta-item category">
-    <a href="/categories/C-C/" rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>C/C++</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>静态变量、静态方法和 this 指针都是为了更好表现类的概念。</p>
-<p>类中的静态变量能够实现同类对象中的信息共享，共享状态能够实现许多实用的功能，比如说计数。</p>
-<p>静态变量不能用普通函数直接访问，就需要用到静态函数来管理静态变量。</p>
-<p>this 指针用 <code>this-&gt;name = name</code> 的形式解决类中函数传入的参数与类中成员变量冲突的问题。</p>
-<p>总之，通过代码来说明问题更容易理解。</p>
-      
-        <div class="readmore">
-          <a href="/post/cd8fc6b5.html" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/c/" rel="nofollow"><i class="fas fa-tag fa-fw"></i> c++</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1198,7 +1203,7 @@
             </a>
           
           <p class="current">
-            8 / 15
+            8 / 16
           </p>
           
             <a class="next" rel="next" href="/page/9/">
